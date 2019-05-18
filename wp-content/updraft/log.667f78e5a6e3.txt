@@ -1,0 +1,93 @@
+0000.030 () Opened log file at time: Tue, 14 May 2019 08:54:51 +0000 on https://tesla-cat.com
+0000.030 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.16.14 WP: 5.2 PHP: 7.2.17-0ubuntu0.18.04.1 (apache2handler, Linux VM-0-13-ubuntu 4.15.0-29-generic #31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 x86_64) MySQL: 10.1.38-MariaDB-0ubuntu0.18.04.2 WPLANG: en_US Server: Apache/2.4.29 (Ubuntu) safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 8.7M | 4M) multisite: N openssl: OpenSSL 1.1.0g  2 Nov 2017 mcrypt: N LANG: C ZipArchive::addFile: Y
+0000.030 () Free space on disk containing Updraft's temporary directory: 45196.7 MB
+0000.013 () Opened log file at time: Tue, 14 May 2019 08:54:52 +0000 on https://tesla-cat.com
+0000.014 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.16.14 WP: 5.2 PHP: 7.2.17-0ubuntu0.18.04.1 (apache2handler, Linux VM-0-13-ubuntu 4.15.0-29-generic #31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 x86_64) MySQL: 10.1.38-MariaDB-0ubuntu0.18.04.2 WPLANG: en_US Server: Apache/2.4.29 (Ubuntu) safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 7.5M | 2M) multisite: N openssl: OpenSSL 1.1.0g  2 Nov 2017 mcrypt: N LANG: C ZipArchive::addFile: Y
+0000.014 () Free space on disk containing Updraft's temporary directory: 45196.7 MB
+0000.014 () Ensuring WP_Filesystem is setup for a restore
+0000.015 () WP_Filesystem is setup and ready for a restore
+0000.028 () Restore job started. Entities to restore: db. Restore options: {"updraft_encryptionphrase":"","updraft_restorer_wpcore_includewpconfig":false,"updraft_incremental_restore_point":-1}
+0000.039 () Entity: db
+0000.039 () restore_backup(backup_file=backup_2019-05-13-1701_tesla_cat_ea26cd67d193-db.gz, type=db, info=a:0:{}, last_one=1)
+0000.039 () Unpacking backup... (backup_2019-05-13-1701_tesla_cat_ea26cd67d193-db.gz, 0.7 Mb)
+0000.041 () Database successfully unpacked
+0000.041 () Restoring the database (on a large site this can take a long time - if it times out (which can happen if your web hosting company has configured your hosting to limit resources) then you should use a different method, such as phpMyAdmin)...
+0000.041 () Using direct MySQL access; value of use_mysqli is: 1
+0000.174 () Tried to raise max_allowed_packet from 16 MB to 32 MB, but failed (Access denied; you need (at least one of) the SUPER privilege(s) for this operation, b:0;)
+0000.174 () Max packet size: 16 MB
+0000.174 () Entering maintenance mode
+0000.174 () Enabling Maintenance mode&#8230;
+0000.175 () Backup of: https://tesla-cat.com
+0000.175 () Content URL: https://tesla-cat.com/wp-content
+0000.175 () Uploads URL: http://tesla-cat.com/wp-content/uploads
+0000.175 () Old table prefix: wp_
+0000.175 () Site information: multisite=0
+0000.175 () New table prefix: wp_
+0000.214 () Processing table (InnoDB): wp_options
+0000.811 () Restoring prior UD configuration (table: wp_options; keys: 3)
+0000.876 () Processing table (InnoDB): wp_users
+0001.047 () Processing table (InnoDB): wp_usermeta
+0001.192 () Processing table (InnoDB): wp_commentmeta
+0001.336 () Processing table (InnoDB): wp_comments
+0001.550 () Processing table (InnoDB): wp_links
+0001.672 () Processing table (InnoDB): wp_postmeta
+0002.173 () Processing table (InnoDB): wp_posts
+0004.374 () Database queries processed: 50 in 4.33 seconds
+0004.521 () Processing table (InnoDB): wp_term_relationships
+0004.666 () Processing table (InnoDB): wp_term_taxonomy
+0004.846 () Processing table (InnoDB): wp_termmeta
+0005.018 () Processing table (InnoDB): wp_terms
+0005.182 () Processing table (InnoDB): wp_yoast_seo_links
+0005.298 () Processing table (InnoDB): wp_yoast_seo_meta
+0005.414 () Processing table (InnoDB): wp_failed_jobs
+0005.515 () Processing table (InnoDB): wp_l2hbibtex
+0005.608 () Processing table (InnoDB): wp_mailchimp_carts
+0005.724 () Processing table (InnoDB): wp_pv_commission
+0005.851 () Processing table (InnoDB): wp_queue
+0005.944 () Processing table (InnoDB): wp_spellcheck_dictionary
+0006.037 () Processing table (InnoDB): wp_spellcheck_empty
+0006.161 () Processing table (InnoDB): wp_spellcheck_grammar
+0006.268 () Processing table (InnoDB): wp_spellcheck_grammar_options
+0006.388 () Processing table (InnoDB): wp_spellcheck_html
+0006.478 () Processing table (InnoDB): wp_spellcheck_ignore
+0006.572 () Processing table (InnoDB): wp_spellcheck_options
+0006.689 () Processing table (InnoDB): wp_spellcheck_words
+0006.814 () Database queries processed: 100 in 6.77 seconds
+0006.814 () Processing table (InnoDB): wp_wc_download_log
+0006.943 () Processing table (InnoDB): wp_wc_webhooks
+0007.052 () Processing table (InnoDB): wp_woocommerce_api_keys
+0007.177 () Processing table (InnoDB): wp_woocommerce_attribute_taxonomies
+0007.288 () Processing table (InnoDB): wp_woocommerce_downloadable_product_permissions
+0007.412 () Processing table (InnoDB): wp_woocommerce_log
+0007.512 () Processing table (InnoDB): wp_woocommerce_order_itemmeta
+0007.618 () Processing table (InnoDB): wp_woocommerce_order_items
+0007.720 () Processing table (InnoDB): wp_woocommerce_payment_tokenmeta
+0007.851 () Processing table (InnoDB): wp_woocommerce_payment_tokens
+0007.968 () Processing table (InnoDB): wp_woocommerce_sessions
+0008.838 () Processing table (InnoDB): wp_woocommerce_shipping_zone_locations
+0009.018 () Processing table (InnoDB): wp_woocommerce_shipping_zone_methods
+0009.177 () Processing table (InnoDB): wp_woocommerce_shipping_zones
+0009.300 () Processing table (InnoDB): wp_woocommerce_tax_rate_locations
+0009.452 () Processing table (InnoDB): wp_woocommerce_tax_rates
+0009.598 () Processing table (InnoDB): wp_wpbackitup_job_control
+0009.714 () Processing table (InnoDB): wp_wpbackitup_job_items
+0009.950 () Processing table (InnoDB): wp_wpbackitup_job_tasks
+0010.080 () Processing table (InnoDB): wp_xh_sessions
+0010.259 () Processing table (InnoDB): wp_xh_social_channel_qq
+0010.352 () Database queries processed: 150 in 10.31 seconds
+0010.389 () Processing table (InnoDB): wp_xh_social_channel_wechat
+0010.570 () Processing table (InnoDB): wp_xh_social_channel_weibo
+0010.659 () UpdraftPlus Vault: this site has not been connected - check your settings
+0140.136 () Dropbox: Failed to connect to api.dropboxapi.com port 443: Connection timed out (line: 167, file: /var/www/html/wordpress/wp-content/plugins/updraftplus/includes/Dropbox2/OAuth/Consumer/Curl.php)
+0157.688 () Google Drive: id_from_path failure: exception (Google_IO_Exception): Connection timed out after 15001 milliseconds (line: 117, file: /var/www/html/wordpress/wp-content/plugins/updraftplus/includes/Google/IO/Curl.php)
+0157.688 () Google Drive: id_from_path: retry (2)
+0175.689 () Google Drive: id_from_path failure: exception (Google_IO_Exception): Connection timed out after 15000 milliseconds (line: 117, file: /var/www/html/wordpress/wp-content/plugins/updraftplus/includes/Google/IO/Curl.php)
+0175.689 () Google Drive: id_from_path: retry (1)
+0194.690 () Google Drive: id_from_path failure: exception (Google_IO_Exception): Connection timed out after 15000 milliseconds (line: 117, file: /var/www/html/wordpress/wp-content/plugins/updraftplus/includes/Google/IO/Curl.php)
+0194.690 () Google Drive: id_from_path: retry (0)
+0209.703 () Unlocking database and leaving maintenance mode
+0209.703 () Disabling Maintenance mode&#8230;
+0209.704 () Finished: lines processed: 157 in 209.66 seconds
+0209.704 () Cleaning up rubbish...
+0209.771 () Restore successful!
+0209.771 () Restore successful

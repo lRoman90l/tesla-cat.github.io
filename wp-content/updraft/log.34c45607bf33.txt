@@ -1,0 +1,227 @@
+0000.034 () Opened log file at time: Mon, 13 May 2019 23:18:20 +0000 on https://tesla-cat.com
+0000.035 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.16.14 WP: 5.2 PHP: 7.2.17-0ubuntu0.18.04.1 (apache2handler, Linux VM-0-13-ubuntu 4.15.0-29-generic #31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 x86_64) MySQL: 10.1.38-MariaDB-0ubuntu0.18.04.2 WPLANG: en_US Server: Apache/2.4.29 (Ubuntu) safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 4.1M | 4M) multisite: N openssl: OpenSSL 1.1.0g  2 Nov 2017 mcrypt: N LANG: C ZipArchive::addFile: Y
+0000.035 () Free space on disk containing Updraft's temporary directory: 45276 MB
+0000.019 () Opened log file at time: Mon, 13 May 2019 23:18:21 +0000 on https://tesla-cat.com
+0000.019 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.16.14 WP: 5.2 PHP: 7.2.17-0ubuntu0.18.04.1 (apache2handler, Linux VM-0-13-ubuntu 4.15.0-29-generic #31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 x86_64) MySQL: 10.1.38-MariaDB-0ubuntu0.18.04.2 WPLANG: en_US Server: Apache/2.4.29 (Ubuntu) safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 3.5M | 4M) multisite: N openssl: OpenSSL 1.1.0g  2 Nov 2017 mcrypt: N LANG: C ZipArchive::addFile: Y
+0000.019 () Free space on disk containing Updraft's temporary directory: 45276 MB
+0000.020 () Ensuring WP_Filesystem is setup for a restore
+0000.020 () WP_Filesystem is setup and ready for a restore
+0000.033 () Restore job started. Entities to restore: plugins, themes, uploads, others, db. Restore options: {"updraft_encryptionphrase":"","updraft_restorer_wpcore_includewpconfig":false,"updraft_incremental_restore_point":-1}
+0000.035 () Will not delete any archives after unpacking them, because there was no cloud storage for this backup
+0000.050 () Entity: db
+0000.050 () restore_backup(backup_file=backup_2019-05-13-1701_tesla_cat_ea26cd67d193-db.gz, type=db, info=a:0:{}, last_one=)
+0000.050 () Unpacking backup... (backup_2019-05-13-1701_tesla_cat_ea26cd67d193-db.gz, 0.7 Mb)
+0000.052 () Database successfully unpacked
+0000.052 () Restoring the database (on a large site this can take a long time - if it times out (which can happen if your web hosting company has configured your hosting to limit resources) then you should use a different method, such as phpMyAdmin)...
+0000.052 () Using direct MySQL access; value of use_mysqli is: 1
+0000.239 () Tried to raise max_allowed_packet from 16 MB to 32 MB, but failed (Access denied; you need (at least one of) the SUPER privilege(s) for this operation, b:0;)
+0000.239 () Max packet size: 16 MB
+0000.239 () Entering maintenance mode
+0000.239 () Enabling Maintenance mode&#8230;
+0000.239 () Backup of: https://tesla-cat.com
+0000.241 () Content URL: https://tesla-cat.com/wp-content
+0000.241 () Uploads URL: http://tesla-cat.com/wp-content/uploads
+0000.241 () Old table prefix: wp_
+0000.241 () Site information: multisite=0
+0000.241 () New table prefix: wp_
+0000.301 () Processing table (InnoDB): wp_options
+0000.892 () Restoring prior UD configuration (table: wp_options; keys: 3)
+0000.979 () Processing table (InnoDB): wp_users
+0001.228 () Processing table (InnoDB): wp_usermeta
+0001.411 () Processing table (InnoDB): wp_commentmeta
+0001.561 () Processing table (InnoDB): wp_comments
+0001.801 () Processing table (InnoDB): wp_links
+0001.973 () Processing table (InnoDB): wp_postmeta
+0002.522 () Processing table (InnoDB): wp_posts
+0004.600 () Database queries processed: 50 in 4.55 seconds
+0004.735 () Processing table (InnoDB): wp_term_relationships
+0004.876 () Processing table (InnoDB): wp_term_taxonomy
+0005.065 () Processing table (InnoDB): wp_termmeta
+0005.295 () Processing table (InnoDB): wp_terms
+0005.449 () Processing table (InnoDB): wp_yoast_seo_links
+0005.544 () Processing table (InnoDB): wp_yoast_seo_meta
+0005.635 () Processing table (InnoDB): wp_failed_jobs
+0005.701 () Processing table (InnoDB): wp_l2hbibtex
+0005.790 () Processing table (InnoDB): wp_mailchimp_carts
+0005.875 () Processing table (InnoDB): wp_pv_commission
+0006.000 () Processing table (InnoDB): wp_queue
+0006.122 () Processing table (InnoDB): wp_spellcheck_dictionary
+0006.208 () Processing table (InnoDB): wp_spellcheck_empty
+0006.309 () Processing table (InnoDB): wp_spellcheck_grammar
+0006.381 () Processing table (InnoDB): wp_spellcheck_grammar_options
+0006.467 () Processing table (InnoDB): wp_spellcheck_html
+0006.532 () Processing table (InnoDB): wp_spellcheck_ignore
+0006.604 () Processing table (InnoDB): wp_spellcheck_options
+0006.690 () Processing table (InnoDB): wp_spellcheck_words
+0006.784 () Database queries processed: 100 in 6.73 seconds
+0006.784 () Processing table (InnoDB): wp_wc_download_log
+0006.908 () Processing table (InnoDB): wp_wc_webhooks
+0007.023 () Processing table (InnoDB): wp_woocommerce_api_keys
+0007.169 () Processing table (InnoDB): wp_woocommerce_attribute_taxonomies
+0007.320 () Processing table (InnoDB): wp_woocommerce_downloadable_product_permissions
+0007.448 () Processing table (InnoDB): wp_woocommerce_log
+0007.531 () Processing table (InnoDB): wp_woocommerce_order_itemmeta
+0007.614 () Processing table (InnoDB): wp_woocommerce_order_items
+0007.697 () Processing table (InnoDB): wp_woocommerce_payment_tokenmeta
+0007.797 () Processing table (InnoDB): wp_woocommerce_payment_tokens
+0007.931 () Processing table (InnoDB): wp_woocommerce_sessions
+0008.809 () Processing table (InnoDB): wp_woocommerce_shipping_zone_locations
+0008.948 () Processing table (InnoDB): wp_woocommerce_shipping_zone_methods
+0009.066 () Processing table (InnoDB): wp_woocommerce_shipping_zones
+0009.180 () Processing table (InnoDB): wp_woocommerce_tax_rate_locations
+0009.309 () Processing table (InnoDB): wp_woocommerce_tax_rates
+0009.436 () Processing table (InnoDB): wp_wpbackitup_job_control
+0009.507 () Processing table (InnoDB): wp_wpbackitup_job_items
+0009.667 () Processing table (InnoDB): wp_wpbackitup_job_tasks
+0009.760 () Processing table (InnoDB): wp_xh_sessions
+0009.884 () Processing table (InnoDB): wp_xh_social_channel_qq
+0009.988 () Database queries processed: 150 in 9.93 seconds
+0009.989 () Processing table (InnoDB): wp_xh_social_channel_wechat
+0010.152 () Processing table (InnoDB): wp_xh_social_channel_weibo
+0010.345 () Unlocking database and leaving maintenance mode
+0010.345 () Disabling Maintenance mode&#8230;
+0010.345 () Finished: lines processed: 157 in 10.29 seconds
+0010.345 () Cleaning up rubbish...
+0010.382 () Entity: plugins
+0010.383 () restore_backup(backup_file=backup_2019-05-13-1701_tesla_cat_ea26cd67d193-plugins.zip, type=plugins, info=a:2:{s:4:"path";s:42:"/var/www/html/wordpress/wp-content/plugins";s:11:"description";s:7:"Plugins";}, last_one=)
+0010.383 () Unpacking backup... (backup_2019-05-13-1701_tesla_cat_ea26cd67d193-plugins.zip, 19.3 MB)
+0010.386 () Unzipping backup_2019-05-13-1701_tesla_cat_ea26cd67d193-plugins.zip to /var/www/html/wordpress/wp-content/upgrade/606c5e98/ using UpdraftPlus_ZipArchive, starting index 0
+0010.522 () Unzip progress: 1002 out of 4907 files (1.9 MB, plugins/insert-php/libs/factory/bootstrap/assets/js-min/bootstrap.scrollspy.min.js)
+0010.696 () Unzip progress: 2003 out of 4907 files (15.6 MB, plugins/wordpress-seo/vendor/yoast/api-libs/google/io/Google_CurlIO.php)
+0010.920 () Unzip progress: 3004 out of 4907 files (37.3 MB, plugins/updraftplus/vendor/aws/aws-sdk-php/src/Aws/S3/Model/MultipartUpload/ParallelTransfer.php)
+0011.127 () Unzip progress: 4005 out of 4907 files (52.4 MB, plugins/jetpack/modules/tiled-gallery/tiled-gallery/templates/rectangular-layout.php)
+0011.255 () Unzip progress: 4907 out of 4907 files (59.6 MB, plugins/simple-custom-post-order/screenshot-1.png)
+0011.257 () Moving old data: filesystem method / updraft_dir is potentially possible
+0011.257 () Moving old data: can potentially use wp_filesystem method / -old
+0011.257 () Moving old data out of the way...
+0011.365 () Top-level entities being moved: insert-php, host-google-fonts-locally, hello.php, upload-max-file-size, index.php, wordpress-seo, akismet, updraftplus, jetpack, simple-custom-post-order
+0011.395 () Error message: Could not move the files into place. Check your file permissions.
+0011.395 () Error data (move_failed): /var/www/html/wordpress/wp-content/plugins/insert-php -> /var/www/html/wordpress/wp-content/updraft/plugins-old/insert-php
+0011.395 () plugins: /var/www/html/wordpress/wp-content/plugins: deleting contents (as attempts to copy failed)
+0011.601 () Moving unpacked backup into place...
+0011.849 () Top-level entities being moved: insert-php, host-google-fonts-locally, upload-max-file-size, index.php, wordpress-seo, akismet, updraftplus, jetpack, simple-custom-post-order
+0011.849 () PHP event: code E_WARNING: copy(/var/www/html/wordpress/wp-content/plugins/insert-php/admin/ajax/ajax.php): failed to open stream: Permission denied (line 281, wp-admin/includes/class-wp-filesystem-direct.php)
+0011.887 () Error message: Could not move the files into place. Check your file permissions.
+0011.887 () Error data (move_failed): (2) /var/www/html/wordpress/wp-content/upgrade/606c5e98/plugins/insert-php -> /var/www/html/wordpress/wp-content/plugins/insert-php
+0011.898 () Restore failed...
+0011.898 () Error message: Could not move the files into place. Check your file permissions.
+0011.898 () Error data (move_failed): (2) /var/www/html/wordpress/wp-content/upgrade/606c5e98/plugins/insert-php -> /var/www/html/wordpress/wp-content/plugins/insert-php
+0011.898 () Restore failed
+0000.012 () Opened log file at time: Mon, 13 May 2019 23:25:54 +0000 on https://tesla-cat.com
+0000.012 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.16.14 WP: 5.2 PHP: 7.2.17-0ubuntu0.18.04.1 (apache2handler, Linux VM-0-13-ubuntu 4.15.0-29-generic #31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 x86_64) MySQL: 10.1.38-MariaDB-0ubuntu0.18.04.2 WPLANG: en_US Server: Apache/2.4.29 (Ubuntu) safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 8.4M | 4M) multisite: N openssl: OpenSSL 1.1.0g  2 Nov 2017 mcrypt: N LANG: C ZipArchive::addFile: Y
+0000.012 () Free space on disk containing Updraft's temporary directory: 45155.3 MB
+0000.012 () Opened log file at time: Mon, 13 May 2019 23:25:55 +0000 on https://tesla-cat.com
+0000.013 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.16.14 WP: 5.2 PHP: 7.2.17-0ubuntu0.18.04.1 (apache2handler, Linux VM-0-13-ubuntu 4.15.0-29-generic #31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 x86_64) MySQL: 10.1.38-MariaDB-0ubuntu0.18.04.2 WPLANG: en_US Server: Apache/2.4.29 (Ubuntu) safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 7.3M | 2M) multisite: N openssl: OpenSSL 1.1.0g  2 Nov 2017 mcrypt: N LANG: C ZipArchive::addFile: Y
+0000.013 () Free space on disk containing Updraft's temporary directory: 45155.3 MB
+0000.013 () Ensuring WP_Filesystem is setup for a restore
+0000.014 () WP_Filesystem is setup and ready for a restore
+0000.015 () Restore job started. Entities to restore: plugins, themes, uploads, others, db. Restore options: {"updraft_encryptionphrase":"","updraft_restorer_wpcore_includewpconfig":false,"updraft_incremental_restore_point":-1}
+0000.028 () Entity: db
+0000.028 () restore_backup(backup_file=backup_2019-05-13-1701_tesla_cat_ea26cd67d193-db.gz, type=db, info=a:0:{}, last_one=)
+0000.029 () Unpacking backup... (backup_2019-05-13-1701_tesla_cat_ea26cd67d193-db.gz, 0.7 Mb)
+0000.592 () Database successfully unpacked
+0000.592 () Restoring the database (on a large site this can take a long time - if it times out (which can happen if your web hosting company has configured your hosting to limit resources) then you should use a different method, such as phpMyAdmin)...
+0000.592 () Using direct MySQL access; value of use_mysqli is: 1
+0000.742 () Tried to raise max_allowed_packet from 16 MB to 32 MB, but failed (Access denied; you need (at least one of) the SUPER privilege(s) for this operation, b:0;)
+0000.742 () Max packet size: 16 MB
+0000.742 () Entering maintenance mode
+0000.742 () Enabling Maintenance mode&#8230;
+0000.742 () Backup of: https://tesla-cat.com
+0000.742 () Content URL: https://tesla-cat.com/wp-content
+0000.742 () Uploads URL: http://tesla-cat.com/wp-content/uploads
+0000.742 () Old table prefix: wp_
+0000.743 () Site information: multisite=0
+0000.743 () New table prefix: wp_
+0000.793 () Processing table (InnoDB): wp_options
+0001.575 () Restoring prior UD configuration (table: wp_options; keys: 3)
+0001.638 () Processing table (InnoDB): wp_users
+0001.775 () Processing table (InnoDB): wp_usermeta
+0001.901 () Processing table (InnoDB): wp_commentmeta
+0002.054 () Processing table (InnoDB): wp_comments
+0002.426 () Processing table (InnoDB): wp_links
+0002.519 () Processing table (InnoDB): wp_postmeta
+0002.935 () Processing table (InnoDB): wp_posts
+0005.195 () Database queries processed: 50 in 4.60 seconds
+0005.450 () Processing table (InnoDB): wp_term_relationships
+0005.608 () Processing table (InnoDB): wp_term_taxonomy
+0005.778 () Processing table (InnoDB): wp_termmeta
+0005.977 () Processing table (InnoDB): wp_terms
+0006.152 () Processing table (InnoDB): wp_yoast_seo_links
+0006.393 () Processing table (InnoDB): wp_yoast_seo_meta
+0006.592 () Processing table (InnoDB): wp_failed_jobs
+0006.709 () Processing table (InnoDB): wp_l2hbibtex
+0006.828 () Processing table (InnoDB): wp_mailchimp_carts
+0006.961 () Processing table (InnoDB): wp_pv_commission
+0007.115 () Processing table (InnoDB): wp_queue
+0007.357 () Processing table (InnoDB): wp_spellcheck_dictionary
+0007.581 () Processing table (InnoDB): wp_spellcheck_empty
+0007.718 () Processing table (InnoDB): wp_spellcheck_grammar
+0007.869 () Processing table (InnoDB): wp_spellcheck_grammar_options
+0008.029 () Processing table (InnoDB): wp_spellcheck_html
+0008.266 () Processing table (InnoDB): wp_spellcheck_ignore
+0008.530 () Processing table (InnoDB): wp_spellcheck_options
+0008.769 () Processing table (InnoDB): wp_spellcheck_words
+0008.950 () Database queries processed: 100 in 8.36 seconds
+0008.950 () Processing table (InnoDB): wp_wc_download_log
+0009.102 () Processing table (InnoDB): wp_wc_webhooks
+0009.271 () Processing table (InnoDB): wp_woocommerce_api_keys
+0009.529 () Processing table (InnoDB): wp_woocommerce_attribute_taxonomies
+0009.645 () Processing table (InnoDB): wp_woocommerce_downloadable_product_permissions
+0009.799 () Processing table (InnoDB): wp_woocommerce_log
+0009.963 () Processing table (InnoDB): wp_woocommerce_order_itemmeta
+0010.147 () Processing table (InnoDB): wp_woocommerce_order_items
+0010.413 () Processing table (InnoDB): wp_woocommerce_payment_tokenmeta
+0010.597 () Processing table (InnoDB): wp_woocommerce_payment_tokens
+0010.734 () Processing table (InnoDB): wp_woocommerce_sessions
+0011.818 () Processing table (InnoDB): wp_woocommerce_shipping_zone_locations
+0011.999 () Processing table (InnoDB): wp_woocommerce_shipping_zone_methods
+0012.190 () Processing table (InnoDB): wp_woocommerce_shipping_zones
+0012.358 () Processing table (InnoDB): wp_woocommerce_tax_rate_locations
+0012.611 () Processing table (InnoDB): wp_woocommerce_tax_rates
+0012.770 () Processing table (InnoDB): wp_wpbackitup_job_control
+0012.915 () Processing table (InnoDB): wp_wpbackitup_job_items
+0013.143 () Processing table (InnoDB): wp_wpbackitup_job_tasks
+0013.302 () Processing table (InnoDB): wp_xh_sessions
+0013.514 () Processing table (InnoDB): wp_xh_social_channel_qq
+0013.606 () Database queries processed: 150 in 13.01 seconds
+0013.639 () Processing table (InnoDB): wp_xh_social_channel_wechat
+0013.814 () Processing table (InnoDB): wp_xh_social_channel_weibo
+0013.905 () UpdraftPlus Vault: this site has not been connected - check your settings
+0143.713 () Dropbox: Failed to connect to api.dropboxapi.com port 443: Connection timed out (line: 167, file: /var/www/html/wordpress/wp-content/plugins/updraftplus/includes/Dropbox2/OAuth/Consumer/Curl.php)
+0161.075 () Google Drive: id_from_path failure: exception (Google_IO_Exception): Connection timed out after 15000 milliseconds (line: 117, file: /var/www/html/wordpress/wp-content/plugins/updraftplus/includes/Google/IO/Curl.php)
+0161.076 () Google Drive: id_from_path: retry (2)
+0179.076 () Google Drive: id_from_path failure: exception (Google_IO_Exception): Connection timed out after 15000 milliseconds (line: 117, file: /var/www/html/wordpress/wp-content/plugins/updraftplus/includes/Google/IO/Curl.php)
+0179.076 () Google Drive: id_from_path: retry (1)
+0198.076 () Google Drive: id_from_path failure: exception (Google_IO_Exception): Connection timed out after 15000 milliseconds (line: 117, file: /var/www/html/wordpress/wp-content/plugins/updraftplus/includes/Google/IO/Curl.php)
+0198.076 () Google Drive: id_from_path: retry (0)
+0213.091 () Unlocking database and leaving maintenance mode
+0213.091 () Disabling Maintenance mode&#8230;
+0213.091 () Finished: lines processed: 157 in 212.50 seconds
+0213.091 () Cleaning up rubbish...
+0213.137 () Entity: plugins
+0213.137 () restore_backup(backup_file=backup_2019-05-13-1701_tesla_cat_ea26cd67d193-plugins.zip, type=plugins, info=a:2:{s:4:"path";s:42:"/var/www/html/wordpress/wp-content/plugins";s:11:"description";s:7:"Plugins";}, last_one=)
+0213.137 () Unpacking backup... (backup_2019-05-13-1701_tesla_cat_ea26cd67d193-plugins.zip, 19.3 MB)
+0213.138 () Unzipping backup_2019-05-13-1701_tesla_cat_ea26cd67d193-plugins.zip to /var/www/html/wordpress/wp-content/upgrade/606c5e98/ using UpdraftPlus_ZipArchive, starting index 0
+0213.267 () Unzip progress: 1002 out of 4907 files (1.9 MB, plugins/insert-php/libs/factory/bootstrap/assets/js-min/bootstrap.scrollspy.min.js)
+0213.457 () Unzip progress: 2003 out of 4907 files (15.6 MB, plugins/wordpress-seo/vendor/yoast/api-libs/google/io/Google_CurlIO.php)
+0213.707 () Unzip progress: 3004 out of 4907 files (37.3 MB, plugins/updraftplus/vendor/aws/aws-sdk-php/src/Aws/S3/Model/MultipartUpload/ParallelTransfer.php)
+0213.941 () Unzip progress: 4005 out of 4907 files (52.4 MB, plugins/jetpack/modules/tiled-gallery/tiled-gallery/templates/rectangular-layout.php)
+0214.068 () Unzip progress: 4907 out of 4907 files (59.6 MB, plugins/simple-custom-post-order/screenshot-1.png)
+0214.073 () /var/www/html/wordpress/wp-content/updraft/plugins-old: This directory already exists, and will be replaced
+0214.073 () Moving old data: filesystem method / updraft_dir is potentially possible
+0214.073 () /var/www/html/wordpress/wp-content/plugins-old: This directory already exists, and will be replaced
+0214.073 () Moving old data: can potentially use wp_filesystem method / -old
+0214.073 () Moving old data out of the way...
+0214.193 () Top-level entities being moved: insert-php, host-google-fonts-locally, upload-max-file-size, wordpress-seo, updraftplus, jetpack, simple-custom-post-order
+0214.207 () Error message: Could not move the files into place. Check your file permissions.
+0214.207 () Error data (move_failed): /var/www/html/wordpress/wp-content/plugins/insert-php -> /var/www/html/wordpress/wp-content/updraft/plugins-old/insert-php
+0214.207 () plugins: /var/www/html/wordpress/wp-content/plugins: deleting contents (as attempts to copy failed)
+0214.447 () Moving unpacked backup into place...
+0214.776 () Top-level entities being moved: insert-php, host-google-fonts-locally, upload-max-file-size, index.php, wordpress-seo, akismet, updraftplus, jetpack, simple-custom-post-order
+0214.776 () PHP event: code E_WARNING: copy(/var/www/html/wordpress/wp-content/plugins/insert-php/admin/ajax/ajax.php): failed to open stream: Permission denied (line 281, wp-admin/includes/class-wp-filesystem-direct.php)
+0214.817 () Error message: Could not move the files into place. Check your file permissions.
+0214.817 () Error data (move_failed): (2) /var/www/html/wordpress/wp-content/upgrade/606c5e98/plugins/insert-php -> /var/www/html/wordpress/wp-content/plugins/insert-php
+0214.849 () Restore failed...
+0214.849 () Error message: Could not move the files into place. Check your file permissions.
+0214.849 () Error data (move_failed): (2) /var/www/html/wordpress/wp-content/upgrade/606c5e98/plugins/insert-php -> /var/www/html/wordpress/wp-content/plugins/insert-php
+0214.849 () Restore failed
