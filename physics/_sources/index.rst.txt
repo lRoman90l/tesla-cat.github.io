@@ -3,5 +3,4 @@ Home
 ====
 
 .. toctree::
-   Astrophysics/index
-.. Biophysics/index
+   General-Relativity/index
