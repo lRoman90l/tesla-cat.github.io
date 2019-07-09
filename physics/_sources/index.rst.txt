@@ -1,7 +1,0 @@
-
-Home
-====
-
-.. toctree::
-   Astrophysics/index
-.. Biophysics/index
