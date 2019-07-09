@@ -1,0 +1,6 @@
+
+Astrophysics
+============
+
+.. toctree::
+   General Relativity/index
