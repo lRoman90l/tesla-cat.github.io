@@ -3,4 +3,4 @@ Astrophysics
 ============
 
 .. toctree::
-   General Relativity/index
+   General-Relativity/index
