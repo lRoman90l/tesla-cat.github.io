@@ -2,23 +2,85 @@
 Hartree Fock Method
 ========================
 
+:Date: 27 July 2019
+
 Dependency
 -------------
-Schrodinger equation, Born-Oppenheimer approximation
 
+- `Schrodinger Equation`_
+- `Slater Determinant`_
+- `Born Oppenheimer Approximation`_
+- `Lagrange Multiplier`_
 
-What ?
+.. _Schrodinger Equation: 
+.. _Slater Determinant:
+.. _Born Oppenheimer Approximation:
+.. _Lagrange Multiplier:
+
+What?
 -----------
-Solve the electronic Schrodinger equation that results from the time-independent Schrodinger
-equation after invoking the Born-Oppenheimer approximation.
+
+Calculate the approximate wavefunction and energy for atoms
 
 Derivation
 -------------
+
+**Step 1** Approximate the wavefunction using `Slater Determinant`_
+
 .. math::
-    [-{1\over 2}\sum_i \nabla_i^2
-    -\sum_{A,i}{Z_A \over r_{Ai}}
-    +\sum_{A>B}{Z_A Z_B \over R_{AB}}
-    +\sum_{i>j}{1\over r_{ij}}]\Psi(r;R)=E\Psi(r;R)
+	\Psi = {1\over \sqrt{N!} } 
+		\begin{vmatrix}
+			\chi_1(x_1) & \chi_2(x_1) & ... & \chi_N(x_1)\\
+			\chi_1(x_2) & \chi_2(x_2) & ... & \chi_N(x_2)\\
+			...\\
+			\chi_1(x_N) & \chi_2(x_N) & ... & \chi_N(x_N)
+		\end{vmatrix}
+
+**Step 2** The system Hamiltonian after `Born Oppenheimer Approximation`_
+
+.. math::
+	\begin{align*}
+	& H = \sum\limits_i h(i) + \sum\limits_{i<j} v(i,j) + V_{NN} \\
+	& where \\
+	& h(i) = -{1\over 2}\nabla_i^2 - \sum\limits_A {Z_A\over r_{iA}} \\
+	& v(i,j) = {1\over r_{ij}}
+	\end{align*}
+
+**Step 3** The energy
+
+.. math::
+	\begin{align*}
+		E & = \langle \Psi |H| \Psi \rangle \\
+		  & = \sum\limits_i \langle i|h|i \rangle 
+		  	 +{1\over 2} \sum\limits_{ij}[ii|jj]-[ij|ji] \\
+	& where\\
+	& \langle i|h|j \rangle = \int dx_1 \; \chi_i^* h \chi_j\\
+	& [ij|kl] = \int dx_1 dx_2 \; \chi_i^* \chi_j {1\over r_{ij}} \chi_k^* \chi_l
+	\end{align*}
+
+**Step 4** Use `Lagrange Multiplier`_ to minimize the energy wrt changes in the orbitals :math:`\chi_i \to \chi_i+\delta \chi_i`
+
+under constraint :math:`\langle i|j \rangle = \delta_{ij}`
+
+.. math::
+	\begin{align*}
+	& L = E - \sum\limits_{ij} \epsilon_{ij} [\langle i|j \rangle - \delta_{ij}]\\
+	& \delta L =0 \Rightarrow \boxed{
+		f \chi_i = \epsilon_i \chi_i
+	}\\
+	& where \\
+	& \text{Fock operator  } 
+		f \equiv h + \sum\limits_j J_j - K_j\\
+	& - where \\
+	& \text{Coulomb operator  } 
+		J_j(x_1) = \int dx_2 \; |\chi_j(x_2)|^2 {1\over r_{12}} \\
+	& \text{Exchange operator  } 
+		K_j(x_1) \chi_i(x_1) = \left[ \int dx_2\; \chi_j^*(x_2) {1\over r_{12}} \chi_i(x_2)\right] \chi_j(x_1) \\
+	\end{align*}
+
+**Step 5** Introducing basis functions to transform the above **integral equation** into a **matrix equation**
+
+**TO BE CONTINUED**
 
 
 
@@ -28,38 +90,3 @@ Derivation
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-Code
-----
-
-.. rubric:: Code
-
-::
-
-  def update_weights(m, b, X, Y, learning_rate):
-      m_deriv = 0
-      b_deriv = 0
-      N = len(X)
-      for i in range(N):
-          # Calculate partial derivatives
-          # -2x(y - (mx + b))
-          m_deriv += -2*X[i] * (Y[i] - (m*X[i] + b))
-
-          # -2(y - (mx + b))
-          b_deriv += -2*(Y[i] - (m*X[i] + b))
-
-      # We subtract because the derivatives point in direction of steepest ascent
-      m -= (m_deriv / float(N)) * learning_rate
-      b -= (b_deriv / float(N)) * learning_rate
-
-      return m, b
