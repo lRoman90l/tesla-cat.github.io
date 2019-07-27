@@ -1,0 +1,65 @@
+
+Hartree Fock Method
+========================
+
+Dependency
+-------------
+Schrodinger equation, Born-Oppenheimer approximation
+
+
+What ?
+-----------
+Solve the electronic Schrodinger equation that results from the time-independent Schrodinger
+equation after invoking the Born-Oppenheimer approximation.
+
+Derivation
+-------------
+.. math::
+    [-{1\over 2}\sum_i \nabla_i^2
+    -\sum_{A,i}{Z_A \over r_{Ai}}
+    +\sum_{A>B}{Z_A Z_B \over R_{AB}}
+    +\sum_{i>j}{1\over r_{ij}}]\Psi(r;R)=E\Psi(r;R)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Code
+----
+
+.. rubric:: Code
+
+::
+
+  def update_weights(m, b, X, Y, learning_rate):
+      m_deriv = 0
+      b_deriv = 0
+      N = len(X)
+      for i in range(N):
+          # Calculate partial derivatives
+          # -2x(y - (mx + b))
+          m_deriv += -2*X[i] * (Y[i] - (m*X[i] + b))
+
+          # -2(y - (mx + b))
+          b_deriv += -2*(Y[i] - (m*X[i] + b))
+
+      # We subtract because the derivatives point in direction of steepest ascent
+      m -= (m_deriv / float(N)) * learning_rate
+      b -= (b_deriv / float(N)) * learning_rate
+
+      return m, b

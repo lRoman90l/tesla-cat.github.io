@@ -68,7 +68,7 @@ introduction of yourself to join!
 - **什么？：** 我们想回答的问题是什么？
 - **推导：** 建议用 SymPy_
 - **代码：** 建议用 Python_
-- **示例：** 建议使用上面的**代码**。
+- **示例：** 建议使用上面的 **代码** 。
 - **所以？：** 这段知识的意义。
 - **谁？** 谁开发了这个理论，或参考论文。
 
@@ -91,5 +91,6 @@ introduction of yourself to join!
 
 .. toctree::
    General-Relativity/index
+   Biomolecular-Physics/index
 
 
