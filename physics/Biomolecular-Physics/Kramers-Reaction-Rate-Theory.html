@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Non-equilibrium Thermodynamics &mdash; Physics  documentation</title>
+  <title>Kramers Reaction Rate Theory &mdash; Physics  documentation</title>
   
 
   
@@ -36,8 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Kramers Reaction Rate Theory" href="Kramers-Reaction-Rate-Theory.html" />
-    <link rel="prev" title="Density Functional Theory" href="Density-Functional-Theory.html" /> 
+    <link rel="prev" title="Non-equilibrium Thermodynamics" href="Non-equilibrium-Thermodynamics.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,14 +84,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Biomolecular Physics</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Hartree-Fock-Method.html">Hartree Fock Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Density-Functional-Theory.html">Density Functional Theory</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Non-equilibrium Thermodynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Non-equilibrium-Thermodynamics.html">Non-equilibrium Thermodynamics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Kramers Reaction Rate Theory</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#what">What?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#derivation">Derivation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#so">So ?</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Kramers-Reaction-Rate-Theory.html">Kramers Reaction Rate Theory</a></li>
 </ul>
 </li>
 </ul>
@@ -142,13 +140,13 @@
         
           <li><a href="index.html">Biomolecular Physics</a> &raquo;</li>
         
-      <li>Non-equilibrium Thermodynamics</li>
+      <li>Kramers Reaction Rate Theory</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Biomolecular-Physics/Non-equilibrium-Thermodynamics.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Biomolecular-Physics/Kramers-Reaction-Rate-Theory.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -161,8 +159,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="non-equilibrium-thermodynamics">
-<h1>Non-equilibrium Thermodynamics<a class="headerlink" href="#non-equilibrium-thermodynamics" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="kramers-reaction-rate-theory">
+<h1>Kramers Reaction Rate Theory<a class="headerlink" href="#kramers-reaction-rate-theory" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Date</dt>
 <dd class="field-odd"><p>28 July 2019</p>
@@ -171,46 +169,53 @@
 <div class="section" id="dependency">
 <h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#boltzmann-distribution">Boltzmann Distribution</a></p></li>
+<li><p><a class="reference internal" href="#schrodinger-equation">Schrodinger Equation</a></p></li>
+<li><p><a class="reference internal" href="#born-oppenheimer-approximation">Born Oppenheimer Approximation</a></p></li>
+<li><p><a class="reference internal" href="#functional">Functional</a></p></li>
 </ul>
 </div>
 <div class="section" id="what">
-<span id="boltzmann-distribution"></span><h2>What?<a class="headerlink" href="#what" title="Permalink to this headline">¶</a></h2>
+<span id="functional"></span><span id="born-oppenheimer-approximation"></span><span id="schrodinger-equation"></span><h2>What?<a class="headerlink" href="#what" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id1">
+<img alt="../_images/Kramers-Reaction-Rate-Theory-1.PNG" src="../_images/Kramers-Reaction-Rate-Theory-1.PNG" />
+<p class="caption"><span class="caption-text"><em>TO BE MODIFIED</em></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="math notranslate nohighlight">
+\[\require{mhchem}
+\ce{A &lt;=&gt; B -&gt;[k^+] C}\]</div>
+<p>Let the transition state <span class="math notranslate nohighlight">\(B\)</span> correspond to <strong>reaction coordinate</strong> <span class="math notranslate nohighlight">\(x=x^{\ne}\)</span></p>
 </div>
 <div class="section" id="derivation">
 <h2>Derivation<a class="headerlink" href="#derivation" title="Permalink to this headline">¶</a></h2>
-<p><strong>Step 1</strong> <strong>Crooks Fluctuation Theorem</strong> relates <strong>work</strong> <span class="math notranslate nohighlight">\(W\)</span> of a non-equilibrium process to <strong>free energy</strong> <span class="math notranslate nohighlight">\(\Delta G\)</span> (an equilibrium property)</p>
+<p><strong>Step 1</strong></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-&amp;\boxed{
-        {P_{A\to B}(W) \over P_{B\to A}(-W)} = e^{\beta (W-\Delta G)}
-}\\
-&amp; where\\
-&amp; P = \text{Probability}\\
-&amp; A,B = \text{States}
+&amp; k^+ = {\text{flux} \over N_A} \\
+&amp; \text{and}\\
+&amp; \text{flux} = \underbrace{{N^{\ne} \over \Delta x}}_{\text{density}}
+        \underbrace{\langle v^{\ne} \rangle}_{velocity} \\
+&amp; {N^{\ne} \over N_A} = {z^{\ne} \over z_A} \; (\text{Boltzmann Factor})\\
+\Rightarrow &amp; k^+ = {z^{\ne} \over z_A} {\langle v^{\ne} \rangle \over \Delta x}
 \end{align*}\end{split}\]</div>
-<p><strong>Step 2</strong> Proof of <strong>Step 1</strong></p>
+<p><strong>Step 2</strong> Find <span class="math notranslate nohighlight">\(z^{\ne}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp; z^{\ne} = {1\over h} \int dp
+        \int_{x^{\ne}-{\Delta x \over 2}}^{x^{\ne}+{\Delta x \over 2}}
+        dx \; \exp[{p^2\over 2m}+V(x)] \\
+&amp;\text{Assume } V=const \text{ around } x^{\ne}\\
+\Rightarrow z^{\ne} &amp; = {1\over h} \Delta x\; e^{-\beta V(x^{\ne})}
+        \sqrt{2\pi m \beta}
+\end{align*}\end{split}\]</div>
+<p><strong>Step 3</strong> Find <span class="math notranslate nohighlight">\(z^A\)</span></p>
 <p><em>TO BE ADDED</em></p>
-<p><strong>Step 3</strong> <strong>Jarzynski Equality</strong>, a consequence of Crooks Fluctuation Theorem</p>
+<p><strong>Step 4</strong> Find <span class="math notranslate nohighlight">\(\langle v^{\ne} \rangle\)</span></p>
+<p><em>TO BE ADDED</em></p>
+<p><strong>Step 5</strong> Combine above</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-&amp;{P_{A\to B}(W) e^{-\beta W} = P_{B\to A}(-W)} e^{-\beta \Delta G}\\
-&amp; \text{Integrate over } P\\
-&amp; \Rightarrow \boxed{
-        \langle e^{-\beta W} \rangle = e^{-\beta \Delta G}
-}
-\end{align*}\end{split}\]</div>
-</div>
-<div class="section" id="so">
-<h2>So ?<a class="headerlink" href="#so" title="Permalink to this headline">¶</a></h2>
-<p>In order to calculate free energy:</p>
-<p>Previously we need to simulate molecules in equilibrium process which is time consuming.
-Now we can just use Non-equilibrium process, saves a lot of time!</p>
-<p>Perform multiple Non-equilibrium simulations, then:</p>
-<ul class="simple">
-<li><p>Using Crooks Fluctuation Theorem, find <span class="math notranslate nohighlight">\(W\)</span> such that <span class="math notranslate nohighlight">\(P_{A\to B}(W) = P_{B\to A}(-W)\)</span>, then <span class="math notranslate nohighlight">\(\Delta G=W\)</span></p></li>
-<li><p>Using Jarzynski Equality, <span class="math notranslate nohighlight">\(\Delta G= {1\over -\beta}\ln \langle e^{-\beta W} \rangle\)</span></p></li>
-</ul>
+\[\boxed{
+        k^+ = {\omega_A \over 2\pi}e^{-\beta V(x^{\ne})}
+}\]</div>
 </div>
 </div>
 
@@ -222,10 +227,8 @@ Now we can just use Non-equilibrium process, saves a lot of time!</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Kramers-Reaction-Rate-Theory.html" class="btn btn-neutral float-right" title="Kramers Reaction Rate Theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="Density-Functional-Theory.html" class="btn btn-neutral float-left" title="Density Functional Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Non-equilibrium-Thermodynamics.html" class="btn btn-neutral float-left" title="Non-equilibrium Thermodynamics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
