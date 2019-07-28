@@ -7,13 +7,12 @@ Kramers Reaction Rate Theory
 Dependency
 -------------
 
-- `Schrodinger Equation`_
-- `Born Oppenheimer Approximation`_
-- Functional_
+- `Statistical Mechanics`_
+- `Boltzmann Factor`_
 
-.. _Schrodinger Equation: 
-.. _Born Oppenheimer Approximation:
-.. _Functional:
+.. _Statistical Mechanics: 
+.. _Boltzmann Factor:
+
 
 What?
 -----------
