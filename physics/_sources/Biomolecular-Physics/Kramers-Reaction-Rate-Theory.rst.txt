@@ -30,7 +30,7 @@ Let the transition state :math:`B` correspond to **reaction coordinate** :math:`
 Derivation
 -------------
 
-**Step 1** 
+**Step 1** **Transition State Theory (TST)**
 
 .. math::
 	\begin{align*}
@@ -62,9 +62,21 @@ Derivation
 
 *TO BE ADDED*
 
-**Step 5** Combine above
+**Step 5** Combining above
 
 .. math::
 	\boxed{
-		k^+ = {\omega_A \over 2\pi}e^{-\beta V(x^{\ne})}
+		k^+ = {\omega_A \over 2\pi}e^{-\beta V(x^{\ne})} \;\;\; \text{TST}
+	}
+
+**Step 6** Modify **TST** to get **Kramers Theory**
+
+*TO BE FURTHER EXPLAINED*
+
+.. math::
+	\boxed{
+		k^+ = {1\over \omega_B}\left(-{\gamma \over 2}+\sqrt{{\gamma^2 \over 4}+\omega_B^2}\right) 
+		\left\{
+			{\omega_A \over 2\pi}e^{-\beta V(x^{\ne})}
+		\right\} \;\;\; \text{Kramers}
 	}
