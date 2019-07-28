@@ -90,6 +90,8 @@ introduction of yourself to join!
 
 
 .. toctree::
-   Biomolecular-Physics/index
+	Thermodynamics-And-Statistical-Mechanics/index
+	Biomolecular-Physics/index
+
 
 
