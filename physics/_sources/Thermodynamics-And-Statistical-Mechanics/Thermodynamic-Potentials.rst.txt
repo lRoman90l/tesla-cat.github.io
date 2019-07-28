@@ -29,8 +29,8 @@ Derivation
 	& where\\
 	& T: \text{Temperature}\\
 	& S: \text{Entropy}\\
-	& F_i: \text{Generalized Forces}\\
-	& x_i: \text{Generalized Coordinates}\\
+	& F_i: \text{Generalized Forces such as Pressure} P\\
+	& x_i: \text{Generalized Coordinates such as Volume} V\\
 	& \mu_j: \text{Chemical Potentials}\\
 	& N_j: \text{Particles Numbers}\\
 	& and \\
