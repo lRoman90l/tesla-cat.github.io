@@ -17,8 +17,8 @@ Dependency
 .. _Born Oppenheimer Approximation:
 .. _Lagrange Multiplier:
 
-What?
------------
+What is the problem ?
+------------------------
 
 Calculate the approximate wavefunction and energy for atoms
 

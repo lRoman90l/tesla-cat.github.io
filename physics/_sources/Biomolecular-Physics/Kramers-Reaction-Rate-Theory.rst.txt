@@ -14,8 +14,8 @@ Dependency
 .. _Boltzmann Factor:
 
 
-What?
------------
+What is the problem ?
+------------------------
 
 .. figure:: Kramers-Reaction-Rate-Theory-1.PNG
    

@@ -12,8 +12,8 @@ Dependency
 .. _Boltzmann Distribution: 
 
 
-What?
------------
+What is the problem ?
+-------------------------
 
 
 
@@ -47,8 +47,8 @@ Derivation
 	}
 	\end{align*}
 
-So ?
----------
+What is the significance ?
+-----------------------------
 In order to calculate free energy:
 
 Previously we need to simulate molecules in equilibrium process which is time consuming.
