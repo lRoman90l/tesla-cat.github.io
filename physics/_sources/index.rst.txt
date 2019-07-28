@@ -90,7 +90,6 @@ introduction of yourself to join!
 
 
 .. toctree::
-   General-Relativity/index
    Biomolecular-Physics/index
 
 

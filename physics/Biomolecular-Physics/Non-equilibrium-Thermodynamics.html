@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Density Functional Theory &mdash; Physics  documentation</title>
+  <title>Non-equilibrium Thermodynamics &mdash; Physics  documentation</title>
   
 
   
@@ -36,8 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Non-equilibrium Thermodynamics" href="Non-equilibrium-Thermodynamics.html" />
-    <link rel="prev" title="Hartree Fock Method" href="Hartree-Fock-Method.html" /> 
+    <link rel="prev" title="Density Functional Theory" href="Density-Functional-Theory.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,13 +83,14 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Biomolecular Physics</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Hartree-Fock-Method.html">Hartree Fock Method</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Density Functional Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Density-Functional-Theory.html">Density Functional Theory</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Non-equilibrium Thermodynamics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#what">What?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#derivation">Derivation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#so">So ?</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Non-equilibrium-Thermodynamics.html">Non-equilibrium Thermodynamics</a></li>
 </ul>
 </li>
 </ul>
@@ -140,13 +140,13 @@
         
           <li><a href="index.html">Biomolecular Physics</a> &raquo;</li>
         
-      <li>Density Functional Theory</li>
+      <li>Non-equilibrium Thermodynamics</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Biomolecular-Physics/Density-Functional-Theory.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Biomolecular-Physics/Non-equilibrium-Thermodynamics.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -159,8 +159,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="density-functional-theory">
-<h1>Density Functional Theory<a class="headerlink" href="#density-functional-theory" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="non-equilibrium-thermodynamics">
+<h1>Non-equilibrium Thermodynamics<a class="headerlink" href="#non-equilibrium-thermodynamics" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Date</dt>
 <dd class="field-odd"><p>28 July 2019</p>
@@ -169,61 +169,46 @@
 <div class="section" id="dependency">
 <h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#schrodinger-equation">Schrodinger Equation</a></p></li>
-<li><p><a class="reference internal" href="#born-oppenheimer-approximation">Born Oppenheimer Approximation</a></p></li>
-<li><p><a class="reference internal" href="#functional">Functional</a></p></li>
+<li><p><a class="reference internal" href="#boltzmann-distribution">Boltzmann Distribution</a></p></li>
 </ul>
 </div>
 <div class="section" id="what">
-<span id="functional"></span><span id="born-oppenheimer-approximation"></span><span id="schrodinger-equation"></span><h2>What?<a class="headerlink" href="#what" title="Permalink to this headline">¶</a></h2>
-<p>Calculate the approximate wavefunction and energy for atoms</p>
+<span id="boltzmann-distribution"></span><h2>What?<a class="headerlink" href="#what" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="derivation">
 <h2>Derivation<a class="headerlink" href="#derivation" title="Permalink to this headline">¶</a></h2>
-<p><strong>Step 1</strong> Hohenberg Kohn theorem</p>
-<p><span class="math notranslate nohighlight">\(n(r)\)</span>: groundstate electron density</p>
-<p><span class="math notranslate nohighlight">\(v(r)\)</span>: external potential</p>
-<p>Then <a class="reference internal" href="#functional">Functional</a> <span class="math notranslate nohighlight">\(v=v[n]\)</span>, meaning if we observe some <span class="math notranslate nohighlight">\(n(r)\)</span>, then we know exactly what potential <span class="math notranslate nohighlight">\(v(r)\)</span> generates such density distribution</p>
+<p><strong>Step 1</strong> <strong>Crooks Fluctuation Theorem</strong> relates <strong>work</strong> <span class="math notranslate nohighlight">\(W\)</span> of a non-equilibrium process to <strong>free energy</strong> <span class="math notranslate nohighlight">\(\Delta G\)</span> (an equilibrium property)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp;\boxed{
+        {P_{A\to B}(W) \over P_{B\to A}(-W)} = e^{\beta (W-\Delta G)}
+}\\
+&amp; where\\
+&amp; P = \text{Probability}\\
+&amp; A,B = \text{States}
+\end{align*}\end{split}\]</div>
 <p><strong>Step 2</strong> Proof of <strong>Step 1</strong></p>
 <p><em>TO BE ADDED</em></p>
-<p><strong>Step 3</strong> The energy</p>
+<p><strong>Step 3</strong> <strong>Jarzynski Equality</strong>, a consequence of Crooks Fluctuation Theorem</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-E[n] &amp; = T+U+V = T[n]+U[n]+\int n(r)v(r) \; d^3r\\
-&amp; where\\
-&amp; T = \text{Kinetic energy of electrons}\\
-&amp; U = \text{Electric potential}\\
-&amp; V = \text{Total external potential}
+&amp;{P_{A\to B}(W) e^{-\beta W} = P_{B\to A}(-W)} e^{-\beta \Delta G}\\
+&amp; \text{Integrate over } P\\
+&amp; \Rightarrow \boxed{
+        \langle e^{-\beta W} \rangle = e^{-\beta \Delta G}
+}
 \end{align*}\end{split}\]</div>
-<p><strong>Step 4</strong> Kohn-Sham approach to evaluate The energy</p>
-<p>Introduce single particle orbitals <span class="math notranslate nohighlight">\(\chi_i\)</span></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-&amp; T=T_{\text{single particle}} + T_{\text{correlation}} = T_s+T_c \\
-&amp; T_s = T_s\{\chi_i[n]\}\\
-&amp; \text{Introduce:}\\
-&amp; E_{xc} = (T-T_s)+(U-U_H)\\
-&amp; \Rightarrow\\
-E[n] &amp; = T_s\{\chi_i[n]\}+U_H+E_{xc}+V
-\end{align*}\end{split}\]</div>
-<p>The idea above is to leave all the non-trivial parts to <span class="math notranslate nohighlight">\(E_{xc}=E_{x}+E_{c}\)</span></p>
+</div>
+<div class="section" id="so">
+<h2>So ?<a class="headerlink" href="#so" title="Permalink to this headline">¶</a></h2>
+<p>In order to calculate free energy:</p>
+<p>Previously we need to simulate molecules in equilibrium process which is time consuming.
+Now we can just use Non-equilibrium process, saves a lot of time!</p>
+<p>Perform multiple Non-equilibrium simulations, then:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x\)</span> stands for exchange energy due to the Pauli Principle</p></li>
-<li><p><span class="math notranslate nohighlight">\(c\)</span> stands for correlation energy, <span class="math notranslate nohighlight">\(T_c\)</span> is part of <span class="math notranslate nohighlight">\(E_c\)</span></p></li>
+<li><p>Using Crooks Fluctuation Theorem, find <span class="math notranslate nohighlight">\(W\)</span> such that <span class="math notranslate nohighlight">\(P_{A\to B}(W) = P_{B\to A}(-W)\)</span>, then <span class="math notranslate nohighlight">\(\Delta G=W\)</span></p></li>
+<li><p>Using Jarzynski Equality, <span class="math notranslate nohighlight">\(\Delta G= {1\over -\beta}\ln \langle e^{-\beta W} \rangle\)</span></p></li>
 </ul>
-<p>We have</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-&amp; T_s = ...\text{ trivial expression we know} \\
-&amp; U_H = ...\text{ trivial expression we know} \\
-&amp; E_x = ???\text{ can only be calculated after approximation(step 5)} \\
-&amp; E_c = ???\text{ can only be calculated after approximation(step 5)}
-\end{align*}\end{split}\]</div>
-<p><strong>Step 5</strong> Approximations to find <span class="math notranslate nohighlight">\(E_{xc}\)</span></p>
-<p><em>TO BE ADDED</em></p>
-<p><strong>Step 6</strong> Get the groundstate energy by minimizing <span class="math notranslate nohighlight">\(E[n]\)</span> wrt <span class="math notranslate nohighlight">\(n\)</span></p>
-<p><strong>Kohn-Sham Equations</strong></p>
-<p><strong>TO BE CONTINUED</strong></p>
 </div>
 </div>
 
@@ -235,10 +220,8 @@ E[n] &amp; = T_s\{\chi_i[n]\}+U_H+E_{xc}+V
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Non-equilibrium-Thermodynamics.html" class="btn btn-neutral float-right" title="Non-equilibrium Thermodynamics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="Hartree-Fock-Method.html" class="btn btn-neutral float-left" title="Hartree Fock Method" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Density-Functional-Theory.html" class="btn btn-neutral float-left" title="Density Functional Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
