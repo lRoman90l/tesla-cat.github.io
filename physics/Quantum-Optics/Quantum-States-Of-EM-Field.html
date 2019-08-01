@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Einstein Field Equations &mdash; Physics  documentation</title>
+  <title>Quantum States Of EM Field &mdash; Physics  documentation</title>
   
 
   
@@ -35,7 +35,9 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Thermodynamics And Statistical Mechanics" href="../Thermodynamics-And-Statistical-Mechanics/index.html" />
+    <link rel="prev" title="Quantization Of EM Field" href="Quantization-Of-EM-Field.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,7 +81,18 @@
               
             
             
-              <ul>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Quantum Optics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Quantization-Of-LC-Circuit.html">Quantization Of LC Circuit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Quantization-Of-EM-Field.html">Quantization Of EM Field</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Quantum States Of EM Field</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-the-problem">What is the problem ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#derivation">Derivation</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../Thermodynamics-And-Statistical-Mechanics/index.html">Thermodynamics And Statistical Mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Biomolecular-Physics/index.html">Biomolecular Physics</a></li>
 </ul>
@@ -127,13 +140,15 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Einstein Field Equations</li>
+          <li><a href="index.html">Quantum Optics</a> &raquo;</li>
+        
+      <li>Quantum States Of EM Field</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/General-Relativity/Einstein-Field-Equations.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Quantum-Optics/Quantum-States-Of-EM-Field.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -146,35 +161,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="einstein-field-equations">
-<h1>Einstein Field Equations<a class="headerlink" href="#einstein-field-equations" title="Permalink to this headline">¶</a></h1>
-<div class="math notranslate nohighlight">
-\[R_{\mu\nu}-\dfrac{1}{2}g_{\mu\nu}R+g_{\mu\nu}\Lambda=\dfrac{8\pi G}{c^4}T_{\mu\nu}\]</div>
+  <div class="section" id="quantum-states-of-em-field">
+<h1>Quantum States Of EM Field<a class="headerlink" href="#quantum-states-of-em-field" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Date</dt>
+<dd class="field-odd"><p>2 August 2019</p>
+</dd>
+</dl>
+<div class="section" id="dependency">
+<h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><span class="xref std std-doc">Quantum-Harmonic-Oscillator</span></p></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-problem">
+<h2>What is the problem ?<a class="headerlink" href="#what-is-the-problem" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="derivation">
 <h2>Derivation<a class="headerlink" href="#derivation" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="code">
-<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
-<p class="rubric">Code</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_weights</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">):</span>
-    <span class="n">m_deriv</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">b_deriv</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="c1"># Calculate partial derivatives</span>
-        <span class="c1"># -2x(y - (mx + b))</span>
-        <span class="n">m_deriv</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">m</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">))</span>
-
-        <span class="c1"># -2(y - (mx + b))</span>
-        <span class="n">b_deriv</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">m</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">))</span>
-
-    <span class="c1"># We subtract because the derivatives point in direction of steepest ascent</span>
-    <span class="n">m</span> <span class="o">-=</span> <span class="p">(</span><span class="n">m_deriv</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">))</span> <span class="o">*</span> <span class="n">learning_rate</span>
-    <span class="n">b</span> <span class="o">-=</span> <span class="p">(</span><span class="n">b_deriv</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">))</span> <span class="o">*</span> <span class="n">learning_rate</span>
-
-    <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">b</span>
-</pre></div>
-</div>
+<p><strong>Step 1</strong> Fock States / Number States</p>
+<p>A Fock state is a state with a well-defined number of photons, i.e. an eigenstate of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp; N = \sum\limits_M N_M = \sum\limits_M a_M^{\dagger}a_M\\
+&amp; n=0 \text{ (vacuum state): } |vac\rangle = ...\otimes |0\rangle \otimes |0\rangle \otimes ...\\
+&amp; n=1 \text{ (one photon): } \sum\limits_M c_M |1_M\rangle \\
+&amp; n=2 \text{ (two photons): } \\
+&amp; \;\;\; |2_M\rangle = ...\otimes |0\rangle \otimes |2\rangle \otimes ...\\
+&amp; \;\;\; |1_M,1_{M'}\rangle = ...\otimes |1\rangle \otimes ...  \otimes |1\rangle \otimes ...\\
+&amp; \;\;\; \text{and any superposition of them}\\
+\end{align*}\end{split}\]</div>
+<p>All one-photon states are ultimately <strong>monomode</strong>, because</p>
+<p><strong>TO BE CONTINUED</strong></p>
 </div>
 </div>
 
@@ -183,6 +201,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Thermodynamics-And-Statistical-Mechanics/index.html" class="btn btn-neutral float-right" title="Thermodynamics And Statistical Mechanics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Quantization-Of-EM-Field.html" class="btn btn-neutral float-left" title="Quantization Of EM Field" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
