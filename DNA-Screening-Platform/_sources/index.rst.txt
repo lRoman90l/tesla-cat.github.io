@@ -1,0 +1,25 @@
+
+`Read The Docs`_ 
+====================================
+
+.. _Read The Docs: https://tesla-cat.github.io/DNA-Screening-Platform/index.html
+
+.. contents::
+
+What do we want to achieve ?
+-----------------------------------
+
+Develop an affordable `High throughput Screening`_ platform for genomic structural variations
+
+.. _High throughput Screening: https://en.wikipedia.org/wiki/High-throughput_screening
+
+What are the steps ?
+-----------------------------------
+
+- :doc:`Validate The Ideas`, identify the :doc:`Main Difficulties`, be sure this is not a waste of time
+- Distribute the :doc:`Tasks` among team members
+- Develop individual :doc:`Components` the prototype
+- :doc:`Benchmarking`
+- Make :doc:`Revisions`, we must be the best in the world otherwise no one will buy it
+- Find VC and start a company
+
