@@ -1,8 +1,6 @@
 
-`Read The Docs`_ 
+Overview 
 ====================================
-
-.. _Read The Docs: https://tesla-cat.github.io/DNA-Screening-Platform/index.html
 
 .. contents::
 
