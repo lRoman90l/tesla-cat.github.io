@@ -16,10 +16,10 @@ Develop an affordable `High throughput Screening`_ platform for genomic structur
 What are the steps ?
 -----------------------------------
 
-- :doc:`Validate The Ideas`, identify the :doc:`Main Difficulties`, be sure this is not a waste of time
+- :doc:`Validate The Ideas`, identify the :doc:`Main Difficulties`
 - Distribute the :doc:`Tasks` among team members
-- Develop individual :doc:`Components` the prototype
+- Develop individual :doc:`Components` for the prototype
 - :doc:`Benchmarking`
-- Make :doc:`Revisions`, we must be the best in the world otherwise no one will buy it
+- Make :doc:`Revisions`
 - Find VC and start a company
 
