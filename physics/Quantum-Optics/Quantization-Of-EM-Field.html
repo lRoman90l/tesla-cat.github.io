@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quantum States Of EM Field" href="Quantum-States-Of-EM-Field.html" />
+    <link rel="next" title="Quantization Of EM Field Version2" href="Quantization-Of-EM-Field-Version2.html" />
     <link rel="prev" title="Quantization Of LC Circuit" href="Quantization-Of-LC-Circuit.html" /> 
 </head>
 
@@ -82,6 +82,8 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Electrodynamics/index.html">Electrodynamics  GO FIND KENNETH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Advanced-Quantum-Mechanics-Feynman-Path-Integral/index.html">Advanced Quantum Mechanics: Feynman Path Integral</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Quantum Optics</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Quantization-Of-LC-Circuit.html">Quantization Of LC Circuit</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Quantization Of EM Field</a><ul>
@@ -90,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#derivation">Derivation</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="Quantization-Of-EM-Field-Version2.html">Quantization Of EM Field Version2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Quantum-States-Of-EM-Field.html">Quantum States Of EM Field</a></li>
 </ul>
 </li>
@@ -192,14 +195,14 @@
 <p><strong>Step 2</strong> <span class="xref std std-doc">Plane-Wave-Expansion</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-A(r,t) &amp; = \sum\limits_{M = -\infty}^{\infty}
+A(r,t) &amp; = \sum\limits_M
         \underbrace{\hat{p}_M}_{\text{Polarization}}\;
-        \underbrace{q_M}_{\text{Amplitude}}
+        \underbrace{\mathcal{A}_M}_{\text{Amplitude}}
         e^{i(k_M \cdot r-\omega_M t)}
         + cc \\
-&amp; \equiv \sum\limits_{M = -\infty}^{\infty} \hat{p}_M q_M(t) e^{i(k_M \cdot r)} + cc \\
+&amp; \equiv \sum\limits_M \hat{p}_M \mathcal{A}_M(t) e^{i(k_M \cdot r)} + cc \\
 &amp; where\\
-&amp; q_M(t)=q_M e^{-i\omega_M t}\\
+&amp; \mathcal{A}_M(t)=\mathcal{A}_M e^{-i\omega_M t}\\
 &amp; M = \{k_x,k_y,k_z,p \} \text{ is a set of parameters}\\
 &amp; \text{Each possible value of } M, \text{ eg:{1,2,3,1}, is a &quot;Mode&quot;}\\
 &amp; k_x \text{ is wavenumber along } x \text{ and } p \in \{1,2\}\\
@@ -208,14 +211,14 @@ A(r,t) &amp; = \sum\limits_{M = -\infty}^{\infty}
 <p><strong>Step 3</strong> From <span class="math notranslate nohighlight">\(A\)</span> we can find the <span class="xref std std-doc">Hamiltonian</span>, refer to <span class="xref std std-doc">Maxwell-Equations</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-&amp; H = 2\epsilon_0 V \sum \omega_M^2 \; q_M(t) q_M^*(t)\\
+&amp; H = 2\epsilon_0 V \sum \omega_M^2 \; \mathcal{A}_M(t) \mathcal{A}_M^*(t)\\
 &amp; where \; V \text{ is volume}
 \end{align*}\end{split}\]</div>
 <p><strong>Step 4</strong> As we did in <a class="reference internal" href="Quantization-Of-LC-Circuit.html"><span class="doc">Quantization Of LC Circuit</span></a>, the idea is to cast the Hamiltonian into form of <span class="xref std std-doc">Quantum-Harmonic-Oscillator</span></p>
 <p>Using a common technique named ???</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-&amp; \text{Introduce } Q_M = \sqrt{\epsilon_0 V} (q_M+q_M^*) \text{ and } P_M = {1\over i} \sqrt{\epsilon_0 V \omega_M^2} (q_M - q_M^*)\\
+&amp; \text{Introduce } Q_M = \sqrt{\epsilon_0 V} (\mathcal{A}_M+\mathcal{A}_M^*) \text{ and } P_M = {1\over i} \sqrt{\epsilon_0 V \omega_M^2} (\mathcal{A}_M - \mathcal{A}_M^*)\\
 &amp; \Rightarrow H = \sum\limits_M  {P_M^2\over 2} + {1\over 2}\omega_M^2 Q_M^2
 \end{align*}\end{split}\]</div>
 <p><strong>Step 5</strong> Results from <span class="xref std std-doc">Quantum-Harmonic-Oscillator</span> then follows</p>
@@ -230,7 +233,7 @@ A(r,t) &amp; = \sum\limits_{M = -\infty}^{\infty}
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Quantum-States-Of-EM-Field.html" class="btn btn-neutral float-right" title="Quantum States Of EM Field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Quantization-Of-EM-Field-Version2.html" class="btn btn-neutral float-right" title="Quantization Of EM Field Version2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Quantization-Of-LC-Circuit.html" class="btn btn-neutral float-left" title="Quantization Of LC Circuit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -35,13 +35,7 @@ Knowledge Structure
 Contribute
 -----------------------------------
 
-This project is started by `Ding Ruiqi`_ from National University of Singapore, 
-but anyone with love and qualification in Physics/Mathematics can contrubute.
-
-Please feel free to contact Ding Ruiqi: e0134117@u.nus.edu with a simple 
-introduction of yourself to join!
-
-
+This project is actively maintained by `Ding Ruiqi`_ , a 4th year undergraduate from National University of Singapore.
 
 中文版
 ============
@@ -75,13 +69,10 @@ introduction of yourself to join!
 贡献
 -----------------------------------
 
-该项目由新加坡国立大学的 `Ding Ruiqi`_ 创建，
-但任何拥有爱和物理/数学知识的人都可以贡献。
-
-请随时联系丁瑞奇：e0134117@u.nus.edu 用一个简单的自我介绍加入！
+该项目由新加坡国立大学的大四学生 `Ding Ruiqi`_ 活跃维持。
 
 
-.. _`Ding Ruiqi`: https://www.youtube.com
+.. _Ding Ruiqi: https://tesla-cat.com/cv/
 
 .. _SymPy: https://www.sympy.org/en/index.html
 .. _w3cschools: https://www.w3schools.com/
@@ -90,6 +81,8 @@ introduction of yourself to join!
 
 
 .. toctree::
+	Electrodynamics/index
+	Advanced-Quantum-Mechanics-Feynman-Path-Integral/index
 	Quantum-Optics/index
 	Thermodynamics-And-Statistical-Mechanics/index
 	Biomolecular-Physics/index

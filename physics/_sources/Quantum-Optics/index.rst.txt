@@ -5,6 +5,7 @@ Quantum Optics
 .. toctree::
 	Quantization-Of-LC-Circuit
 	Quantization-Of-EM-Field
+	Quantization-Of-EM-Field-Version2
 	Quantum-States-Of-EM-Field
 	
 	

@@ -1,6 +1,6 @@
 
-Quantization Of EM Field
-===============================
+Quantization Of EM Field Version2
+====================================
 
 :Date: 1 August 2019
 
@@ -31,12 +31,12 @@ Derivation
 
 .. math::
 	\begin{align*}
-	A(r,t) & = \sum\limits_M
+	A(r,t) & = \sum\limits_{M = -\infty}^{\infty}
 		\underbrace{\hat{p}_M}_{\text{Polarization}}\;
 		\underbrace{\mathcal{A}_M}_{\text{Amplitude}}
 		e^{i(k_M \cdot r-\omega_M t)}
 		+ cc \\
-	& \equiv \sum\limits_M \hat{p}_M \mathcal{A}_M(t) e^{i(k_M \cdot r)} + cc \\
+	& \equiv \sum\limits_{M = -\infty}^{\infty} \hat{p}_M \mathcal{A}_M(t) e^{i(k_M \cdot r)} + cc \\
 	& where\\
 	& \mathcal{A}_M(t)=\mathcal{A}_M e^{-i\omega_M t}\\
 	& M = \{k_x,k_y,k_z,p \} \text{ is a set of parameters}\\
