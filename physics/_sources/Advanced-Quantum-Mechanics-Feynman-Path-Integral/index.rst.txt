@@ -4,5 +4,7 @@ Advanced Quantum Mechanics: Feynman Path Integral
 
 .. toctree::
 	Classical-Action
+	Propagator
 	
+
 
