@@ -1,0 +1,54 @@
+
+Design-Plan
+============================
+
+.. contents::
+
+Note
+---------
+
+- This is originally a project documentation, some files mentioned in this series can be found at `this GitHub repo of mine`_
+
+.. _this GitHub repo of mine: https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System
+
+Front End
+---------------
+
+Technologies Used:
+
+- Bootstrap 4
+- Plotly.js
+
+Notes:
+
+- If the project scales, I will use **React.js** or **Vue.js**, but currently there is no such need
+
+Back End
+----------------
+
+Technologies Used:
+
+- Node.js / Python as server
+
+Quartus Project
+----------------------
+
+Uses Cyclone V SoC: HPS (processor) + FPGA
+
+What I'm already familiar with:
+
+- C
+- Verilog
+- Quartus
+
+What I need to learn:
+
+- Communication between HPS and FPGA 
+
+Tutorials I found useful:
+
+- `DE10 Nano User Manual Chapter 7 Examples for using both HPS SoC and FGPA`_
+
+.. _DE10 Nano User Manual Chapter 7 Examples for using both HPS SoC and FGPA: https://www.terasic.com.tw/cgi-bin/page/archive_download.pl?Language=English&No=1046&FID=80dc14136fa65c17ec12c623335b949f
+
+

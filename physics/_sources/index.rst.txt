@@ -86,6 +86,7 @@ This project is actively maintained by `Ding Ruiqi`_ , a 4th year undergraduate 
 	Quantum-Optics/index
 	Thermodynamics-And-Statistical-Mechanics/index
 	Biomolecular-Physics/index
+	Experimental-Physics-SoC-FPGA-Design/index
 
 
 

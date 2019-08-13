@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Free Energy Calculation &mdash; Physics  documentation</title>
+  <title>Experimental Physics: SoC FPGA Design &mdash; Physics  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Non-equilibrium Thermodynamics" href="Non-equilibrium-Thermodynamics.html" />
-    <link rel="prev" title="Density Functional Theory" href="Density-Functional-Theory.html" /> 
+    <link rel="next" title="Design-Plan" href="Design-Plan.html" />
+    <link rel="prev" title="Kramers Reaction Rate Theory" href="../Biomolecular-Physics/Kramers-Reaction-Rate-Theory.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,21 +86,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../Advanced-Quantum-Mechanics-Feynman-Path-Integral/index.html">Advanced Quantum Mechanics: Feynman Path Integral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Optics/index.html">Quantum Optics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Thermodynamics-And-Statistical-Mechanics/index.html">Thermodynamics And Statistical Mechanics</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Biomolecular Physics</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Master-Equation.html">Master Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hartree-Fock-Method.html">Hartree Fock Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Density-Functional-Theory.html">Density Functional Theory</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Free Energy Calculation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#what-is-the-problem">What is the problem ?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#derivation">Derivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Biomolecular-Physics/index.html">Biomolecular Physics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Experimental Physics: SoC FPGA Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Design-Plan.html">Design-Plan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-FPGA-Part.html">Processor-FPGA Communication: FPGA Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Processor-Part.html">Processor-FPGA Communication: FPGA Part</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Non-equilibrium-Thermodynamics.html">Non-equilibrium Thermodynamics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kramers-Reaction-Rate-Theory.html">Kramers Reaction Rate Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../Experimental-Physics-SoC-FPGA-Design/index.html">Experimental Physics: SoC FPGA Design</a></li>
 </ul>
 
             
@@ -146,15 +138,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">Biomolecular Physics</a> &raquo;</li>
-        
-      <li>Free Energy Calculation</li>
+      <li>Experimental Physics: SoC FPGA Design</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Biomolecular-Physics/Free-Energy-Calculation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -167,34 +157,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="free-energy-calculation">
-<h1>Free Energy Calculation<a class="headerlink" href="#free-energy-calculation" title="Permalink to this headline">¶</a></h1>
-<dl class="field-list simple">
-<dt class="field-odd">Date</dt>
-<dd class="field-odd"><p>29 July 2019</p>
-</dd>
-</dl>
-<div class="section" id="dependency">
-<h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
-<p><span class="xref std std-doc">Canonical Ensemble And Boltzmann Factor</span></p>
-</div>
-<div class="section" id="what-is-the-problem">
-<h2>What is the problem ?<a class="headerlink" href="#what-is-the-problem" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="derivation">
-<h2>Derivation<a class="headerlink" href="#derivation" title="Permalink to this headline">¶</a></h2>
-<p><strong>Step 1</strong> A straight forward result of <span class="xref std std-doc">Canonical Ensemble And Boltzmann Factor</span>: Zwanzig equation</p>
-<div class="math notranslate nohighlight">
-\[\begin{align*}
-&amp;\Delta F = -k_B T \ln{z_2\over z_1} =-k_B T \ln \langle e^{-\beta \Delta E} \rangle
-\end{align*}\]</div>
-<p>Problem of using Zwanzig equation: Exponential (<span class="math notranslate nohighlight">\(e^{-\beta \Delta E}\)</span>) is too sensitive, <span class="math notranslate nohighlight">\(\Delta E\)</span> must be small for it to work</p>
-<p><strong>Step 2</strong> Solution to this problem: <span class="xref std std-doc">Perturbation Theory</span></p>
-<p><strong>idea</strong>: Take many steps instead of one, at each step <span class="math notranslate nohighlight">\(\Delta E\)</span> is small</p>
-<div class="math notranslate nohighlight">
-\[\begin{align*}
-&amp;\Delta F = \int_0^1 \langle {\partial H \over \partial \lambda} \rangle \; d\lambda
-\end{align*}\]</div>
+  <div class="section" id="experimental-physics-soc-fpga-design">
+<h1>Experimental Physics: SoC FPGA Design<a class="headerlink" href="#experimental-physics-soc-fpga-design" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Design-Plan.html">Design-Plan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Design-Plan.html#note">Note</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Design-Plan.html#front-end">Front End</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Design-Plan.html#back-end">Back End</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Design-Plan.html#quartus-project">Quartus Project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Processor-FPGA-Communication-FPGA-Part.html">Processor-FPGA Communication: FPGA Part</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-FPGA-Part.html#dependency">Dependency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-FPGA-Part.html#what-is-the-problem">What is the problem ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-FPGA-Part.html#fpga-part">FPGA Part</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Processor-FPGA-Communication-Processor-Part.html">Processor-FPGA Communication: FPGA Part</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Processor-Part.html#dependency">Dependency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Processor-Part.html#what-is-the-problem">What is the problem ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Processor-Part.html#fpga-part">FPGA Part</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -206,10 +192,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Non-equilibrium-Thermodynamics.html" class="btn btn-neutral float-right" title="Non-equilibrium Thermodynamics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Design-Plan.html" class="btn btn-neutral float-right" title="Design-Plan" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Density-Functional-Theory.html" class="btn btn-neutral float-left" title="Density Functional Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../Biomolecular-Physics/Kramers-Reaction-Rate-Theory.html" class="btn btn-neutral float-left" title="Kramers Reaction Rate Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
