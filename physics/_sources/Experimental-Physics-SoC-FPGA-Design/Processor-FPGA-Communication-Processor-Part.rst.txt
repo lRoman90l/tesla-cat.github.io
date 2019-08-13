@@ -1,78 +1,38 @@
 
-Processor-FPGA Communication: FPGA Part
+Processor-FPGA Communication: Processor Part
 ===========================================================
 
-:Date: 12 Aug 2019
+:Date: 14 Aug 2019
 
-.. contents::
+`Corresponding Project Folder`_
+------------------------------------------
+
+.. _Corresponding Project Folder: https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project/HPS_FPGA_LED
 
 Dependency
 -------------
 
-- `DE10 Nano Development Board Website`_
-- Quartus (For FPGA part) [I am using Quartus Lite 18.1]
-- C Programming (For Processor part)
+- Edit the system environment variables
 
-.. _DE10 Nano Development Board: https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=1046&PartNo=4
-
-What is the problem ?
--------------------------
-
-- Before Cyclone V, FPGAs I used are independent. So I used SPI, UART etc. to handle communication with Processors
-- In Cyclone V, Processor (Called HPS) and FPGA are put on the same chip (Known as SoC)
-- So we use a communication interface with much better performance: AXI (Advanced eXtensible Interface)
-- The key to AXI is the share of memory
-
-FPGA Part
+Processor Part
 --------------------------------
 
-**Step 1** AXI Bridge Block Diagram
+**Step 1** Add :code:`quartus\sopc_builder\bin` to **PATH** environment variable, in my case :code:`D:\QUARTUS\quartus\sopc_builder\bin`
 
-.. figure:: imgs/7-1_AXI_Bridge_Block_Diagram.png
+**Step 2** Install `Intel SoC FPGA Embedded Development Suite`_
 
-**Step 2** To design the entire system from scratch is **hard**, We only need to modify the **Basis Design**
+- Search program **SoC EDS command shell** in your computer and run it
 
-- Download file **DE10-Nano CD-ROM** from `DE10 Nano Development Board Website`_
-- The **Basis Design** files can be found in **Demonstrations\SoC_FPGA\DE10_NANO_SoC_GHRD** folder
-- Open **DE10_NANO_SoC_GHRD.qpf** with Quartus
+.. _Intel SoC FPGA Embedded Development Suite: http://fpgasoftware.intel.com/soceds/18.1/?edition=standard&platform=windows&download_manager=direct
 
-**Step 3** Map **Memory Address** to **Physical Pins**
+**Step 3** Generate necessary C header file
 
-- Go to **Quartus >> Tools >> Platform Designer**
-- A open file window should pop up, choose file **soc_system.qsys**
-- The following figures should explain themselves
+- In **SoC EDS command shell** go to your Quartus project folder and execute :code:`./generate_hps_qys_header.sh`. This **automatically** generates :code:`hps_0.h` C header file based on :code:`soc_system.sopcinfo` file. :code:`hps_0.h` contains **address infomation** we set earlier in FPGA part: e.g. :code:`#define LED_PIO_BASE 0x3000` is in it. 
+- We can then use the macro :code:`LED_PIO_BASE` later in our main C program conveniently
 
-.. figure:: imgs/7-2_System_Contents_^_led_pio_external_connection.png
+**Step 4** Write the main C program, refer to :code:`main.c` and read the comments there
 
-    At **System Contents** set the name **led_pio_external_connection**
+TO BE CONTINUED
 
-.. figure:: imgs/7-3_Address_Map_^_led_pio.png
 
-    At **Address Map** define address for **led_pio**
 
-- Now go back to **Quartus** from **Platform Designer**, open the Verilog file **DE10_NANO_SoC_GHRD.v**
-
-.. figure:: imgs/7-4_DE10_NANO_SoC_GHRD_^_FPGA_Partion.png
-
-    In **DE10_NANO_SoC_GHRD.v** file we connect **led_pio_external_connection_export** to **fpga_led_internal**
-
-.. figure:: imgs/7-5_DE10_NANO_SoC_GHRD_^_REG_WIRE_declarations.png
-
-    In **DE10_NANO_SoC_GHRD.v** file we connect **fpga_led_internal** to **LED**
-
-- Now open **Pin Planner**, refer to file **Pin Map.html**
-
-.. figure:: imgs/7-6_Pin_Planner_^_LED.png
-
-    Here we connect **LED** to **Physical Pins on FPGA**
-
-Now we know how to map **Memory Address** to **Physical Pins**, these **Memory Address** will be directly used in **C Programs** later
-
-**Step 4** Generate >> TCL >> Compile >> Program
-
-- **Platform Designer >> Generate >> Generate HDL... >> Generate**. This automatically generates Verilog files which you would have to write yourself if you don't use Platform Designer
-- **.tcl** files are already executed in GHRD project, so **you can skip this step**. But if the project is not based on the GHRD project: **Quartus >> Tools >> Tcl Scripts...**, select **_parameters.tcl** and **_pin_assignments.tcl** and Run
-- **Quartus >> Processing >> Start Compilation**, **DE10_NANO_SoC_GHRD.sof** will be generated **output_files** folder
-- Finally just use **Quartus >> Tools >> Programmer** to program the board
-
-.. figure:: imgs/7-7_Programmer.png
