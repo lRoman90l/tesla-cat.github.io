@@ -27,12 +27,20 @@ Processor Part
 
 **Step 3** Generate necessary C header file
 
-- In **SoC EDS command shell** go to your Quartus project folder and execute :code:`./generate_hps_qys_header.sh`. This **automatically** generates :code:`hps_0.h` C header file based on :code:`soc_system.sopcinfo` file. :code:`hps_0.h` contains **address infomation** we set earlier in FPGA part: e.g. :code:`#define LED_PIO_BASE 0x3000` is in it. 
+- In **SoC EDS command shell** go to your Quartus project folder and execute :code:`./generate_hps_qys_header.sh`. This **automatically** generates :code:`hps_0.h` C header file based on :code:`soc_system.sopcinfo` file. :code:`hps_0.h` contains **address infomation** we set earlier in FPGA part: e.g. :code:`#define LED_PIO_BASE 0x3000` is in it
 - We can then use the macro :code:`LED_PIO_BASE` later in our main C program conveniently
 
 **Step 4** Write the main C program, refer to :code:`main.c` and read the comments there
 
+**Step 5** Compile the C program
+
+- In **SoC EDS command shell** go to the project folder and execute :code:`make`
+
+**Step 6** Copy the file to DE10-Nano Board and execute
+
 TO BE CONTINUED
+
+
 
 
 
