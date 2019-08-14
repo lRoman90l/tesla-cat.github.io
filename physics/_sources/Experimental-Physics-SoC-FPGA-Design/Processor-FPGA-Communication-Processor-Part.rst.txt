@@ -36,11 +36,14 @@ Processor Part
 
 - In **SoC EDS command shell** go to the project folder and execute :code:`make`
 
-**Step 6** Copy the file to DE10-Nano Board and execute
+**Step 6** Copy the file to DE10-Nano Board and execute it
 
-- In **SoC EDS command shell** go to the project folder and execute :code:`scp HPS_FPGA_LED root@192.168.7.1:/home/root`, then type "yes" and "enter"
+- Connect your computer with DE10-Nano board using `Ethernet over USB`_ , this corresponds to :code:`IP Address: 192.168.7.1`
+- In **SoC EDS command shell** go to the project folder and execute :code:`scp HPS_FPGA_LED root@192.168.7.1:/home/root`, then type "yes" and press "Enter"
 
-**Step 7** Enter the Linux System of your DE10-Nano board. I use `VNC Viewer`_ , open Linux console (Applications >> Terminal Emulator in VNC Viewer). Go to :code:`/home/root` and execute :code:`./HPS_FPGA_LED`
+.. _Ethernet over USB: https://software.intel.com/en-us/node/712683
+
+**Step 7** Enter the Linux System of your DE10-Nano board. I use `VNC Viewer`_ introduced in `Ethernet over USB`_. Then open Linux console (Applications >> Terminal Emulator in VNC Viewer). Go to :code:`/home/root` and execute :code:`./HPS_FPGA_LED`
 
 .. _VNC Viewer: https://www.realvnc.com/en/connect/download/viewer/ 
 

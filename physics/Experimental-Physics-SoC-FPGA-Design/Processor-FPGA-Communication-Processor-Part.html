@@ -196,11 +196,12 @@
 <ul class="simple">
 <li><p>In <strong>SoC EDS command shell</strong> go to the project folder and execute <code class="code docutils literal notranslate"><span class="pre">make</span></code></p></li>
 </ul>
-<p><strong>Step 6</strong> Copy the file to DE10-Nano Board and execute</p>
+<p><strong>Step 6</strong> Copy the file to DE10-Nano Board and execute it</p>
 <ul class="simple">
-<li><p>In <strong>SoC EDS command shell</strong> go to the project folder and execute <code class="code docutils literal notranslate"><span class="pre">scp</span> <span class="pre">HPS_FPGA_LED</span> <span class="pre">root&#64;192.168.7.1:/home/root</span></code>, then type “yes” and “enter”</p></li>
+<li><p>Connect your computer with DE10-Nano board using <a class="reference external" href="https://software.intel.com/en-us/node/712683">Ethernet over USB</a> , this corresponds to <code class="code docutils literal notranslate"><span class="pre">IP</span> <span class="pre">Address:</span> <span class="pre">192.168.7.1</span></code></p></li>
+<li><p>In <strong>SoC EDS command shell</strong> go to the project folder and execute <code class="code docutils literal notranslate"><span class="pre">scp</span> <span class="pre">HPS_FPGA_LED</span> <span class="pre">root&#64;192.168.7.1:/home/root</span></code>, then type “yes” and press “Enter”</p></li>
 </ul>
-<p><strong>Step 7</strong> Enter the Linux System of your DE10-Nano board. I use <a class="reference external" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a> , open Linux console (Applications &gt;&gt; Terminal Emulator in VNC Viewer). Go to <code class="code docutils literal notranslate"><span class="pre">/home/root</span></code> and execute <code class="code docutils literal notranslate"><span class="pre">./HPS_FPGA_LED</span></code></p>
+<p><strong>Step 7</strong> Enter the Linux System of your DE10-Nano board. I use <a class="reference external" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a> introduced in <a class="reference external" href="https://software.intel.com/en-us/node/712683">Ethernet over USB</a>. Then open Linux console (Applications &gt;&gt; Terminal Emulator in VNC Viewer). Go to <code class="code docutils literal notranslate"><span class="pre">/home/root</span></code> and execute <code class="code docutils literal notranslate"><span class="pre">./HPS_FPGA_LED</span></code></p>
 <p><strong>We are done!</strong></p>
 </div>
 </div>
