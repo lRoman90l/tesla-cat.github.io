@@ -1,5 +1,5 @@
 
-Advanced Quantum Mechanics: Feynman Path Integral
+Quantum Mechanics: Feynman Path Integral
 ===================================================
 
 .. toctree::

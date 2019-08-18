@@ -66,7 +66,7 @@ FPGA Part
 
 - Now open **Pin Planner**, refer to file `Pin Map html`_ 
 
-.. _Pin Map html: https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project/Pin%20Map.html
+.. _Pin Map html: https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project/PinMap.html
 
 .. figure:: imgs/7-6_Pin_Planner_^_LED.png
 

@@ -81,11 +81,12 @@ This project is actively maintained by `Ding Ruiqi`_ , a 4th year undergraduate 
 
 
 .. toctree::
-	Electrodynamics/index
-	Advanced-Quantum-Mechanics-Feynman-Path-Integral/index
+	Quantum-Mechanics-Feynman-Path-Integral/index
+	Quantum-Computation/index
 	Quantum-Optics/index
 	Thermodynamics-And-Statistical-Mechanics/index
 	Biomolecular-Physics/index
+	Papers-Quantum-Computers/index
 	Experimental-Physics-SoC-FPGA-Design/index
 
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Advanced Quantum Mechanics: Feynman Path Integral &mdash; Physics  documentation</title>
+  <title>2010 Quantum computing &mdash; Physics  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Classical Action" href="Classical-Action.html" />
-    <link rel="prev" title="Electrodynamics GO FIND KENNETH" href="../Electrodynamics/index.html" /> 
+    <link rel="next" title="Experimental Physics: SoC FPGA Design" href="../Experimental-Physics-SoC-FPGA-Design/index.html" />
+    <link rel="prev" title="Papers: Quantum Computers" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,15 +82,20 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../Electrodynamics/index.html">Electrodynamics  GO FIND KENNETH</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced Quantum Mechanics: Feynman Path Integral</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html">Classical Action</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html">Propagator</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../Quantum-Mechanics-Feynman-Path-Integral/index.html">Quantum Mechanics: Feynman Path Integral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quantum-Computation/index.html">Quantum Computation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Optics/index.html">Quantum Optics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Thermodynamics-And-Statistical-Mechanics/index.html">Thermodynamics And Statistical Mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Biomolecular-Physics/index.html">Biomolecular Physics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Papers: Quantum Computers</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2010 Quantum computing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#i-introduction">I. INTRODUCTION</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ii-requirements-for-quantum-computing-divincenzo-s-criteria">II. REQUIREMENTS FOR QUANTUM COMPUTING (DiVincenzo’s Criteria)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iii-quantifying-noise-in-quantum-systems">III. QUANTIFYING NOISE IN QUANTUM SYSTEMS</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../Experimental-Physics-SoC-FPGA-Design/index.html">Experimental Physics: SoC FPGA Design</a></li>
 </ul>
 
@@ -137,13 +142,15 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Advanced Quantum Mechanics: Feynman Path Integral</li>
+          <li><a href="index.html">Papers: Quantum Computers</a> &raquo;</li>
+        
+      <li>2010 Quantum computing</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Advanced-Quantum-Mechanics-Feynman-Path-Integral/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Papers-Quantum-Computers/2010-Quantum-computing.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -156,26 +163,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="advanced-quantum-mechanics-feynman-path-integral">
-<h1>Advanced Quantum Mechanics: Feynman Path Integral<a class="headerlink" href="#advanced-quantum-mechanics-feynman-path-integral" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Classical-Action.html">Classical Action</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html#dependency">Dependency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html#what-is-the-problem">What is the problem ?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html#derivation">Derivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html#example-1-newton-s-law">Example 1: Newton’s Law</a></li>
+  <div class="section" id="quantum-computing">
+<h1>2010 Quantum computing<a class="headerlink" href="#quantum-computing" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Date</dt>
+<dd class="field-odd"><p>18 Aug 2019</p>
+</dd>
+</dl>
+<div class="section" id="i-introduction">
+<h2>I. INTRODUCTION<a class="headerlink" href="#i-introduction" title="Permalink to this headline">¶</a></h2>
+<p><strong>Step 1</strong> Why is Quantum Computer better than Classical one?</p>
+<p>Because a quantum system is in superposition of states, doing everything allowed at the same time.
+The system collapse into one state once observation (measurement) is made.</p>
+<p>For this reason, we can do <strong>simulations</strong> of physical systems (condensed matter, chemistry, anything!) <strong>much faster</strong>.</p>
+<p><strong>Step 2</strong> What is this paper about?</p>
+<p>Comparison of different <strong>Hardwares</strong> to make quantum computers.</p>
+</div>
+<div class="section" id="ii-requirements-for-quantum-computing-divincenzo-s-criteria">
+<h2>II. REQUIREMENTS FOR QUANTUM COMPUTING (DiVincenzo’s Criteria)<a class="headerlink" href="#ii-requirements-for-quantum-computing-divincenzo-s-criteria" title="Permalink to this headline">¶</a></h2>
+<p><strong>Requirement 1</strong> Scalability</p>
+<p><strong>Requirement 2</strong> A universal set of <span class="xref std std-doc">Quantum Logic Gates</span> (Clifford group)</p>
+<p><strong>Requirement 3</strong> Correctability: It must be possible to extract entropy of the computer to maintain the its quantum state</p>
+<p>More specifically, this means</p>
+<ul class="simple">
+<li><p><strong>Initialization:</strong> quickly cool down a system</p></li>
+<li><p><strong>Measurement:</strong> quickly determine the state of the system</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Propagator.html">Propagator</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#dependency">Dependency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#what-is-the-problem">What is the problem ?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#derivation">Derivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#doubt-1">Doubt 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#derivation-part-2">Derivation Part 2</a></li>
-</ul>
-</li>
-</ul>
+</div>
+<div class="section" id="iii-quantifying-noise-in-quantum-systems">
+<h2>III. QUANTIFYING NOISE IN QUANTUM SYSTEMS<a class="headerlink" href="#iii-quantifying-noise-in-quantum-systems" title="Permalink to this headline">¶</a></h2>
+<p><strong>TO BE CONTINUED</strong></p>
 </div>
 </div>
 
@@ -187,10 +204,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Classical-Action.html" class="btn btn-neutral float-right" title="Classical Action" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Experimental-Physics-SoC-FPGA-Design/index.html" class="btn btn-neutral float-right" title="Experimental Physics: SoC FPGA Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../Electrodynamics/index.html" class="btn btn-neutral float-left" title="Electrodynamics GO FIND KENNETH" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Papers: Quantum Computers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
