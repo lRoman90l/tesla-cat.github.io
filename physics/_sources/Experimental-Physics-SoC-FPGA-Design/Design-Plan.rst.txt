@@ -46,10 +46,11 @@ What I need to learn:
 Tutorials
 -----------------
 
-- **Most Useful: ** `DE1 SoC ARM HPS and FPGA Addresses and Communication Cornell ece5760`_
-- **Main page of the above: ** `ece5760 Reading Material`_ 
-- **YouTube series of the above: ** `Cyclone 5 and memory mapping`_
-- **Almost Useless: ** `DE10 Nano User Manual Chapter 7 Examples for using both HPS SoC and FGPA`_
+- `DE10 Nano User Manual Chapter 7 Examples for using both HPS SoC and FGPA`_
+- `DE1 SoC ARM HPS and FPGA Addresses and Communication Cornell ece5760`_
+- **Main page of the above:** `ece5760 Reading Material`_ 
+- **YouTube series of the above:** `Cyclone 5 and memory mapping`_
+
 
 .. _DE1 SoC ARM HPS and FPGA Addresses and Communication Cornell ece5760: https://people.ece.cornell.edu/land/courses/ece5760/DE1_SOC/HPS_peripherials/FPGA_addr_index.html
 .. _ece5760 Reading Material: https://people.ece.cornell.edu/land/courses/ece5760/#reading
