@@ -43,10 +43,17 @@ What I need to learn:
 
 - Communication between HPS and FPGA 
 
-Tutorials I found useful:
+Tutorials
+-----------------
 
-- `DE10 Nano User Manual Chapter 7 Examples for using both HPS SoC and FGPA`_
+- **Most Useful: ** `DE1 SoC ARM HPS and FPGA Addresses and Communication Cornell ece5760`_
+- **Main page of the above: ** `ece5760 Reading Material`_ 
+- **YouTube series of the above: ** `Cyclone 5 and memory mapping`_
+- **Almost Useless: ** `DE10 Nano User Manual Chapter 7 Examples for using both HPS SoC and FGPA`_
 
+.. _DE1 SoC ARM HPS and FPGA Addresses and Communication Cornell ece5760: https://people.ece.cornell.edu/land/courses/ece5760/DE1_SOC/HPS_peripherials/FPGA_addr_index.html
+.. _ece5760 Reading Material: https://people.ece.cornell.edu/land/courses/ece5760/#reading
+.. _Cyclone 5 and memory mapping: https://www.youtube.com/watch?v=0XRn5KbnzYA&list=PLKcjQ_UFkrd7UcOVMm39A6VdMbWWq-e_c&index=2
 .. _DE10 Nano User Manual Chapter 7 Examples for using both HPS SoC and FGPA: https://www.terasic.com.tw/cgi-bin/page/archive_download.pl?Language=English&No=1046&FID=80dc14136fa65c17ec12c623335b949f
 
 
