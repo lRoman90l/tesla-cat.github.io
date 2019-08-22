@@ -82,6 +82,7 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Relativity/index.html">Relativity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Mechanics-Feynman-Path-Integral/index.html">Quantum Mechanics: Feynman Path Integral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Computation/index.html">Quantum Computation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Optics/index.html">Quantum Optics</a></li>
@@ -197,7 +198,7 @@
 <div class="section" id="fpga-part">
 <h2>FPGA Part<a class="headerlink" href="#fpga-part" title="Permalink to this headline">¶</a></h2>
 <p><strong>Step 1</strong> AXI Bridge Block Diagram</p>
-<div class="figure align-center">
+<div class="figure align-default">
 <img alt="../_images/7-1_AXI_Bridge_Block_Diagram.png" src="../_images/7-1_AXI_Bridge_Block_Diagram.png" />
 </div>
 <p><strong>Step 2</strong> To design the entire system from scratch is <strong>hard</strong>, We only need to modify the <strong>Basis Design</strong></p>
@@ -212,29 +213,29 @@
 <li><p>A open file window should pop up, choose file <code class="code docutils literal notranslate"><span class="pre">soc_system.qsys</span></code></p></li>
 <li><p>The following figures should explain themselves</p></li>
 </ul>
-<div class="figure align-center" id="id2">
+<div class="figure align-default" id="id2">
 <img alt="../_images/7-2_System_Contents_^_led_pio_external_connection.png" src="../_images/7-2_System_Contents_^_led_pio_external_connection.png" />
 <p class="caption"><span class="caption-text">At <strong>System Contents</strong> set the name <strong>led_pio_external_connection</strong></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id3">
+<div class="figure align-default" id="id3">
 <img alt="../_images/7-3_Address_Map_^_led_pio.png" src="../_images/7-3_Address_Map_^_led_pio.png" />
 <p class="caption"><span class="caption-text">At <strong>Address Map</strong> define address for <strong>led_pio</strong></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <ul class="simple">
 <li><p>Now go back to <strong>Quartus</strong> from <strong>Platform Designer</strong>, open the Verilog file <code class="code docutils literal notranslate"><span class="pre">DE10_NANO_SoC_GHRD.v</span></code></p></li>
 </ul>
-<div class="figure align-center" id="id4">
+<div class="figure align-default" id="id4">
 <img alt="../_images/7-4_DE10_NANO_SoC_GHRD_^_FPGA_Partion.png" src="../_images/7-4_DE10_NANO_SoC_GHRD_^_FPGA_Partion.png" />
 <p class="caption"><span class="caption-text">In <code class="code docutils literal notranslate"><span class="pre">DE10_NANO_SoC_GHRD.v</span></code> file we connect <strong>led_pio_external_connection_export</strong> to <strong>fpga_led_internal</strong></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-center" id="id5">
+<div class="figure align-default" id="id5">
 <img alt="../_images/7-5_DE10_NANO_SoC_GHRD_^_REG_WIRE_declarations.png" src="../_images/7-5_DE10_NANO_SoC_GHRD_^_REG_WIRE_declarations.png" />
 <p class="caption"><span class="caption-text">In <code class="code docutils literal notranslate"><span class="pre">DE10_NANO_SoC_GHRD.v</span></code> file we connect <strong>fpga_led_internal</strong> to <strong>LED</strong></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <ul class="simple">
 <li><p>Now open <strong>Pin Planner</strong>, refer to file <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project/PinMap.html">Pin Map html</a></p></li>
 </ul>
-<div class="figure align-center" id="id6">
+<div class="figure align-default" id="id6">
 <img alt="../_images/7-6_Pin_Planner_^_LED.png" src="../_images/7-6_Pin_Planner_^_LED.png" />
 <p class="caption"><span class="caption-text">Here we connect <strong>LED</strong> to <strong>Physical Pins on FPGA</strong></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
@@ -246,7 +247,7 @@
 <li><p><strong>Quartus &gt;&gt; Processing &gt;&gt; Start Compilation</strong>, <code class="code docutils literal notranslate"><span class="pre">DE10_NANO_SoC_GHRD.sof</span></code> will be generated <code class="code docutils literal notranslate"><span class="pre">output_files</span></code> folder</p></li>
 <li><p>Finally just use <strong>Quartus &gt;&gt; Tools &gt;&gt; Programmer</strong> to program the board</p></li>
 </ul>
-<div class="figure align-center">
+<div class="figure align-default">
 <img alt="../_images/7-7_Programmer.png" src="../_images/7-7_Programmer.png" />
 </div>
 </div>
