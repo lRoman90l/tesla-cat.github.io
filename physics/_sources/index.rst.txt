@@ -2,7 +2,7 @@
 Home
 ======
 
-.. image:: admin/imgs/logo.jpeg
+.. image:: admin/imgs/logo.png
 .. contents::
 
 **Physics** is a project that documents the **programming language of the universe**
