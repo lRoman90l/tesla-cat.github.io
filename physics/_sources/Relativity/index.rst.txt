@@ -3,7 +3,7 @@ Relativity
 ===================================================
 
 .. toctree::
-	Special-Relativity
+	Lorentz-Transformation
 	
 
 

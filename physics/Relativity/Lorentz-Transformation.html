@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Special Relativity &mdash; Physics  documentation</title>
+  <title>Lorentz Transformation &mdash; Physics  documentation</title>
   
 
   
@@ -83,7 +83,7 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Relativity</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Special Relativity</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Lorentz Transformation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#what-is-the-problem">What is the problem ?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#derivation">Derivation</a></li>
@@ -147,13 +147,13 @@
         
           <li><a href="index.html">Relativity</a> &raquo;</li>
         
-      <li>Special Relativity</li>
+      <li>Lorentz Transformation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Relativity/Special-Relativity.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Relativity/Lorentz-Transformation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -166,8 +166,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="special-relativity">
-<h1>Special Relativity<a class="headerlink" href="#special-relativity" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="lorentz-transformation">
+<h1>Lorentz Transformation<a class="headerlink" href="#lorentz-transformation" title="Permalink to this headline">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Date</dt>
 <dd class="field-odd"><p>22 Aug 2019</p>
@@ -175,12 +175,36 @@
 </dl>
 <div class="section" id="dependency">
 <h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><span class="xref std std-doc">Linear Algebra</span></p></li>
+</ul>
 </div>
 <div class="section" id="what-is-the-problem">
 <h2>What is the problem ?<a class="headerlink" href="#what-is-the-problem" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Length of an object</strong> and <strong>Time interval of a process</strong> are not <strong>absolute</strong>! They are <strong>relative</strong>, meaning they are different in different reference frames!</p></li>
+</ul>
 </div>
 <div class="section" id="derivation">
 <h2>Derivation<a class="headerlink" href="#derivation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\((t,x,y,z)\)</span> represent an <strong>Event</strong> in a <strong>reference frame</strong> that is <strong>at rest</strong>, that is, this event happend at <strong>position</strong> <span class="math notranslate nohighlight">\((x,y,z)\)</span> at <strong>time</strong> <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p>Consider another frame moving at speed (normalized by light speed) <span class="math notranslate nohighlight">\(\beta = {v \over c}\)</span> along <span class="math notranslate nohighlight">\(x\)</span> axis relative to the <strong>RestFrame</strong>, then in <strong>MovingFrame</strong>, the same event happens at <span class="math notranslate nohighlight">\((t',x',y',z')=\text{LorentzTransform}(t,x,y,z)\)</span></p></li>
+<li><p><strong>LorentzTransform</strong> is simply a <span class="xref std std-doc">Linear Transform</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp;\left(\array{
+        \gamma &amp; -\gamma\beta \\
+        -\gamma\beta &amp; \gamma
+        \\&amp;&amp;1\\&amp;&amp;&amp;1
+}\right) \\
+&amp; where \\
+&amp; \gamma = (1-\beta^2)^{-1/2}
+\end{align*}\end{split}\]</div>
+<ul class="simple">
+<li><p>To get a deeper understanding: the above is one <span class="xref std std-doc">Representation</span> of the <span class="xref std std-doc">Lorentz Group</span></p></li>
+</ul>
 </div>
 <div class="section" id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
@@ -200,18 +224,12 @@
         <span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">InverseLorentzMatrix</span> <span class="o">=</span>  <span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LorentzMatrix</span><span class="p">)</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2">self.LorentzMatrix</span><span class="se">\&#39;</span><span class="s2"> is: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">LorentzMatrix</span> <span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2">self.InverseLorentzMatrix</span><span class="se">\&#39;</span><span class="s2"> is: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">InverseLorentzMatrix</span> <span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">LorentzTransform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">RestFrameCoordinate</span><span class="p">):</span>
         <span class="n">MovingFrameCoordinate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">LorentzMatrix</span><span class="p">,</span> <span class="n">RestFrameCoordinate</span> <span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2">MovingFrameCoordinate</span><span class="se">\&#39;</span><span class="s2"> is:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">MovingFrameCoordinate</span> <span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">MovingFrameCoordinate</span>
 
     <span class="k">def</span> <span class="nf">InverseLorentzTransform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">MovingFrameCoordinate</span><span class="p">):</span>
         <span class="n">RestFrameCoordinate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">InverseLorentzMatrix</span><span class="p">,</span> <span class="n">MovingFrameCoordinate</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2">RestFrameCoordinate</span><span class="se">\&#39;</span><span class="s2"> is:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">RestFrameCoordinate</span> <span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">RestFrameCoordinate</span>
 </pre></div>
 </div>
@@ -223,39 +241,71 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
 <span class="n">SR</span> <span class="o">=</span> <span class="n">SpecialRelativity</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
 
-<span class="c1"># Part (a) and (b)</span>
-<span class="n">RestFrameCoordinate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">SR</span><span class="o">.</span><span class="n">LorentzTransform</span><span class="p">(</span><span class="n">RestFrameCoordinate</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Part (a) and (b)&quot;</span><span class="p">)</span>
+<span class="n">Event_B_RestFrameCoordinate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Event_B_MovingFrameCoordinate</span> <span class="o">=</span> <span class="n">SR</span><span class="o">.</span><span class="n">LorentzTransform</span><span class="p">(</span><span class="n">Event_B_RestFrameCoordinate</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;In Barn frame, Event B happned at </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">Event_B_RestFrameCoordinate</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;In Vaulter frame, Event B happned at </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">Event_B_MovingFrameCoordinate</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Part (c)&quot;</span><span class="p">)</span>
+<span class="n">VaulterFrameEvents</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">8.7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">8.7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">BarnFrameEvents</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">VaulterFrameEvents</span><span class="p">:</span>
+    <span class="n">MovingFrameCoordinate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">RestFrameCoordinate</span> <span class="o">=</span> <span class="n">SR</span><span class="o">.</span><span class="n">InverseLorentzTransform</span><span class="p">(</span><span class="n">MovingFrameCoordinate</span><span class="p">)</span>
+    <span class="n">BarnFrameEvents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RestFrameCoordinate</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;VaulterFrameEvents:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">VaulterFrameEvents</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;BarnFrameEvents:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">BarnFrameEvents</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Result:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;self.LorentzMatrix&#39;</span> <span class="ow">is</span><span class="p">:</span>
- <span class="p">[[</span> <span class="mf">2.</span>         <span class="o">-</span><span class="mf">1.73205081</span>  <span class="mf">0.</span>          <span class="mf">0.</span>        <span class="p">]</span>
- <span class="p">[</span><span class="o">-</span><span class="mf">1.73205081</span>  <span class="mf">2.</span>          <span class="mf">0.</span>          <span class="mf">0.</span>        <span class="p">]</span>
- <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">0.</span>          <span class="mf">1.</span>          <span class="mf">0.</span>        <span class="p">]</span>
- <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">0.</span>          <span class="mf">0.</span>          <span class="mf">1.</span>        <span class="p">]]</span>
-<span class="s1">&#39;self.InverseLorentzMatrix&#39;</span> <span class="ow">is</span><span class="p">:</span>
- <span class="p">[[</span><span class="mf">2.</span>         <span class="mf">1.73205081</span> <span class="mf">0.</span>         <span class="mf">0.</span>        <span class="p">]</span>
- <span class="p">[</span><span class="mf">1.73205081</span> <span class="mf">2.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>        <span class="p">]</span>
- <span class="p">[</span><span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">1.</span>         <span class="mf">0.</span>        <span class="p">]</span>
- <span class="p">[</span><span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">1.</span>        <span class="p">]]</span>
-
-
-<span class="s1">&#39;MovingFrameCoordinate&#39;</span> <span class="ow">is</span><span class="p">:</span>
+<p>Output:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Part</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">In</span> <span class="n">Barn</span> <span class="n">frame</span><span class="p">,</span> <span class="n">Event</span> <span class="n">B</span> <span class="n">happned</span> <span class="n">at</span>
+ <span class="p">[[</span><span class="mi">0</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">In</span> <span class="n">Vaulter</span> <span class="n">frame</span><span class="p">,</span> <span class="n">Event</span> <span class="n">B</span> <span class="n">happned</span> <span class="n">at</span>
  <span class="p">[[</span><span class="o">-</span><span class="mf">8.66025404</span><span class="p">]</span>
  <span class="p">[</span><span class="mf">10.</span>        <span class="p">]</span>
  <span class="p">[</span> <span class="mf">0.</span>        <span class="p">]</span>
  <span class="p">[</span> <span class="mf">0.</span>        <span class="p">]]</span>
+
+ <span class="n">Part</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">VaulterFrameEvents</span><span class="p">:</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">8.7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">8.7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">BarnFrameEvents</span><span class="p">:</span>
+<span class="p">[[</span><span class="o">-</span><span class="mf">17.39999999999999</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">15.068842025849225</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]]</span>
+<span class="p">[[</span><span class="o">-</span><span class="mf">0.07949192431122754</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.931157974150768</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]]</span>
+<span class="p">[[</span><span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]]</span>
+<span class="p">[[</span><span class="mf">17.320508075688764</span><span class="p">],</span> <span class="p">[</span><span class="mf">19.999999999999993</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]]</span>
 </pre></div>
 </div>
-<p>Interpretation:</p>
+<p>Answers to Assignment:</p>
 <ul class="simple">
-<li><p>Event <span class="math notranslate nohighlight">\(B\)</span> happened at time <span class="math notranslate nohighlight">\(t'= -8.7\)</span> and position <span class="math notranslate nohighlight">\(x'=10 m\)</span>.</p></li>
-<li><p>This means to the Vaulter(MovingFrame), Event <span class="math notranslate nohighlight">\(B\)</span> happend before <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
-<li><p>When the Vaulter was at rest, he knew that if he want to <strong>get into the bar completely</strong>, he must cover <span class="math notranslate nohighlight">\(\Delta L=10 m\)</span> since for him the pole is <span class="math notranslate nohighlight">\(10 m\)</span></p></li>
-<li><p>Now when the Vaulter moves, in his frame the barn is moving towards him in the <span class="math notranslate nohighlight">\(-x\)</span> direction. For him the pole is still <span class="math notranslate nohighlight">\(10 m\)</span>, but the distance <span class="math notranslate nohighlight">\(\Delta L\)</span> he has to cover, is <strong>shortened</strong>! So he sees Event <span class="math notranslate nohighlight">\(B\)</span> before <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Part a: <span class="math notranslate nohighlight">\(t'_B = -8.7\)</span></p></li>
+<li><p>Part b: <span class="math notranslate nohighlight">\(10 m\)</span></p></li>
+<li><p>Part c:</p></li>
 </ul>
-<p>Illustration:</p>
+<div class="figure align-default">
+<img alt="../_images/PC4248-Assignment1-Fig2.png" src="../_images/PC4248-Assignment1-Fig2.png" />
+</div>
 <div class="figure align-default">
 <img alt="../_images/PC4248-Assignment1-Fig1.png" src="../_images/PC4248-Assignment1-Fig1.png" />
 </div>
