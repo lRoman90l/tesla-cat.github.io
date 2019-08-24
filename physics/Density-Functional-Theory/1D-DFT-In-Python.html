@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Relativity &mdash; Physics  documentation</title>
+  <title>1D DFT In Python &mdash; Physics  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Lorentz Transformation" href="Lorentz-Transformation.html" />
-    <link rel="prev" title="Home" href="../index.html" /> 
+    <link rel="next" title="Thermodynamics And Statistical Mechanics" href="../Thermodynamics-And-Statistical-Mechanics/index.html" />
+    <link rel="prev" title="Density Functional Theory" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,14 +82,20 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Relativity</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Lorentz-Transformation.html">Lorentz Transformation</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../Relativity/index.html">Relativity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Mechanics-Feynman-Path-Integral/index.html">Quantum Mechanics: Feynman Path Integral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Computation/index.html">Quantum Computation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Optics/index.html">Quantum Optics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Density-Functional-Theory/index.html">Density Functional Theory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Density Functional Theory</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1D DFT In Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#credit">Credit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-the-problem">What is the problem ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code">Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../Thermodynamics-And-Statistical-Mechanics/index.html">Thermodynamics And Statistical Mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Biomolecular-Physics/index.html">Biomolecular Physics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Papers-Quantum-Computers/index.html">Papers: Quantum Computers</a></li>
@@ -139,13 +145,15 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Relativity</li>
+          <li><a href="index.html">Density Functional Theory</a> &raquo;</li>
+        
+      <li>1D DFT In Python</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Relativity/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Density-Functional-Theory/1D-DFT-In-Python.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -158,19 +166,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="relativity">
-<h1>Relativity<a class="headerlink" href="#relativity" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Lorentz-Transformation.html">Lorentz Transformation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Lorentz-Transformation.html#dependency">Dependency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Lorentz-Transformation.html#what-is-the-problem">What is the problem ?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Lorentz-Transformation.html#derivation">Derivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Lorentz-Transformation.html#code">Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Lorentz-Transformation.html#example-1-vaulter-in-the-barn">Example 1: Vaulter in the barn</a></li>
+  <div class="section" id="d-dft-in-python">
+<h1>1D DFT In Python<a class="headerlink" href="#d-dft-in-python" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Date</dt>
+<dd class="field-odd"><p>24 Aug 2019</p>
+</dd>
+</dl>
+<div class="section" id="credit">
+<h2>Credit<a class="headerlink" href="#credit" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This is modified from <a class="reference internal" href="#numpy-1d-dft">Numpy 1D DFT</a></p></li>
 </ul>
-</li>
-</ul>
+</div>
+<div class="section" id="dependency">
+<span id="numpy-1d-dft"></span><h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="what-is-the-problem">
+<h2>What is the problem ?<a class="headerlink" href="#what-is-the-problem" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp; ({dy\over dx})_i = {y_{i+1}-y_i \over \Delta x}\equiv D_{ij}y_j \\
+&amp; \Rightarrow D_{ij}= {\delta_{i+1,j}-\delta_{i,j} \over \Delta x}
+\end{align*}\end{split}\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -182,10 +206,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Lorentz-Transformation.html" class="btn btn-neutral float-right" title="Lorentz Transformation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Thermodynamics-And-Statistical-Mechanics/index.html" class="btn btn-neutral float-right" title="Thermodynamics And Statistical Mechanics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral float-left" title="Home" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Density Functional Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

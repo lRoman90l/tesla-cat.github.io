@@ -1,0 +1,30 @@
+
+1D DFT In Python
+=================================
+
+:Date: 24 Aug 2019
+
+Credit
+---------
+
+- This is modified from `Numpy 1D DFT`_ 
+
+.. _Numpy 1D DFT: 
+
+Dependency
+-------------
+
+What is the problem ?
+-------------------------
+
+Code
+-------------
+
+.. math::
+	\begin{align*}
+	& ({dy\over dx})_i = {y_{i+1}-y_i \over \Delta x}\equiv D_{ij}y_j \\
+	& \Rightarrow D_{ij}= {\delta_{i+1,j}-\delta_{i,j} \over \Delta x} 
+	\end{align*}
+
+.. code-block::
+

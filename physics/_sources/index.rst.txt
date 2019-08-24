@@ -81,11 +81,11 @@ This project is actively maintained by `Ding Ruiqi`_ , a 4th year undergraduate 
 
 
 .. toctree::
-	Survive-As-A-Physics-Guy/index
 	Relativity/index
 	Quantum-Mechanics-Feynman-Path-Integral/index
 	Quantum-Computation/index
 	Quantum-Optics/index
+	Density-Functional-Theory/index
 	Thermodynamics-And-Statistical-Mechanics/index
 	Biomolecular-Physics/index
 	Papers-Quantum-Computers/index
