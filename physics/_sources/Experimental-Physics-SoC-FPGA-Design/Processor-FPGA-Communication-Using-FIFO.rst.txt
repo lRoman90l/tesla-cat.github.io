@@ -22,8 +22,8 @@ Dependency
 
 
 
-Using FIFO
---------------------
+Using FIFO: FPGA Part
+------------------------
 
 **Step 1** We will use **Platform Designer** to generate two **FIFOs**, **HPS to FPGA FIFO** and **FPGA to HPS FIFO**
 
@@ -131,7 +131,8 @@ Using FIFO
 - The nonblocking read/write macros in the HPS program are not well tested. 
 - If you use nonblocking read/write that you must check the return value for success.
 
-**Step 4** In the C code
+Using FIFO: Processor Part
+-------------------------------
 
 The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO_2_prettified.c` is modified from the original file :code:`FIFO_2.c`. However, it is **not tested yet** since I still have doubt as can be seen below, hopefully my boss can help me with this: 
 

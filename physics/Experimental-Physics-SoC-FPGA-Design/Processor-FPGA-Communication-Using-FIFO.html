@@ -97,7 +97,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#credit">Credit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#corresponding-project-folder">Corresponding Project Folder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-fifo">Using FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-fifo-fpga-part">Using FIFO: FPGA Part</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-fifo-processor-part">Using FIFO: Processor Part</a></li>
 </ul>
 </li>
 </ul>
@@ -187,8 +188,8 @@
 <div class="section" id="dependency">
 <h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="using-fifo">
-<h2>Using FIFO<a class="headerlink" href="#using-fifo" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-fifo-fpga-part">
+<h2>Using FIFO: FPGA Part<a class="headerlink" href="#using-fifo-fpga-part" title="Permalink to this headline">¶</a></h2>
 <p><strong>Step 1</strong> We will use <strong>Platform Designer</strong> to generate two <strong>FIFOs</strong>, <strong>HPS to FPGA FIFO</strong> and <strong>FPGA to HPS FIFO</strong></p>
 <div class="figure align-default">
 <img alt="../_images/Stage-2_ECE5760_Qsys_FIFO.png" src="../_images/Stage-2_ECE5760_Qsys_FIFO.png" />
@@ -294,7 +295,9 @@
 <li><p>The nonblocking read/write macros in the HPS program are not well tested.</p></li>
 <li><p>If you use nonblocking read/write that you must check the return value for success.</p></li>
 </ul>
-<p><strong>Step 4</strong> In the C code</p>
+</div>
+<div class="section" id="using-fifo-processor-part">
+<h2>Using FIFO: Processor Part<a class="headerlink" href="#using-fifo-processor-part" title="Permalink to this headline">¶</a></h2>
 <p>The following <code class="code docutils literal notranslate"><span class="pre">Quartus</span> <span class="pre">Project</span> <span class="pre">Stage</span> <span class="pre">2\Cornell</span> <span class="pre">ECE5760\C</span> <span class="pre">Code</span> <span class="pre">for</span> <span class="pre">HPS\FIFO_2_prettified.c</span></code> is modified from the original file <code class="code docutils literal notranslate"><span class="pre">FIFO_2.c</span></code>. However, it is <strong>not tested yet</strong> since I still have doubt as can be seen below, hopefully my boss can help me with this:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// FIFO details:</span>
 <span class="c1">//     Depth: 256    Data Width: 32 bits</span>
