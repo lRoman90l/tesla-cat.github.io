@@ -15,7 +15,7 @@ Credit
 `Corresponding Project Folder`_
 ------------------------------------------
 
-.. _Corresponding Project Folder: https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%203/Cornell%20ECE5760
+.. _Corresponding Project Folder: https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202
 
 Dependency
 -------------
@@ -112,7 +112,7 @@ Using FIFO
 
 
 
-.. _DE1_SoC_Computer verilog file: https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%203/Cornell%20ECE5760/FIFO_loopback/verilog/DE1_SoC_Computer.v#L515
+.. _DE1_SoC_Computer verilog file: https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760/Top%20Level%20Entity%20for%20FPGA/DE1_SoC_Computer.v#L515
 
 **Step 2** FIFO Settings
 
@@ -133,27 +133,119 @@ Using FIFO
 
 **Step 4** In the C code
 
-The first six macros read out the state of the read/write FIFOs.
+The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO_2_prettified.c` is modified from the original file :code:`FIFO_2.c`. However, it is **not tested yet** since I still have doubt as can be seen below, hopefully my boss can help me with this: 
 
 .. code-block:: c
 
-	#define WRITE_FIFO_FILL_LEVEL 	(*FIFO_write_status_ptr)
-	#define READ_FIFO_FILL_LEVEL  	(*FIFO_read_status_ptr)
-	#define WRITE_FIFO_FULL	   		((*(FIFO_write_status_ptr+1))& 1 ) 
-	#define WRITE_FIFO_EMPTY	  	((*(FIFO_write_status_ptr+1))& 2 ) 
-	#define READ_FIFO_FULL		  	((*(FIFO_read_status_ptr+1)) & 1 )
-	#define READ_FIFO_EMPTY	  		((*(FIFO_read_status_ptr+1)) & 2 )
-	// arg a is data to be written
-	#define FIFO_WRITE_BLOCK(a)	  	{while (WRITE_FIFO_FULL){WAIT};FIFO_WRITE=a;}
-	// arg a is data to be written, arg b is success/fail of write: b==1 means success
-	#define FIFO_WRITE_NOBLOCK(a,b) {b=!WRITE_FIFO_FULL; if(!WRITE_FIFO_FULL)FIFO_WRITE=a; }
-	// arg a is data read
-	#define FIFO_READ_BLOCK(a)	  	{while (READ_FIFO_EMPTY){WAIT};a=FIFO_READ;}
-	// arg a is data read, arg b is success/fail of read: b==1 means success
-	#define FIFO_READ_NOBLOCK(a,b) 	{b=!READ_FIFO_EMPTY; if(!READ_FIFO_EMPTY)a=FIFO_READ;}
+	// FIFO details: 
+	//     Depth: 256    Data Width: 32 bits
 
+	#include <stdio.h>
+	#include <string.h>
+	#include <stdlib.h>
+	#include <unistd.h>
+	#include <fcntl.h>
+	#include <sys/types.h>
+	#include <sys/ipc.h> 
+	#include <sys/shm.h> 
+	#include <sys/mman.h>
+	#include <sys/time.h> 
+	#include <math.h> 
+	    
+	//?????????????????????????????
+	    // main bus; scratch RAM. used only for testing
+	    #define FPGA_ONCHIP_BASE      0xC8000000
+	    #define FPGA_ONCHIP_SPAN      0x00001000
+	    // main bus; FIFO write address
+	    #define FIFO_BASE             0xC0000000
+	    #define FIFO_SPAN             0x00001000
+	    /// lw_bus; FIFO status address
+	    #define HW_REGS_BASE          0xff200000
+	    #define HW_REGS_SPAN          0x00005000 
+	    /*
+	    #define HW_REGS_BASE ( ALT_STM_OFST )
+	    #define HW_REGS_SPAN ( 0x04000000 )
+	    #define HW_REGS_MASK ( HW_REGS_SPAN - 1 )
+	    */
+	//?????????????????????????????
 
+	//====================================
+	// The following corresponds to **h2f_axi_master** in Platform Designer
+	//====================================
+	void *h2f_virtual_base;
+	volatile unsigned int * FIFO_write_ptr = NULL ;
+	volatile unsigned int * FIFO_read_ptr = NULL ;
+	#define FIFO_WRITE           (*(FIFO_write_ptr))
+	#define FIFO_READ            (*(FIFO_read_ptr))
 
+	//====================================
+	// The following corresponds to **h2f_lw_axi_master** in Platform Designer
+	//====================================
+	void *h2f_lw_virtual_base;
+	volatile unsigned int * FIFO_write_status_ptr = NULL ;
+	volatile unsigned int * FIFO_read_status_ptr = NULL ;
+	#define WRITE_FIFO_FILL_LEVEL (*FIFO_write_status_ptr)
+	#define READ_FIFO_FILL_LEVEL  (*FIFO_read_status_ptr)
+	#define WRITE_FIFO_FULL       ((*(FIFO_write_status_ptr+1))& 1 ) 
+	#define WRITE_FIFO_EMPTY      ((*(FIFO_write_status_ptr+1))& 2 ) 
+	#define READ_FIFO_FULL        ((*(FIFO_read_status_ptr+1)) & 1 )
+	#define READ_FIFO_EMPTY       ((*(FIFO_read_status_ptr+1)) & 2 )
+	#define WAIT {} 
 
+	//====================================
+	// Helper Functions
+	//====================================
 
+	// Write and Read: **a** is data to be written, **b** is result(success/fail)
+	#define FIFO_WRITE_BLOCK(a)         {while (WRITE_FIFO_FULL){WAIT};FIFO_WRITE=a;}
+	#define FIFO_READ_BLOCK(a)          {while (READ_FIFO_EMPTY){WAIT};a=FIFO_READ;}
+	#define FIFO_WRITE_NOBLOCK(a,b)     {b=!WRITE_FIFO_FULL; if(!WRITE_FIFO_FULL)FIFO_WRITE=a;}
+	#define FIFO_READ_NOBLOCK(a,b)      {b=!READ_FIFO_EMPTY; if(!READ_FIFO_EMPTY)a=FIFO_READ;}
 
+	int memoryMapping(){
+	    // Step 1
+	    if( (fd = open("/dev/mem",(O_RDWR|O_SYNC))) == -1 ){
+	        printf( "ERROR: could not open \"/dev/mem\"...\n" );
+	        return( 1 );
+	    }
+	    
+	    // **h2f_axi_master** Part
+	    h2f_virtual_base = mmap( NULL, FIFO_SPAN, ( PROT_READ | PROT_WRITE ), MAP_SHARED, fd, FIFO_BASE);     
+	    if( h2f_virtual_base == MAP_FAILED ) {
+	        printf( "ERROR: mmap() for **h2f_axi_master** failed\n");
+	        close( fd );  return(1);
+	    }
+	    FIFO_write_ptr =(unsigned int *)(h2f_virtual_base);
+	    FIFO_read_ptr  =(unsigned int *)(h2f_virtual_base + 0x10);
+	    
+	    // **h2f_lw_axi_master** Part
+	    h2f_lw_virtual_base = mmap( NULL, HW_REGS_SPAN, ( PROT_READ | PROT_WRITE ), MAP_SHARED, fd, HW_REGS_BASE );    
+	    if( h2f_lw_virtual_base == MAP_FAILED ) {
+	        printf( "ERROR: mmap() for **h2f_lw_axi_master** failed...\n" );
+	        close( fd );  return(1);
+	    }
+	    FIFO_write_status_ptr = (unsigned int *)(h2f_lw_virtual_base);
+	    FIFO_read_status_ptr  = (unsigned int *)(h2f_lw_virtual_base + 0x20); //0x20
+	        
+	    return(0);
+	}
+
+	int repeatWriting(){
+	    int i;
+	    while(1){
+	        printf( "repeatWriting: ");    
+	        scanf("%d", &i);
+	        FIFO_WRITE_BLOCK(i);
+	        printf("Fill levels: WRITE_FIFO=%d READ_FIFO=%d\n", WRITE_FIFO_FILL_LEVEL, READ_FIFO_FILL_LEVEL);    
+	    }
+	    return(0);
+	}
+
+	//====================================
+	// Main Function
+	//====================================
+
+	int main(void){
+	    memoryMapping();
+	    repeatWriting();
+	} 

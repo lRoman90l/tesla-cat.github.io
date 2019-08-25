@@ -9,7 +9,7 @@ Credit
 
 - This is modified from `Numpy 1D DFT`_ 
 
-.. _Numpy 1D DFT: 
+.. _Numpy 1D DFT: https://github.com/tamuhey/python_1d_dft/blob/master/numpy_1ddft.ipynb
 
 Dependency
 -------------

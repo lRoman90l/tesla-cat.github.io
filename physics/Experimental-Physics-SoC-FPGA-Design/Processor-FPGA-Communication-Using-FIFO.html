@@ -182,7 +182,7 @@
 </dl>
 </div>
 <div class="section" id="corresponding-project-folder">
-<h2><a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%203/Cornell%20ECE5760">Corresponding Project Folder</a><a class="headerlink" href="#corresponding-project-folder" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202">Corresponding Project Folder</a><a class="headerlink" href="#corresponding-project-folder" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="dependency">
 <h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
@@ -194,7 +194,7 @@
 <img alt="../_images/Stage-2_ECE5760_Qsys_FIFO.png" src="../_images/Stage-2_ECE5760_Qsys_FIFO.png" />
 </div>
 <ul class="simple">
-<li><p>For <strong>HPS to FPGA FIFO</strong>, its <strong>Output</strong> will be <strong>Exported</strong> and will be connected to the Top-Level module <strong>DE1_SoC_Computer</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%203/Cornell%20ECE5760/FIFO_loopback/verilog/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 515</strong>).</p></li>
+<li><p>For <strong>HPS to FPGA FIFO</strong>, its <strong>Output</strong> will be <strong>Exported</strong> and will be connected to the Top-Level module <strong>DE1_SoC_Computer</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760/Top%20Level%20Entity%20for%20FPGA/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 515</strong>).</p></li>
 </ul>
 <div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// HPS to FPGA FIFO</span>
 <span class="p">.</span><span class="n">fifo_hps_to_fpga_out_readdata</span>      <span class="p">(</span><span class="n">hps_to_fpga_readdata</span><span class="p">),</span>      <span class="c1">//  fifo_hps_to_fpga_out.readdata</span>
@@ -208,7 +208,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>To use this <strong>Output</strong> of <strong>HPS to FPGA FIFO</strong>, we must write by ourselves a <strong>State Machine</strong> to handle <strong>Reading Data From HPS</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%203/Cornell%20ECE5760/FIFO_loopback/verilog/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 440</strong>). Specifically, HPS to FPGA FIFO <strong>Reader</strong> state machine waits for data in the FIFO, then reads the data into a buffer and <strong>sets a ready flag</strong>. The <strong>csr-register</strong> used to wait is the <strong>status register</strong>, so that only bit 0 (full) and bit 1 (empty) are read</p></li>
+<li><p>To use this <strong>Output</strong> of <strong>HPS to FPGA FIFO</strong>, we must write by ourselves a <strong>State Machine</strong> to handle <strong>Reading Data From HPS</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760/Top%20Level%20Entity%20for%20FPGA/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 440</strong>). Specifically, HPS to FPGA FIFO <strong>Reader</strong> state machine waits for data in the FIFO, then reads the data into a buffer and <strong>sets a ready flag</strong>. The <strong>csr-register</strong> used to wait is the <strong>status register</strong>, so that only bit 0 (full) and bit 1 (empty) are read</p></li>
 </ul>
 <div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// =================================</span>
 <span class="c1">// HPS_to_FPGA state machine</span>
@@ -238,7 +238,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>For <strong>FPGA to HPS FIFO</strong>, its <strong>Input</strong> will be <strong>Exported</strong> and will be connected to the Top-Level module <strong>DE1_SoC_Computer</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%203/Cornell%20ECE5760/FIFO_loopback/verilog/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 525</strong>).</p></li>
+<li><p>For <strong>FPGA to HPS FIFO</strong>, its <strong>Input</strong> will be <strong>Exported</strong> and will be connected to the Top-Level module <strong>DE1_SoC_Computer</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760/Top%20Level%20Entity%20for%20FPGA/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 525</strong>).</p></li>
 </ul>
 <div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// FPGA to HPS FIFO</span>
 <span class="p">.</span><span class="n">fifo_fpga_to_hps_in_writedata</span>      <span class="p">(</span><span class="n">fpga_to_hps_in_writedata</span><span class="p">),</span>      <span class="c1">// fifo_fpga_to_hps_in.writedata</span>
@@ -251,7 +251,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>To use this <strong>Input</strong> of <strong>FPGA to HPS FIFO</strong>, we must write by ourselves a <strong>State Machine</strong> to handle <strong>Writing Data To HPS</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%203/Cornell%20ECE5760/FIFO_loopback/verilog/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 466</strong>). Specifically, FPGA to HPS FIFO <strong>Writer</strong> state machine waits for space in the <strong>FPGA to HPS FIFO</strong> then writes the data to the FIFO and <strong>clears the ready flag</strong></p></li>
+<li><p>To use this <strong>Input</strong> of <strong>FPGA to HPS FIFO</strong>, we must write by ourselves a <strong>State Machine</strong> to handle <strong>Writing Data To HPS</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760/Top%20Level%20Entity%20for%20FPGA/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 466</strong>). Specifically, FPGA to HPS FIFO <strong>Writer</strong> state machine waits for space in the <strong>FPGA to HPS FIFO</strong> then writes the data to the FIFO and <strong>clears the ready flag</strong></p></li>
 </ul>
 <div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// =================================</span>
 <span class="c1">// FPGA_to_HPS state machine</span>
@@ -295,21 +295,119 @@
 <li><p>If you use nonblocking read/write that you must check the return value for success.</p></li>
 </ul>
 <p><strong>Step 4</strong> In the C code</p>
-<p>The first six macros read out the state of the read/write FIFOs.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define WRITE_FIFO_FILL_LEVEL   (*FIFO_write_status_ptr)</span>
-<span class="cp">#define READ_FIFO_FILL_LEVEL    (*FIFO_read_status_ptr)</span>
-<span class="cp">#define WRITE_FIFO_FULL                 ((*(FIFO_write_status_ptr+1))&amp; 1 )</span>
-<span class="cp">#define WRITE_FIFO_EMPTY                ((*(FIFO_write_status_ptr+1))&amp; 2 )</span>
-<span class="cp">#define READ_FIFO_FULL                  ((*(FIFO_read_status_ptr+1)) &amp; 1 )</span>
-<span class="cp">#define READ_FIFO_EMPTY                 ((*(FIFO_read_status_ptr+1)) &amp; 2 )</span>
-<span class="c1">// arg a is data to be written</span>
-<span class="cp">#define FIFO_WRITE_BLOCK(a)             {while (WRITE_FIFO_FULL){WAIT};FIFO_WRITE=a;}</span>
-<span class="c1">// arg a is data to be written, arg b is success/fail of write: b==1 means success</span>
-<span class="cp">#define FIFO_WRITE_NOBLOCK(a,b) {b=!WRITE_FIFO_FULL; if(!WRITE_FIFO_FULL)FIFO_WRITE=a; }</span>
-<span class="c1">// arg a is data read</span>
-<span class="cp">#define FIFO_READ_BLOCK(a)              {while (READ_FIFO_EMPTY){WAIT};a=FIFO_READ;}</span>
-<span class="c1">// arg a is data read, arg b is success/fail of read: b==1 means success</span>
-<span class="cp">#define FIFO_READ_NOBLOCK(a,b)  {b=!READ_FIFO_EMPTY; if(!READ_FIFO_EMPTY)a=FIFO_READ;}</span>
+<p>The following <code class="code docutils literal notranslate"><span class="pre">Quartus</span> <span class="pre">Project</span> <span class="pre">Stage</span> <span class="pre">2\Cornell</span> <span class="pre">ECE5760\C</span> <span class="pre">Code</span> <span class="pre">for</span> <span class="pre">HPS\FIFO_2_prettified.c</span></code> is modified from the original file <code class="code docutils literal notranslate"><span class="pre">FIFO_2.c</span></code>. However, it is <strong>not tested yet</strong> since I still have doubt as can be seen below, hopefully my boss can help me with this:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// FIFO details:</span>
+<span class="c1">//     Depth: 256    Data Width: 32 bits</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/ipc.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/shm.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
+
+<span class="c1">//?????????????????????????????</span>
+    <span class="c1">// main bus; scratch RAM. used only for testing</span>
+    <span class="cp">#define FPGA_ONCHIP_BASE      0xC8000000</span>
+    <span class="cp">#define FPGA_ONCHIP_SPAN      0x00001000</span>
+    <span class="c1">// main bus; FIFO write address</span>
+    <span class="cp">#define FIFO_BASE             0xC0000000</span>
+    <span class="cp">#define FIFO_SPAN             0x00001000</span>
+    <span class="c1">/// lw_bus; FIFO status address</span>
+    <span class="cp">#define HW_REGS_BASE          0xff200000</span>
+    <span class="cp">#define HW_REGS_SPAN          0x00005000</span>
+    <span class="cm">/*</span>
+<span class="cm">    #define HW_REGS_BASE ( ALT_STM_OFST )</span>
+<span class="cm">    #define HW_REGS_SPAN ( 0x04000000 )</span>
+<span class="cm">    #define HW_REGS_MASK ( HW_REGS_SPAN - 1 )</span>
+<span class="cm">    */</span>
+<span class="c1">//?????????????????????????????</span>
+
+<span class="c1">//====================================</span>
+<span class="c1">// The following corresponds to **h2f_axi_master** in Platform Designer</span>
+<span class="c1">//====================================</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">h2f_virtual_base</span><span class="p">;</span>
+<span class="k">volatile</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">FIFO_write_ptr</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">;</span>
+<span class="k">volatile</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">FIFO_read_ptr</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">;</span>
+<span class="cp">#define FIFO_WRITE           (*(FIFO_write_ptr))</span>
+<span class="cp">#define FIFO_READ            (*(FIFO_read_ptr))</span>
+
+<span class="c1">//====================================</span>
+<span class="c1">// The following corresponds to **h2f_lw_axi_master** in Platform Designer</span>
+<span class="c1">//====================================</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">h2f_lw_virtual_base</span><span class="p">;</span>
+<span class="k">volatile</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">FIFO_write_status_ptr</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">;</span>
+<span class="k">volatile</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">FIFO_read_status_ptr</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">;</span>
+<span class="cp">#define WRITE_FIFO_FILL_LEVEL (*FIFO_write_status_ptr)</span>
+<span class="cp">#define READ_FIFO_FILL_LEVEL  (*FIFO_read_status_ptr)</span>
+<span class="cp">#define WRITE_FIFO_FULL       ((*(FIFO_write_status_ptr+1))&amp; 1 )</span>
+<span class="cp">#define WRITE_FIFO_EMPTY      ((*(FIFO_write_status_ptr+1))&amp; 2 )</span>
+<span class="cp">#define READ_FIFO_FULL        ((*(FIFO_read_status_ptr+1)) &amp; 1 )</span>
+<span class="cp">#define READ_FIFO_EMPTY       ((*(FIFO_read_status_ptr+1)) &amp; 2 )</span>
+<span class="cp">#define WAIT {}</span>
+
+<span class="c1">//====================================</span>
+<span class="c1">// Helper Functions</span>
+<span class="c1">//====================================</span>
+
+<span class="c1">// Write and Read: **a** is data to be written, **b** is result(success/fail)</span>
+<span class="cp">#define FIFO_WRITE_BLOCK(a)         {while (WRITE_FIFO_FULL){WAIT};FIFO_WRITE=a;}</span>
+<span class="cp">#define FIFO_READ_BLOCK(a)          {while (READ_FIFO_EMPTY){WAIT};a=FIFO_READ;}</span>
+<span class="cp">#define FIFO_WRITE_NOBLOCK(a,b)     {b=!WRITE_FIFO_FULL; if(!WRITE_FIFO_FULL)FIFO_WRITE=a;}</span>
+<span class="cp">#define FIFO_READ_NOBLOCK(a,b)      {b=!READ_FIFO_EMPTY; if(!READ_FIFO_EMPTY)a=FIFO_READ;}</span>
+
+<span class="kt">int</span> <span class="nf">memoryMapping</span><span class="p">(){</span>
+    <span class="c1">// Step 1</span>
+    <span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/dev/mem&quot;</span><span class="p">,(</span><span class="n">O_RDWR</span><span class="o">|</span><span class="n">O_SYNC</span><span class="p">)))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;ERROR: could not open </span><span class="se">\&quot;</span><span class="s">/dev/mem</span><span class="se">\&quot;</span><span class="s">...</span><span class="se">\n</span><span class="s">&quot;</span> <span class="p">);</span>
+        <span class="k">return</span><span class="p">(</span> <span class="mi">1</span> <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// **h2f_axi_master** Part</span>
+    <span class="n">h2f_virtual_base</span> <span class="o">=</span> <span class="n">mmap</span><span class="p">(</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">FIFO_SPAN</span><span class="p">,</span> <span class="p">(</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span> <span class="p">),</span> <span class="n">MAP_SHARED</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="n">FIFO_BASE</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span> <span class="n">h2f_virtual_base</span> <span class="o">==</span> <span class="n">MAP_FAILED</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;ERROR: mmap() for **h2f_axi_master** failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="n">close</span><span class="p">(</span> <span class="n">fd</span> <span class="p">);</span>  <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">FIFO_write_ptr</span> <span class="o">=</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_virtual_base</span><span class="p">);</span>
+    <span class="n">FIFO_read_ptr</span>  <span class="o">=</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_virtual_base</span> <span class="o">+</span> <span class="mh">0x10</span><span class="p">);</span>
+
+    <span class="c1">// **h2f_lw_axi_master** Part</span>
+    <span class="n">h2f_lw_virtual_base</span> <span class="o">=</span> <span class="n">mmap</span><span class="p">(</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">HW_REGS_SPAN</span><span class="p">,</span> <span class="p">(</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span> <span class="p">),</span> <span class="n">MAP_SHARED</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="n">HW_REGS_BASE</span> <span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span> <span class="n">h2f_lw_virtual_base</span> <span class="o">==</span> <span class="n">MAP_FAILED</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;ERROR: mmap() for **h2f_lw_axi_master** failed...</span><span class="se">\n</span><span class="s">&quot;</span> <span class="p">);</span>
+        <span class="n">close</span><span class="p">(</span> <span class="n">fd</span> <span class="p">);</span>  <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">FIFO_write_status_ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_lw_virtual_base</span><span class="p">);</span>
+    <span class="n">FIFO_read_status_ptr</span>  <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_lw_virtual_base</span> <span class="o">+</span> <span class="mh">0x20</span><span class="p">);</span> <span class="c1">//0x20</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">repeatWriting</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;repeatWriting: &quot;</span><span class="p">);</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">);</span>
+        <span class="n">FIFO_WRITE_BLOCK</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Fill levels: WRITE_FIFO=%d READ_FIFO=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">WRITE_FIFO_FILL_LEVEL</span><span class="p">,</span> <span class="n">READ_FIFO_FILL_LEVEL</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//====================================</span>
+<span class="c1">// Main Function</span>
+<span class="c1">//====================================</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">memoryMapping</span><span class="p">();</span>
+    <span class="n">repeatWriting</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
