@@ -39,7 +39,7 @@ Derivation
 	  E_0 = \text{extr}_{\rho,\mu} \; E[\rho,\mu] \\	  
 	  \text{Effective Energies} &
 	  V(r')\equiv -\left( {\delta \over \delta n(r') } E_{\text{kin}}[n]+\mu \right) & 
-	  T(p')\equiv -\left( {\delta \over \delta \rho(p') } E_{\text{kin}}[\rho]+\mu \right) \\	  
+	  T(p')\equiv -\left( {\delta \over \delta \rho(p') } E_{\text{ext}}[\rho]+\mu \right) \\	  
 	  \text{Consider} &
 	  E_1=E_{\text{kin}}[n]+\int dr' n(r')[V(r')+\mu] & 
 	  E_1=E_{\text{ext}}[\rho]+\int dp' \rho(p')[T(p')+\mu] \\	  
@@ -55,7 +55,22 @@ Derivation
 	  E[T,\rho,\mu]=E_1[T(p')+\mu] - \int dp' \rho(p')[T(p')-T_{\text{kin}}(p')] +E_{\text{e-e}}[p] -\mu N   \\ 
 	  \text{Then} &
 	  E_0 = \text{extr}_{V,n,\mu} \; E[V,n,\mu] & 
-	  E_0 = \text{extr}_{T,\rho,\mu} \; E[T,\rho,\mu] \\	   
+	  E_0 = \text{extr}_{T,\rho,\mu} \; E[T,\rho,\mu] \\	
+	  \text{Then} &
+	  \begin{cases}
+	  \delta V   : & n(r') = {\delta \over \delta V(r')} E_1[V+\mu] \\
+	  \delta n   : & V(r') = {\delta \over \delta n(r')} E_{\text{e-e}}[n]+V_{\text{ext}}(r')\\
+	  \delta \mu : & N = {\delta \over \delta \mu} E_1[V+\mu]
+	  \end{cases} & 
+	  \begin{cases}
+	  \delta T    : & \rho(p') = {\delta \over \delta T(p')}    E_1[T+\mu] \\
+	  \delta \rho : & T(p') =    {\delta \over \delta \rho(p')} E_{\text{e-e}}[\rho]+T_{\text{kin}}(p')\\
+	  \delta \mu  : & N =        {\delta \over \delta \mu} E_1[T+\mu]
+	  \end{cases}
+	  \\ 
+	  \text{More on }E_1 &
+	  & 
+	  \\  
 	\end{array}
 		
 

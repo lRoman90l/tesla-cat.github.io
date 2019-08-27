@@ -209,7 +209,7 @@
   E_0 = \text{extr}_{\rho,\mu} \; E[\rho,\mu] \\
   \text{Effective Energies} &amp;
   V(r')\equiv -\left( {\delta \over \delta n(r') } E_{\text{kin}}[n]+\mu \right) &amp;
-  T(p')\equiv -\left( {\delta \over \delta \rho(p') } E_{\text{kin}}[\rho]+\mu \right) \\
+  T(p')\equiv -\left( {\delta \over \delta \rho(p') } E_{\text{ext}}[\rho]+\mu \right) \\
   \text{Consider} &amp;
   E_1=E_{\text{kin}}[n]+\int dr' n(r')[V(r')+\mu] &amp;
   E_1=E_{\text{ext}}[\rho]+\int dp' \rho(p')[T(p')+\mu] \\
@@ -226,6 +226,21 @@
   \text{Then} &amp;
   E_0 = \text{extr}_{V,n,\mu} \; E[V,n,\mu] &amp;
   E_0 = \text{extr}_{T,\rho,\mu} \; E[T,\rho,\mu] \\
+  \text{Then} &amp;
+  \begin{cases}
+  \delta V   : &amp; n(r') = {\delta \over \delta V(r')} E_1[V+\mu] \\
+  \delta n   : &amp; V(r') = {\delta \over \delta n(r')} E_{\text{e-e}}[n]+V_{\text{ext}}(r')\\
+  \delta \mu : &amp; N = {\delta \over \delta \mu} E_1[V+\mu]
+  \end{cases} &amp;
+  \begin{cases}
+  \delta T    : &amp; \rho(p') = {\delta \over \delta T(p')}    E_1[T+\mu] \\
+  \delta \rho : &amp; T(p') =    {\delta \over \delta \rho(p')} E_{\text{e-e}}[\rho]+T_{\text{kin}}(p')\\
+  \delta \mu  : &amp; N =        {\delta \over \delta \mu} E_1[T+\mu]
+  \end{cases}
+  \\
+  \text{More on }E_1 &amp;
+  &amp;
+  \\
 \end{array}\end{split}\]</div>
 </div>
 </div>
