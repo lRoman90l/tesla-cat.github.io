@@ -1,0 +1,63 @@
+
+DFT In Momentum Space
+=================================
+
+:Date: 27 Aug 2019
+
+Credit
+---------
+
+- This is a summary of Prof. Englert's paper 
+
+Dependency
+-------------
+
+What is the problem ?
+-------------------------
+
+Derivation
+-------------
+
+.. math::
+	\begin{array}{c|c|c}
+	  \text{Description} & \text{Position Space} & \text{Momentum Space} \\ 
+	  & & \\  
+	  \text{Density} & 
+	  n(r')=N\int dr_2'...dr_N' |\langle r',r_2'...r_N'|\psi_0\rangle |^2 & 
+	  \rho(p')=N\int dp_2'...dp_N' |\langle p',p_2'...p_N'|\psi_0\rangle |^2\\  
+	  \text{HK Theorem} & 
+	  E_0=\min\limits_n E[n] & 
+	  E_0=\min\limits_{\rho} E[\rho] \\    
+	  \text{Central Point} &
+	  n(r') \text{ uniquely determines } V_{\text{ext}},|\psi_0\rangle& 
+	  \rho(p') \text{ uniquely determines } T_{\text{kin}},|\psi_0\rangle \\ 
+	  \text{Lagrange Multiplier} &
+	  E[n,\mu]=E[n]-\mu [N-\int dr' n(r')] & 
+	  E[\rho,\mu]=E[\rho]-\mu [N-\int dp' \rho(p')] \\	  
+	  \text{Lagrange Multiplier} &
+	  E_0 = \text{extr}_{n,\mu} \; E[n,\mu] & 
+	  E_0 = \text{extr}_{\rho,\mu} \; E[\rho,\mu] \\	  
+	  \text{Effective Energies} &
+	  V(r')\equiv -\left( {\delta \over \delta n(r') } E_{\text{kin}}[n]+\mu \right) & 
+	  T(p')\equiv -\left( {\delta \over \delta \rho(p') } E_{\text{kin}}[\rho]+\mu \right) \\	  
+	  \text{Consider} &
+	  E_1=E_{\text{kin}}[n]+\int dr' n(r')[V(r')+\mu] & 
+	  E_1=E_{\text{ext}}[\rho]+\int dp' \rho(p')[T(p')+\mu] \\	  
+	  \text{Then} &
+	  \delta E_1 = \int dr' n(r')[\delta V(r')+\delta \mu]  & 
+	  \delta E_1 = \int dp' \rho(p')[\delta T(p')+\delta \mu]  \\	  
+	  \text{Then} &
+	  E_1 = E_1[V(r')+\mu]  & 
+	  E_1 = E_1[T(p')+\mu]  \\	  
+	  \text{Consider} &
+	  E[V,n,\mu]=E_1[V(r')+\mu] - \int dr' n(r')[V(r')-V_{\text{ext}}(r')] 
+	  +E_{\text{e-e}}[n] -\mu N  & 
+	  E[T,\rho,\mu]=E_1[T(p')+\mu] - \int dp' \rho(p')[T(p')-T_{\text{kin}}(p')] +E_{\text{e-e}}[p] -\mu N   \\ 
+	  \text{Then} &
+	  E_0 = \text{extr}_{V,n,\mu} \; E[V,n,\mu] & 
+	  E_0 = \text{extr}_{T,\rho,\mu} \; E[T,\rho,\mu] \\	   
+	\end{array}
+		
+
+
+

@@ -4,6 +4,7 @@ Density Functional Theory
 
 .. toctree::
 	1D-DFT-In-Python
+	DFT-In-Momentum-Space
 	
 
 
