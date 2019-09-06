@@ -22,8 +22,10 @@ Dependency
 
 
 
-Using FIFO: FPGA Part
-------------------------
+Using FIFO: FPGA Part (ECE5760)
+--------------------------------------
+
+*This part uses parameters in ECE5760*
 
 **Step 1** We will use **Platform Designer** to generate two **FIFOs**, **HPS to FPGA FIFO** and **FPGA to HPS FIFO**
 
@@ -131,6 +133,17 @@ Using FIFO: FPGA Part
 - The nonblocking read/write macros in the HPS program are not well tested. 
 - If you use nonblocking read/write that you must check the return value for success.
 
+
+Using FIFO: FPGA Part (Mine)
+--------------------------------------
+
+*This part uses My parameters*
+
+.. figure:: imgs/Stage-2_Mine_Qsys_FIFO.png
+
+.. figure:: imgs/Stage-2_Mine_Qsys_Address_Map.png
+
+
 Using FIFO: Processor Part
 -------------------------------
 
@@ -138,7 +151,7 @@ The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO
 
 .. code-block:: c
 
-	// FIFO details: 
+	// FIFO details:
 	//     Depth: 256    Data Width: 32 bits
 
 	#include <stdio.h>
@@ -147,28 +160,24 @@ The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO
 	#include <unistd.h>
 	#include <fcntl.h>
 	#include <sys/types.h>
-	#include <sys/ipc.h> 
-	#include <sys/shm.h> 
+	#include <sys/ipc.h>
+	#include <sys/shm.h>
 	#include <sys/mman.h>
-	#include <sys/time.h> 
-	#include <math.h> 
-	    
-	//?????????????????????????????
-	    // main bus; scratch RAM. used only for testing
-	    #define FPGA_ONCHIP_BASE      0xC8000000
-	    #define FPGA_ONCHIP_SPAN      0x00001000
-	    // main bus; FIFO write address
-	    #define FIFO_BASE             0xC0000000
-	    #define FIFO_SPAN             0x00001000
-	    /// lw_bus; FIFO status address
-	    #define HW_REGS_BASE          0xff200000
-	    #define HW_REGS_SPAN          0x00005000 
-	    /*
+	#include <sys/time.h>
+	#include <math.h>
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// Modify the following based on your Qsys File in in Platform Designer 
+
+	    // The following corresponds to **h2f_axi_master** in Platform Designer
+	    #define h2f_axi_master_BASE             ( 0xC0000000 )
+	    #define h2f_axi_master_SPAN             ( 0x04000000 )
+
+	    //The following corresponds to **h2f_lw_axi_master** in Platform Designer
 	    #define HW_REGS_BASE ( ALT_STM_OFST )
 	    #define HW_REGS_SPAN ( 0x04000000 )
-	    #define HW_REGS_MASK ( HW_REGS_SPAN - 1 )
-	    */
-	//?????????????????????????????
+	    #define HW_REGS_MASK ( HW_REGS_SPAN - 1 )  
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	//====================================
 	// The following corresponds to **h2f_axi_master** in Platform Designer
@@ -187,11 +196,11 @@ The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO
 	volatile unsigned int * FIFO_read_status_ptr = NULL ;
 	#define WRITE_FIFO_FILL_LEVEL (*FIFO_write_status_ptr)
 	#define READ_FIFO_FILL_LEVEL  (*FIFO_read_status_ptr)
-	#define WRITE_FIFO_FULL       ((*(FIFO_write_status_ptr+1))& 1 ) 
-	#define WRITE_FIFO_EMPTY      ((*(FIFO_write_status_ptr+1))& 2 ) 
+	#define WRITE_FIFO_FULL       ((*(FIFO_write_status_ptr+1))& 1 )
+	#define WRITE_FIFO_EMPTY      ((*(FIFO_write_status_ptr+1))& 2 )
 	#define READ_FIFO_FULL        ((*(FIFO_read_status_ptr+1)) & 1 )
 	#define READ_FIFO_EMPTY       ((*(FIFO_read_status_ptr+1)) & 2 )
-	#define WAIT {} 
+	#define WAIT {}
 
 	//====================================
 	// Helper Functions
@@ -209,35 +218,41 @@ The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO
 	        printf( "ERROR: could not open \"/dev/mem\"...\n" );
 	        return( 1 );
 	    }
-	    
+
 	    // **h2f_axi_master** Part
-	    h2f_virtual_base = mmap( NULL, FIFO_SPAN, ( PROT_READ | PROT_WRITE ), MAP_SHARED, fd, FIFO_BASE);     
+	    h2f_virtual_base = mmap( NULL, h2f_axi_master_SPAN, ( PROT_READ | PROT_WRITE ), MAP_SHARED, fd, h2f_axi_master_BASE);
 	    if( h2f_virtual_base == MAP_FAILED ) {
 	        printf( "ERROR: mmap() for **h2f_axi_master** failed\n");
 	        close( fd );  return(1);
 	    }
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// Modify the following based on your Qsys File in in Platform Designer 
 	    FIFO_write_ptr =(unsigned int *)(h2f_virtual_base);
-	    FIFO_read_ptr  =(unsigned int *)(h2f_virtual_base + 0x10);
-	    
+	    FIFO_read_ptr  =(unsigned int *)(h2f_virtual_base + 0x40000);
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	    // **h2f_lw_axi_master** Part
-	    h2f_lw_virtual_base = mmap( NULL, HW_REGS_SPAN, ( PROT_READ | PROT_WRITE ), MAP_SHARED, fd, HW_REGS_BASE );    
+	    h2f_lw_virtual_base = mmap( NULL, HW_REGS_SPAN, ( PROT_READ | PROT_WRITE ), MAP_SHARED, fd, HW_REGS_BASE );
 	    if( h2f_lw_virtual_base == MAP_FAILED ) {
 	        printf( "ERROR: mmap() for **h2f_lw_axi_master** failed...\n" );
 	        close( fd );  return(1);
 	    }
-	    FIFO_write_status_ptr = (unsigned int *)(h2f_lw_virtual_base);
-	    FIFO_read_status_ptr  = (unsigned int *)(h2f_lw_virtual_base + 0x20); //0x20
-	        
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// Modify the following based on your Qsys File in in Platform Designer 
+	    FIFO_write_status_ptr = (unsigned int *)(h2f_lw_virtual_base + 0x50000);
+	    FIFO_read_status_ptr  = (unsigned int *)(h2f_lw_virtual_base + 0x60000); 
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	    return(0);
 	}
 
 	int repeatWriting(){
 	    int i;
 	    while(1){
-	        printf( "repeatWriting: ");    
+	        printf( "repeatWriting: ");
 	        scanf("%d", &i);
 	        FIFO_WRITE_BLOCK(i);
-	        printf("Fill levels: WRITE_FIFO=%d READ_FIFO=%d\n", WRITE_FIFO_FILL_LEVEL, READ_FIFO_FILL_LEVEL);    
+	        printf("Fill levels: WRITE_FIFO=%d READ_FIFO=%d\n", WRITE_FIFO_FILL_LEVEL, READ_FIFO_FILL_LEVEL);
 	    }
 	    return(0);
 	}
@@ -249,4 +264,4 @@ The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO
 	int main(void){
 	    memoryMapping();
 	    repeatWriting();
-	} 
+	}

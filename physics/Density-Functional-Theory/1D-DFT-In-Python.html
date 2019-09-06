@@ -88,10 +88,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Optics/index.html">Quantum Optics</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Density Functional Theory</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1D DFT In Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#note">Note</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#credit">Credit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#what-is-the-problem">What is the problem ?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#differentiation">Differentiation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#free-particle-hamiltonian">Free particle Hamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#harmonic-oscillator">Harmonic oscillator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#potential-well">Potential well</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#density">Density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functional-derivative">Functional Derivative</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exchange-potential">Exchange Potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coulomb-potential">Coulomb potential</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solve-the-kohnsham-equations-self-consistency-loop">Solve the Kohn–Sham Equations: Self-Consistency Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wrap-up">Wrap up</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="DFT-In-Momentum-Space.html">DFT In Momentum Space</a></li>
@@ -169,33 +177,402 @@
             
   <div class="section" id="d-dft-in-python">
 <h1>1D DFT In Python<a class="headerlink" href="#d-dft-in-python" title="Permalink to this headline">¶</a></h1>
-<dl class="field-list simple">
-<dt class="field-odd">Date</dt>
-<dd class="field-odd"><p>24 Aug 2019</p>
-</dd>
-</dl>
+<div class="section" id="note">
+<h2>Note<a class="headerlink" href="#note" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="code docutils literal notranslate"><span class="pre">.rst</span></code> file for this page is generated using Jupyter Notebook, from the <code class="code docutils literal notranslate"><span class="pre">.ipynb</span></code> file: <a class="reference external" href="https://github.com/tesla-cat/Physics/blob/master/ipynb/Density_Functional_Theory_1D.ipynb">Density Functional Theory 1D</a></p>
+</div>
 <div class="section" id="credit">
 <h2>Credit<a class="headerlink" href="#credit" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>This is modified from <a class="reference external" href="https://github.com/tamuhey/python_1d_dft/blob/master/numpy_1ddft.ipynb">Numpy 1D DFT</a></p></li>
-</ul>
+<p>This note is modified from <a class="reference external" href="https://github.com/tamuhey/python_1d_dft/blob/master/numpy_1ddft.ipynb">Numpy
+1D-DFT</a></p>
 </div>
-<div class="section" id="dependency">
-<h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="what-is-the-problem">
-<h2>What is the problem ?<a class="headerlink" href="#what-is-the-problem" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="code">
-<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="differentiation">
+<h2>Differentiation<a class="headerlink" href="#differentiation" title="Permalink to this headline">¶</a></h2>
+<p>First order differentiation</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-&amp; ({dy\over dx})_i = {y_{i+1}-y_i \over \Delta x}\equiv D_{ij}y_j \\
-&amp; \Rightarrow D_{ij}= {\delta_{i+1,j}-\delta_{i,j} \over \Delta x}
-\end{align*}\end{split}\]</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+\[\begin{split}({dy\over dx})_i = {y_{i+1}-y_i \over \Delta x}\equiv D_{ij}y_j \\
+\Rightarrow D_{ij}= {\delta_{i+1,j}-\delta_{i,j} \over \Delta x}\end{split}\]</div>
+<p>Second order differentiation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}({d^2y\over dx^2})_i \equiv D_{ij}^{(2)}y_j
+\\D_{ij}^{(2)}= {\delta_{i+1,j}-2\delta_{i,j}+\delta_{i-1,j} \over (\Delta x)^2}\\ =-D_{ik}D_{jk}\\
+\Rightarrow D^{(2)}=-DD^T\end{split}\]</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+
+n_grid=200
+x=np.linspace(-5,5,n_grid)
+y=np.sin(x)
+
+Delta_x = x[1] - x[0]
+print(np.diagflat(np.ones(n_grid-1),-2))
+print(np.eye(n_grid))
+D = np.diagflat(np.ones(n_grid-1),1) - np.eye(n_grid)
+D = D / Delta_x
+
+D2 = - D.dot(D.T)
+D2[-1,-1]=D2[0,0] #The derivative may not be well defined at the end of the grid
+
+plt.plot(x,y, label=&quot;f&quot;)
+plt.plot(x[:-1],D.dot(y)[:-1], label=&quot;D&quot;)
+plt.plot(x[1:-1],D2.dot(y)[1:-1], label=&quot;D2&quot;)
+plt.legend()
 </pre></div>
 </div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="o">...</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]]</span>
+<span class="p">[[</span><span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="o">...</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="o">...</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1.</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fcc1fc68048</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/output_3_2.png" src="../_images/output_3_2.png" />
+</div>
+<div class="section" id="free-particle-hamiltonian">
+<h2>Free particle Hamiltonian<a class="headerlink" href="#free-particle-hamiltonian" title="Permalink to this headline">¶</a></h2>
+<p>(in a box given by grid size 10)</p>
+<div class="math notranslate nohighlight">
+\[H=T=-{\hbar^2 \over 2m}\nabla^2\]</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>hbar = 1
+m = 1
+H_FreeParticle = - (hbar**2/(2*m)) * D2
+EigenValue, EigenVector_FreeParticle = np.linalg.eigh(H_FreeParticle)
+
+for i in range(5):
+  plt.plot(x,EigenVector_FreeParticle[:,i], label=f&quot;EigenValue: {EigenValue[i]:.3f}&quot;)
+plt.legend()
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fcc22da2da0</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/output_5_1.png" src="../_images/output_5_1.png" />
+</div>
+<div class="section" id="harmonic-oscillator">
+<h2>Harmonic oscillator<a class="headerlink" href="#harmonic-oscillator" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[H=-{\hbar^2 \over 2m}\nabla^2 +x^2\]</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>HarmonicPotential = np.diagflat(x*x)
+H_HarmonicOscillator = H_FreeParticle + HarmonicPotential
+EigenValue, EigenVector_HarmonicOscillator = np.linalg.eigh(H_HarmonicOscillator)
+
+for i in range(5):
+  plt.plot(x,EigenVector_HarmonicOscillator[:,i], label=f&quot;EigenValue: {EigenValue[i]:.3f}&quot;)
+plt.legend()
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fcc22480358</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/output_7_1.png" src="../_images/output_7_1.png" />
+</div>
+<div class="section" id="potential-well">
+<h2>Potential well<a class="headerlink" href="#potential-well" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>PotentialWell = np.full_like(x,1e10)
+PotentialWell[np.logical_and(x&gt;-2,x&lt;2)] = 0
+PotentialWell = np.diagflat(PotentialWell)
+
+H_PotentialWell = H_FreeParticle + PotentialWell
+EigenValue, EigenVector_PotentialWell = np.linalg.eigh(H_PotentialWell)
+
+for i in range(5):
+  plt.plot(x,EigenVector_PotentialWell[:,i], label=f&quot;EigenValue: {EigenValue[i]:.3f}&quot;)
+plt.legend()
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fcc1fae82e8</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/output_9_1.png" src="../_images/output_9_1.png" />
+</div>
+<div class="section" id="density">
+<h2>Density<a class="headerlink" href="#density" title="Permalink to this headline">¶</a></h2>
+<p>Each state <span class="math notranslate nohighlight">\(k\)</span> (EigenVector) can have <span class="math notranslate nohighlight">\(N_k=0,1\text{ or }2\)</span>
+electrons</p>
+<div class="math notranslate nohighlight">
+\[n(x)=\sum\limits_k N_k |\psi_k(x)|^2\]</div>
+<p>Note that the eigenvalues (energy) given by <strong>np.linalg.eigh</strong> is
+automatically ordered from small to large</p>
+<p>Thus if <span class="math notranslate nohighlight">\(N_\text{total}=5\)</span> for example,
+<span class="math notranslate nohighlight">\(N_0=N_1=2,N_2=1,N_{&gt;2}=0\)</span></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def Integrate(x,y,axis = 0):
+  dx = x[1]-x[0]
+  return np.sum(y*dx, axis = axis)
+
+
+def GetDensity(N_total, psi, x):
+  I = Integrate(x,psi**2)
+  normalized_psi = psi/np.sqrt(I)[None,:]  # ???
+
+  N_k = [2 for _ in range(N_total//2)]
+  if N_total % 2:
+    N_k.append(1)
+
+  density = np.zeros_like(normalized_psi[:,0])
+  for N_k_, psi in zip(N_k, normalized_psi.T):
+    density += N_k_ * (psi**2)
+  return density
+
+N_total = 17
+plt.plot(GetDensity(N_total,EigenVector_FreeParticle, x), label=&quot;FreeParticle&quot;)
+plt.plot(GetDensity(N_total,EigenVector_HarmonicOscillator, x), label=&quot;HarmonicOscillator&quot;)
+plt.plot(GetDensity(N_total,EigenVector_PotentialWell, x), label=&quot;PotentialWell&quot;)
+plt.legend()
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fcc1fa1f240</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/output_11_1.png" src="../_images/output_11_1.png" />
+</div>
+<div class="section" id="functional-derivative">
+<h2>Functional Derivative<a class="headerlink" href="#functional-derivative" title="Permalink to this headline">¶</a></h2>
+<p>a generalization of the Euler–Lagrange equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}F[n]=\int f(\vec{r},n(\vec{r}),\nabla n(\vec{r})) \; dr\\
+\Rightarrow {\delta F \over \delta n} = {\partial f \over \partial n}-\nabla\cdot {\partial f \over \partial \nabla n}\end{split}\]</div>
+</div>
+<div class="section" id="exchange-potential">
+<h2>Exchange Potential<a class="headerlink" href="#exchange-potential" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Exchange-Correlation Functional</strong> is a correction to the
+electronic energy that approximates the effect of electron interactions.</p>
+<p>To keep life simple, we ignore <strong>Correlation</strong> because its expression is
+more tedious than interesting to implement.</p>
+<p>Consider therefore the <strong>Exchange Functional</strong> in the <strong>Local Density
+Approximation (LDA)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[E_{Ex}^{LDA}[n]=-{3\over 4}({3\over \pi})^{1/3}\int n^{4/3}\;dx\]</div>
+<p>In the derivation of the <strong>Kohn-Sham Equations</strong>, the <strong>potential
+corresponding to each energy term</strong> is defined as the derivative of the
+energy with respect to the density. The <strong>Exchange Potential</strong> is
+therefore:</p>
+<div class="math notranslate nohighlight">
+\[v_{Ex}^{LDA}(x)={\delta E_{Ex}^{LDA} \over \delta n}=-({3\over \pi})^{1/3} n^{1/3}(x)\]</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def GetExchange(n,x):
+  ExchangeEnergy = -3/4 * (3/np.pi)**(1/3) * Integrate(x, n**(4/3))
+  ExchangePotential = - (3/np.pi)**(1/3) * n**(1/3)
+  return ExchangeEnergy, ExchangePotential
+</pre></div>
+</div>
+</div>
+<div class="section" id="coulomb-potential">
+<h2>Coulomb potential<a class="headerlink" href="#coulomb-potential" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Electrostatic Energy</strong> or <strong>Hartree Energy</strong> is given by</p>
+<div class="math notranslate nohighlight">
+\[E_{Ha}^{3D}={1\over 2}\iint {n(\vec{r}),n(\vec{r}') \over |\vec{r}-\vec{r}'|} \; d\vec{r} \; d\vec{r}'\]</div>
+<p>This expression converges in 3D, but not in 1D. Hence we cheat and use a
+modified form:</p>
+<div class="math notranslate nohighlight">
+\[E_{Ha}^{1D}={1\over 2}\iint {n(x),n(x') \over \sqrt{(x-x')^2+\epsilon}} \; dx \; dx'\]</div>
+<p>Again, the potential is the derivative of the energy with respect to the
+density:</p>
+<div class="math notranslate nohighlight">
+\[v_{Ha}^{1D}(x)={\delta E_{Ha}^{1D} \over \delta n}= \int {n(x') \over \sqrt{(x-x')^2+\epsilon}} \; dx'\]</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def GetHartree(n,x,epsilon=1e-1):
+  Delta_x = x[1]-x[0]
+  HartreeEnergy = 1/2*np.sum(n[None,:]*n[:,None]/np.sqrt((x[None,:]-x[:,None])**2+epsilon)*Delta_x*Delta_x)
+  HartreePotential = np.sum(n[None,:]/np.sqrt((x[None,:]-x[:,None])**2+epsilon)*Delta_x, axis=-1)
+  return HartreeEnergy, HartreePotential
+</pre></div>
+</div>
+</div>
+<div class="section" id="solve-the-kohnsham-equations-self-consistency-loop">
+<h2>Solve the Kohn–Sham Equations: Self-Consistency Loop<a class="headerlink" href="#solve-the-kohnsham-equations-self-consistency-loop" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>initialize the density (you can take an arbitrary constant)</p></li>
+<li><p>Calculate the Exchange and Hatree potentials</p></li>
+<li><p>Calculate the Hamiltonian</p></li>
+<li><p>Calculate the eigenvalues and eigenvectors (wavefunctions)</p></li>
+<li><p>If not converged, calculate the density and back to 1</p></li>
+</ol>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n = np.zeros(n_grid)
+LastEnergy = float(&quot;inf&quot;)
+
+for i in range(1000):
+  ExchangeEnergy, ExchangePotential = GetExchange(n,x)
+  HartreeEnergy, HartreePotential = GetHartree(n,x)
+
+  H = H_FreeParticle + HarmonicPotential + np.diagflat(ExchangePotential+HartreePotential)
+  EigenValue, EigenVector_DFT = np.linalg.eigh(H)
+  change = abs(EigenValue[0]-LastEnergy)
+  LastEnergy = EigenValue[0]
+  print(&quot;Ground State Energy:&quot;,EigenValue[0],&quot;.. Change:&quot;,change)
+  if change &lt; 1e-5:
+    break
+
+  n = GetDensity(N_total, EigenVector_DFT, x)
+&#39;&#39;&#39;
+for i in range(5):
+  plt.plot(x,EigenVector_DFT[:,i], label=f&quot;EigenValue: {EigenValue[i]:.3f}&quot;)
+plt.legend()
+&#39;&#39;&#39;
+
+plt.plot(GetDensity(N_total,EigenVector_HarmonicOscillator, x), label=&quot;HarmonicOscillator 1 electron&quot;)
+plt.plot(GetDensity(N_total, EigenVector_DFT, x), label=&quot;HarmonicOscillator 17 electrons&quot;)
+plt.legend()
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">0.7069489216396394</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="n">inf</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">16.362481113553386</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">15.655532191913746</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">13.802125164165675</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">2.560355949387711</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">15.300177750512375</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">1.4980525863467005</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.411948982556314</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.8882287679560612</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.946992808765927</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.5350438262096127</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.624165620778795</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.32282718798713184</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.820098486380779</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.19593286560198386</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.701062940689484</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.11903554569129504</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.773528046467316</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.07246510577783205</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.729396772844979</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.044131273622337375</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.756291444171477</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.02689467132649881</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.739899203648717</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.01639224052276056</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.749892601933313</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.009993398284596111</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.743800001840365</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.00609260009294843</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.747514729729723</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.003714727889358116</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.745249799055264</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.002264930674458654</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.746630802141052</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.001381003085787924</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.745788757575497</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.0008420445655552555</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.746302185556894</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.0005134279813976406</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.745989128109859</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.00031305744703580274</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.746180012284182</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.00019088417432300275</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.746063622259712</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">0.00011639002446983682</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.746134590178523</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">7.096791881089359e-05</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.746091318041849</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">4.3272136673877526e-05</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.746117702900854</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">2.638485900519072e-05</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.746101614932831</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">1.6087968022659993e-05</span>
+<span class="n">Ground</span> <span class="n">State</span> <span class="n">Energy</span><span class="p">:</span> <span class="mf">14.746111424450689</span> <span class="o">..</span> <span class="n">Change</span><span class="p">:</span> <span class="mf">9.8095178575619e-06</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fcc1f998f60</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/output_19_2.png" src="../_images/output_19_2.png" />
+</div>
+<div class="section" id="wrap-up">
+<h2>Wrap up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+
+def Integrate(x,y,axis = 0):
+  dx = x[1] - x[0]
+  return np.sum(y*dx, axis = axis)
+
+def GetDensity(N_total, psi, x):
+  I = Integrate(x,psi**2)
+  normalized_psi = psi/np.sqrt(I)[None,:]
+
+  N_k = [2 for _ in range(N_total//2)]
+  if N_total % 2:
+    N_k.append(1)
+
+  n = np.zeros_like(normalized_psi[:,0])
+  for N_k_, psi in zip(N_k, normalized_psi.T):
+    n += N_k_ * (psi**2)
+  return n
+
+def GetExchange(n,x):
+  ExchangeEnergy = -3/4 * (3/np.pi)**(1/3) * Integrate(x, n**(4/3))
+  ExchangePotential = - (3/np.pi)**(1/3) * n**(1/3)
+  return ExchangeEnergy, ExchangePotential
+
+def GetHartree(n,x,epsilon=1e-1):
+  dx = x[1]-x[0]
+  HartreeEnergy = 1/2*np.sum(n[None,:]*n[:,None]/np.sqrt((x[None,:]-x[:,None])**2+epsilon)*dx*dx)
+  HartreePotential = np.sum(n[None,:]/np.sqrt((x[None,:]-x[:,None])**2+epsilon)*dx, axis=-1)
+  return HartreeEnergy, HartreePotential
+
+class SimpleDFT:
+  def __init__(self, N_total=17, x_begin=-5, x_end=5, n_grid = 200,
+              hbar = 1, m = 1):
+    self.n_grid = n_grid
+    self.N_total = N_total
+    self.x = np.linspace(x_begin,x_end,n_grid)
+    self.dx = x[1] - x[0]
+    self.D = np.diagflat(np.ones(n_grid-1),1) - np.eye(n_grid)
+    self.D = self.D / self.dx
+    self.D2 = - self.D.dot( self.D.T )
+    self.D2[-1,-1] = self.D2[0,0] #The derivative may not be well defined at the end of the grid
+    self.H_FreeParticle = - (hbar**2/(2*m)) * D2
+
+  def FreeParticle(self):
+    Potential = 0
+    self.Solve(&quot;FreeParticle&quot;,Potential)
+
+  def HarmonicPotential(self,k=1):
+    Potential = np.diagflat(k * self.x*self.x)
+    self.Solve(&quot;Harmonic Potential&quot;, Potential)
+
+  def PotentialWell(self, width = 4,center =0):
+    Potential = np.full_like(self.x,1e10)
+    Potential[np.logical_and(self.x&gt; center-width/2, self.x&lt; center+width/2)] = 0
+    Potential = np.diagflat(Potential)
+    self.Solve(&quot;Potential Well&quot;, Potential)
+
+  def Solve(self,PotentialName, Potential):
+    _,_,n_NoInt = self.SolveSingleParticle(  PotentialName, Potential)
+    _,_,n_DFT   = self.SolveManyParticle( PotentialName, Potential)
+    plt.title(&quot;Density: &quot;+PotentialName)
+    plt.plot(n_NoInt,label=&quot;n_NoInt&quot;), plt.plot(n_DFT,label=&quot;n_DFT&quot;)
+    plt.legend(), plt.show()
+
+  def SolveSingleParticle(self,PotentialName, Potential):
+    H = self.H_FreeParticle + Potential
+    EigenValue, EigenVector = np.linalg.eigh(H)
+    n = GetDensity(self.N_total, EigenVector, x)
+    plt.title(&quot;SingleParticle: &quot;+PotentialName)
+    for i in range(5):
+      plt.plot(x,EigenVector[:,i], label=f&quot;EigenValue: {EigenValue[i]:.3f}&quot;)
+    plt.legend(), plt.show()
+    return EigenValue, EigenVector, n
+
+  def SolveManyParticle(self, PotentialName, Potential):
+    n = np.zeros(self.n_grid)
+    LastEnergy = float(&quot;inf&quot;)
+
+    for i in range(1000):
+      ExchangeEnergy, ExchangePotential = GetExchange(n,x)
+      HartreeEnergy, HartreePotential = GetHartree(n,x)
+      H = H_FreeParticle + Potential + np.diagflat(ExchangePotential+HartreePotential)
+      EigenValue, EigenVector = np.linalg.eigh(H)
+      change = abs(EigenValue[0]-LastEnergy)
+      LastEnergy = EigenValue[0]
+      #print(&quot;Ground State Energy:&quot;,EigenValue[0],&quot;.. Change:&quot;,change)
+      if change &lt; 1e-5:
+        break
+      n = GetDensity(self.N_total, EigenVector, x)
+    plt.title(&quot;ManyParticle: &quot;+PotentialName)
+    for i in range(5):
+      plt.plot(x,EigenVector[:,i], label=f&quot;EigenValue: {EigenValue[i]:.3f}&quot;)
+    plt.legend(), plt.show()
+    return EigenValue, EigenVector, n
+
+# usage
+SimpleDFT_1 = SimpleDFT()
+SimpleDFT_1.FreeParticle()
+SimpleDFT_1.HarmonicPotential()
+SimpleDFT_1.PotentialWell()
+</pre></div>
+</div>
+<img alt="../_images/output_21_0.png" src="../_images/output_21_0.png" />
+<img alt="../_images/output_21_1.png" src="../_images/output_21_1.png" />
+<img alt="../_images/output_21_2.png" src="../_images/output_21_2.png" />
+<img alt="../_images/output_21_3.png" src="../_images/output_21_3.png" />
+<img alt="../_images/output_21_4.png" src="../_images/output_21_4.png" />
+<img alt="../_images/output_21_5.png" src="../_images/output_21_5.png" />
+<img alt="../_images/output_21_6.png" src="../_images/output_21_6.png" />
+<img alt="../_images/output_21_7.png" src="../_images/output_21_7.png" />
+<img alt="../_images/output_21_8.png" src="../_images/output_21_8.png" />
 </div>
 </div>
 

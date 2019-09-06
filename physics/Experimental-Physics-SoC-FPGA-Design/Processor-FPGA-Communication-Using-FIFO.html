@@ -97,7 +97,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#credit">Credit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#corresponding-project-folder">Corresponding Project Folder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-fifo-fpga-part">Using FIFO: FPGA Part</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-fifo-fpga-part-ece5760">Using FIFO: FPGA Part (ECE5760)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-fifo-fpga-part-mine">Using FIFO: FPGA Part (Mine)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-fifo-processor-part">Using FIFO: Processor Part</a></li>
 </ul>
 </li>
@@ -188,8 +189,9 @@
 <div class="section" id="dependency">
 <h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="using-fifo-fpga-part">
-<h2>Using FIFO: FPGA Part<a class="headerlink" href="#using-fifo-fpga-part" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-fifo-fpga-part-ece5760">
+<h2>Using FIFO: FPGA Part (ECE5760)<a class="headerlink" href="#using-fifo-fpga-part-ece5760" title="Permalink to this headline">¶</a></h2>
+<p><em>This part uses parameters in ECE5760</em></p>
 <p><strong>Step 1</strong> We will use <strong>Platform Designer</strong> to generate two <strong>FIFOs</strong>, <strong>HPS to FPGA FIFO</strong> and <strong>FPGA to HPS FIFO</strong></p>
 <div class="figure align-default">
 <img alt="../_images/Stage-2_ECE5760_Qsys_FIFO.png" src="../_images/Stage-2_ECE5760_Qsys_FIFO.png" />
@@ -296,6 +298,16 @@
 <li><p>If you use nonblocking read/write that you must check the return value for success.</p></li>
 </ul>
 </div>
+<div class="section" id="using-fifo-fpga-part-mine">
+<h2>Using FIFO: FPGA Part (Mine)<a class="headerlink" href="#using-fifo-fpga-part-mine" title="Permalink to this headline">¶</a></h2>
+<p><em>This part uses My parameters</em></p>
+<div class="figure align-default">
+<img alt="../_images/Stage-2_Mine_Qsys_FIFO.png" src="../_images/Stage-2_Mine_Qsys_FIFO.png" />
+</div>
+<div class="figure align-default">
+<img alt="../_images/Stage-2_Mine_Qsys_Address_Map.png" src="../_images/Stage-2_Mine_Qsys_Address_Map.png" />
+</div>
+</div>
 <div class="section" id="using-fifo-processor-part">
 <h2>Using FIFO: Processor Part<a class="headerlink" href="#using-fifo-processor-part" title="Permalink to this headline">¶</a></h2>
 <p>The following <code class="code docutils literal notranslate"><span class="pre">Quartus</span> <span class="pre">Project</span> <span class="pre">Stage</span> <span class="pre">2\Cornell</span> <span class="pre">ECE5760\C</span> <span class="pre">Code</span> <span class="pre">for</span> <span class="pre">HPS\FIFO_2_prettified.c</span></code> is modified from the original file <code class="code docutils literal notranslate"><span class="pre">FIFO_2.c</span></code>. However, it is <strong>not tested yet</strong> since I still have doubt as can be seen below, hopefully my boss can help me with this:</p>
@@ -314,22 +326,18 @@
 <span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
 
-<span class="c1">//?????????????????????????????</span>
-    <span class="c1">// main bus; scratch RAM. used only for testing</span>
-    <span class="cp">#define FPGA_ONCHIP_BASE      0xC8000000</span>
-    <span class="cp">#define FPGA_ONCHIP_SPAN      0x00001000</span>
-    <span class="c1">// main bus; FIFO write address</span>
-    <span class="cp">#define FIFO_BASE             0xC0000000</span>
-    <span class="cp">#define FIFO_SPAN             0x00001000</span>
-    <span class="c1">/// lw_bus; FIFO status address</span>
-    <span class="cp">#define HW_REGS_BASE          0xff200000</span>
-    <span class="cp">#define HW_REGS_SPAN          0x00005000</span>
-    <span class="cm">/*</span>
-<span class="cm">    #define HW_REGS_BASE ( ALT_STM_OFST )</span>
-<span class="cm">    #define HW_REGS_SPAN ( 0x04000000 )</span>
-<span class="cm">    #define HW_REGS_MASK ( HW_REGS_SPAN - 1 )</span>
-<span class="cm">    */</span>
-<span class="c1">//?????????????????????????????</span>
+<span class="c1">//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+<span class="c1">// Modify the following based on your Qsys File in in Platform Designer</span>
+
+    <span class="c1">// The following corresponds to **h2f_axi_master** in Platform Designer</span>
+    <span class="cp">#define h2f_axi_master_BASE             ( 0xC0000000 )</span>
+    <span class="cp">#define h2f_axi_master_SPAN             ( 0x04000000 )</span>
+
+    <span class="c1">//The following corresponds to **h2f_lw_axi_master** in Platform Designer</span>
+    <span class="cp">#define HW_REGS_BASE ( ALT_STM_OFST )</span>
+    <span class="cp">#define HW_REGS_SPAN ( 0x04000000 )</span>
+    <span class="cp">#define HW_REGS_MASK ( HW_REGS_SPAN - 1 )</span>
+<span class="c1">//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
 
 <span class="c1">//====================================</span>
 <span class="c1">// The following corresponds to **h2f_axi_master** in Platform Designer</span>
@@ -372,13 +380,16 @@
     <span class="p">}</span>
 
     <span class="c1">// **h2f_axi_master** Part</span>
-    <span class="n">h2f_virtual_base</span> <span class="o">=</span> <span class="n">mmap</span><span class="p">(</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">FIFO_SPAN</span><span class="p">,</span> <span class="p">(</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span> <span class="p">),</span> <span class="n">MAP_SHARED</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="n">FIFO_BASE</span><span class="p">);</span>
+    <span class="n">h2f_virtual_base</span> <span class="o">=</span> <span class="n">mmap</span><span class="p">(</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">h2f_axi_master_SPAN</span><span class="p">,</span> <span class="p">(</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span> <span class="p">),</span> <span class="n">MAP_SHARED</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="n">h2f_axi_master_BASE</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span> <span class="n">h2f_virtual_base</span> <span class="o">==</span> <span class="n">MAP_FAILED</span> <span class="p">)</span> <span class="p">{</span>
         <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;ERROR: mmap() for **h2f_axi_master** failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
         <span class="n">close</span><span class="p">(</span> <span class="n">fd</span> <span class="p">);</span>  <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
     <span class="p">}</span>
+<span class="c1">//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+<span class="c1">// Modify the following based on your Qsys File in in Platform Designer</span>
     <span class="n">FIFO_write_ptr</span> <span class="o">=</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_virtual_base</span><span class="p">);</span>
-    <span class="n">FIFO_read_ptr</span>  <span class="o">=</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_virtual_base</span> <span class="o">+</span> <span class="mh">0x10</span><span class="p">);</span>
+    <span class="n">FIFO_read_ptr</span>  <span class="o">=</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_virtual_base</span> <span class="o">+</span> <span class="mh">0x40000</span><span class="p">);</span>
+<span class="c1">//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
 
     <span class="c1">// **h2f_lw_axi_master** Part</span>
     <span class="n">h2f_lw_virtual_base</span> <span class="o">=</span> <span class="n">mmap</span><span class="p">(</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">HW_REGS_SPAN</span><span class="p">,</span> <span class="p">(</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span> <span class="p">),</span> <span class="n">MAP_SHARED</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="n">HW_REGS_BASE</span> <span class="p">);</span>
@@ -386,8 +397,11 @@
         <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;ERROR: mmap() for **h2f_lw_axi_master** failed...</span><span class="se">\n</span><span class="s">&quot;</span> <span class="p">);</span>
         <span class="n">close</span><span class="p">(</span> <span class="n">fd</span> <span class="p">);</span>  <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="n">FIFO_write_status_ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_lw_virtual_base</span><span class="p">);</span>
-    <span class="n">FIFO_read_status_ptr</span>  <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_lw_virtual_base</span> <span class="o">+</span> <span class="mh">0x20</span><span class="p">);</span> <span class="c1">//0x20</span>
+<span class="c1">//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+<span class="c1">// Modify the following based on your Qsys File in in Platform Designer</span>
+    <span class="n">FIFO_write_status_ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_lw_virtual_base</span> <span class="o">+</span> <span class="mh">0x50000</span><span class="p">);</span>
+    <span class="n">FIFO_read_status_ptr</span>  <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)(</span><span class="n">h2f_lw_virtual_base</span> <span class="o">+</span> <span class="mh">0x60000</span><span class="p">);</span>
+<span class="c1">//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
 
     <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
