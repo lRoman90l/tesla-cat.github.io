@@ -192,6 +192,11 @@
 \[\begin{split}\begin{array}{c|c|c}
   \text{Description} &amp; \text{Position Space} &amp; \text{Momentum Space} \\
   &amp; &amp; \\
+  \text{Starting Point} &amp;
+  H = \underbrace{ H_{\text{kin}} }_{\sum\limits_{j=1}^N {1\over 2}p_j^2 }
+  +   \underbrace{ H_{\text{ext}} }_{\sum\limits_{j=1}^N -{Z\over |r_j|} }
+  +   \underbrace{ H_{\text{e-e}} }_{{1\over 2}\sum\limits_{j,k;j\ne k}^N |r_j-r_k|^{-1} } &amp;
+  \\
   \text{Density} &amp;
   n(r')=N\int dr_2'...dr_N' |\langle r',r_2'...r_N'|\psi_0\rangle |^2 &amp;
   \rho(p')=N\int dp_2'...dp_N' |\langle p',p_2'...p_N'|\psi_0\rangle |^2\\
@@ -239,8 +244,30 @@
   \end{cases}
   \\
   \text{More on }E_1 &amp;
-  &amp;
+  E_1[V+\mu] = \langle \psi_0 |\sum\limits_{j=1}^N [\underbrace{H(r_j,p_j)}_{ T_{\text{kin}}(p)+V(r)  }+\mu]| \psi_0 \rangle  &amp;
+  E_1[T+\mu] = \langle \psi_0 |\sum\limits_{j=1}^N [\underbrace{H(r_j,p_j)}_{ T(p)+V_{\text{ext}}(r) }+\mu]| \psi_0 \rangle  \\
+  \text{Inference} &amp;
+  E_1 = \text{Tr } f(H+\mu) \text{ for some function }f &amp;
+  E_1 = \text{Tr } f(H+\mu) \\
+  \text{Approximation} &amp;
+  f(x)\approx x \eta(-x) \text{ Where } \eta \text{ is Heaviside} &amp;
+  f(x)\approx x \eta(-x) \text{ Where } \eta \text{ is Heaviside} \\
+  \text{Thus} &amp;
+  E_1 = \text{Tr } [(H+\mu)\eta(-H-\mu)] &amp;
+  E_1 = \text{Tr } [(H+\mu)\eta(-H-\mu)] \\
+  \text{Thus} &amp;
+  \begin{cases}
+  N\approx \text{Tr } \eta(-H-\mu) \\
+  n(r') \approx 2 \langle r'|\eta(-H-\mu)|r' \rangle
+  \end{cases} &amp;
+  \begin{cases}
+  N\approx \text{Tr } \eta(-H-\mu) \\
+  \rho(p') \approx 2 \langle p'|\eta(-H-\mu)|p' \rangle
+  \end{cases}
   \\
+  \text{Thomas Fermi} &amp;
+   &amp;
+   \\
 \end{array}\end{split}\]</div>
 </div>
 </div>
