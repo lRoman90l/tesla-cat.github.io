@@ -193,9 +193,9 @@
   \text{Description} &amp; \text{Position Space} &amp; \text{Momentum Space} \\
   &amp; &amp; \\
   \text{Starting Point} &amp;
-  H = \underbrace{ H_{\text{kin}} }_{\sum\limits_{j=1}^N {1\over 2}p_j^2 }
-  +   \underbrace{ H_{\text{ext}} }_{\sum\limits_{j=1}^N -{Z\over |r_j|} }
-  +   \underbrace{ H_{\text{e-e}} }_{{1\over 2}\sum\limits_{j,k;j\ne k}^N |r_j-r_k|^{-1} } &amp;
+  H = \underbrace{ T_{\text{kin}} }_{\sum\limits_{j=1}^N {1\over 2}p_j^2 }
+  +   \underbrace{ V_{\text{ext}} }_{\sum\limits_{j=1}^N -{Z\over |r_j|} }
+  +   \underbrace{ V_{\text{e-e}} }_{{1\over 2}\sum\limits_{j,k;j\ne k}^N |r_j-r_k|^{-1} } &amp;
   \\
   \text{Density} &amp;
   n(r')=N\int dr_2'...dr_N' |\langle r',r_2'...r_N'|\psi_0\rangle |^2 &amp;
@@ -204,8 +204,8 @@
   E_0=\min\limits_n E[n] &amp;
   E_0=\min\limits_{\rho} E[\rho] \\
   \text{Central Point} &amp;
-  n(r') \text{ uniquely determines } V_{\text{ext}},|\psi_0\rangle&amp;
-  \rho(p') \text{ uniquely determines } T_{\text{kin}},|\psi_0\rangle \\
+  n(r') \text{ uniquely determines } V_{\text{ext}}=-{Z\over |r|},|\psi_0\rangle&amp;
+  \rho(p') \text{ uniquely determines } T_{\text{kin}}={1\over 2}p^2,|\psi_0\rangle \\
   \text{Lagrange Multiplier} &amp;
   E[n,\mu]=E[n]-\mu [N-\int dr' n(r')] &amp;
   E[\rho,\mu]=E[\rho]-\mu [N-\int dp' \rho(p')] \\
@@ -266,8 +266,23 @@
   \end{cases}
   \\
   \text{Thomas Fermi} &amp;
-   &amp;
-   \\
+  \text{Quantum Mechanical Trace to Classic Mechanical Integral} &amp;
+  E_1^{TF}[V+\mu]=2\int {dr'dp'\over (2\pi)^3}(H+\mu)\eta(-H-\mu) \\
+  \text{Heaviside} &amp;
+  p'\le \sqrt{-2[V(r')+\mu]} \equiv P(r') \;\text{Fermi Momentum} &amp;
+  r'\le Z[T(p')+\mu]^{-1} \equiv R(p') \;\text{Fermi Radius} \\
+  \text{Thus} &amp;
+  E_1^{TF}[V+\mu]= \int dr' (-{1\over 15\pi^2})P^5(r') &amp;
+  E_1^{TF}[T+\mu]= \int dp' (-{Z\over 6\pi^2})R^2(p') \\
+  \text{Thus} &amp;
+  n(r')=...={1\over 3\pi^2}P^3(r') &amp;
+  \rho(p')=...={1\over 3\pi^2}R^3(p') \\
+  \text{And} &amp;
+  E_{\text{kin}}^{TF}[n]   =\int dr' {1\over 10\pi^2} P^5(r') &amp;
+  E_{\text{ext}}^{TF}[\rho]=\int dp' {-Z\over 2\pi^2} R^2(p')  \\
+  \text{And} &amp;
+  E_{\text{e-e}}^{TF}[n] = \text{TO BE CONTINUED}  &amp;
+  \\
 \end{array}\end{split}\]</div>
 </div>
 </div>
