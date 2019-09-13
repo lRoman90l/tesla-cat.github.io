@@ -3,6 +3,8 @@ Density Functional Theory
 ===================================================
 
 .. toctree::
+	Hohenberg-Kohn-Variational-Principle
+	Kohn-Sham-Equations
 	1D-DFT-In-Python
 	DFT-In-Momentum-Space
 	
