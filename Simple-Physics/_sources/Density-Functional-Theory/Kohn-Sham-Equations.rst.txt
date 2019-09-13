@@ -44,3 +44,16 @@ Derivation
 - Foot Note 1: see :doc:`DFT In Momentum Space` for details
 
 **Step 3** Self-Consistent Loop
+
+.. math::
+	\begin{align*}
+	& \text{Step 1: Initialize }n(r) \text{ with Educated Guess} \\
+	& \text{Step 2: Use }n(r) 
+		\text{ to calculate } v_{\text{__effectiveSP}}\\
+	& \text{Step 3: Use Single Particle Schrodinger Equation:} \\
+	& \;\;\;\;  (-{1\over 2}\nabla^2 + v_{\text{__effectiveSP}})\psi_i=\psi_i 
+		\text{ to calculate } \psi_i \\
+	& \text{Step 4: Use } \psi_i 
+		\text{ to calculate new } n(r)=\sum\limits_i |\psi_i|^2 \\
+	& \text{Step 5: Go to Step 2 unless }n(r) \text{ converges}
+ 	\end{align*}

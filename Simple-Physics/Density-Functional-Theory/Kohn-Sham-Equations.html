@@ -211,6 +211,18 @@
 <li><p>Foot Note 1: see <span class="xref std std-doc">DFT In Momentum Space</span> for details</p></li>
 </ul>
 <p><strong>Step 3</strong> Self-Consistent Loop</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp; \text{Step 1: Initialize }n(r) \text{ with Educated Guess} \\
+&amp; \text{Step 2: Use }n(r)
+        \text{ to calculate } v_{\text{__effectiveSP}}\\
+&amp; \text{Step 3: Use Single Particle Schrodinger Equation:} \\
+&amp; \;\;\;\;  (-{1\over 2}\nabla^2 + v_{\text{__effectiveSP}})\psi_i=\psi_i
+        \text{ to calculate } \psi_i \\
+&amp; \text{Step 4: Use } \psi_i
+        \text{ to calculate new } n(r)=\sum\limits_i |\psi_i|^2 \\
+&amp; \text{Step 5: Go to Step 2 unless }n(r) \text{ converges}
+\end{align*}\end{split}\]</div>
 </div>
 </div>
 
