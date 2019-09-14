@@ -31,17 +31,25 @@ The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO
 	// FIFO details:
 	//     Depth: 256    Data Width: 32 bits
 
-	#include <stdio.h>
+	// From Cornell ECE5760
 	#include <string.h>
 	#include <stdlib.h>
-	#include <unistd.h>
-	#include <fcntl.h>
 	#include <sys/types.h>
 	#include <sys/ipc.h>
 	#include <sys/shm.h>
-	#include <sys/mman.h>
 	#include <sys/time.h>
 	#include <math.h>
+
+	// From Terasic original HPS_FPGA_LED example 
+	#include <stdio.h>
+	#include <unistd.h> // provides access to the POSIX operating system API
+	#include <fcntl.h>  // header in the C POSIX library
+	#include <sys/mman.h> // memory management 
+	#include "hwlib.h" // location: SoC EDS\embedded\ip\altera\hps\altera_hps\hwlib\include
+	#include "socal/socal.h" // location: SoC EDS\embedded\ip\altera\hps\altera_hps\hwlib\include\soc_cv_av\socal
+	#include "socal/hps.h"
+	#include "socal/alt_gpio.h"
+	#include "hps_0.h"
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Modify the following based on your Qsys File in in Platform Designer 
@@ -91,6 +99,7 @@ The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO
 
 	int memoryMapping(){
 	    // Step 1
+	    int fd;
 	    if( (fd = open("/dev/mem",(O_RDWR|O_SYNC))) == -1 ){
 	        printf( "ERROR: could not open \"/dev/mem\"...\n" );
 	        return( 1 );
@@ -141,4 +150,5 @@ The following :code:`Quartus Project Stage 2\Cornell ECE5760\C Code for HPS\FIFO
 	int main(void){
 	    memoryMapping();
 	    repeatWriting();
+	    return(0);
 	}

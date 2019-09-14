@@ -196,17 +196,25 @@
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// FIFO details:</span>
 <span class="c1">//     Depth: 256    Data Width: 32 bits</span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="c1">// From Cornell ECE5760</span>
 <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;sys/ipc.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;sys/shm.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
+
+<span class="c1">// From Terasic original HPS_FPGA_LED example</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt; // provides access to the POSIX operating system API</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;  // header in the C POSIX library</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt; // memory management</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;hwlib.h&quot; // location: SoC EDS\embedded\ip\altera\hps\altera_hps\hwlib\include</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;socal/socal.h&quot; // location: SoC EDS\embedded\ip\altera\hps\altera_hps\hwlib\include\soc_cv_av\socal</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;socal/hps.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;socal/alt_gpio.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;hps_0.h&quot;</span><span class="cp"></span>
 
 <span class="c1">//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
 <span class="c1">// Modify the following based on your Qsys File in in Platform Designer</span>
@@ -256,6 +264,7 @@
 
 <span class="kt">int</span> <span class="nf">memoryMapping</span><span class="p">(){</span>
     <span class="c1">// Step 1</span>
+    <span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
     <span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/dev/mem&quot;</span><span class="p">,(</span><span class="n">O_RDWR</span><span class="o">|</span><span class="n">O_SYNC</span><span class="p">)))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">){</span>
         <span class="n">printf</span><span class="p">(</span> <span class="s">&quot;ERROR: could not open </span><span class="se">\&quot;</span><span class="s">/dev/mem</span><span class="se">\&quot;</span><span class="s">...</span><span class="se">\n</span><span class="s">&quot;</span> <span class="p">);</span>
         <span class="k">return</span><span class="p">(</span> <span class="mi">1</span> <span class="p">);</span>
@@ -306,6 +315,7 @@
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     <span class="n">memoryMapping</span><span class="p">();</span>
     <span class="n">repeatWriting</span><span class="p">();</span>
+    <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>

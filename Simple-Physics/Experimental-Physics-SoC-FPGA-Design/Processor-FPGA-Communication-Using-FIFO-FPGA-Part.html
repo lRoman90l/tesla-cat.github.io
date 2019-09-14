@@ -405,7 +405,7 @@
 <span class="kt">wire</span>     <span class="p">[</span><span class="mh">27</span><span class="o">:</span> <span class="mh">0</span><span class="p">]</span>    <span class="n">stm_hw_events</span><span class="p">;</span>
 <span class="kt">wire</span>                <span class="n">fpga_clk_50</span><span class="p">;</span>
 <span class="c1">// connection of internal logics</span>
-<span class="k">assign</span> <span class="no">LED</span><span class="p">[</span><span class="mh">7</span><span class="o">:</span> <span class="mh">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fpga_led_internal</span><span class="p">;</span>
+<span class="c1">// assign LED[7: 1] = fpga_led_internal;</span>
 <span class="k">assign</span> <span class="n">fpga_clk_50</span> <span class="o">=</span> <span class="no">FPGA_CLK1_50</span><span class="p">;</span>
 <span class="k">assign</span> <span class="n">stm_hw_events</span> <span class="o">=</span> <span class="p">{{</span><span class="mh">15</span><span class="p">{</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">}},</span> <span class="no">SW</span><span class="p">,</span> <span class="n">fpga_led_internal</span><span class="p">,</span> <span class="n">fpga_debounced_buttons</span><span class="p">};</span>
 
@@ -589,7 +589,7 @@
         <span class="n">counter</span> <span class="o">&lt;=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
 <span class="k">end</span>
 
-<span class="k">assign</span> <span class="no">LED</span><span class="p">[</span><span class="mh">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">led_level</span><span class="p">;</span>
+<span class="c1">//assign LED[0] = led_level;</span>
 
 <span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
 <span class="c1">// Begin Code added by me Part 2: FIFO handlers</span>
@@ -606,17 +606,19 @@
         <span class="c1">// Let the logic handling be done in a separate module.</span>
     <span class="c1">// !!! End Work To Be Done Part 1 !!!</span>
 
-    <span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">HPS_to_FPGA_state</span> <span class="p">;</span>
-    <span class="kt">reg</span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">hps_to_fpga_out_csr_readdata</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>  <span class="n">HPS_to_FPGA_state</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">hps_to_fpga_out_csr_readdata</span> <span class="p">;</span>
     <span class="kt">reg</span> <span class="n">data_buffer_valid</span> <span class="p">;</span>
     <span class="kt">reg</span> <span class="n">hps_to_fpga_read</span> <span class="p">;</span>
     <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_buffer</span> <span class="p">;</span>
     <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">hps_to_fpga_readdata</span> <span class="p">;</span>
 
-    <span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">FPGA_to_HPS_state</span> <span class="p">;</span>
-    <span class="kt">reg</span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">fpga_to_hps_in_csr_readdata</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>  <span class="n">FPGA_to_HPS_state</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">fpga_to_hps_in_csr_readdata</span> <span class="p">;</span>
     <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">fpga_to_hps_in_writedata</span> <span class="p">;</span>
     <span class="kt">reg</span> <span class="n">fpga_to_hps_in_write</span> <span class="p">;</span>
+
+   <span class="k">assign</span> <span class="no">LED</span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">HPS_to_FPGA_state</span><span class="p">;</span>
 
     <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">fpga_clk_50</span><span class="p">)</span> <span class="k">begin</span>
         <span class="c1">//=================================</span>
@@ -635,6 +637,7 @@
         <span class="k">end</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">HPS_to_FPGA_state</span> <span class="o">==</span> <span class="mh">8</span><span class="mi">&#39;d4</span><span class="p">)</span> <span class="k">begin</span>
+
             <span class="n">data_buffer</span> <span class="o">&lt;=</span> <span class="n">hps_to_fpga_readdata</span> <span class="p">;</span>
             <span class="n">data_buffer_valid</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b1</span> <span class="p">;</span>
             <span class="n">hps_to_fpga_read</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span> <span class="p">;</span>

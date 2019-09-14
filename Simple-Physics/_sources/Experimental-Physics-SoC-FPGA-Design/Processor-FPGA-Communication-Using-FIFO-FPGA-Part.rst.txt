@@ -239,7 +239,7 @@ This part uses My parameters and DE10_NANO_SoC_GHRD
     wire     [27: 0]    stm_hw_events;
     wire                fpga_clk_50;
     // connection of internal logics
-    assign LED[7: 1] = fpga_led_internal;
+    // assign LED[7: 1] = fpga_led_internal;
     assign fpga_clk_50 = FPGA_CLK1_50;
     assign stm_hw_events = {{15{1'b0}}, SW, fpga_led_internal, fpga_debounced_buttons};
 
@@ -337,23 +337,23 @@ This part uses My parameters and DE10_NANO_SoC_GHRD
     //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
     // Begin Code added by me Part 1: IO Mapping
         // HPS to FPGA FIFO
-        .fifo_hps_to_fpga_out_readdata      (hps_to_fpga_readdata),    
-        .fifo_hps_to_fpga_out_read          (hps_to_fpga_read),         
-        .fifo_hps_to_fpga_out_waitrequest   (),                           
-        .fifo_hps_to_fpga_out_csr_address   (32'd1), //(hps_to_fpga_out_csr_address),  
-        .fifo_hps_to_fpga_out_csr_read      (1'b1), //(hps_to_fpga_out_csr_read),    
-        .fifo_hps_to_fpga_out_csr_writedata (),                            
-        .fifo_hps_to_fpga_out_csr_write     (1'b0),                           
-        .fifo_hps_to_fpga_out_csr_readdata  (hps_to_fpga_out_csr_readdata),    
-        
+        .fifo_hps_to_fpga_out_readdata      (hps_to_fpga_readdata),
+        .fifo_hps_to_fpga_out_read          (hps_to_fpga_read),
+        .fifo_hps_to_fpga_out_waitrequest   (),
+        .fifo_hps_to_fpga_out_csr_address   (32'd1), //(hps_to_fpga_out_csr_address),
+        .fifo_hps_to_fpga_out_csr_read      (1'b1), //(hps_to_fpga_out_csr_read),
+        .fifo_hps_to_fpga_out_csr_writedata (),
+        .fifo_hps_to_fpga_out_csr_write     (1'b0),
+        .fifo_hps_to_fpga_out_csr_readdata  (hps_to_fpga_out_csr_readdata),
+
         // FPGA to HPS FIFO
-        .fifo_fpga_to_hps_in_writedata      (fpga_to_hps_in_writedata),     
-        .fifo_fpga_to_hps_in_write          (fpga_to_hps_in_write),         
-        .fifo_fpga_to_hps_in_csr_address    (32'd1), //(fpga_to_hps_in_csr_address),   
-        .fifo_fpga_to_hps_in_csr_read       (1'b1), //(fpga_to_hps_in_csr_read),      
-        .fifo_fpga_to_hps_in_csr_writedata  (),  
-        .fifo_fpga_to_hps_in_csr_write      (1'b0),     
-        .fifo_fpga_to_hps_in_csr_readdata   (fpga_to_hps_in_csr_readdata), 
+        .fifo_fpga_to_hps_in_writedata      (fpga_to_hps_in_writedata),
+        .fifo_fpga_to_hps_in_write          (fpga_to_hps_in_write),
+        .fifo_fpga_to_hps_in_csr_address    (32'd1), //(fpga_to_hps_in_csr_address),
+        .fifo_fpga_to_hps_in_csr_read       (1'b1), //(fpga_to_hps_in_csr_read),
+        .fifo_fpga_to_hps_in_csr_writedata  (),
+        .fifo_fpga_to_hps_in_csr_write      (1'b0),
+        .fifo_fpga_to_hps_in_csr_readdata   (fpga_to_hps_in_csr_readdata),
     // End Code added by me Part 1: IO Mapping
     //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
@@ -423,34 +423,36 @@ This part uses My parameters and DE10_NANO_SoC_GHRD
             counter <= counter + 1'b1;
     end
 
-    assign LED[0] = led_level;
+    //assign LED[0] = led_level;
 
     //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
     // Begin Code added by me Part 2: FIFO handlers
-        
+
         // !!! Begin Work To Be Done Part 1 !!!
             // Currently this block of code READs data from HPS,
             // Store it in **reg [31:0] data_buffer**
             // Then WRITEs it right back without any processing,
-            // This is simply to test out the functionality and 
+            // This is simply to test out the functionality and
             // demonstrate usage.
             // Next step is to Wrap this whole module into a
-            // simple General data sender and receiver, 
+            // simple General data sender and receiver,
             // just like an UART module.
             // Let the logic handling be done in a separate module.
         // !!! End Work To Be Done Part 1 !!!
 
-        reg [7:0] HPS_to_FPGA_state ;
-        reg[31:0] hps_to_fpga_out_csr_readdata ;
+        reg [7:0]  HPS_to_FPGA_state ;
+        reg [31:0] hps_to_fpga_out_csr_readdata ;
         reg data_buffer_valid ;
-        reg hps_to_fpga_read ; 
+        reg hps_to_fpga_read ;
         reg [31:0] data_buffer ;
-        reg [31:0] hps_to_fpga_readdata ; 
+        reg [31:0] hps_to_fpga_readdata ;
 
-        reg [7:0] FPGA_to_HPS_state ;
-        reg[31:0] fpga_to_hps_in_csr_readdata ;
-        reg [31:0] fpga_to_hps_in_writedata ; 
-        reg fpga_to_hps_in_write ; 
+        reg [7:0]  FPGA_to_HPS_state ;
+        reg [31:0] fpga_to_hps_in_csr_readdata ;
+        reg [31:0] fpga_to_hps_in_writedata ;
+        reg fpga_to_hps_in_write ;
+       
+       assign LED[7:0] = HPS_to_FPGA_state;
 
         always @(posedge fpga_clk_50) begin
             //=================================
@@ -460,7 +462,7 @@ This part uses My parameters and DE10_NANO_SoC_GHRD
             // And the last transfer is complete ?
             if( HPS_to_FPGA_state == 8'd0 && !(hps_to_fpga_out_csr_readdata[1]) && !data_buffer_valid ) begin
                 hps_to_fpga_read <= 1'b1 ;
-                HPS_to_FPGA_state <= 8'd2 ; 
+                HPS_to_FPGA_state <= 8'd2 ;
             end
 
             if ( HPS_to_FPGA_state == 8'd2) begin
@@ -469,10 +471,11 @@ This part uses My parameters and DE10_NANO_SoC_GHRD
             end
 
             if (HPS_to_FPGA_state == 8'd4) begin
-                data_buffer <= hps_to_fpga_readdata ; 
-                data_buffer_valid <= 1'b1 ; 
+            
+                data_buffer <= hps_to_fpga_readdata ;
+                data_buffer_valid <= 1'b1 ;
                 hps_to_fpga_read <= 1'b0 ;
-                HPS_to_FPGA_state <= 8'd0 ; 
+                HPS_to_FPGA_state <= 8'd0 ;
             end
         //-----------------------------------------------
             //=================================
@@ -481,21 +484,18 @@ This part uses My parameters and DE10_NANO_SoC_GHRD
             // Is there space in the FPGA_to_HPS FIFO ?
             // And data is available ?
             if (FPGA_to_HPS_state==0 && !(fpga_to_hps_in_csr_readdata[0]) && data_buffer_valid) begin
-                fpga_to_hps_in_writedata <= data_buffer ;   
+                fpga_to_hps_in_writedata <= data_buffer ;
                 fpga_to_hps_in_write <= 1'b1 ;
                 FPGA_to_HPS_state <= 8'd4 ;
             end
-            
+
             if (FPGA_to_HPS_state==4) begin
                 fpga_to_hps_in_write <= 1'b0 ;
-                data_buffer_valid <= 1'b0 ; 
+                data_buffer_valid <= 1'b0 ;
                 FPGA_to_HPS_state <= 8'd0 ;
-            end    
+            end
         end
     // End Code added by me Part 2: FIFO handlers
     //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
     endmodule
-
-
-
