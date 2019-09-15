@@ -1,198 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>~~~</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-	<link rel="stylesheet" href="bootstrap.min.css">
-	<script src="bootstrap.min.js"></script>
+<script type="text/javascript" src="./libraries/Tone.js"></script>
+<script type="text/javascript" src="./libraries/tonejs-ui.js"></script>
+<script type="text/javascript" src="./libraries/midi"></script>
+<script type="text/javascript" src="./libraries/dat.gui.min.js"></script>
+<script type="text/javascript" src="./SimpleQCW.js"></script>
+<link rel="stylesheet" type="text/css" href="./main.css">
 
-	<link rel="stylesheet" href="ToneJsMidi.css">
-	<script type="text/javascript" src="Tone.js"></script>
-	<script type="text/javascript" src="tonejs-ui.js"></script>
-	<script type="text/javascript" src="Midi.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<style>
-		* { font-size: 16px !important ; }
-	</style>
-</head>
-<body>
+<tone-content>
+	<div id="fileDrop">
+		<label for="file-upload" class="custom-file-upload">
+		    <i class="fa fa-cloud-upload"></i>Choose MIDI
+		</label>
+		<input id="file-upload" type="file" accept="audio/midi"/>
+	</div>
 
-<div class="container">
+	<div id="Results">
+		<textarea id="resultsText" placeholder="json output..."></textarea>
+	</div>
+	
+	<tone-play-toggle disabled=""></tone-play-toggle>
+	<div id="myGuiContainer"></div>
+</tone-content>
 
-  <div class="row m-3">
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item active" aria-current="page">Home</li>
-				<li class="breadcrumb-item"><a href="/FileUpload.html">Tsubasa Amami File Uploader</a></li>
-			</ol>
-		</nav>		
-  </div>	
-
-  <div class="row m-3 justify-content-center">
-        <tone-content>
-		
-		<div id="FileDrop">
-		<div id="Text">
-		Drop a midi file here
-		</div>
-		<input type="file" accept="audio/midi">
-		</div>
-		<div id="Results">
-		<textarea id="ResultsText" placeholder="json output..."></textarea>
-		</div>
-		<span class="badge badge-secondary m-3">Play in Browser: </span>
-		<tone-play-toggle disabled></tone-play-toggle>
-		</tone-content>
-		<span class="badge badge-secondary m-3">Play on Tesla Coil: </span>
-		
-		<button id="PlayonTeslaCoil" type="button" class="btn btn-info" text="">Play</button>
-		
-  </div>
-
-  <div class="row m-3 justify-content-around">
-      <div id="my-gui-container"></div>
-  </div>
-</div>
-
-
-
-</body>
-
-
-
-<script type="text/javascript" src="dat.gui.min.js"></script>
-<script type="text/javascript" src="ToneJsMidi.js"></script>
 <script type="text/javascript">
-    
-
-window.onload = function() {
-	var GuiData = function() {
-		this.Progress = 0;
-		this.f_kHz = 164;			this.Ramp_kHz = 255;
-		this.Phase_us = 200;		this.Ontime_us = 50;	  
-		this.OCD_A = 64;		    
-		
-		this.Playing = false;		this.TestMode = false;		this.Phase = false;
-		this.QCWmode = false;
-	};
-///////////////////////////////////////////////////////////////
-// Begin dat.gui Part
-///////////////////////////////////////////////////////////////
-  var guiData = new GuiData();
-  var gui = new dat.GUI({ autoPlace: false });
-  	var ProgressGui = gui.add(guiData, 'Progress', 0, 1);
-  	ProgressGui.onFinishChange(   function(value) { Progress = parseInt(value) });
-	ProgressGui.listen()
-
-	var OntimeGui = gui.add(guiData, 'Ontime_us', 10, 100);
-
-	gui.add(guiData, 'f_kHz', 100, 300).onFinishChange(   function() { SendGuiData(); });
-	gui.add(guiData, 'Ramp_kHz', 10, 500).onFinishChange( function() { SendGuiData(); });
-	gui.add(guiData, 'Phase_us', 10, 500).onFinishChange( function() { SendGuiData(); });
-	
-	gui.add(guiData, 'OCD_A', 10, 100).onFinishChange(    function() { SendGuiData(); });
-	gui.add(guiData, 'Playing').onFinishChange(           function() { SendGuiData(); });
-	gui.add(guiData, 'TestMode').onFinishChange(          function() { SendGuiData(); });
-	gui.add(guiData, 'Phase').onFinishChange(             function() { SendGuiData(); });
-	gui.add(guiData, 'QCWmode').onFinishChange(           function() { SendGuiData(); });
-
-	function SendGuiData(){ 
-		guiDataSend = {}; 
-	
-	// Bytes To FPGA
-		var BytesToFPGA = [];
-		f_clk = Math.round( 50000 / guiData.f_kHz );  // clk: 50 Mhz
-		BytesToFPGA = BytesToFPGA.concat( IntTo3Bytes(f_clk, Address = 1) );
-
-		Ramp_clk = Math.round( 50000 / guiData.Ramp_kHz );  // clk: 50 Mhz
-		BytesToFPGA = BytesToFPGA.concat( IntTo3Bytes(Ramp_clk, Address = 4) );
-
-		Phase_clk = Math.round( guiData.Phase_us / 0.02 );  // clk: 0.02 us
-		BytesToFPGA = BytesToFPGA.concat( IntTo3Bytes(Phase_clk, Address = 7) );
-
-		OCD_PWM = Math.round( guiData.OCD_A );  
-		BytesToFPGA = BytesToFPGA.concat( IntTo3Bytes(OCD_PWM, Address = 10) );
-
-		BytesToFPGA.push( guiData.Playing*1 + guiData.TestMode*2 
-						+ guiData.Phase*4   + guiData.QCWmode*8 );
-		guiDataSend.BytesToFPGA = BytesToFPGA;
-		
-		connection.send(JSON.stringify(guiDataSend));console.log(guiDataSend); 
-	}
-
-	function IntTo3Bytes(Int, Address){  // this results in 3*4=12 bits resolution
-		return  [ Int      & 15 +  Address    * 16 ,
-			      Int >> 4 & 15 + (Address+1) * 16 ,
-			      Int >> 8 & 15 + (Address+2) * 16 ];
-	}
-
-  document.getElementById('my-gui-container').appendChild(gui.domElement);	
-///////////////////////////////////////////////////////////////
-// End dat.gui Part
-///////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////
-// Begin Play on Tesla Coil Part
-///////////////////////////////////////////////////////////////
-const MusicModeResolution = 14
-const MusicModeMax = Math.pow(2,MusicModeResolution)-2  ; 
-
-
-const PlayonTeslaCoil = document.getElementById("PlayonTeslaCoil");
-PlayonTeslaCoil.addEventListener("click", function() {
-  	if(this.innerHTML == "Play" && currentNotes.length>0 ){
-  		this.innerHTML = "Pause";  Play();
-  		ProgressGui.max(currentNotes.length-2)
-  	}else{ this.innerHTML = "Play" }
-});
-
-function Play(){
-	if(Progress+1 < currentNotes.length){
-		setTimeout(function(){ 
-			PlayNote(currentNotes[Progress+1])
-			Progress ++; ProgressGui.setValue(Progress); 
-			if(PlayonTeslaCoil.innerHTML == "Pause"){ Play() }
-		}, (currentNotes[Progress+1].time - currentNotes[Progress].time)*1000);
-	}else{ Progress=0; ProgressGui.setValue(Progress); Play(); }
-}
-
-function PlayNote(note){
-	//note.midi, note.time, note.duration, note.name
-	Frequency = parseInt( Math.pow( 2 , (note.midi-69)/12 ) * 440)
-	Duration = parseInt( note.duration * 1000 )
-
-	Period = 1e6 / Frequency
-    Volume = parseInt( OntimeGui.getValue() * MusicModeMax/Period )
-    console.log(Frequency, Duration, Volume)
-	return Frequency, Duration, Volume
-}
-
-///////////////////////////////////////////////////////////////
-// End Play on Tesla Coil Part 
-///////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////
-// Begin WebSocket Part
-///////////////////////////////////////////////////////////////
-
-	var connection = new WebSocket('ws://'+location.hostname+':81/', ['arduino']);
-	connection.binaryType = 'arraybuffer';
-
-	connection.onopen = SendGuiData();
-	connection.onerror = function (error) { alert('WebSocket Error: ' + error); };
-	connection.onclose = function (     ) { alert('WebSocket Closed '        ); };
-	connection.onmessage = function(event) {
-		
-	};
-
-///////////////////////////////////////////////////////////////
-// End WebSocket Part 
-///////////////////////////////////////////////////////////////
-
-};
+	const simpleQCWmidi = new SimpleQCWmidi("#fileDrop", "#resultsText")
+	const simpleQCWgui = new SimpleQCWgui("#myGuiContainer")
 
 </script>
-
-</html>

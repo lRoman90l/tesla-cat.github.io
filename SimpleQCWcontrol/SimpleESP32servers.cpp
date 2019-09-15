@@ -7,6 +7,8 @@
 
 #include "SimpleESP32servers.h"
 
+//////////////////// Begin Methods Definition //////////////
+
 SimpleESP32servers::SimpleESP32servers() {
 
 }
@@ -15,7 +17,6 @@ void SimpleESP32servers::startWiFiAndServers(
         const char *WiFiID,
         const char *WiFiPassword) {
     Serial.begin(115200); delay(10);
-    Serial2.begin(115200,SERIAL_8N2); delay(10);
 
     SPIFFS.begin();
 
@@ -93,7 +94,7 @@ void SimpleESP32servers::handleWebSocketsEvent(uint8_t num,
                                              WStype_t type,
                                              uint8_t *payload,
                                              size_t length) {
-    Serial.println("handleWebSocketsEvent");
+    //Serial.println("handleWebSocketsEvent");
     switch (type){
         case WStype_DISCONNECTED:
             break;
@@ -112,3 +113,5 @@ void SimpleESP32servers::handleWebSocketsText(uint8_t *payload) {
     String message = String( (char *)payload );
     Serial.println("handleWebSocketsText: "+message);
 }
+
+//////////////////// End Methods Definition //////////////

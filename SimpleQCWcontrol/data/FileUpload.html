@@ -1,67 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Tsubasa Amami File Uploader</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-	<link rel="stylesheet" href="bootstrap.min.css">
-	<script src="bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./main.css">
 
-</head>
-<body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="container">
-
-  <div class="row m-3">
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="/">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Tsubasa Amami File Uploader</li>
-			</ol>
-		</nav>		
-  </div>	
-
-	<div class="row m-3 justify-content-around">
-      <p style="text-align: middle">Upload files to ESP32. Use .gz files to save space</p>
-  </div>
-
-  <div class="row m-3 justify-content-around">
-      <form method="post" enctype="multipart/form-data">
-				<input class="btn btn-light" type="file" multiple>
-				<input class="btn btn-primary" type="submit">
-			</form>
-  </div>
-
-	<div class="row m-3 justify-content-around">
-      <img src="Tsubasa-Amami.jpg" width=30%>
-  </div>
+<div id="fileDrop">
+	<label for="file-upload" class="custom-file-upload">
+		<i class="fa fa-cloud-upload"></i>Upload File
+	</label>
+	<form method="post" enctype="multipart/form-data">
+		<input id="file-upload" type="file" multiple>
+	</form>
 </div>
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
