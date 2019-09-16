@@ -197,11 +197,11 @@ soc_system u0(
                .hps_0_f2h_warm_reset_req_reset_n(~hps_warm_reset),          //       hps_0_f2h_warm_reset_req.reset_n
 
 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-// Begin Code added by me Part 1: IO Mapping          
-          // FIFO
-          .fiforeadrequest_external_connection_export(wire_FIFOreadRequest),      //output (to FPGA) PIO
-          .fiforeaddataqueue_external_connection_export(wire_FIFOreadDataQueue),  //input  (to HPS)  PIO
-          .fiforeadempty_external_connection_export(wire_FIFOreadEmpty),          //input  (to HPS)  PIO
+// Begin Code added by me Part 1: IO Mapping					
+					// FIFO
+					.fiforeadrequest_external_connection_export(wire_FIFOreadRequest),      //output (to FPGA) PIO
+					.fiforeaddataqueue_external_connection_export(wire_FIFOreadDataQueue),  //input  (to HPS)  PIO
+					.fiforeadempty_external_connection_export(wire_FIFOreadEmpty),          //input  (to HPS)  PIO
 // End Code added by me Part 1: IO Mapping
 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
            );
@@ -277,112 +277,112 @@ end
 // The following shows signal flow, "<--->" represents wires, <===> represents memory-map
 // MyModule <---> FIFO Module <---> PIOs in Qsys generated Module(DE10_NANO_SoC_GHRD) <===> HPS
 
-  /* FIFO module description 
-    input clock;
-    
-    // Write side by FPGA
-    input         wrreq;  // write request
-    input [31:0]  data;   // data to write
-    output        full;  
+	/* FIFO module description 
+		input clock;
+		
+		// Write side by FPGA
+		input	        wrreq;  // write request
+		input	[31:0]  data;   // data to write
+		output        full;  
 
-    // Read side by HPS, more accurately, 
-    // Parallel IO(PIO) from Qsys generated Module
-    // We need two 32 bits PIOs:
-    //    1. PIO_FifoReadDataQueue: maps to q
-    //    2. PIO_FifoReadControl:   maps to rdreq,empty
-    input         rdreq;  // read request
-    output [31:0] q;      // data queue to read
-    output        empty;  
-    
-    // Fill level, number of "used words" in the queue
-    output [7:0]  usedw;  // used words
-  */
+		// Read side by HPS, more accurately, 
+		// Parallel IO(PIO) from Qsys generated Module
+		// We need two 32 bits PIOs:
+		//    1. PIO_FifoReadDataQueue: maps to q
+		//    2. PIO_FifoReadControl:   maps to rdreq,empty
+		input	        rdreq;  // read request
+		output [31:0] q;      // data queue to read
+		output        empty;  
+		
+		// Fill level, number of "used words" in the queue
+		output [7:0]  usedw;  // used words
+	*/
 
-  // Wires to connect Custom Sub-Modules:
-    // Write side by FPGA
-    wire        wire_FIFOwriteRequest;
-    wire [31:0] wire_FIFOwriteData;
-    wire        wire_FIFOwriteFull;
-    // Read side by HPS, more accurately, 
-    // Parallel IO(PIO) from Qsys generated Module(DE10_NANO_SoC_GHRD)
-    wire        wire_FIFOreadRequest;
-    wire [31:0] wire_FIFOreadDataQueue;
-    wire        wire_FIFOreadEmpty;
+	// Wires to connect Custom Sub-Modules:
+		// Write side by FPGA
+		wire        wire_FIFOwriteRequest;
+		wire [31:0] wire_FIFOwriteData;
+		wire        wire_FIFOwriteFull;
+		// Read side by HPS, more accurately, 
+		// Parallel IO(PIO) from Qsys generated Module(DE10_NANO_SoC_GHRD)
+		wire        wire_FIFOreadRequest;
+		wire [31:0] wire_FIFOreadDataQueue;
+		wire        wire_FIFOreadEmpty;
 
-    assign LED = wire_FIFOwriteData[31:24];
+		assign LED = wire_FIFOwriteData[31:24];
 
-  // Custom Sub-Modules:
-    FIFO fifo(
-      .clock(fpga_clk_50),
-      // Write side by FPGA
-      .wrreq(wire_FIFOwriteRequest),
-      .data(wire_FIFOwriteData),
-      .full(wire_FIFOwriteFull),
-      // Read side by HPS, more accurately, 
-      // Parallel IO(PIO) from Qsys generated Module
-      .rdreq(wire_FIFOreadRequest),
-      .q(wire_FIFOreadDataQueue),
-      .empty(wire_FIFOreadEmpty),
-      
-      .usedw(),
-    );
-    
-    MyModule myModule(
-      .clk(fpga_clk_50),
-      .FIFOwriteRequest(wire_FIFOwriteRequest),
-      .FIFOwriteData(wire_FIFOwriteData),
-      .FIFOwriteFull(wire_FIFOwriteFull),
-    );
-    
-    /* In the IO mapping at the beginning of this file
-      soc_system u0(
-        ...
-        .fiforeadrequest_external_connection_export(wire_FIFOreadRequest),      //output (to FPGA) PIO
-        .fiforeaddataqueue_external_connection_export(wire_FIFOreadDataQueue),  //input  (to HPS)  PIO
-        .fiforeadempty_external_connection_export(wire_FIFOreadEmpty),          //input  (to HPS)  PIO
-        ...
-      );
-    */
-  
+	// Custom Sub-Modules:
+		FIFO fifo(
+			.clock(fpga_clk_50),
+			// Write side by FPGA
+			.wrreq(wire_FIFOwriteRequest),
+			.data(wire_FIFOwriteData),
+			.full(wire_FIFOwriteFull),
+			// Read side by HPS, more accurately, 
+			// Parallel IO(PIO) from Qsys generated Module
+			.rdreq(wire_FIFOreadRequest),
+			.q(wire_FIFOreadDataQueue),
+			.empty(wire_FIFOreadEmpty),
+			
+			.usedw(),
+		);
+		
+		MyModule myModule(
+			.clk(fpga_clk_50),
+			.FIFOwriteRequest(wire_FIFOwriteRequest),
+			.FIFOwriteData(wire_FIFOwriteData),
+			.FIFOwriteFull(wire_FIFOwriteFull),
+		);
+		
+		/* In the IO mapping at the beginning of this file
+			soc_system u0(
+				...
+				.fiforeadrequest_external_connection_export(wire_FIFOreadRequest),      //output (to FPGA) PIO
+				.fiforeaddataqueue_external_connection_export(wire_FIFOreadDataQueue),  //input  (to HPS)  PIO
+				.fiforeadempty_external_connection_export(wire_FIFOreadEmpty),          //input  (to HPS)  PIO
+				...
+			);
+		*/
+	
 // End Code added by me Part 2
 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-  
+	
 endmodule
 
 //===========================================================
 
 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 // Begin Code added by me Part 3: MyModule
-  module MyModule(
-    input clk,
-    output            FIFOwriteRequest,
-    output reg [31:0] FIFOwriteData,
-    input             FIFOwriteFull
-  );
-    ToShortPulse toShortPulse(
-      .clk(clk),
-      .longPulse(FIFOwriteData[24]),
-      .shortPulse(FIFOwriteRequest),
-    );
-    always @(posedge clk) begin 
-      FIFOwriteData <= FIFOwriteData+1;
-    end
-  endmodule
-  
-  // Module to make longPulse into shortPulse
-  module ToShortPulse(
-    input clk,
-    input longPulse,
-    output reg shortPulse
-  );
-    reg last_longPulse;
+	module MyModule(
+		input clk,
+		output            FIFOwriteRequest,
+		output reg [31:0] FIFOwriteData,
+		input             FIFOwriteFull
+	);
+		ToShortPulse toShortPulse(
+			.clk(clk),
+			.longPulse(FIFOwriteData[24]),
+			.shortPulse(FIFOwriteRequest),
+		);
+		always @(posedge clk) begin 
+			FIFOwriteData <= FIFOwriteData+1;
+		end
+	endmodule
+	
+	// Module to make longPulse into shortPulse
+	module ToShortPulse(
+		input clk,
+		input longPulse,
+		output reg shortPulse
+	);
+		reg last_longPulse;
 
-    always @ (posedge clk) begin
-      shortPulse <= (last_longPulse==0 && longPulse==1)?1:0;
-      last_longPulse <= longPulse;
-    end
-  endmodule
-  
+		always @ (posedge clk) begin
+			shortPulse <= (last_longPulse==0 && longPulse==1)?1:0;
+			last_longPulse <= longPulse;
+		end
+	endmodule
+	
 // End Code added by me Part 3: MyModule
 //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
