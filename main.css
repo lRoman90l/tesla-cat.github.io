@@ -40,8 +40,23 @@ canvas {
 	z-index: 1; /* TODO Solve this in HTML */
 }
 
-a, button, input, select {
+input, select {
 	pointer-events: auto;
+
+}
+
+a, button {
+	color: deepskyblue;
+	display: inline-block;
+
+	border: 2px solid pink;
+    border-radius: 10px;
+
+    padding: 5px;
+	margin: 5px auto; 
+}
+a, button:hover {
+    border: 2px solid deepskyblue;
 }
 
 .dg.ac {
@@ -51,3 +66,14 @@ a, button, input, select {
 	user-select: none;
 	z-index: 2 !important; /* TODO Solve this in HTML */
 }
+
+*{
+	font: italic bold 16px cursive;
+}
+
+
+
+
+
+
+
