@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Processor-FPGA Communication: Using FIFO FPGA Part &mdash; Simple Physics  documentation</title>
+  <title>FAILED Processor-FPGA Communication: Using FIFO FPGA Part &mdash; Simple Physics  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Processor-FPGA Communication: Using FIFO Processor Part" href="Processor-FPGA-Communication-Using-FIFO-Processor-Part.html" />
-    <link rel="prev" title="FAILED Processor-FPGA Communication: Using FIFO Processor Part" href="FAILED-Processor-FPGA-Communication-Using-FIFO-Processor-Part.html" /> 
+    <link rel="next" title="FAILED Processor-FPGA Communication: Using FIFO Processor Part" href="FAILED-Processor-FPGA-Communication-Using-FIFO-Processor-Part.html" />
+    <link rel="prev" title="Processor-FPGA Communication: Processor Part" href="Processor-FPGA-Communication-Processor-Part.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -94,18 +94,16 @@
 <li class="toctree-l2"><a class="reference internal" href="Design-Plan.html">Design Plan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-FPGA-Part.html">Processor-FPGA Communication: FPGA Part</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Processor-Part.html">Processor-FPGA Communication: Processor Part</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FAILED-Processor-FPGA-Communication-Using-FIFO-FPGA-Part.html">FAILED Processor-FPGA Communication: Using FIFO FPGA Part</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FAILED-Processor-FPGA-Communication-Using-FIFO-Processor-Part.html">FAILED Processor-FPGA Communication: Using FIFO Processor Part</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Processor-FPGA Communication: Using FIFO FPGA Part</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#what-is-the-idea">What is the idea?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#what-are-we-gonna-do">What are we gonna do?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#how-fifo-works">How FIFO works</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#use-the-fifo-library-in-quartus">Use the FIFO library in quartus</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-pio-in-platform-designer">Create PIO in Platform Designer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#modify-the-standard-de10-nano-soc-ghrd-v">Modify the Standard <code class="code docutils literal notranslate"><span class="pre">DE10_NANO_SoC_GHRD.v</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-full-code">The full code</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FAILED Processor-FPGA Communication: Using FIFO FPGA Part</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#warning">Warning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#credit">Credit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#this-part-uses-parameters-in-cornell-ece5760">This part uses parameters in Cornell ECE5760</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#this-part-uses-my-parameters-and-de10-nano-soc-ghrd">This part uses My parameters and DE10_NANO_SoC_GHRD</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="FAILED-Processor-FPGA-Communication-Using-FIFO-Processor-Part.html">FAILED Processor-FPGA Communication: Using FIFO Processor Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Using-FIFO-FPGA-Part.html">Processor-FPGA Communication: Using FIFO FPGA Part</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Using-FIFO-Processor-Part.html">Processor-FPGA Communication: Using FIFO Processor Part</a></li>
 </ul>
 </li>
@@ -156,13 +154,13 @@
         
           <li><a href="index.html">Experimental Physics: SoC FPGA Design</a> &raquo;</li>
         
-      <li>Processor-FPGA Communication: Using FIFO FPGA Part</li>
+      <li>FAILED Processor-FPGA Communication: Using FIFO FPGA Part</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/Processor-FPGA-Communication-Using-FIFO-FPGA-Part.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/FAILED-Processor-FPGA-Communication-Using-FIFO-FPGA-Part.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -175,237 +173,150 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="processor-fpga-communication-using-fifo-fpga-part">
-<h1>Processor-FPGA Communication: Using FIFO FPGA Part<a class="headerlink" href="#processor-fpga-communication-using-fifo-fpga-part" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="failed-processor-fpga-communication-using-fifo-fpga-part">
+<h1>FAILED Processor-FPGA Communication: Using FIFO FPGA Part<a class="headerlink" href="#failed-processor-fpga-communication-using-fifo-fpga-part" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="warning">
+<h2>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h2>
+<p>The approach used in this part, using FIFO provided by Platform Designer(Qsys), has failed due to the lack of proper example from Altera. I will use FIFO component from Quartus Library instead. Please read <span class="xref std std-doc">Processor-FPGA Communication: Using FIFO FPGA Part</span> instead.</p>
+</div>
+<div class="section" id="credit">
+<h2>Credit<a class="headerlink" href="#credit" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>This section is <strong>Modified From</strong> <a class="reference external" href="https://people.ece.cornell.edu/land/courses/ece5760/DE1_SOC/HPS_peripherials/FPGA_addr_index.html">DE1 SoC ARM HPS and FPGA Addresses and Communication Cornell ece5760</a></li>
+</ul>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">20 Sep 2019</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">20 Aug 2019</td>
 </tr>
 </tbody>
 </table>
-<div class="section" id="what-is-the-idea">
-<h2>What is the idea?<a class="headerlink" href="#what-is-the-idea" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Your custom module, for example a counter, wants to send data to HPS (processor)</li>
-<li>FIFO is a buffer, it buffers data until the processor has time to read it</li>
-</ul>
 </div>
-<div class="section" id="what-are-we-gonna-do">
-<h2>What are we gonna do?<a class="headerlink" href="#what-are-we-gonna-do" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>We will write a simple counter in the <strong>FPGA Part</strong>, the counter increases <span class="math notranslate nohighlight">\(1\)</span> every <code class="code docutils literal notranslate"><span class="pre">clk</span></code> cycle</li>
-<li>This counter makes a write request every <span class="math notranslate nohighlight">\(2^{24}\)</span> <code class="code docutils literal notranslate"><span class="pre">clk</span></code> cycle to the FIFO, and writes the counter value to the FIFO</li>
-<li>To FIFO read port is connected to 3 PIOs generated by Platform Designer(Qsys), these 3 PIOs can be directly accessed by the Processor via memory mapping, since this memory is shared by the FPGA and Processor</li>
-<li>Meanwhile, the 8 LEDs on the DE10-NANO board are connected to :code:<a href="#id1"><span class="problematic" id="id2">`</span></a>usedw`(<strong>used words</strong>) which indicates the number of data stored in the FIFO</li>
-<li>We will write a simple reader in the <strong>Processor Part</strong></li>
-<li>User execute the compiled C code in the terminal, then they type in number of data to read</li>
-<li>They will see read data printed to the terminal, as well as the decrease in number indicated by the LED</li>
-</ul>
+<div class="section" id="dependency">
+<h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="how-fifo-works">
-<h2>How FIFO works<a class="headerlink" href="#how-fifo-works" title="Permalink to this headline">¶</a></h2>
-<p>The following IO definition corresponds to FIFO modules generated by Quartus library</p>
-<ul class="simple">
-<li>Each data in FIFO is called a “word”, the number of words currently in FIFO is :code:<a href="#id3"><span class="problematic" id="id4">`</span></a>usedw`(<strong>used words</strong>)</li>
-<li>Writing to a FIFO: make <code class="code docutils literal notranslate"><span class="pre">wrreq</span></code> (<strong>write request</strong>) HIGH for one <code class="code docutils literal notranslate"><span class="pre">clk</span></code> cycle, then whatever is at input <code class="code docutils literal notranslate"><span class="pre">data</span></code> gets written to the FIFO</li>
-<li>Reading from the FIFO: make <code class="code docutils literal notranslate"><span class="pre">rdreq</span></code> (<strong>read request</strong>) HIGH for one <code class="code docutils literal notranslate"><span class="pre">clk</span></code> cycle, then the old value of <code class="code docutils literal notranslate"><span class="pre">q`(**queue**)</span> <span class="pre">gets</span> <span class="pre">cleared</span> <span class="pre">:code:`q</span></code> has a new value</li>
-<li>Don’t write to FIFO when <code class="code docutils literal notranslate"><span class="pre">full</span></code> is HIGH. Don’t read from FIFO when <code class="code docutils literal notranslate"><span class="pre">empty</span></code> is HIGH</li>
-<li>If <code class="code docutils literal notranslate"><span class="pre">wrreq</span></code> is HIGH for 5 <code class="code docutils literal notranslate"><span class="pre">clk</span></code> cycles, 5 data get written into the FIFO, If <code class="code docutils literal notranslate"><span class="pre">rdreq</span></code> is HIGH for 5 <code class="code docutils literal notranslate"><span class="pre">clk</span></code> cycles, 5 data get cleared from the FIFO. That is why usually you don’t want these signals to be HIGH for more than 1 <code class="code docutils literal notranslate"><span class="pre">clk</span></code> cycle</li>
-</ul>
-<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// The following shows signal flow, &quot;&lt;---&gt;&quot; represents wires, &lt;===&gt; represents memory-map</span>
-<span class="c1">// MyModule &lt;---&gt; FIFO Module &lt;---&gt; PIOs in Qsys generated Module(DE10_NANO_SoC_GHRD) &lt;===&gt; HPS</span>
-
-        <span class="cm">/* FIFO module description</span>
-<span class="cm">                input clock;</span>
-
-<span class="cm">                // Write side by FPGA</span>
-<span class="cm">                input           wrreq;  // write request</span>
-<span class="cm">                input   [31:0]  data;   // data to write</span>
-<span class="cm">                output        full;</span>
-
-<span class="cm">                // Read side by HPS, more accurately,</span>
-<span class="cm">                // Parallel IO(PIO) from Qsys generated Module</span>
-<span class="cm">                // We need two 32 bits PIOs:</span>
-<span class="cm">                //    1. PIO_FifoReadDataQueue: maps to q</span>
-<span class="cm">                //    2. PIO_FifoReadControl:   maps to rdreq,empty</span>
-<span class="cm">                input           rdreq;  // read request</span>
-<span class="cm">                output [31:0] q;      // data queue to read</span>
-<span class="cm">                output        empty;</span>
-
-<span class="cm">                // Fill level, number of &quot;used words&quot; in the queue</span>
-<span class="cm">                output [7:0]  usedw;  // number of used words</span>
-<span class="cm">        */</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="use-the-fifo-library-in-quartus">
-<h2>Use the FIFO library in quartus<a class="headerlink" href="#use-the-fifo-library-in-quartus" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Find and create a FIFO module from the library</li>
-</ul>
+<div class="section" id="this-part-uses-parameters-in-cornell-ece5760">
+<h2>This part uses parameters in Cornell ECE5760<a class="headerlink" href="#this-part-uses-parameters-in-cornell-ece5760" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760">Corresponding Project Folder</a></p>
+<p><strong>Step 1</strong> We will use <strong>Platform Designer</strong> to generate two <strong>FIFOs</strong>, <strong>HPS to FPGA FIFO</strong> and <strong>FPGA to HPS FIFO</strong></p>
 <div class="figure">
-<img alt="../_images/Stage-3_FIFOlibrary1.png" src="../_images/Stage-3_FIFOlibrary1.png" />
+<img alt="../_images/Stage-2_ECE5760_Qsys_FIFO.png" src="../_images/Stage-2_ECE5760_Qsys_FIFO.png" />
 </div>
 <ul class="simple">
-<li>Setup the module details</li>
+<li>For <strong>HPS to FPGA FIFO</strong>, its <strong>Output</strong> will be <strong>Exported</strong> and will be connected to the Top-Level module <strong>DE1_SoC_Computer</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760/Top%20Level%20Entity%20for%20FPGA/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 515</strong>).</li>
 </ul>
-<div class="figure">
-<img alt="../_images/Stage-3_FIFOlibrary2.png" src="../_images/Stage-3_FIFOlibrary2.png" />
-</div>
-<ul class="simple">
-<li>Then these files will be generated</li>
-</ul>
-<div class="figure">
-<img alt="../_images/Stage-3_FIFOlibrary3.png" src="../_images/Stage-3_FIFOlibrary3.png" />
-</div>
-<ul class="simple">
-<li>Include <code class="code docutils literal notranslate"><span class="pre">FIFO.qip</span></code> file into your project</li>
-</ul>
-<div class="figure">
-<img alt="../_images/Stage-3_FIFOlibrary4.png" src="../_images/Stage-3_FIFOlibrary4.png" />
-</div>
-</div>
-<div class="section" id="create-pio-in-platform-designer">
-<h2>Create PIO in Platform Designer<a class="headerlink" href="#create-pio-in-platform-designer" title="Permalink to this headline">¶</a></h2>
-<p><strong>Create PIO (Parallel IO) in Platform Designer (Qsys) to connect to FIFO module</strong></p>
-<ul class="simple">
-<li>Search PIO</li>
-</ul>
-<div class="figure">
-<img alt="../_images/Stage-3_PIOqsys1.png" src="../_images/Stage-3_PIOqsys1.png" />
-</div>
-<ul class="simple">
-<li>Create the necessary connections</li>
-</ul>
-<div class="figure">
-<img alt="../_images/Stage-3_PIOqsys2.png" src="../_images/Stage-3_PIOqsys2.png" />
-</div>
-<ul class="simple">
-<li>Download the following Qsys file to see the details</li>
-</ul>
-<p><a class="reference download internal" download="" href="../_downloads/589242bf6e85f5ccb08496ad55d1e480/soc_system.qsys"><code class="xref download docutils literal notranslate"><span class="pre">soc_system.qsys</span></code></a></p>
-</div>
-<div class="section" id="modify-the-standard-de10-nano-soc-ghrd-v">
-<h2>Modify the Standard <code class="code docutils literal notranslate"><span class="pre">DE10_NANO_SoC_GHRD.v</span></code><a class="headerlink" href="#modify-the-standard-de10-nano-soc-ghrd-v" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>create wires that are use to connect different modules in Verilog</li>
-</ul>
-<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wires to connect Custom Sub-Modules:</span>
-        <span class="c1">// Write side by FPGA</span>
-        <span class="kt">wire</span>        <span class="n">wire_FIFOwriteRequest</span><span class="p">;</span>
-        <span class="kt">wire</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">wire_FIFOwriteData</span><span class="p">;</span>
-        <span class="kt">wire</span>        <span class="n">wire_FIFOwriteFull</span><span class="p">;</span>
-        <span class="c1">// Read side by HPS, more accurately,</span>
-        <span class="c1">// Parallel IO(PIO) from Qsys generated Module(DE10_NANO_SoC_GHRD)</span>
-        <span class="kt">wire</span>        <span class="n">wire_FIFOreadRequest</span><span class="p">;</span>
-        <span class="kt">wire</span>        <span class="n">wire_FIFOreadRequestShortPulse</span><span class="p">;</span>
-                <span class="n">ToShortPulse</span> <span class="n">toShortPulse_FIFOreadRequest</span><span class="p">(</span>
-                        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">fpga_clk_50</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">longPulse</span><span class="p">(</span><span class="n">wire_FIFOreadRequest</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">shortPulse</span><span class="p">(</span><span class="n">wire_FIFOreadRequestShortPulse</span><span class="p">),</span>
-                <span class="p">);</span>
-
-        <span class="kt">wire</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">wire_FIFOreadDataQueue</span><span class="p">;</span>
-        <span class="kt">wire</span>        <span class="n">wire_FIFOreadEmpty</span><span class="p">;</span>
-        <span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>  <span class="n">wire_FIFOnumberOfUsedWords</span><span class="p">;</span>
-
-        <span class="k">assign</span> <span class="no">LED</span> <span class="o">=</span> <span class="n">wire_FIFOnumberOfUsedWords</span><span class="p">;</span>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// HPS to FPGA FIFO</span>
+<span class="p">.</span><span class="n">fifo_hps_to_fpga_out_readdata</span>      <span class="p">(</span><span class="n">hps_to_fpga_readdata</span><span class="p">),</span>      <span class="c1">//  fifo_hps_to_fpga_out.readdata</span>
+<span class="p">.</span><span class="n">fifo_hps_to_fpga_out_read</span>          <span class="p">(</span><span class="n">hps_to_fpga_read</span><span class="p">),</span>          <span class="c1">//   out.read</span>
+<span class="p">.</span><span class="n">fifo_hps_to_fpga_out_waitrequest</span>   <span class="p">(),</span>                            <span class="c1">//   out.waitrequest</span>
+<span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_address</span>   <span class="p">(</span><span class="mh">32</span><span class="mi">&#39;d1</span><span class="p">),</span> <span class="c1">//(hps_to_fpga_out_csr_address),   // fifo_hps_to_fpga_out_csr.address</span>
+<span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_read</span>      <span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">),</span> <span class="c1">//(hps_to_fpga_out_csr_read),      //   csr.read</span>
+<span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_writedata</span> <span class="p">(),</span>                              <span class="c1">//   csr.writedata</span>
+<span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_write</span>     <span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">),</span>                           <span class="c1">//   csr.write</span>
+<span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_readdata</span>  <span class="p">(</span><span class="n">hps_to_fpga_out_csr_readdata</span><span class="p">),</span>        <span class="c1">//   csr.readdata</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>Connect the <strong>module</strong> generated by Platform Designer (<code class="code docutils literal notranslate"><span class="pre">soc_system</span></code>) to the wires</li>
+<li>To use this <strong>Output</strong> of <strong>HPS to FPGA FIFO</strong>, we must write by ourselves a <strong>State Machine</strong> to handle <strong>Reading Data From HPS</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760/Top%20Level%20Entity%20for%20FPGA/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 440</strong>). Specifically, HPS to FPGA FIFO <strong>Reader</strong> state machine waits for data in the FIFO, then reads the data into a buffer and <strong>sets a ready flag</strong>. The <strong>csr-register</strong> used to wait is the <strong>status register</strong>, so that only bit 0 (full) and bit 1 (empty) are read</li>
 </ul>
-<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">//=======================================================</span>
-<span class="c1">//  Structural coding</span>
-<span class="c1">//=======================================================</span>
-<span class="n">soc_system</span> <span class="n">u0</span><span class="p">(</span>
-        <span class="c1">// other default connections...</span>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">//=================================</span>
+<span class="c1">// HPS_to_FPGA state machine</span>
+<span class="c1">//==================================</span>
+<span class="c1">// Is there data in HPS_to_FPGA FIFO ?</span>
+<span class="c1">// And the last transfer is complete ?</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">HPS_to_FPGA_state</span> <span class="o">==</span> <span class="mh">8</span><span class="mi">&#39;d0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">hps_to_fpga_out_csr_readdata</span><span class="p">[</span><span class="mh">1</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">data_buffer_valid</span><span class="p">)</span>  <span class="k">begin</span>
+    <span class="n">hps_to_fpga_read</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b1</span> <span class="p">;</span>
+    <span class="n">HPS_to_FPGA_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d2</span> <span class="p">;</span> <span class="c1">//</span>
+<span class="k">end</span>
 
-        <span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
-        <span class="c1">// Begin Code added by me Part 1: IO Mapping</span>
-                <span class="c1">// FIFO</span>
-                <span class="p">.</span><span class="n">fiforeadrequest_external_connection_export</span><span class="p">(</span><span class="n">wire_FIFOreadRequest</span><span class="p">),</span>      <span class="c1">//output (to FPGA) PIO</span>
-                <span class="p">.</span><span class="n">fiforeaddataqueue_external_connection_export</span><span class="p">(</span><span class="n">wire_FIFOreadDataQueue</span><span class="p">),</span>  <span class="c1">//input  (to HPS)  PIO</span>
-                <span class="p">.</span><span class="n">fiforeadempty_external_connection_export</span><span class="p">(</span><span class="n">wire_FIFOreadEmpty</span><span class="p">),</span>          <span class="c1">//input  (to HPS)  PIO</span>
-        <span class="c1">// End Code added by me Part 1: IO Mapping</span>
-        <span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
-<span class="p">);</span>
+<span class="c1">// delay</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">HPS_to_FPGA_state</span> <span class="o">==</span> <span class="mh">8</span><span class="mi">&#39;d2</span><span class="p">)</span> <span class="k">begin</span>
+    <span class="c1">// zero the read request BEFORE the data appears</span>
+    <span class="c1">// in the next state!</span>
+    <span class="n">hps_to_fpga_read</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span> <span class="p">;</span>
+    <span class="n">HPS_to_FPGA_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d4</span> <span class="p">;</span>
+<span class="k">end</span>
+
+<span class="c1">// read the word from the FIFO</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">HPS_to_FPGA_state</span> <span class="o">==</span> <span class="mh">8</span><span class="mi">&#39;d4</span><span class="p">)</span> <span class="k">begin</span>
+    <span class="n">data_buffer</span> <span class="o">&lt;=</span> <span class="n">hps_to_fpga_readdata</span> <span class="p">;</span> <span class="c1">// send back data</span>
+    <span class="n">data_buffer_valid</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b1</span> <span class="p">;</span> <span class="c1">// set the data ready flag</span>
+    <span class="n">hps_to_fpga_read</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span> <span class="p">;</span>
+    <span class="n">HPS_to_FPGA_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d0</span> <span class="p">;</span> <span class="c1">//6</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>Connect the FIFO to the wires</li>
+<li>For <strong>FPGA to HPS FIFO</strong>, its <strong>Input</strong> will be <strong>Exported</strong> and will be connected to the Top-Level module <strong>DE1_SoC_Computer</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760/Top%20Level%20Entity%20for%20FPGA/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 525</strong>).</li>
 </ul>
-<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="no">FIFO</span> <span class="n">fifo</span><span class="p">(</span>
-        <span class="p">.</span><span class="n">clock</span><span class="p">(</span><span class="n">fpga_clk_50</span><span class="p">),</span>
-        <span class="c1">// Write side by FPGA</span>
-        <span class="p">.</span><span class="n">wrreq</span><span class="p">(</span><span class="n">wire_FIFOwriteRequest</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">data</span><span class="p">(</span><span class="n">wire_FIFOwriteData</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">full</span><span class="p">(</span><span class="n">wire_FIFOwriteFull</span><span class="p">),</span>
-        <span class="c1">// Read side by HPS, more accurately,</span>
-        <span class="c1">// Parallel IO(PIO) from Qsys generated Module</span>
-        <span class="p">.</span><span class="n">rdreq</span><span class="p">(</span><span class="n">wire_FIFOreadRequestShortPulse</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">q</span><span class="p">(</span><span class="n">wire_FIFOreadDataQueue</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">empty</span><span class="p">(</span><span class="n">wire_FIFOreadEmpty</span><span class="p">),</span>
-
-        <span class="p">.</span><span class="n">usedw</span><span class="p">(</span><span class="n">wire_FIFOnumberOfUsedWords</span><span class="p">),</span>
-<span class="p">);</span>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">// FPGA to HPS FIFO</span>
+<span class="p">.</span><span class="n">fifo_fpga_to_hps_in_writedata</span>      <span class="p">(</span><span class="n">fpga_to_hps_in_writedata</span><span class="p">),</span>      <span class="c1">// fifo_fpga_to_hps_in.writedata</span>
+<span class="p">.</span><span class="n">fifo_fpga_to_hps_in_write</span>          <span class="p">(</span><span class="n">fpga_to_hps_in_write</span><span class="p">),</span>          <span class="c1">//                     .write</span>
+<span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_address</span>    <span class="p">(</span><span class="mh">32</span><span class="mi">&#39;d1</span><span class="p">),</span> <span class="c1">//(fpga_to_hps_in_csr_address),    //  fifo_fpga_to_hps_in_csr.address</span>
+<span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_read</span>       <span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">),</span> <span class="c1">//(fpga_to_hps_in_csr_read),       //                         .read</span>
+<span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_writedata</span>  <span class="p">(),</span>  <span class="c1">//                         .writedata</span>
+<span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_write</span>      <span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">),</span>      <span class="c1">//                         .write</span>
+<span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_readdata</span>   <span class="p">(</span><span class="n">fpga_to_hps_in_csr_readdata</span><span class="p">),</span>    <span class="c1">//</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>Connect MyModule (defined later) to the wires</li>
+<li>To use this <strong>Input</strong> of <strong>FPGA to HPS FIFO</strong>, we must write by ourselves a <strong>State Machine</strong> to handle <strong>Writing Data To HPS</strong>, please refer to <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/Cornell%20ECE5760/Top%20Level%20Entity%20for%20FPGA/DE1_SoC_Computer.v#L515">DE1_SoC_Computer verilog file</a> (<strong>line 466</strong>). Specifically, FPGA to HPS FIFO <strong>Writer</strong> state machine waits for space in the <strong>FPGA to HPS FIFO</strong> then writes the data to the FIFO and <strong>clears the ready flag</strong></li>
 </ul>
-<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="n">MyModule</span> <span class="n">myModule</span><span class="p">(</span>
-        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">fpga_clk_50</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">FIFOwriteRequest</span><span class="p">(</span><span class="n">wire_FIFOwriteRequest</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">FIFOwriteData</span><span class="p">(</span><span class="n">wire_FIFOwriteData</span><span class="p">),</span>
-        <span class="p">.</span><span class="n">FIFOwriteFull</span><span class="p">(</span><span class="n">wire_FIFOwriteFull</span><span class="p">),</span>
-<span class="p">);</span>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">//=================================</span>
+<span class="c1">// FPGA_to_HPS state machine</span>
+<span class="c1">//==================================</span>
+<span class="c1">// Is there space in the FPGA_to_HPS FIFO ?</span>
+<span class="c1">// And data is available ?</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">FPGA_to_HPS_state</span><span class="o">==</span><span class="mh">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">fpga_to_hps_in_csr_readdata</span><span class="p">[</span><span class="mh">0</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="n">data_buffer_valid</span><span class="p">)</span> <span class="k">begin</span>
+    <span class="n">fpga_to_hps_in_writedata</span> <span class="o">&lt;=</span> <span class="n">data_buffer</span> <span class="p">;</span>
+    <span class="n">fpga_to_hps_in_write</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b1</span> <span class="p">;</span>
+    <span class="n">FPGA_to_HPS_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d4</span> <span class="p">;</span>
+<span class="k">end</span>
+
+<span class="c1">// finish the write to FPGA_to_HPS FIFO</span>
+<span class="c1">//if (HPS_to_FPGA_state == 8&#39;d8) begin</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">FPGA_to_HPS_state</span><span class="o">==</span><span class="mh">4</span><span class="p">)</span> <span class="k">begin</span>
+    <span class="n">fpga_to_hps_in_write</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span> <span class="p">;</span>
+    <span class="n">data_buffer_valid</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span> <span class="p">;</span> <span class="c1">// used the data, so clear flag</span>
+    <span class="n">FPGA_to_HPS_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d0</span> <span class="p">;</span>
+<span class="k">end</span>
 </pre></div>
+</div>
+<p><strong>Step 2</strong> FIFO Settings</p>
+<ul class="simple">
+<li>Note that <strong>Allow Backpressure</strong> should be <strong>off</strong></li>
+</ul>
+<div class="figure">
+<img alt="../_images/Stage-2_ECE5760_Qsys_FIFO_Settings.png" src="../_images/Stage-2_ECE5760_Qsys_FIFO_Settings.png" />
+</div>
+<p><strong>Step 3</strong> Some Remarks</p>
+<ul class="simple">
+<li>Timing for the FIFO read/write is not specified in the users manual! The HPS-to-FPGA read operation takes TWO cycles but the read-enable line <strong>can only be held high for ONE cycle</strong>, Holding it high for two cycles results in two reads.</li>
+<li>The HPS program asks the user for the number of items to send (0&lt;N&lt;500), reads the fill-level of each of the FIFOs, then prints out the returned values and fill levels.</li>
+</ul>
+<div class="figure">
+<img alt="../_images/Stage-2_ECE5760_C_Program_Result.png" src="../_images/Stage-2_ECE5760_C_Program_Result.png" />
 </div>
 <ul class="simple">
-<li>defined MyModule and module ToShortPulse</li>
+<li>For N greater than 256, using block-write, that the FPGA-to-HPS FIFO will fill, then stall, while the HPS-to-FPGA FIFO keeps filling.</li>
+<li>The nonblocking read/write macros in the HPS program are not well tested.</li>
+<li>If you use nonblocking read/write that you must check the return value for success.</li>
 </ul>
-<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
-<span class="c1">// Begin Code added by me Part 3: MyModule</span>
-        <span class="k">module</span> <span class="n">MyModule</span><span class="p">(</span>
-                <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
-                <span class="k">output</span>            <span class="n">FIFOwriteRequest</span><span class="p">,</span>
-                <span class="k">output</span> <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">FIFOwriteData</span><span class="p">,</span>
-                <span class="k">input</span>             <span class="n">FIFOwriteFull</span>
-        <span class="p">);</span>
-                <span class="n">ToShortPulse</span> <span class="n">toShortPulse_FIFOwriteRequest</span><span class="p">(</span>
-                        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">longPulse</span><span class="p">(</span><span class="n">FIFOwriteData</span><span class="p">[</span><span class="mh">24</span><span class="p">]</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">FIFOwriteFull</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">shortPulse</span><span class="p">(</span><span class="n">FIFOwriteRequest</span><span class="p">),</span>
-                <span class="p">);</span>
-                <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
-                        <span class="n">FIFOwriteData</span> <span class="o">&lt;=</span> <span class="n">FIFOwriteData</span><span class="o">+</span><span class="mh">1</span><span class="p">;</span>
-                <span class="k">end</span>
-        <span class="k">endmodule</span>
-
-        <span class="c1">// Module to make longPulse into shortPulse</span>
-        <span class="k">module</span> <span class="n">ToShortPulse</span><span class="p">(</span>
-                <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
-                <span class="k">input</span> <span class="n">longPulse</span><span class="p">,</span>
-                <span class="k">output</span> <span class="kt">reg</span> <span class="n">shortPulse</span>
-        <span class="p">);</span>
-                <span class="kt">reg</span> <span class="n">last_longPulse</span><span class="p">;</span>
-
-                <span class="k">always</span> <span class="p">@</span> <span class="p">(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
-                        <span class="n">shortPulse</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">last_longPulse</span><span class="o">==</span><span class="mh">0</span> <span class="o">&amp;&amp;</span> <span class="n">longPulse</span><span class="o">==</span><span class="mh">1</span><span class="p">)</span><span class="o">?</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">;</span>
-                        <span class="n">last_longPulse</span> <span class="o">&lt;=</span> <span class="n">longPulse</span><span class="p">;</span>
-                <span class="k">end</span>
-        <span class="k">endmodule</span>
-
-<span class="c1">// End Code added by me Part 3: MyModule</span>
-<span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
-</pre></div>
 </div>
+<div class="section" id="this-part-uses-my-parameters-and-de10-nano-soc-ghrd">
+<h2>This part uses My parameters and DE10_NANO_SoC_GHRD<a class="headerlink" href="#this-part-uses-my-parameters-and-de10-nano-soc-ghrd" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project%20Stage%202/DE10_NANO_SoC_GHRD">Corresponding Project Folder</a></p>
+<div class="figure">
+<img alt="../_images/Stage-2_Mine_Qsys_FIFO.png" src="../_images/Stage-2_Mine_Qsys_FIFO.png" />
 </div>
-<div class="section" id="the-full-code">
-<h2>The full code<a class="headerlink" href="#the-full-code" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="../_images/Stage-2_Mine_Qsys_Address_Map.png" src="../_images/Stage-2_Mine_Qsys_Address_Map.png" />
+</div>
+<ul class="simple">
+<li>In the following code, most parts are generated by <strong>Terasic System Builder</strong>. As for the part I added, they are Surrounded by comments <strong>Begin Code added by me</strong> and <strong>End Code added by me</strong></li>
+<li>Please also read comments <strong>Begin Work To Be Done</strong> and <strong>End Work To Be Done</strong></li>
+</ul>
 <div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">//=======================================================</span>
 <span class="c1">//  This code is generated by Terasic System Builder</span>
 <span class="c1">//=======================================================</span>
@@ -491,8 +402,6 @@
     <span class="k">input</span>    <span class="p">[</span> <span class="mh">3</span><span class="o">:</span> <span class="mh">0</span><span class="p">]</span>    <span class="no">SW</span>
 <span class="p">);</span>
 
-
-
 <span class="c1">//=======================================================</span>
 <span class="c1">//  REG/WIRE declarations</span>
 <span class="c1">//=======================================================</span>
@@ -506,11 +415,9 @@
 <span class="kt">wire</span>     <span class="p">[</span><span class="mh">27</span><span class="o">:</span> <span class="mh">0</span><span class="p">]</span>    <span class="n">stm_hw_events</span><span class="p">;</span>
 <span class="kt">wire</span>                <span class="n">fpga_clk_50</span><span class="p">;</span>
 <span class="c1">// connection of internal logics</span>
-<span class="c1">//assign LED[7: 1] = fpga_led_internal;</span>
+<span class="c1">// assign LED[7: 1] = fpga_led_internal;</span>
 <span class="k">assign</span> <span class="n">fpga_clk_50</span> <span class="o">=</span> <span class="no">FPGA_CLK1_50</span><span class="p">;</span>
 <span class="k">assign</span> <span class="n">stm_hw_events</span> <span class="o">=</span> <span class="p">{{</span><span class="mh">15</span><span class="p">{</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">}},</span> <span class="no">SW</span><span class="p">,</span> <span class="n">fpga_led_internal</span><span class="p">,</span> <span class="n">fpga_debounced_buttons</span><span class="p">};</span>
-
-
 
 <span class="c1">//=======================================================</span>
 <span class="c1">//  Structural coding</span>
@@ -605,12 +512,27 @@
 
 <span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
 <span class="c1">// Begin Code added by me Part 1: IO Mapping</span>
-                                        <span class="c1">// FIFO</span>
-                                        <span class="p">.</span><span class="n">fiforeadrequest_external_connection_export</span><span class="p">(</span><span class="n">wire_FIFOreadRequest</span><span class="p">),</span>      <span class="c1">//output (to FPGA) PIO</span>
-                                        <span class="p">.</span><span class="n">fiforeaddataqueue_external_connection_export</span><span class="p">(</span><span class="n">wire_FIFOreadDataQueue</span><span class="p">),</span>  <span class="c1">//input  (to HPS)  PIO</span>
-                                        <span class="p">.</span><span class="n">fiforeadempty_external_connection_export</span><span class="p">(</span><span class="n">wire_FIFOreadEmpty</span><span class="p">),</span>          <span class="c1">//input  (to HPS)  PIO</span>
+    <span class="c1">// HPS to FPGA FIFO</span>
+    <span class="p">.</span><span class="n">fifo_hps_to_fpga_out_readdata</span>      <span class="p">(</span><span class="n">hps_to_fpga_readdata</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">fifo_hps_to_fpga_out_read</span>          <span class="p">(</span><span class="n">hps_to_fpga_read</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">fifo_hps_to_fpga_out_waitrequest</span>   <span class="p">(),</span>
+    <span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_address</span>   <span class="p">(</span><span class="mh">32</span><span class="mi">&#39;d1</span><span class="p">),</span> <span class="c1">//(hps_to_fpga_out_csr_address),</span>
+    <span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_read</span>      <span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">),</span> <span class="c1">//(hps_to_fpga_out_csr_read),</span>
+    <span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_writedata</span> <span class="p">(),</span>
+    <span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_write</span>     <span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">fifo_hps_to_fpga_out_csr_readdata</span>  <span class="p">(</span><span class="n">hps_to_fpga_out_csr_readdata</span><span class="p">),</span>
+
+    <span class="c1">// FPGA to HPS FIFO</span>
+    <span class="p">.</span><span class="n">fifo_fpga_to_hps_in_writedata</span>      <span class="p">(</span><span class="n">fpga_to_hps_in_writedata</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">fifo_fpga_to_hps_in_write</span>          <span class="p">(</span><span class="n">fpga_to_hps_in_write</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_address</span>    <span class="p">(</span><span class="mh">32</span><span class="mi">&#39;d1</span><span class="p">),</span> <span class="c1">//(fpga_to_hps_in_csr_address),</span>
+    <span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_read</span>       <span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">),</span> <span class="c1">//(fpga_to_hps_in_csr_read),</span>
+    <span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_writedata</span>  <span class="p">(),</span>
+    <span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_write</span>      <span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">fifo_fpga_to_hps_in_csr_readdata</span>   <span class="p">(</span><span class="n">fpga_to_hps_in_csr_readdata</span><span class="p">),</span>
 <span class="c1">// End Code added by me Part 1: IO Mapping</span>
 <span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
+
            <span class="p">);</span>
 
 <span class="c1">// Debounce logic to clean out glitches within 1ms</span>
@@ -680,126 +602,79 @@
 <span class="c1">//assign LED[0] = led_level;</span>
 
 <span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
-<span class="c1">// Begin Code added by me Part 2:</span>
-<span class="c1">// The following shows signal flow, &quot;&lt;---&gt;&quot; represents wires, &lt;===&gt; represents memory-map</span>
-<span class="c1">// MyModule &lt;---&gt; FIFO Module &lt;---&gt; PIOs in Qsys generated Module(DE10_NANO_SoC_GHRD) &lt;===&gt; HPS</span>
+<span class="c1">// Begin Code added by me Part 2: FIFO handlers</span>
 
-        <span class="cm">/* FIFO module description</span>
-<span class="cm">                input clock;</span>
+    <span class="c1">// !!! Begin Work To Be Done Part 1 !!!</span>
+        <span class="c1">// Currently this block of code READs data from HPS,</span>
+        <span class="c1">// Store it in **reg [31:0] data_buffer**</span>
+        <span class="c1">// Then WRITEs it right back without any processing,</span>
+        <span class="c1">// This is simply to test out the functionality and</span>
+        <span class="c1">// demonstrate usage.</span>
+        <span class="c1">// Next step is to Wrap this whole module into a</span>
+        <span class="c1">// simple General data sender and receiver,</span>
+        <span class="c1">// just like an UART module.</span>
+        <span class="c1">// Let the logic handling be done in a separate module.</span>
+    <span class="c1">// !!! End Work To Be Done Part 1 !!!</span>
 
-<span class="cm">                // Write side by FPGA</span>
-<span class="cm">                input           wrreq;  // write request</span>
-<span class="cm">                input   [31:0]  data;   // data to write</span>
-<span class="cm">                output        full;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>  <span class="n">HPS_to_FPGA_state</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">hps_to_fpga_out_csr_readdata</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="n">data_buffer_valid</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="n">hps_to_fpga_read</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_buffer</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">hps_to_fpga_readdata</span> <span class="p">;</span>
 
-<span class="cm">                // Read side by HPS, more accurately,</span>
-<span class="cm">                // Parallel IO(PIO) from Qsys generated Module</span>
-<span class="cm">                // We need two 32 bits PIOs:</span>
-<span class="cm">                //    1. PIO_FifoReadDataQueue: maps to q</span>
-<span class="cm">                //    2. PIO_FifoReadControl:   maps to rdreq,empty</span>
-<span class="cm">                input           rdreq;  // read request</span>
-<span class="cm">                output [31:0] q;      // data queue to read</span>
-<span class="cm">                output        empty;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>  <span class="n">FPGA_to_HPS_state</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">fpga_to_hps_in_csr_readdata</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">fpga_to_hps_in_writedata</span> <span class="p">;</span>
+    <span class="kt">reg</span> <span class="n">fpga_to_hps_in_write</span> <span class="p">;</span>
 
-<span class="cm">                // Fill level, number of &quot;used words&quot; in the queue</span>
-<span class="cm">                output [7:0]  usedw;  // number of used words</span>
-<span class="cm">        */</span>
+   <span class="k">assign</span> <span class="no">LED</span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">HPS_to_FPGA_state</span><span class="p">;</span>
 
-        <span class="c1">// Wires to connect Custom Sub-Modules:</span>
-                <span class="c1">// Write side by FPGA</span>
-                <span class="kt">wire</span>        <span class="n">wire_FIFOwriteRequest</span><span class="p">;</span>
-                <span class="kt">wire</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">wire_FIFOwriteData</span><span class="p">;</span>
-                <span class="kt">wire</span>        <span class="n">wire_FIFOwriteFull</span><span class="p">;</span>
-                <span class="c1">// Read side by HPS, more accurately,</span>
-                <span class="c1">// Parallel IO(PIO) from Qsys generated Module(DE10_NANO_SoC_GHRD)</span>
-                <span class="kt">wire</span>        <span class="n">wire_FIFOreadRequest</span><span class="p">;</span>
-                <span class="kt">wire</span>        <span class="n">wire_FIFOreadRequestShortPulse</span><span class="p">;</span>
-                        <span class="n">ToShortPulse</span> <span class="n">toShortPulse_FIFOreadRequest</span><span class="p">(</span>
-                                <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">fpga_clk_50</span><span class="p">),</span>
-                                <span class="p">.</span><span class="n">longPulse</span><span class="p">(</span><span class="n">wire_FIFOreadRequest</span><span class="p">),</span>
-                                <span class="p">.</span><span class="n">shortPulse</span><span class="p">(</span><span class="n">wire_FIFOreadRequestShortPulse</span><span class="p">),</span>
-                        <span class="p">);</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">fpga_clk_50</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="c1">//=================================</span>
+        <span class="c1">// HPS_to_FPGA state machine</span>
+        <span class="c1">//==================================</span>
+        <span class="c1">// Is there data in HPS_to_FPGA FIFO ?</span>
+        <span class="c1">// And the last transfer is complete ?</span>
+        <span class="k">if</span><span class="p">(</span> <span class="n">HPS_to_FPGA_state</span> <span class="o">==</span> <span class="mh">8</span><span class="mi">&#39;d0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">hps_to_fpga_out_csr_readdata</span><span class="p">[</span><span class="mh">1</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">data_buffer_valid</span> <span class="p">)</span> <span class="k">begin</span>
+            <span class="n">hps_to_fpga_read</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b1</span> <span class="p">;</span>
+            <span class="n">HPS_to_FPGA_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d2</span> <span class="p">;</span>
+        <span class="k">end</span>
 
-                <span class="kt">wire</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">wire_FIFOreadDataQueue</span><span class="p">;</span>
-                <span class="kt">wire</span>        <span class="n">wire_FIFOreadEmpty</span><span class="p">;</span>
-                <span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>  <span class="n">wire_FIFOnumberOfUsedWords</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">HPS_to_FPGA_state</span> <span class="o">==</span> <span class="mh">8</span><span class="mi">&#39;d2</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">hps_to_fpga_read</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span> <span class="p">;</span>
+            <span class="n">HPS_to_FPGA_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d4</span> <span class="p">;</span>
+        <span class="k">end</span>
 
-                <span class="k">assign</span> <span class="no">LED</span> <span class="o">=</span> <span class="n">wire_FIFOnumberOfUsedWords</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">HPS_to_FPGA_state</span> <span class="o">==</span> <span class="mh">8</span><span class="mi">&#39;d4</span><span class="p">)</span> <span class="k">begin</span>
 
-        <span class="c1">// Custom Sub-Modules:</span>
-                <span class="no">FIFO</span> <span class="n">fifo</span><span class="p">(</span>
-                        <span class="p">.</span><span class="n">clock</span><span class="p">(</span><span class="n">fpga_clk_50</span><span class="p">),</span>
-                        <span class="c1">// Write side by FPGA</span>
-                        <span class="p">.</span><span class="n">wrreq</span><span class="p">(</span><span class="n">wire_FIFOwriteRequest</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">data</span><span class="p">(</span><span class="n">wire_FIFOwriteData</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">full</span><span class="p">(</span><span class="n">wire_FIFOwriteFull</span><span class="p">),</span>
-                        <span class="c1">// Read side by HPS, more accurately,</span>
-                        <span class="c1">// Parallel IO(PIO) from Qsys generated Module</span>
-                        <span class="p">.</span><span class="n">rdreq</span><span class="p">(</span><span class="n">wire_FIFOreadRequestShortPulse</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">q</span><span class="p">(</span><span class="n">wire_FIFOreadDataQueue</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">empty</span><span class="p">(</span><span class="n">wire_FIFOreadEmpty</span><span class="p">),</span>
+            <span class="n">data_buffer</span> <span class="o">&lt;=</span> <span class="n">hps_to_fpga_readdata</span> <span class="p">;</span>
+            <span class="n">data_buffer_valid</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b1</span> <span class="p">;</span>
+            <span class="n">hps_to_fpga_read</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span> <span class="p">;</span>
+            <span class="n">HPS_to_FPGA_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d0</span> <span class="p">;</span>
+        <span class="k">end</span>
+    <span class="c1">//-----------------------------------------------</span>
+        <span class="c1">//=================================</span>
+        <span class="c1">// FPGA_to_HPS state machine</span>
+        <span class="c1">//==================================</span>
+        <span class="c1">// Is there space in the FPGA_to_HPS FIFO ?</span>
+        <span class="c1">// And data is available ?</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">FPGA_to_HPS_state</span><span class="o">==</span><span class="mh">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">fpga_to_hps_in_csr_readdata</span><span class="p">[</span><span class="mh">0</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="n">data_buffer_valid</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">fpga_to_hps_in_writedata</span> <span class="o">&lt;=</span> <span class="n">data_buffer</span> <span class="p">;</span>
+            <span class="n">fpga_to_hps_in_write</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b1</span> <span class="p">;</span>
+            <span class="n">FPGA_to_HPS_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d4</span> <span class="p">;</span>
+        <span class="k">end</span>
 
-                        <span class="p">.</span><span class="n">usedw</span><span class="p">(</span><span class="n">wire_FIFOnumberOfUsedWords</span><span class="p">),</span>
-                <span class="p">);</span>
-
-                <span class="n">MyModule</span> <span class="n">myModule</span><span class="p">(</span>
-                        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">fpga_clk_50</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">FIFOwriteRequest</span><span class="p">(</span><span class="n">wire_FIFOwriteRequest</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">FIFOwriteData</span><span class="p">(</span><span class="n">wire_FIFOwriteData</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">FIFOwriteFull</span><span class="p">(</span><span class="n">wire_FIFOwriteFull</span><span class="p">),</span>
-                <span class="p">);</span>
-
-                <span class="cm">/* In the IO mapping at the beginning of this file</span>
-<span class="cm">                        soc_system u0(</span>
-<span class="cm">                                ...</span>
-<span class="cm">                                .fiforeadrequest_external_connection_export(wire_FIFOreadRequest),      //output (to FPGA) PIO</span>
-<span class="cm">                                .fiforeaddataqueue_external_connection_export(wire_FIFOreadDataQueue),  //input  (to HPS)  PIO</span>
-<span class="cm">                                .fiforeadempty_external_connection_export(wire_FIFOreadEmpty),          //input  (to HPS)  PIO</span>
-<span class="cm">                                ...</span>
-<span class="cm">                        );</span>
-<span class="cm">                */</span>
-
-<span class="c1">// End Code added by me Part 2</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">FPGA_to_HPS_state</span><span class="o">==</span><span class="mh">4</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">fpga_to_hps_in_write</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span> <span class="p">;</span>
+            <span class="n">data_buffer_valid</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span> <span class="p">;</span>
+            <span class="n">FPGA_to_HPS_state</span> <span class="o">&lt;=</span> <span class="mh">8</span><span class="mi">&#39;d0</span> <span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="c1">// End Code added by me Part 2: FIFO handlers</span>
 <span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
 
 <span class="k">endmodule</span>
-
-<span class="c1">//===========================================================</span>
-
-<span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
-<span class="c1">// Begin Code added by me Part 3: MyModule</span>
-        <span class="k">module</span> <span class="n">MyModule</span><span class="p">(</span>
-                <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
-                <span class="k">output</span>            <span class="n">FIFOwriteRequest</span><span class="p">,</span>
-                <span class="k">output</span> <span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">FIFOwriteData</span><span class="p">,</span>
-                <span class="k">input</span>             <span class="n">FIFOwriteFull</span>
-        <span class="p">);</span>
-                <span class="n">ToShortPulse</span> <span class="n">toShortPulse_FIFOwriteRequest</span><span class="p">(</span>
-                        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">longPulse</span><span class="p">(</span><span class="n">FIFOwriteData</span><span class="p">[</span><span class="mh">24</span><span class="p">]</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">FIFOwriteFull</span><span class="p">),</span>
-                        <span class="p">.</span><span class="n">shortPulse</span><span class="p">(</span><span class="n">FIFOwriteRequest</span><span class="p">),</span>
-                <span class="p">);</span>
-                <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
-                        <span class="n">FIFOwriteData</span> <span class="o">&lt;=</span> <span class="n">FIFOwriteData</span><span class="o">+</span><span class="mh">1</span><span class="p">;</span>
-                <span class="k">end</span>
-        <span class="k">endmodule</span>
-
-        <span class="c1">// Module to make longPulse into shortPulse</span>
-        <span class="k">module</span> <span class="n">ToShortPulse</span><span class="p">(</span>
-                <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
-                <span class="k">input</span> <span class="n">longPulse</span><span class="p">,</span>
-                <span class="k">output</span> <span class="kt">reg</span> <span class="n">shortPulse</span>
-        <span class="p">);</span>
-                <span class="kt">reg</span> <span class="n">last_longPulse</span><span class="p">;</span>
-
-                <span class="k">always</span> <span class="p">@</span> <span class="p">(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
-                        <span class="n">shortPulse</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">last_longPulse</span><span class="o">==</span><span class="mh">0</span> <span class="o">&amp;&amp;</span> <span class="n">longPulse</span><span class="o">==</span><span class="mh">1</span><span class="p">)</span><span class="o">?</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">;</span>
-                        <span class="n">last_longPulse</span> <span class="o">&lt;=</span> <span class="n">longPulse</span><span class="p">;</span>
-                <span class="k">end</span>
-        <span class="k">endmodule</span>
-
-<span class="c1">// End Code added by me Part 3: MyModule</span>
-<span class="c1">//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</span>
 </pre></div>
 </div>
 </div>
@@ -813,10 +688,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Processor-FPGA-Communication-Using-FIFO-Processor-Part.html" class="btn btn-neutral float-right" title="Processor-FPGA Communication: Using FIFO Processor Part" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="FAILED-Processor-FPGA-Communication-Using-FIFO-Processor-Part.html" class="btn btn-neutral float-right" title="FAILED Processor-FPGA Communication: Using FIFO Processor Part" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="FAILED-Processor-FPGA-Communication-Using-FIFO-Processor-Part.html" class="btn btn-neutral float-left" title="FAILED Processor-FPGA Communication: Using FIFO Processor Part" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Processor-FPGA-Communication-Processor-Part.html" class="btn btn-neutral float-left" title="Processor-FPGA Communication: Processor Part" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

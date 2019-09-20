@@ -6,6 +6,8 @@ Experimental Physics: SoC FPGA Design
 	Design-Plan
 	Processor-FPGA-Communication-FPGA-Part
 	Processor-FPGA-Communication-Processor-Part
+	FAILED-Processor-FPGA-Communication-Using-FIFO-FPGA-Part
+	FAILED-Processor-FPGA-Communication-Using-FIFO-Processor-Part
 	Processor-FPGA-Communication-Using-FIFO-FPGA-Part
 	Processor-FPGA-Communication-Using-FIFO-Processor-Part
 	

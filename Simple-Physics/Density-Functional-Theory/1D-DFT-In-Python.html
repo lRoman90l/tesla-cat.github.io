@@ -393,11 +393,11 @@ density:</p>
 <div class="section" id="solve-the-kohnsham-equations-self-consistency-loop">
 <h2>Solve the Kohn–Sham Equations: Self-Consistency Loop<a class="headerlink" href="#solve-the-kohnsham-equations-self-consistency-loop" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>initialize the density (you can take an arbitrary constant)</p></li>
-<li><p>Calculate the Exchange and Hatree potentials</p></li>
-<li><p>Calculate the Hamiltonian</p></li>
-<li><p>Calculate the eigenvalues and eigenvectors (wavefunctions)</p></li>
-<li><p>If not converged, calculate the density and back to 1</p></li>
+<li>initialize the density (you can take an arbitrary constant)</li>
+<li>Calculate the Exchange and Hatree potentials</li>
+<li>Calculate the Hamiltonian</li>
+<li>Calculate the eigenvalues and eigenvectors (wavefunctions)</li>
+<li>If not converged, calculate the density and back to 1</li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_grid</span><span class="p">)</span>
 <span class="n">LastEnergy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
