@@ -9,6 +9,19 @@ Note
 
 .. _this GitHub repo of mine: https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System
 
+
+What are we gonna do?
+-------------------------
+
+- The Cyclone V SoC FPGA can be used as **sequencer, counter** etc. for the lab
+- The FPGA passes the data it collected to the HPS processor via FIFO, the processor has a server running on it, so any client can get the data via XML http request etc.
+- The client can also send data, through processor server, to control the FPGA
+- We will use DE10-NANO Dev Board to do the above:
+
+.. figure:: imgs/DE10_NANO_Dev_Board.jpg
+
+
+
 Front End
 ---------------
 

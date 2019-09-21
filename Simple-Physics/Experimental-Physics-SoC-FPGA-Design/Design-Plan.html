@@ -93,6 +93,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Experimental Physics: SoC FPGA Design</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Design Plan</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#note">Note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-are-we-gonna-do">What are we gonna do?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#front-end">Front End</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#back-end">Back End</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quartus-project">Quartus Project</a></li>
@@ -180,6 +181,18 @@
 <ul class="simple">
 <li>This is originally a project documentation, some files mentioned in this series can be found at <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System">this GitHub repo of mine</a></li>
 </ul>
+</div>
+<div class="section" id="what-are-we-gonna-do">
+<h2>What are we gonna do?<a class="headerlink" href="#what-are-we-gonna-do" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The Cyclone V SoC FPGA can be used as <strong>sequencer, counter</strong> etc. for the lab</li>
+<li>The FPGA passes the data it collected to the HPS processor via FIFO, the processor has a server running on it, so any client can get the data via XML http request etc.</li>
+<li>The client can also send data, through processor server, to control the FPGA</li>
+<li>We will use DE10-NANO Dev Board to do the above:</li>
+</ul>
+<div class="figure">
+<img alt="../_images/DE10_NANO_Dev_Board.jpg" src="../_images/DE10_NANO_Dev_Board.jpg" />
+</div>
 </div>
 <div class="section" id="front-end">
 <h2>Front End<a class="headerlink" href="#front-end" title="Permalink to this headline">¶</a></h2>
