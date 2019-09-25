@@ -4,7 +4,7 @@ Relativity
 
 .. toctree::
 	Special-vs-General-Relativity
-	Lorentz-Transformation
+	SR-Lorentz-Transformation
 	
 
 

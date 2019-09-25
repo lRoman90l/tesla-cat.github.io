@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Lorentz Transformation &mdash; Simple Physics  documentation</title>
+  <title>SR: Lorentz Transformation &mdash; Simple Physics  documentation</title>
   
 
   
@@ -84,7 +84,7 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Relativity</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Special-vs-General-Relativity.html">Special vs General Relativity</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Lorentz Transformation</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SR: Lorentz Transformation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#what-is-the-problem">What is the problem ?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#derivation">Derivation</a></li>
@@ -149,13 +149,13 @@
         
           <li><a href="index.html">Relativity</a> &raquo;</li>
         
-      <li>Lorentz Transformation</li>
+      <li>SR: Lorentz Transformation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Relativity/Lorentz-Transformation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Relativity/SR-Lorentz-Transformation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,8 +168,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="lorentz-transformation">
-<h1>Lorentz Transformation<a class="headerlink" href="#lorentz-transformation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="sr-lorentz-transformation">
+<h1>SR: Lorentz Transformation<a class="headerlink" href="#sr-lorentz-transformation" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -187,33 +187,50 @@
 <div class="section" id="what-is-the-problem">
 <h2>What is the problem ?<a class="headerlink" href="#what-is-the-problem" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>We only talk about <strong>Lorentz Transformation</strong> in Special Relativity, since it is a consequence of <strong>Minkowski Metric</strong></li>
 <li><strong>Length of an object</strong> and <strong>Time interval of a process</strong> are not <strong>absolute</strong>! They are <strong>relative</strong>, meaning they are different in different reference frames!</li>
 </ul>
 </div>
 <div class="section" id="derivation">
 <h2>Derivation<a class="headerlink" href="#derivation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Step 1</strong> Lorentz Transformation is a consequence of <strong>Minkowski Metric</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp; \text{Notation: In }\Lambda^a_c \text{, } a,c \text{ are indices, }a \text{ is not Power}\\
+&amp; \text{Let } \Lambda^a_c \text{ be any } 4\times 4 \text{ matrix}\\
+&amp; \text{If } \Lambda^a_c \Lambda^b_d g_{ab} =g_{cd} \text{ where } g=g_{\text{Minkowski}} \\
+&amp; \text{Then } \Lambda \text{ is a Lorentz matrix}\\
+&amp; \text{Thus if } x'^{(a)} =\Lambda^a_c x^{(c)} \\
+&amp; \Rightarrow ds'^2 = g_{ab} dx'^{(a)}dx'^{(b)}\\
+&amp; \;\;\;\;  = g_{ab} \Lambda^a_c x^{(c)} \Lambda^b_d x^{(d)}\\
+&amp; \;\;\;\;  = g_{cd} x^{(c)} x^{(d)}\\
+&amp; \;\;\;\;  = ds^2 \\
+&amp; \text{Thus we see Lorentz Transformation is any Transformation}\\
+&amp; \text{that keeps the Distance } ds\text{ invaraint in Minkowski space}
+\end{align*}\end{split}\]</div>
+<p><strong>Step 2</strong> A specific case of Lorentz matrix</p>
 <ul class="simple">
 <li>Let <span class="math notranslate nohighlight">\((t,x,y,z)\)</span> represent an <strong>Event</strong> in a <strong>reference frame</strong> that is <strong>at rest</strong>, that is, this event happend at <strong>position</strong> <span class="math notranslate nohighlight">\((x,y,z)\)</span> at <strong>time</strong> <span class="math notranslate nohighlight">\(t\)</span></li>
 <li>Consider another frame moving at speed (normalized by light speed) <span class="math notranslate nohighlight">\(\beta = {v \over c}\)</span> along <span class="math notranslate nohighlight">\(x\)</span> axis relative to the <strong>RestFrame</strong>, then in <strong>MovingFrame</strong>, the same event happens at <span class="math notranslate nohighlight">\((t',x',y',z')=\text{LorentzTransform}(t,x,y,z)\)</span></li>
-<li><strong>LorentzTransform</strong> is simply a <span class="xref std std-doc">Linear Transform</span></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-&amp;\left(\array{
+&amp;\Lambda= \left(\array{
         \gamma &amp; -\gamma\beta \\
         -\gamma\beta &amp; \gamma
         \\&amp;&amp;1\\&amp;&amp;&amp;1
 }\right) \\
 &amp; where \\
-&amp; \gamma = (1-\beta^2)^{-1/2}
+&amp; -1\le \beta = {v \over c} \le 1 \\
+&amp; \gamma = {1\over \sqrt{1-\beta^2}}
 \end{align*}\end{split}\]</div>
 <ul class="simple">
-<li>To get a deeper understanding: the above is one <span class="xref std std-doc">Representation</span> of the <span class="xref std std-doc">Lorentz Group</span></li>
+<li><strong>Note</strong>: I haven’t figured out how to <strong>derive</strong> the following from <strong>Step 1</strong>, but the definition <span class="math notranslate nohighlight">\(\Lambda^a_c \Lambda^b_d g_{ab} =g_{cd}\)</span> can be easily <strong>verified</strong></li>
 </ul>
 </div>
 <div class="section" id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
-<p><strong>The code is written by myself (Tesla Cat, Ding Ruiqi)</strong></p>
+<p><strong>The code is written by myself: Tesla Cat, Ding Ruiqi. And I am only saying it out loud here because the following is supposed to be submitted to my lecturer as homework ..</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">inv</span>
 
