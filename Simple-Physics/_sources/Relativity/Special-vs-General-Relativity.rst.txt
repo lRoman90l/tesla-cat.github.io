@@ -1,0 +1,62 @@
+
+Special vs General Relativity
+=================================
+
+:Date: 25 Sep 2019
+
+What is the problem ?
+-------------------------
+
+- Gravity is two objects pulling each other
+- Einstein thinks the "pulling" is actually achieved by
+	- Object has mass, this mass causes space to deform
+	- The deform causes two object to move closer, as if they are pulling each other 
+- In Special Relativity, we don't consider gravity
+- In General Relativity, we do consider gravity 
+- Relativity studys the Geometry of Spacetime
+
+Derivation
+-------------
+
+**Step 1** When we study geometry, we must define **Coordinates** and **Metric**, then we can talk about distance.
+
+.. math::
+	\begin{align*}
+	& \text{Coordinates: Alice stand at } x=3 \text{, Bob } x=5\\
+	& \text{Metric: They agree that each unit length }g=5m\\
+	& \text{Then their distance }\Delta s = g \cdot \Delta x = 5m\cdot 2=10m\\
+	& \text{Consider squared length of a small distance }(ds)^2\\
+	& \text{Notation: } ds^2=(ds)^2\\
+	& \text{2D Euclidean Coordinates: } ds^2=dx^2 + dy^2\\
+	& \text{2D Polar Coordinates: } ds^2= dr^2 + r^2 d\theta^2\\
+	& \text{Write in General form: } ds^2= g_{ab}dx^{(a)}dx^{(b)}\\
+	& g_{ab} \text{ is called Metric Tensor and Einstein summation convention is used}\\
+	& \text{Then:}\\
+	& \text{2D Euclidean: } x^{(0)}=x, x^{(1)}=y\text{ and } g_{00}=g_{11}=1, g_{01}=g_{10}=0\\
+	& \text{2D Polar: } x^{(0)}=r, x^{(1)}=\theta\text{ and } g_{00}=1, g_{11}=r^2, g_{01}=g_{10}=0  \\
+	& \text{SR = Special Relativity, GR = General Relativity}\\
+	& \text{4D Spacetime(SR): Ignore mass deforming space} \\
+	& \;\;\;\; ds^2 = -dt^2+dx^2+dy^2+dz^2\\
+	& \text{4D Spacetime(SR): } x^{(0)}=t, x^{(1)}=x, x^{(2)}=y, x^{(3)}=z\\
+	& \text{4D Spacetime(SR): } g=g_{\text{Minkowski}}=
+		\left(\array{
+			-1 & 0 & 0 & 0 \\
+			 0 & 1 & 0 & 0  \\
+			 0 & 0 & 1 & 0  \\
+			 0 & 0 & 0 & 1 
+		}\right)  \\
+	& \text{4D Spacetime(GR): Consider mass deforming space} \\
+	& \;\;\;\;  ds^2 = -(1-{r_s\over r}) dt^2+(1-{r_s\over r})^{-1} dr^2
+			+r^2 d\theta^2+ r^2 \sin^2 \theta d\phi^2 \\
+	& \text{Where } r_s \text{ is called Schwarzschild radius}\\
+	& r_s =2M \text{ will be shown, } M =\text{Mass of the object deforming spacetime}\\
+	& \text{4D Spacetime(GR): } x^{(0)}=t, x^{(1)}=r, x^{(2)}=\theta, x^{(3)}=\phi \\
+	& \text{4D Spacetime(GR): } g=g_{\text{Schwarzschild}} \text{ is determined by Mass}
+	\end{align*}
+
+
+
+
+
+
+
