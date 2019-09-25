@@ -55,8 +55,32 @@ Derivation
 	\end{align*}
 
 
+**Step 2** Some definitions
 
+- In both Special and General Relativity
 
+.. math::
+	\begin{align*}
+	& \text{Inner Product: } A\cdot B= g_{ab}A^{(a)}B^{(b)} \\
+	& \text{Proper Time: } d\tau :=\sqrt{-ds^2} \\
+	& \text{Four Velocity: } u^{(a)}:={dx^{(a)}\over d\tau}\\
+	& \Rightarrow u^2=u\cdot u = g_{ab}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau}\\
+	& \;\;\;\; = {ds^2\over -ds^2} =-1\\
+	& \text{Four Momentum: } p:=mu\\
+	& \text{Relativistic Energy: } E:=p^{(0)}\\
+	& \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})
+	\end{align*}
 
+- In Special Relativity
+
+.. math::
+	\begin{align*}
+	& \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\\
+	& \Rightarrow ds^2 = -dt^2+dx^2+dy^2+dz^2 = (-1+\vec{v}^2)dt^2\\
+	& \text{Proper Time: } d\tau :=\sqrt{-ds^2}=\sqrt{1-\vec{v}^2}dt\\
+	& \text{Relativistic Energy: } E:=p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
+	& \text{Relativistic Momentum: }\vec{p}:=m {\vec{v}\over \sqrt{1-\vec{v}^2}}
+	\end{align*}
+	
 
 
