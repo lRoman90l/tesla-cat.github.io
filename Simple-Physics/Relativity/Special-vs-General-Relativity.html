@@ -253,7 +253,34 @@
 &amp; \Rightarrow ds^2 = -dt^2+dx^2+dy^2+dz^2 = (-1+\vec{v}^2)dt^2\\
 &amp; \text{Proper Time: } d\tau :=\sqrt{-ds^2}=\sqrt{1-\vec{v}^2}dt\\
 &amp; \text{Relativistic Energy: } E:=p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
-&amp; \text{Relativistic Momentum: }\vec{p}:=m {\vec{v}\over \sqrt{1-\vec{v}^2}}
+&amp; \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}
+\end{align*}\end{split}\]</div>
+<ul class="simple">
+<li>In General Relativity</li>
+</ul>
+<p><strong>TO BE ADDED</strong></p>
+<p><strong>Step 3</strong> Equation of motion</p>
+<ul class="simple">
+<li>Also base on Variational Principle, same as Newton’s equation of motion and Shrodinger Equation</li>
+<li>Specifically, we will maximize <strong>proper time</strong></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp; \text{Geodesic: (1) Path with longest proper time. OR (2) Straight line}\\
+&amp; \text{Parameterize the line with one varibale: }l\in [0,1]\\
+&amp; \text{Notation: } \dot{x}={dx\over dl}\\
+&amp; \tau = \int \sqrt{-ds^2}= \int_0^1 \sqrt{-g_{ab}\dot{x}^{(a)}\dot{x}^{(b)}} dl\equiv \int_0^1 L(x,\dot{x};l) dl\\
+&amp; \text{Note that } d\tau = L dl\\
+&amp; \text{To maximize }\tau \text{, use Euler-Lagrange Equation: }
+  {\partial L\over \partial x^{(c)}}={d\over dl}{\partial L\over \partial \dot{x}^{(c)} } \\
+&amp; \text{LHS} = {1\over 2}L^{-1}( -{\partial g_{ab}\over \partial x^{(c)}}\dot{x}^{(a)}\dot{x}^{(b)} )
+        = {1\over 2}( -{\partial g_{ab}\over \partial x^{(c)}}{dx^{(a)} \over d\tau}\dot{x}^{(b)} )  \\
+&amp; \text{RHS} ={d\over dl}[ {1\over 2}L^{-1}( -g_{ab}\delta_{ac} \dot{x}^{(b)} -g_{ab}\dot{x}^{(a)}\delta_{bc}) ]
+        ={d\over dl}[ -g_{bc} {d{x}^{(b)} \over d\tau}] \\
+&amp; {\text{LHS}  \over L} ={\text{LHS}  \over L} \\
+&amp; \Rightarrow
+  \boxed{ {1\over 2}( -{\partial g_{ab}\over \partial x^{(c)}}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau} )
+   = {d\over d\tau}[ -g_{bc} {d{x}^{(b)} \over d\tau}]  \;\;\;\;\text{Geodesic Equation}}
 \end{align*}\end{split}\]</div>
 </div>
 </div>
