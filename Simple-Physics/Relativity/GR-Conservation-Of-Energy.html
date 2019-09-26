@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quantum Mechanics: Feynman Path Integral &mdash; Simple Physics  documentation</title>
+  <title>GR: Conservation Of Energy &mdash; Simple Physics  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Classical Action" href="Classical-Action.html" />
-    <link rel="prev" title="GR: Conservation Of Energy" href="../Relativity/GR-Conservation-Of-Energy.html" /> 
+    <link rel="next" title="Quantum Mechanics: Feynman Path Integral" href="../Quantum-Mechanics-Feynman-Path-Integral/index.html" />
+    <link rel="prev" title="GR: Solving Geodesic Equation" href="GR-Solving-Geodesic-Equation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,12 +82,17 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../Relativity/index.html">Relativity</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Quantum Mechanics: Feynman Path Integral</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html">Classical Action</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html">Propagator</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Relativity</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Special-vs-General-Relativity.html">Special vs General Relativity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SR-Lorentz-Transformation.html">SR: Lorentz Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GR-Solving-Geodesic-Equation.html">GR: Solving Geodesic Equation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">GR: Conservation Of Energy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#derivation">Derivation</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Quantum-Mechanics-Feynman-Path-Integral/index.html">Quantum Mechanics: Feynman Path Integral</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Computation/index.html">Quantum Computation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Quantum-Optics/index.html">Quantum Optics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Density-Functional-Theory/index.html">Density Functional Theory</a></li>
@@ -140,13 +145,15 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Quantum Mechanics: Feynman Path Integral</li>
+          <li><a href="index.html">Relativity</a> &raquo;</li>
+        
+      <li>GR: Conservation Of Energy</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Quantum-Mechanics-Feynman-Path-Integral/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Relativity/GR-Conservation-Of-Energy.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -159,26 +166,52 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="quantum-mechanics-feynman-path-integral">
-<h1>Quantum Mechanics: Feynman Path Integral<a class="headerlink" href="#quantum-mechanics-feynman-path-integral" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Classical-Action.html">Classical Action</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html#dependency">Dependency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html#what-is-the-problem">What is the problem ?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html#derivation">Derivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Classical-Action.html#example-1-newton-s-law">Example 1: Newton’s Law</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Propagator.html">Propagator</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#dependency">Dependency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#what-is-the-problem">What is the problem ?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#derivation">Derivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#doubt-1">Doubt 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Propagator.html#derivation-part-2">Derivation Part 2</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="gr-conservation-of-energy">
+<h1>GR: Conservation Of Energy<a class="headerlink" href="#gr-conservation-of-energy" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">26 Sep 2019</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="derivation">
+<h2>Derivation<a class="headerlink" href="#derivation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Step 1</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+  &amp; \text{I. Earlier we had}\\
+  &amp; ds^2 = -(1-{r_s\over r}) dt^2+(1-{r_s\over r})^{-1} dr^2
+                  +r^2 d\theta^2+ r^2 \sin^2 \theta d\phi^2\\
+  &amp; u^2=u\cdot u = g_{ab}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau}
+     = {ds^2\over -ds^2} =-1\\
+  &amp; (1-{r_s\over r}) {dt\over d\tau}=\text{const}\equiv e \\
+  &amp; r^2 \sin^2 \theta {d\phi \over d\tau}=\text{const}\equiv l \\
+  &amp; \text{II. Consider the case }\theta ={\pi\over 2} \text{ (Plane Orbit)}\\
+  &amp; \Rightarrow   g_{00} ({dt \over d\tau})^2 + g_{11} ({dr \over d\tau})^2 +
+          g_{33} ({d\phi \over d\tau})^2 = -1 \\
+  &amp; \Rightarrow
+          -(1-{r_s\over r}) ({dt \over d\tau})^2 +
+          (1-{r_s\over r})^{-1} ({dr \over d\tau})^2 +
+          r^2 ({d\phi \over d\tau})^2 = -1 \\
+  &amp; \Rightarrow
+          -(1-{r_s\over r})^{-1} e^2 +
+          (1-{r_s\over r})^{-1} ({dr \over d\tau})^2 +
+          {l^2\over r^2} = -1 \\
+  &amp; \Rightarrow
+          - e^2 +
+           ({dr \over d\tau})^2 +
+          (1-{r_s\over r}){l^2\over r^2} = -(1-{r_s\over r}) \\
+  &amp; \Rightarrow
+          \underbrace{ {1\over 2}({dr \over d\tau})^2 }_{\text{Kinetic}} +
+          \underbrace{ (-{1\over 2}){r_s\over r}+{1\over 2}{l^2\over r^2}\boxed{-{1\over 2}{r_s l^2\over r^3}} }_{\text{Potential}}=
+          \underbrace{ {1\over 2}(e^2-1)\equiv \tilde{E} }_{\text{Total}} \\
+  &amp; \;\;\;\; \text{Recall when }r\gg r_s \Rightarrow r_s\approx 2M \\
+  &amp; \;\;\;\; \text{In Newtonian: }\underbrace{ {1\over 2}({dr \over d\tau})^2 }_{\text{Kinetic}} +
+\underbrace{ (-){M\over r}+{1\over 2}{l^2\over r^2} }_{\text{Potential}}=
+    \underbrace{ E }_{\text{Total}} \\
+  \end{align*}\end{split}\]</div>
 </div>
 </div>
 
@@ -190,10 +223,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Classical-Action.html" class="btn btn-neutral float-right" title="Classical Action" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Quantum-Mechanics-Feynman-Path-Integral/index.html" class="btn btn-neutral float-right" title="Quantum Mechanics: Feynman Path Integral" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../Relativity/GR-Conservation-Of-Energy.html" class="btn btn-neutral float-left" title="GR: Conservation Of Energy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="GR-Solving-Geodesic-Equation.html" class="btn btn-neutral float-left" title="GR: Solving Geodesic Equation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

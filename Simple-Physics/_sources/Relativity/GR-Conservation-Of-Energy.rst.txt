@@ -1,0 +1,45 @@
+
+GR: Conservation Of Energy
+=================================
+
+:Date: 26 Sep 2019
+
+Derivation
+-------------
+
+**Step 1** 
+
+.. math::
+	\begin{align*}
+	& \text{I. Earlier we had}\\
+	& ds^2 = -(1-{r_s\over r}) dt^2+(1-{r_s\over r})^{-1} dr^2
+			+r^2 d\theta^2+ r^2 \sin^2 \theta d\phi^2\\
+	& u^2=u\cdot u = g_{ab}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau}
+	   = {ds^2\over -ds^2} =-1\\
+	& (1-{r_s\over r}) {dt\over d\tau}=\text{const}\equiv e \\
+	& r^2 \sin^2 \theta {d\phi \over d\tau}=\text{const}\equiv l \\
+	& \text{II. Consider the case }\theta ={\pi\over 2} \text{ (Plane Orbit)}\\
+	& \Rightarrow   g_{00} ({dt \over d\tau})^2 + g_{11} ({dr \over d\tau})^2 +
+		g_{33} ({d\phi \over d\tau})^2 = -1 \\
+	& \Rightarrow   
+		-(1-{r_s\over r}) ({dt \over d\tau})^2 + 
+		(1-{r_s\over r})^{-1} ({dr \over d\tau})^2 +
+		r^2 ({d\phi \over d\tau})^2 = -1 \\
+	& \Rightarrow   
+		-(1-{r_s\over r})^{-1} e^2 + 
+		(1-{r_s\over r})^{-1} ({dr \over d\tau})^2 +
+		{l^2\over r^2} = -1 \\
+	& \Rightarrow   
+		- e^2 + 
+		 ({dr \over d\tau})^2 +
+		(1-{r_s\over r}){l^2\over r^2} = -(1-{r_s\over r}) \\
+	& \Rightarrow  
+		\underbrace{ {1\over 2}({dr \over d\tau})^2 }_{\text{Kinetic}} +
+		\underbrace{ (-{1\over 2}){r_s\over r}+{1\over 2}{l^2\over r^2}\boxed{-{1\over 2}{r_s l^2\over r^3}} }_{\text{Potential}}= 
+		\underbrace{ {1\over 2}(e^2-1)\equiv \tilde{E} }_{\text{Total}} \\
+	& \;\;\;\; \text{Recall when }r\gg r_s \Rightarrow r_s\approx 2M \\
+	& \;\;\;\; \text{In Newtonian: }\underbrace{ {1\over 2}({dr \over d\tau})^2 }_{\text{Kinetic}} +
+      \underbrace{ (-){M\over r}+{1\over 2}{l^2\over r^2} }_{\text{Potential}}= 
+	  \underbrace{ E }_{\text{Total}} \\
+	\end{align*}
+

@@ -87,7 +87,7 @@ Derivation
 **TO BE ADDED**
 	
 
-**Step 3** Equation of motion
+**Step 3** Equation of Motion: the Geodesic Equation
 
 - Also base on Variational Principle, same as Newton's equation of motion and Shrodinger Equation
 - Specifically, we will maximize **proper time**

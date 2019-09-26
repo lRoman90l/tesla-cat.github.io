@@ -5,6 +5,8 @@ Relativity
 .. toctree::
 	Special-vs-General-Relativity
 	SR-Lorentz-Transformation
+	GR-Solving-Geodesic-Equation
+	GR-Conservation-Of-Energy
 	
 
 
