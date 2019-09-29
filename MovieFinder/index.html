@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-<h2>Using the XMLHttpRequest object</h2>
-
-<button type="button" onclick="loadXMLDoc()">Change Content</button>
-
-<p id="demo"></p>
-
-<script>
-function loadXMLDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML =
-      this.responseText;
-    }
-  };
-  xhttp.open("GET", "https://movie.douban.com/subject_search?search_text=布达佩斯大饭店&cat=1002", true);
-  xhttp.send();
+<script type="text/javascript">
+	
+function httpGet(theUrl){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
 }
-</script>
 
-</body>
-</html>
+theUrl= "http://cj.okzy.tv/inc/api1s.php?ac=detail&t=&pg=&h=&ids=&wd="
+console.log(httpGet(theUrl))
+</script>
