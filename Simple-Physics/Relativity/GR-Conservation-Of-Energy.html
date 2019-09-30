@@ -212,6 +212,25 @@
   &amp; \;\;\;\; \text{In Newtonian: }\underbrace{ {1\over 2}({dr \over d\tau})^2 }_{\text{Kinetic}} +
 \underbrace{ (-){M\over r}+{1\over 2}{l^2\over r^2} }_{\text{Potential}}=
     \underbrace{ E }_{\text{Total}} \\
+  &amp; \text{III. Applications}\\
+  &amp; (1)\text{ Orbit stability:}\\
+  &amp; (2)\text{ Perihelion Shift:}\\
+  &amp; \;\;\;\; r^2  {d\phi \over d\tau}= l \Rightarrow {dr\over d\tau}={l\over r^2}{dr\over d\phi}
+          \;\;\;\; \;\;\;\; u\equiv {1\over r} \\
+  &amp; \;\;\;\; \Rightarrow \tilde{E}={1\over 2}(-l{du\over d\phi})^2
+          -Mu+{1\over 2}l^2u^2-Ml^2u^3\\
+  &amp; \;\;\;\; {d\tilde{E}\over d\phi }\overset{!}{=}0 \Rightarrow
+          {d^2 u\over d\phi^2}-{M\over l^2}+ u-M 3u^2=0 \\
+  &amp; \;\;\;\; \text{Perturbation theory: } u=u_0+c u_1 \;\;\;\; |u_1|\ll |u_0| \\
+  &amp; \;\;\;\; {d^2 u_0\over d\phi^2}-{M\over l^2}+ u_0=0 \;\; [1]\Rightarrow u_0= {M\over l^2}(1+\epsilon\cos\phi) \\
+  &amp; \;\;\;\; {d^2 cu_1\over d\phi^2}+ cu_1-c M 3u_0^2=0 \;\; [2] \\
+  &amp; \;\;\;\; \text{Note that we will let }c=1 \text{ at the end, you can} \\
+  &amp; \;\;\;\; \text{sum up [1] and [2] to check consistency}\\
+  &amp; \;\;\;\; \text{Assume } u_1(\phi)=A+B\phi\sin\phi+C\phi\cos\phi+D\sin2\phi+E\cos2\phi\\
+  &amp; \;\;\;\; \Rightarrow A= {3M^3\over l^4}(1+{\epsilon^2\over 2}), B={3M^3\epsilon\over l^4}, E=-{M^3 \epsilon^2\over 2l^4} \\
+  &amp; \;\;\;\; \text{Finally }u\approx {M\over l^2}(1+\epsilon\cos\phi+ {3M^2\epsilon\over l^2}\phi\sin\phi) \\
+  &amp; \;\;\;\; \approx {M\over l^2}(1+\epsilon\cos[(1-{3M^2\over l^2})\phi]) \Rightarrow \Delta \phi\approx 2\pi(1+{3M^2\over l^2}) \\
+  &amp; \;\;\;\; \text{Semi-major Axis of elliptical orbit: } a={l^2\over M(1-\epsilon^2)}\\
   \end{align*}\end{split}\]</div>
 </div>
 </div>

@@ -49,18 +49,17 @@ Derivation
 	& \;\;\;\;  ds^2 = -(1-{r_s\over r}) dt^2+(1-{r_s\over r})^{-1} dr^2
 			+r^2 d\theta^2+ r^2 \sin^2 \theta d\phi^2 \\
 	& \text{Where } r_s \text{ is called Schwarzschild radius}\\
-	& r_s =2M \text{ will be shown, } M =\text{Mass of the object deforming spacetime}\\
+	& r_s \approx 2M \text{ when }r\gg r_s \text{ and } M =\text{Mass of the object deforming spacetime}\\
 	& \text{4D Spacetime(GR): } x^{(0)}=t, x^{(1)}=r, x^{(2)}=\theta, x^{(3)}=\phi \\
-	& \text{4D Spacetime(GR): } g=g_{\text{Schwarzschild}} \text{ is determined by Mass}
+	& \text{4D Spacetime(GR): } g=g_{\text{Schwarzschild}} \\
 	\end{align*}
 
 
 **Step 2** Some definitions
 
-- In both Special and General Relativity
-
 .. math::
 	\begin{align*}
+	& \textbf{I. Some definitions: SR & GR}\\
 	& \text{Inner Product: } A\cdot B= g_{ab}A^{(a)}B^{(b)} \\
 	& \text{Proper Time: } d\tau :=\sqrt{-ds^2} \\
 	& \text{Four Velocity: } u^{(a)}:={dx^{(a)}\over d\tau}\\
@@ -68,23 +67,22 @@ Derivation
 	& \;\;\;\; = {ds^2\over -ds^2} =-1\\
 	& \text{Four Momentum: } p:=mu\\
 	& \text{Relativistic Energy: } E:=p^{(0)}\\
-	& \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})
-	\end{align*}
-
-- In Special Relativity
-
-.. math::
-	\begin{align*}
+	& \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})\\
+	& \textbf{II. SR}\\
 	& \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\\
 	& \Rightarrow ds^2 = -dt^2+dx^2+dy^2+dz^2 = (-1+\vec{v}^2)dt^2\\
 	& \text{Proper Time: } d\tau :=\sqrt{-ds^2}=\sqrt{1-\vec{v}^2}dt\\
 	& \text{Relativistic Energy: } E:=p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
-	& \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}
+	& \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}\\
+	& \textbf{III. GR}\\
+	& \text{Proper Time: Choose coordinate such that } \\
+	& \;\;\;\; dx^{(1)}=dx^{(2)}=dx^{(3)}=0\Rightarrow d\tau :=\sqrt{-g_{00} }dt =\sqrt{(1-{r_s\over r}) } dt \\ 
+	& \text{Application: Gravitational Redshift} \\
+	& \;\;\;\; \lambda =cT,c=1\Rightarrow {\lambda_{\text{Receiver}} \over \lambda_{\text{Emitter}}}
+		= {\Delta \tau_R \over \Delta \tau_E}={\sqrt{1-r_s/ r_R } \over \sqrt{1-r_s/ r_E }} \\
+	& \;\;\;\; \approx 1-{M\over r_R}+	{M\over r_E}\overset{\Delta r\ll r_E}{\approx} 1+{M\over r_E^2}\Delta r
+		=1+g\Delta r\\
 	\end{align*}
-
-- In General Relativity
-
-**TO BE ADDED**
 	
 
 **Step 3** Equation of Motion: the Geodesic Equation

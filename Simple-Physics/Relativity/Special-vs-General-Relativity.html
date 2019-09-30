@@ -228,16 +228,14 @@
 &amp; \;\;\;\;  ds^2 = -(1-{r_s\over r}) dt^2+(1-{r_s\over r})^{-1} dr^2
                 +r^2 d\theta^2+ r^2 \sin^2 \theta d\phi^2 \\
 &amp; \text{Where } r_s \text{ is called Schwarzschild radius}\\
-&amp; r_s =2M \text{ will be shown, } M =\text{Mass of the object deforming spacetime}\\
+&amp; r_s \approx 2M \text{ when }r\gg r_s \text{ and } M =\text{Mass of the object deforming spacetime}\\
 &amp; \text{4D Spacetime(GR): } x^{(0)}=t, x^{(1)}=r, x^{(2)}=\theta, x^{(3)}=\phi \\
-&amp; \text{4D Spacetime(GR): } g=g_{\text{Schwarzschild}} \text{ is determined by Mass}
+&amp; \text{4D Spacetime(GR): } g=g_{\text{Schwarzschild}} \\
 \end{align*}\end{split}\]</div>
 <p><strong>Step 2</strong> Some definitions</p>
-<ul class="simple">
-<li>In both Special and General Relativity</li>
-</ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
+&amp; \textbf{I. Some definitions: SR &amp; GR}\\
 &amp; \text{Inner Product: } A\cdot B= g_{ab}A^{(a)}B^{(b)} \\
 &amp; \text{Proper Time: } d\tau :=\sqrt{-ds^2} \\
 &amp; \text{Four Velocity: } u^{(a)}:={dx^{(a)}\over d\tau}\\
@@ -245,23 +243,22 @@
 &amp; \;\;\;\; = {ds^2\over -ds^2} =-1\\
 &amp; \text{Four Momentum: } p:=mu\\
 &amp; \text{Relativistic Energy: } E:=p^{(0)}\\
-&amp; \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})
-\end{align*}\end{split}\]</div>
-<ul class="simple">
-<li>In Special Relativity</li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
+&amp; \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})\\
+&amp; \textbf{II. SR}\\
 &amp; \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\\
 &amp; \Rightarrow ds^2 = -dt^2+dx^2+dy^2+dz^2 = (-1+\vec{v}^2)dt^2\\
 &amp; \text{Proper Time: } d\tau :=\sqrt{-ds^2}=\sqrt{1-\vec{v}^2}dt\\
 &amp; \text{Relativistic Energy: } E:=p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
-&amp; \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}
+&amp; \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}\\
+&amp; \textbf{III. GR}\\
+&amp; \text{Proper Time: Choose coordinate such that } \\
+&amp; \;\;\;\; dx^{(1)}=dx^{(2)}=dx^{(3)}=0\Rightarrow d\tau :=\sqrt{-g_{00} }dt =\sqrt{(1-{r_s\over r}) } dt \\
+&amp; \text{Application: Gravitational Redshift} \\
+&amp; \;\;\;\; \lambda =cT,c=1\Rightarrow {\lambda_{\text{Receiver}} \over \lambda_{\text{Emitter}}}
+        = {\Delta \tau_R \over \Delta \tau_E}={\sqrt{1-r_s/ r_R } \over \sqrt{1-r_s/ r_E }} \\
+&amp; \;\;\;\; \approx 1-{M\over r_R}+      {M\over r_E}\overset{\Delta r\ll r_E}{\approx} 1+{M\over r_E^2}\Delta r
+        =1+g\Delta r\\
 \end{align*}\end{split}\]</div>
-<ul class="simple">
-<li>In General Relativity</li>
-</ul>
-<p><strong>TO BE ADDED</strong></p>
 <p><strong>Step 3</strong> Equation of Motion: the Geodesic Equation</p>
 <ul class="simple">
 <li>Also base on Variational Principle, same as Newton’s equation of motion and Shrodinger Equation</li>
