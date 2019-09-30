@@ -194,7 +194,7 @@
 &amp; \textbf{I. Foundation}\\
 &amp; \text{Let }x \text{ be a coordinates system, } x'\text{ be another}\\
 &amp; \text{Basic calculus: } dx'^{(a)} = {\partial x'^{(a)} \over \partial x^{(b)}} d x^{(b)} \\
-&amp; \Rightarrow \boxed{ \delta^a_c = {\partial x'^{(a)} \over \partial x'^{(c)}}  = {\partial x'^{(a)} \over \partial x^{(b)}}   {\partial x^{(b)} \over \partial x'^{(c)}} } \\
+&amp; \Rightarrow \boxed{ \delta'^a_c = {\partial x'^{(a)} \over \partial x'^{(c)}}  = {\partial x'^{(a)} \over \partial x^{(b)}}   {\partial x^{(b)} \over \partial x'^{(c)}} } \boxed{ \delta^a_c = {\partial x^{(a)} \over \partial x'^{(b)}}   {\partial x'^{(b)} \over \partial x^{(c)}} }\\
 &amp; \textbf{II. Tensors: Definition}\\
 &amp; A\text{ is a physical entity, regardless of observer's coordinate system}\\
 &amp; \text{But we can only measure components of it: } A^{(b)}, A'^{(a)} \\
@@ -215,6 +215,20 @@
 &amp; (2)\text{ Inverse Metric Tensor: } g^{(ab)} \text{ is defined by } g^{(ab)} g_{bc} = \delta^a_c\\
 &amp; \;\;\;\; \text{Transformation Law: } g'^{(ab)} = {\partial x'^{(a)} \over \partial x^{(c)}}{\partial x'^{(b)} \over \partial x^{(d)}} g^{(cd)}\\
 &amp; \;\;\;\; \text{Proof: } g'^{(ab)} g'_{bc} = \text{(use above)}= \delta^a_c \Rightarrow \text{Agree with definition}\\
+&amp; (3)\text{ Gradient of }\Phi(x^{(a)}): \partial_a\Phi\equiv {\partial \Phi \over \partial x^{(a)}} \\
+&amp; \;\;\;\; \text{Transformation Law: } \partial'_{a}\Phi'={\partial \Phi' \over \partial x'^{(a)}}=
+{\partial x^{(b)} \over \partial x'^{(a)}}{\partial \Phi \over \partial x^{(b)}} \\
+&amp; (4)\text{ Delta Function: } \\
+&amp; \;\;\;\; \text{Transformation Law: } \delta'^a_c={\partial x'^{(a)} \over \partial x^{(b)}}   {\partial x^{(b)} \over \partial x'^{(c)}}={\partial x'^{(a)} \over \partial x^{(b)}}   {\partial x^{(d)} \over \partial x'^{(c)}} \delta^b_d \\
+&amp; (5)\text{ Gradient of a tensor is tensor when Box=0} \\
+&amp; \;\;\;\; \partial'_{a}A'^{(b)}={\partial A'^{(b)} \over \partial x'^{(a)}}= {\partial \over \partial x'^{(a)}}
+{\partial x'^{(b)} \over \partial x^{(c)}} A^{(c)}
+= {\partial x^{(d)} \over \partial x'^{(a)}} {\partial \over \partial x^{(d)}}
+{\partial x'^{(b)} \over \partial x^{(c)}} A^{(c)} \\
+&amp; \;\;\;\; =\boxed{ {\partial x^{(d)} \over \partial x'^{(a)}}
+{\partial^2 x'^{(b)} \over \partial x^{(c)} \partial x^{(d)}} A^{(c)} }+
+{\partial x^{(d)} \over \partial x'^{(a)}}
+{\partial x'^{(b)} \over \partial x^{(c)}} \partial_d A^{(c)} \\
 &amp; \textbf{IV. Tensors: Operations}\\
 &amp; (1) \text{ Sum: } A^{(ab)}_c+B^{(ab)}_c=C^{(ab)}_c\\
 &amp; (2) \text{ Product: } A^{(ab)}B_c=C^{(ab)}_c\\
