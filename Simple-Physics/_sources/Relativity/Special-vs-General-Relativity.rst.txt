@@ -63,18 +63,23 @@ Derivation
 	& \text{Inner Product: } A\cdot B= g_{ab}A^{(a)}B^{(b)} \\
 	& \text{Proper Time: } d\tau :=\sqrt{-ds^2} \\
 	& \text{Four Velocity: } u^{(a)}:={dx^{(a)}\over d\tau}\\
-	& \Rightarrow u^2=u\cdot u = g_{ab}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau}\\
-	& \;\;\;\; = {ds^2\over -ds^2} =-1\\
+	& \Rightarrow u^2=u\cdot u = g_{ab}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau} = {ds^2\over -ds^2} =-1\\
 	& \text{Four Momentum: } p:=mu\\
 	& \text{Relativistic Energy: } E:=p^{(0)}\\
 	& \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})\\
 	& \textbf{II. SR}\\
-	& \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\\
+	& \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\;\;\;\; |\vec{v}|\le c=1\\
 	& \Rightarrow ds^2 = -dt^2+dx^2+dy^2+dz^2 = (-1+\vec{v}^2)dt^2\\
 	& \text{Proper Time: } d\tau :=\sqrt{-ds^2}=\sqrt{1-\vec{v}^2}dt\\
 	& \text{Relativistic Energy: } E:=p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
 	& \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}\\
-	& \textbf{III. GR}\\
+	& \textbf{III. SR Light}\\
+	& \text{Four Momentum: }p=(E,Ev_x,Ev_y,Ev_z)\\
+	& \text{Relativistic Energy: } E_{\text{Frame of source}}\equiv E_0={1\over \lambda_0}\\
+	& \;\;\;\; \text{(Refer to Lorentz Transformation for below:)}\\
+	& \;\;\;\; v_x=1,v_y=v_z=0 \Rightarrow(E,E,0,0)=\Lambda (E_0,E_0,0,0)\\
+	& \;\;\;\;  \Rightarrow \boxed{ E=E_0 \gamma-E_0 \gamma v \;\;\;\; \text{Doppler effect} }\\
+	& \textbf{IV. GR}\\
 	& \text{Proper Time: Choose coordinate such that } \\
 	& \;\;\;\; dx^{(1)}=dx^{(2)}=dx^{(3)}=0\Rightarrow d\tau :=\sqrt{-g_{00} }dt =\sqrt{(1-{r_s\over r}) } dt \\ 
 	& \text{Application: Gravitational Redshift} \\
@@ -106,7 +111,9 @@ Derivation
 	& {\text{LHS}  \over L} ={\text{LHS}  \over L} \\
 	& \Rightarrow 
 	  \boxed{ {1\over 2}( -{\partial g_{ab}\over \partial x^{(c)}}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau} ) 
-	   = {d\over d\tau}[ -g_{bc} {d{x}^{(b)} \over d\tau}]  \;\;\;\;\text{Geodesic Equation}}
+	   = {d\over d\tau}[ -g_{bc} {dx^{(b)} \over d\tau}]  \;\;\;\;\text{Geodesic Equation}}\\
+	& \Rightarrow 
+	\boxed{ 0 =  {d^2x^{(b)} \over d\tau^2}  \;\;\;\;\text{Geodesic Equation (SR)}} \\
 	\end{align*}
 
 

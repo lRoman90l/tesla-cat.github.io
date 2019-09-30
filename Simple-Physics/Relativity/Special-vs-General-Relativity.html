@@ -90,6 +90,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Coordinate-Transformation-And-Tensors.html">Coordinate Transformation And Tensors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SR-Lorentz-Transformation.html">SR: Lorentz Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OLD-SR-Lorentz-Transformation.html">OLD SR: Lorentz Transformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GR-Solving-Geodesic-Equation.html">GR: Solving Geodesic Equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GR-Conservation-Of-Energy.html">GR: Conservation Of Energy</a></li>
 </ul>
@@ -239,18 +240,23 @@
 &amp; \text{Inner Product: } A\cdot B= g_{ab}A^{(a)}B^{(b)} \\
 &amp; \text{Proper Time: } d\tau :=\sqrt{-ds^2} \\
 &amp; \text{Four Velocity: } u^{(a)}:={dx^{(a)}\over d\tau}\\
-&amp; \Rightarrow u^2=u\cdot u = g_{ab}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau}\\
-&amp; \;\;\;\; = {ds^2\over -ds^2} =-1\\
+&amp; \Rightarrow u^2=u\cdot u = g_{ab}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau} = {ds^2\over -ds^2} =-1\\
 &amp; \text{Four Momentum: } p:=mu\\
 &amp; \text{Relativistic Energy: } E:=p^{(0)}\\
 &amp; \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})\\
 &amp; \textbf{II. SR}\\
-&amp; \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\\
+&amp; \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\;\;\;\; |\vec{v}|\le c=1\\
 &amp; \Rightarrow ds^2 = -dt^2+dx^2+dy^2+dz^2 = (-1+\vec{v}^2)dt^2\\
 &amp; \text{Proper Time: } d\tau :=\sqrt{-ds^2}=\sqrt{1-\vec{v}^2}dt\\
 &amp; \text{Relativistic Energy: } E:=p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
 &amp; \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}\\
-&amp; \textbf{III. GR}\\
+&amp; \textbf{III. SR Light}\\
+&amp; \text{Four Momentum: }p=(E,Ev_x,Ev_y,Ev_z)\\
+&amp; \text{Relativistic Energy: } E_{\text{Frame of source}}\equiv E_0={1\over \lambda_0}\\
+&amp; \;\;\;\; \text{(Refer to Lorentz Transformation for below:)}\\
+&amp; \;\;\;\; v_x=1,v_y=v_z=0 \Rightarrow(E,E,0,0)=\Lambda (E_0,E_0,0,0)\\
+&amp; \;\;\;\;  \Rightarrow \boxed{ E=E_0 \gamma-E_0 \gamma v \;\;\;\; \text{Doppler effect} }\\
+&amp; \textbf{IV. GR}\\
 &amp; \text{Proper Time: Choose coordinate such that } \\
 &amp; \;\;\;\; dx^{(1)}=dx^{(2)}=dx^{(3)}=0\Rightarrow d\tau :=\sqrt{-g_{00} }dt =\sqrt{(1-{r_s\over r}) } dt \\
 &amp; \text{Application: Gravitational Redshift} \\
@@ -280,7 +286,9 @@
 &amp; {\text{LHS}  \over L} ={\text{LHS}  \over L} \\
 &amp; \Rightarrow
   \boxed{ {1\over 2}( -{\partial g_{ab}\over \partial x^{(c)}}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau} )
-   = {d\over d\tau}[ -g_{bc} {d{x}^{(b)} \over d\tau}]  \;\;\;\;\text{Geodesic Equation}}
+   = {d\over d\tau}[ -g_{bc} {dx^{(b)} \over d\tau}]  \;\;\;\;\text{Geodesic Equation}}\\
+&amp; \Rightarrow
+\boxed{ 0 =  {d^2x^{(b)} \over d\tau^2}  \;\;\;\;\text{Geodesic Equation (SR)}} \\
 \end{align*}\end{split}\]</div>
 </div>
 </div>
