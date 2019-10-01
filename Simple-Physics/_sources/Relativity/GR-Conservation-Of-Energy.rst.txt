@@ -37,6 +37,8 @@ Derivation
 		\underbrace{ {1\over 2}({dr \over d\tau})^2 }_{\text{Kinetic}} +
 		\underbrace{ (-{1\over 2}){r_s\over r}+{1\over 2}{l^2\over r^2}\boxed{-{1\over 2}{r_s l^2\over r^3}} }_{\text{Potential } \tilde{V}}= 
 		\underbrace{ {1\over 2}(e^2-1)\equiv \tilde{E} }_{\text{Total}} \\
+	& \;\;\;\; {d\tilde{E}\over d\tau}=0\Rightarrow 
+	{d^2r \over d\tau^2} =-{M\over r^2}+{l^2\over r^3}-{3Ml^2\over r^4}\\
 	& \;\;\;\; \text{Recall when }r\gg r_s \Rightarrow r_s\approx 2M \\
 	& \;\;\;\; \text{In Newtonian: }\underbrace{ {1\over 2}({dr \over d\tau})^2 }_{\text{Kinetic}} +
       \underbrace{ (-){M\over r}+{1\over 2}{l^2\over r^2} }_{\text{Potential}}= 
