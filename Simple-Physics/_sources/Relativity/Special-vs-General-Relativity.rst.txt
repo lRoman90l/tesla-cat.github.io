@@ -59,7 +59,7 @@ Derivation
 
 .. math::
 	\begin{align*}
-	& \textbf{I. Some definitions: SR & GR}\\
+	& \textbf{I. Some definitions: SR & GR }\\
 	& \text{Inner Product: } A\cdot B= g_{ab}A^{(a)}B^{(b)} \\
 	& \text{Proper Time: } d\tau :=\sqrt{-ds^2} \\
 	& \text{Four Velocity: } u^{(a)}:={dx^{(a)}\over d\tau}\\
@@ -67,13 +67,14 @@ Derivation
 	& \text{Four Momentum: } p:=mu\\
 	& \text{Relativistic Energy: } E:=p^{(0)}\\
 	& \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})\\
+	& \text{An useful formula: } \boxed{ u_{\text{Observer}}\cdot p =-m=-E }\\
 	& \textbf{II. SR}\\
 	& \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\;\;\;\; |\vec{v}|\le c=1\\
 	& \Rightarrow ds^2 = -dt^2+dx^2+dy^2+dz^2 = (-1+\vec{v}^2)dt^2\\
 	& \text{Proper Time: } d\tau :=\sqrt{-ds^2}=\sqrt{1-\vec{v}^2}dt\\
 	& \text{Relativistic Energy: } E:=p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
 	& \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}\\
-	& \textbf{III. SR Light}\\
+	& \textbf{III. SR Photon}\\
 	& \text{Four Momentum: }p=(E,Ev_x,Ev_y,Ev_z)\\
 	& \text{Relativistic Energy: } E_{\text{Frame of source}}\equiv E_0={1\over \lambda_0}\\
 	& \;\;\;\; \text{(Refer to Lorentz Transformation for below:)}\\
