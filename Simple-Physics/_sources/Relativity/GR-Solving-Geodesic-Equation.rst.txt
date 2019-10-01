@@ -52,7 +52,8 @@ Derivation
 	& \;\;\;\; \to 
 		{1\over 2} (-{r_s\over r^2}) ({dt \over d\tau})^2 +
 		r ({d\phi \over dt}{dt \over d\tau})^2 = 0 \\
-	& \;\;\;\;  \text{Let } \Omega \equiv {d\phi \over dt} \Rightarrow 
-	 \boxed{ \Omega^2 ={1\over 2} {r_s\over r^3} \underset{r\gg r_s}{=} {M\over r^3} \;\;\;\;\text{Kepler's Third Law}}
+	& \;\;\;\; \text{1. Any observer: }\Omega \equiv {d\phi \over d\tau} \\
+	& \;\;\;\; \text{2. Observer at infinity: } \Omega = {d\phi \over dt} \Rightarrow 
+	  \Omega^2 ={1\over 2} {r_s\over r^3} \underset{r\gg r_s}{=} {M\over r^3} 
 	\end{align*}
 
