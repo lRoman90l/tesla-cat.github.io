@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="OLD SR: Lorentz Transformation" href="OLD-SR-Lorentz-Transformation.html" />
+    <link rel="next" title="GR: Solving Geodesic Equation" href="GR-Solving-Geodesic-Equation.html" />
     <link rel="prev" title="Coordinate Transformation And Tensors" href="Coordinate-Transformation-And-Tensors.html" /> 
 </head>
 
@@ -89,7 +89,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#derivation">Derivation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="OLD-SR-Lorentz-Transformation.html">OLD SR: Lorentz Transformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GR-Solving-Geodesic-Equation.html">GR: Solving Geodesic Equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GR-Conservation-Of-Energy.html">GR: Conservation Of Energy</a></li>
 </ul>
@@ -183,37 +182,29 @@
 <p><strong>Step 1</strong></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-&amp; \text{Notation: In }\Lambda^a_c \text{, } a,c \text{ are indices, }a \text{ is not Power}\\
-&amp; \text{Let } \Lambda^a_c \text{ be any } 4\times 4 \text{ matrix}\\
-&amp; \text{If } \Lambda^a_c \Lambda^b_d g_{ab} =g_{cd} \text{ where } g=g_{\text{Minkowski}} \\
-&amp; \text{Then } \Lambda \text{ is a Lorentz matrix}\\
-&amp; \text{Thus if } x'^{(a)} =\Lambda^a_c x^{(c)} \\
-&amp; \Rightarrow ds'^2 = g_{ab} dx'^{(a)}dx'^{(b)}\\
-&amp; \;\;\;\;  = g_{ab} \Lambda^a_c x^{(c)} \Lambda^b_d x^{(d)}\\
-&amp; \;\;\;\;  = g_{cd} x^{(c)} x^{(d)}\\
-&amp; \;\;\;\;  = ds^2 \\
-&amp; \text{Thus we see Lorentz Transformation is any Transformation}\\
-&amp; \text{that keeps the Distance } ds\text{ invaraint in Minkowski space}
+&amp; S'\text{ frame moves at }\vec{v}=(v,0,0) \text{ viewed from } S \text{ frame, then}\\
+&amp; {\partial x'^{(a)}\over \partial x^{(b)}}=\Lambda^a_b=
+        \begin{pmatrix}
+    \gamma &amp; -\gamma v &amp; 0 &amp; 0 \\
+    -\gamma v &amp; \gamma &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 0 &amp; 0 &amp; 1 \\
+    \end{pmatrix} =
+    \begin{pmatrix}
+    \cosh \Theta &amp; -\sinh\Theta &amp; 0 &amp; 0 \\
+    -\sinh\Theta &amp; \cosh \Theta &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 0 &amp; 0 &amp; 1 \\
+    \end{pmatrix}\\
+&amp; \text{Where }\gamma ={1\over \sqrt{1-v^2} }, \Theta=\tanh^{-1} v \\
+&amp; {\partial x^{(a)}\over \partial x'^{(b)}}=(\Lambda^{-1})^a_b=
+        \begin{pmatrix}
+    \gamma &amp; \gamma v &amp; 0 &amp; 0 \\
+    \gamma v &amp; \gamma &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 0 &amp; 0 &amp; 1 \\
+    \end{pmatrix} \\
 \end{align*}\end{split}\]</div>
-<p><strong>Step 2</strong> A specific case of Lorentz matrix</p>
-<ul class="simple">
-<li>Let <span class="math notranslate nohighlight">\((t,x,y,z)\)</span> represent an <strong>Event</strong> in a <strong>reference frame</strong> that is <strong>at rest</strong>, that is, this event happend at <strong>position</strong> <span class="math notranslate nohighlight">\((x,y,z)\)</span> at <strong>time</strong> <span class="math notranslate nohighlight">\(t\)</span></li>
-<li>Consider another frame moving at speed (normalized by light speed) <span class="math notranslate nohighlight">\(\beta = {v \over c}\)</span> along <span class="math notranslate nohighlight">\(x\)</span> axis relative to the <strong>RestFrame</strong>, then in <strong>MovingFrame</strong>, the same event happens at <span class="math notranslate nohighlight">\((t',x',y',z')=\text{LorentzTransform}(t,x,y,z)\)</span></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-&amp;\Lambda= \left(\array{
-        \gamma &amp; -\gamma\beta \\
-        -\gamma\beta &amp; \gamma
-        \\&amp;&amp;1\\&amp;&amp;&amp;1
-}\right) \\
-&amp; where \\
-&amp; -1\le \beta = {v \over c} \le 1 \\
-&amp; \gamma = {1\over \sqrt{1-\beta^2}}
-\end{align*}\end{split}\]</div>
-<ul class="simple">
-<li><strong>Note</strong>: I haven’t figured out how to <strong>derive</strong> the following from <strong>Step 1</strong>, but the definition <span class="math notranslate nohighlight">\(\Lambda^a_c \Lambda^b_d g_{ab} =g_{cd}\)</span> can be easily <strong>verified</strong></li>
-</ul>
 </div>
 </div>
 
@@ -225,7 +216,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="OLD-SR-Lorentz-Transformation.html" class="btn btn-neutral float-right" title="OLD SR: Lorentz Transformation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="GR-Solving-Geodesic-Equation.html" class="btn btn-neutral float-right" title="GR: Solving Geodesic Equation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Coordinate-Transformation-And-Tensors.html" class="btn btn-neutral float-left" title="Coordinate Transformation And Tensors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -90,7 +90,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Coordinate-Transformation-And-Tensors.html">Coordinate Transformation And Tensors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SR-Lorentz-Transformation.html">SR: Lorentz Transformation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="OLD-SR-Lorentz-Transformation.html">OLD SR: Lorentz Transformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GR-Solving-Geodesic-Equation.html">GR: Solving Geodesic Equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GR-Conservation-Of-Energy.html">GR: Conservation Of Energy</a></li>
 </ul>
@@ -216,7 +215,7 @@
 &amp; \text{2D Polar: } x^{(0)}=r, x^{(1)}=\theta\text{ and } g_{00}=1, g_{11}=r^2, g_{01}=g_{10}=0  \\
 &amp; \text{SR = Special Relativity, GR = General Relativity}\\
 &amp; \text{4D Spacetime(SR): Ignore mass deforming space} \\
-&amp; \;\;\;\; ds^2 = -dt^2+dx^2+dy^2+dz^2\\
+&amp; \;\;\;\; \boxed{ds^2 = -dt^2+dx^2+dy^2+dz^2}\\
 &amp; \text{4D Spacetime(SR): } x^{(0)}=t, x^{(1)}=x, x^{(2)}=y, x^{(3)}=z\\
 &amp; \text{4D Spacetime(SR): } g=g_{\text{Minkowski}}=
         \left(\array{
@@ -225,31 +224,29 @@
                  0 &amp; 0 &amp; 1 &amp; 0  \\
                  0 &amp; 0 &amp; 0 &amp; 1
         }\right)  \\
-&amp; \text{4D Spacetime(GR): Consider mass deforming space} \\
-&amp; \;\;\;\;  ds^2 = -(1-{r_s\over r}) dt^2+(1-{r_s\over r})^{-1} dr^2
-                +r^2 d\theta^2+ r^2 \sin^2 \theta d\phi^2 \\
-&amp; \text{Where } r_s \text{ is called Schwarzschild radius}\\
-&amp; r_s \approx 2M \text{ when }r\gg r_s \text{ and } M =\text{Mass of the object deforming spacetime}\\
+&amp; \text{4D Spacetime(GR): Consider mass M deforming space} \\
+&amp; \;\;\;\;  \boxed{ds^2 = -(1-{r_s\over r}) dt^2+(1-{r_s\over r})^{-1} dr^2
+                +r^2 d\theta^2+ r^2 \sin^2 \theta d\phi^2 }\\
+&amp; \text{Where } r_s=2M \text{ is called Schwarzschild radius}\\
 &amp; \text{4D Spacetime(GR): } x^{(0)}=t, x^{(1)}=r, x^{(2)}=\theta, x^{(3)}=\phi \\
 &amp; \text{4D Spacetime(GR): } g=g_{\text{Schwarzschild}} \\
 \end{align*}\end{split}\]</div>
 <p><strong>Step 2</strong> Some definitions</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-&amp; \textbf{I. Some definitions: SR &amp; GR }\\
+&amp; \textbf{I. Some definitions: SR \&amp; GR }\\
 &amp; \text{Inner Product: } A\cdot B= g_{ab}A^{(a)}B^{(b)} \\
 &amp; \text{Proper Time: } d\tau :=\sqrt{-ds^2} \\
 &amp; \text{Four Velocity: } u^{(a)}:={dx^{(a)}\over d\tau}\\
 &amp; \Rightarrow u^2=u\cdot u = g_{ab}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau} = {ds^2\over -ds^2} =-1\\
-&amp; \text{Four Momentum: } p:=mu\\
-&amp; \text{Relativistic Energy: } E:=p^{(0)}\\
+&amp; \text{Four Momentum: } p:=mu\Rightarrow p^2=-m \;\;\;\; =0 \text{ for Photon}\\
+&amp; \text{Relativistic Energy: } E:=-g_{00} p^{(0)}\\
 &amp; \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})\\
-&amp; \text{An useful formula: } \boxed{ u_{\text{Observer}}\cdot p =-m=-E }\\
 &amp; \textbf{II. SR}\\
-&amp; \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\;\;\;\; |\vec{v}|\le c=1\\
+&amp; \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\;\;\;\; |\vec{v}|\le c\equiv1\\
 &amp; \Rightarrow ds^2 = -dt^2+dx^2+dy^2+dz^2 = (-1+\vec{v}^2)dt^2\\
 &amp; \text{Proper Time: } d\tau :=\sqrt{-ds^2}=\sqrt{1-\vec{v}^2}dt\\
-&amp; \text{Relativistic Energy: } E:=p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
+&amp; \text{Relativistic Energy: } E:=-(-1)p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
 &amp; \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}\\
 &amp; \textbf{III. SR Photon}\\
 &amp; \text{Four Momentum: }p=(E,Ev_x,Ev_y,Ev_z)\\

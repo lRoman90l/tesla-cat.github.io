@@ -7,39 +7,31 @@ SR: Lorentz Transformation
 Derivation
 -------------
 
-**Step 1** 
+**Step 1**
 
 .. math::
 	\begin{align*}
-	& \text{Notation: In }\Lambda^a_c \text{, } a,c \text{ are indices, }a \text{ is not Power}\\
-	& \text{Let } \Lambda^a_c \text{ be any } 4\times 4 \text{ matrix}\\
-	& \text{If } \Lambda^a_c \Lambda^b_d g_{ab} =g_{cd} \text{ where } g=g_{\text{Minkowski}} \\
-	& \text{Then } \Lambda \text{ is a Lorentz matrix}\\
-	& \text{Thus if } x'^{(a)} =\Lambda^a_c x^{(c)} \\
-	& \Rightarrow ds'^2 = g_{ab} dx'^{(a)}dx'^{(b)}\\
-	& \;\;\;\;  = g_{ab} \Lambda^a_c x^{(c)} \Lambda^b_d x^{(d)}\\
-	& \;\;\;\;  = g_{cd} x^{(c)} x^{(d)}\\
-	& \;\;\;\;  = ds^2 \\
-	& \text{Thus we see Lorentz Transformation is any Transformation}\\
-	& \text{that keeps the Distance } ds\text{ invaraint in Minkowski space} 
+	& S'\text{ frame moves at }\vec{v}=(v,0,0) \text{ viewed from } S \text{ frame, then}\\ 
+	& {\partial x'^{(a)}\over \partial x^{(b)}}=\Lambda^a_b=
+		\begin{pmatrix}
+	    \gamma & -\gamma v & 0 & 0 \\
+	    -\gamma v & \gamma & 0 & 0 \\
+	    0 & 0 & 1 & 0 \\
+	    0 & 0 & 0 & 1 \\
+	    \end{pmatrix} =
+	    \begin{pmatrix}
+	    \cosh \Theta & -\sinh\Theta & 0 & 0 \\
+	    -\sinh\Theta & \cosh \Theta & 0 & 0 \\
+	    0 & 0 & 1 & 0 \\
+	    0 & 0 & 0 & 1 \\
+	    \end{pmatrix}\\
+	& \text{Where }\gamma ={1\over \sqrt{1-v^2} }, \Theta=\tanh^{-1} v \\
+	& {\partial x^{(a)}\over \partial x'^{(b)}}=(\Lambda^{-1})^a_b=
+		\begin{pmatrix}
+	    \gamma & \gamma v & 0 & 0 \\
+	    \gamma v & \gamma & 0 & 0 \\
+	    0 & 0 & 1 & 0 \\
+	    0 & 0 & 0 & 1 \\
+	    \end{pmatrix} \\
 	\end{align*}
-
-**Step 2** A specific case of Lorentz matrix
-
-- Let :math:`(t,x,y,z)` represent an **Event** in a **reference frame** that is **at rest**, that is, this event happend at **position** :math:`(x,y,z)` at **time** :math:`t`
-- Consider another frame moving at speed (normalized by light speed) :math:`\beta = {v \over c}` along :math:`x` axis relative to the **RestFrame**, then in **MovingFrame**, the same event happens at :math:`(t',x',y',z')=\text{LorentzTransform}(t,x,y,z)`
-
-.. math::
-	\begin{align*}
-	&\Lambda= \left(\array{
-		\gamma & -\gamma\beta \\
-		-\gamma\beta & \gamma
-		\\&&1\\&&&1
-	}\right) \\
-	& where \\
-	& -1\le \beta = {v \over c} \le 1 \\
-	& \gamma = {1\over \sqrt{1-\beta^2}}
-	\end{align*}
-
-- **Note**: I haven't figured out how to **derive** the following from **Step 1**, but the definition :math:`\Lambda^a_c \Lambda^b_d g_{ab} =g_{cd}` can be easily **verified**
 

@@ -36,7 +36,7 @@ Derivation
 	& \text{2D Polar: } x^{(0)}=r, x^{(1)}=\theta\text{ and } g_{00}=1, g_{11}=r^2, g_{01}=g_{10}=0  \\
 	& \text{SR = Special Relativity, GR = General Relativity}\\
 	& \text{4D Spacetime(SR): Ignore mass deforming space} \\
-	& \;\;\;\; ds^2 = -dt^2+dx^2+dy^2+dz^2\\
+	& \;\;\;\; \boxed{ds^2 = -dt^2+dx^2+dy^2+dz^2}\\
 	& \text{4D Spacetime(SR): } x^{(0)}=t, x^{(1)}=x, x^{(2)}=y, x^{(3)}=z\\
 	& \text{4D Spacetime(SR): } g=g_{\text{Minkowski}}=
 		\left(\array{
@@ -45,11 +45,10 @@ Derivation
 			 0 & 0 & 1 & 0  \\
 			 0 & 0 & 0 & 1 
 		}\right)  \\
-	& \text{4D Spacetime(GR): Consider mass deforming space} \\
-	& \;\;\;\;  ds^2 = -(1-{r_s\over r}) dt^2+(1-{r_s\over r})^{-1} dr^2
-			+r^2 d\theta^2+ r^2 \sin^2 \theta d\phi^2 \\
-	& \text{Where } r_s \text{ is called Schwarzschild radius}\\
-	& r_s \approx 2M \text{ when }r\gg r_s \text{ and } M =\text{Mass of the object deforming spacetime}\\
+	& \text{4D Spacetime(GR): Consider mass M deforming space} \\
+	& \;\;\;\;  \boxed{ds^2 = -(1-{r_s\over r}) dt^2+(1-{r_s\over r})^{-1} dr^2
+			+r^2 d\theta^2+ r^2 \sin^2 \theta d\phi^2 }\\
+	& \text{Where } r_s=2M \text{ is called Schwarzschild radius}\\
 	& \text{4D Spacetime(GR): } x^{(0)}=t, x^{(1)}=r, x^{(2)}=\theta, x^{(3)}=\phi \\
 	& \text{4D Spacetime(GR): } g=g_{\text{Schwarzschild}} \\
 	\end{align*}
@@ -59,20 +58,19 @@ Derivation
 
 .. math::
 	\begin{align*}
-	& \textbf{I. Some definitions: SR & GR }\\
+	& \textbf{I. Some definitions: SR \& GR }\\
 	& \text{Inner Product: } A\cdot B= g_{ab}A^{(a)}B^{(b)} \\
 	& \text{Proper Time: } d\tau :=\sqrt{-ds^2} \\
 	& \text{Four Velocity: } u^{(a)}:={dx^{(a)}\over d\tau}\\
 	& \Rightarrow u^2=u\cdot u = g_{ab}{dx^{(a)} \over d\tau}{dx^{(b)} \over d\tau} = {ds^2\over -ds^2} =-1\\
-	& \text{Four Momentum: } p:=mu\\
-	& \text{Relativistic Energy: } E:=p^{(0)}\\
+	& \text{Four Momentum: } p:=mu\Rightarrow p^2=-m \;\;\;\; =0 \text{ for Photon}\\
+	& \text{Relativistic Energy: } E:=-g_{00} p^{(0)}\\
 	& \text{Relativistic Momentum: }\vec{p}:=(p^{(1)},p^{(2)},p^{(3)})\\
-	& \text{An useful formula: } \boxed{ u_{\text{Observer}}\cdot p =-m=-E }\\
 	& \textbf{II. SR}\\
-	& \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\;\;\;\; |\vec{v}|\le c=1\\
+	& \text{Velocity: } \vec{v}=({dx\over dt},{dy\over dt},{dz\over dt})\;\;\;\; |\vec{v}|\le c\equiv1\\
 	& \Rightarrow ds^2 = -dt^2+dx^2+dy^2+dz^2 = (-1+\vec{v}^2)dt^2\\
 	& \text{Proper Time: } d\tau :=\sqrt{-ds^2}=\sqrt{1-\vec{v}^2}dt\\
-	& \text{Relativistic Energy: } E:=p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
+	& \text{Relativistic Energy: } E:=-(-1)p^{(0)}=m{dt\over d\tau}=m {1\over \sqrt{1-\vec{v}^2}}\\
 	& \text{Relativistic Momentum: }\vec{p}=m {\vec{v}\over \sqrt{1-\vec{v}^2}}\\
 	& \textbf{III. SR Photon}\\
 	& \text{Four Momentum: }p=(E,Ev_x,Ev_y,Ev_z)\\
