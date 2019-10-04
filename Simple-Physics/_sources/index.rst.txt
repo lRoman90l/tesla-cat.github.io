@@ -82,6 +82,7 @@ This project is actively maintained by `Ding Ruiqi`_ , a 4th year undergraduate 
 
 .. toctree::
 	About-Me/index
+	Math/index
 	Relativity/index
 	Quantum-Mechanics-Feynman-Path-Integral/index
 	Quantum-Computation/index
@@ -91,6 +92,7 @@ This project is actively maintained by `Ding Ruiqi`_ , a 4th year undergraduate 
 	Biomolecular-Physics/index
 	Papers-Quantum-Computers/index
 	Experimental-Physics-SoC-FPGA-Design/index
+	Django/index
 	
 
 
