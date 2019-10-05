@@ -4,6 +4,35 @@ Nodejs RESTful API Production
 
 :Date: 5 Oct 2019
 
+Backend Main
+------------------
+
+- To use:
+
+.. code-block:: console
+
+	sudo service mongod start
+	node index.js
+
+- **index.js**
+
+.. code-block:: javascript
+
+	const app = require('express')()
+	app.get('/',(req, res)=>{
+	    res.sendFile(__dirname+'/index.html')
+	})
+
+	const SimpleAPI = require("./my_modules/SimpleAPI.js")
+	const simpleAPI = new SimpleAPI(
+	    hostIP = 'localhost',
+	    port = 3000,
+	    app,
+	    appName = "SimpleAPI",
+	    myAddress = "dingruiqi97m@gmail.com", 
+	    myPassword = "bomb4065"
+	)
+
 Backend Module
 ------------------
 
@@ -32,7 +61,7 @@ Backend Module
 	        })
 	        app.post('/SimpleAPI',jsonParser,(req,res)=>{
 	            if(req.body.type == "setAccount"){
-	                self.setAccount(req)
+	                self.setAccount(req,res)
 	            }
 	            else{
 	                error = self.verifyUser(req)
@@ -61,23 +90,22 @@ Backend Module
 	        var secretCode = require('crypto').randomBytes(48)
 	        
 	        // register secretCode in database
-	        var state = "ToBeVerified"+secretCode
+	        req.body.setAccount.state = "ToBeVerified"+secretCode
+	        var account = new self.AccountModel(req.body.setAccount)
 
 	        // send user email for verification
-	        var receiverAddress = req.body.setAccount.receiverAddress
+	        var email = req.body.setAccount.email
 	        var subject = self.appName+": Set Account Verification"
 	                
 	        var htmlPromise = require('ejs').renderFile(__dirname+'/SetAccountVerification.ejs',{
 	            subject: subject, 
 	            host: self.host, 
-	            receiverAddress: receiverAddress, 
-	            password: req.body.setAccount.password, 
-	            state: state
+	            setAccount: req.body.setAccount
 	        });
 
-	        htmlPromise.then(html =>{
-	            console.log(html)
-	            self.simpleGmail.send(receiverAddress, subject, html)
+	        htmlPromise.then( (html)=>{
+	            self.simpleGmail.send(email, subject, html)
+	            res.send(html)
 	        })         
 	    }
 
@@ -95,48 +123,50 @@ Backend Module
 
 	    defineSchemasAndModels(){
 	        var self = this
-	        var KittySchema = new self.mongoose.Schema({name:String})
-	        KittySchema.methods.speak=function(){
-	            console.log(this.name)
-	        }
-	        self.KittyModel = self.mongoose.model('KittyModel', KittySchema)
+	        var AccountSchema = new self.mongoose.Schema({
+	            // for security
+	            type: String,
+	            email: String,
+	            password: String,
+	            state: String,
+	            // for search
+	            city: String,
+	            gender: String,
+	            occupation: String,
+	            labels: [String],
+	            // for display
+	            display: String
+	        })
+	        self.AccountModel = self.mongoose.model('AccountModel', AccountSchema)
+	    
+	        var OrderSchema = new self.mongoose.Schema({
+	            // for security
+	            buyerEmail: String,
+	            sellerEmail: String,
+	            states: [String],
+	            // for search
+	            productName: String,
+	            buyFrom: String,
+	            priceRange: [Number],
+	            dateRange: [Date],
+	            mailingAddress: String,
+	            bountyRatio: Number,
+	            // for display
+	            display: String
+	        })
+	        self.OrderModel = self.mongoose.model('OrderModel', OrderSchema)
 	    }
 
 	    test(){
 	        var self = this
-	        var fluffy = new self.KittyModel({name:'fluffy'})
-	        fluffy.save((err, fluffy)=>{
-	            if (err) return console.error(err)
-	            fluffy.speak()
-	        })
-	        self.KittyModel.find((err,kittens)=>{
-	            console.log(kittens)
+	        var account = new self.AccountModel({email:'test'})
+	        account.save()
+	        self.AccountModel.find((err,accounts)=>{
+	            console.log(accounts)
 	        })
 	    }
 	}
 
-
-Backend Main
-------------------
-
-- **index.js**
-
-.. code-block:: javascript
-
-	const app = require('express')()
-	app.get('/',(req, res)=>{
-	    res.sendFile(__dirname+'/index.html')
-	})
-
-	const SimpleAPI = require("./my_modules/SimpleAPI.js")
-	const simpleAPI = new SimpleAPI(
-	    hostIP = 'localhost',
-	    port = 3000,
-	    app,
-	    appName = "SimpleAPI",
-	    myAddress = "dingruiqi97m@gmail.com", 
-	    myPassword = "ThisIsRealPassword"
-	)
 
 Backend Email Verification Template
 --------------------------------------
@@ -145,19 +175,20 @@ Backend Email Verification Template
 
 .. code-block:: html
 
-	  <h><%= subject %></h>
+	<h><%= subject %></h>
 
-	  <p>receiverAddress: <%= receiverAddress %></p>
-	  <p>password: <%= password %></p>
-	  <p>state: <%= state %></p>
+	<p>setAccount: <%= JSON.stringify(setAccount) %></p>
 
-	  <button><a href="
-	    <%= host+'/SimpleAPI/setAccountVerify?'
-	                  +'receiverAddress='+receiverAddress
-	                  +'&password='+password
-	                  +'&state='+state
-	    %>" class="button">Confirm
-	  </a></button>
+	<button>
+	    <a href="
+	        <%= host+'/SimpleAPI/setAccountVerify?'
+	            +'type='        + setAccount.type
+	            +'&email='      + setAccount.email
+	            +'&password='   + setAccount.password
+	            +'&state='      + setAccount.state
+	        %>"
+	    >Confirm</a>
+	</button>
 
 Frontend For Testing
 --------------------------------------
@@ -166,13 +197,17 @@ Frontend For Testing
 
 .. code-block:: html
 
-	Hello!
-	<div id="demo"></div>
+	<h>Hello!</h>
+
+	<h3>setAccount verification email will look like this:</h3>
+	<div id="setAccount"></div>
+
 	<script>
+
 	  var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
-	      document.getElementById("demo").innerHTML = this.responseText;
+	      document.getElementById("setAccount").innerHTML = this.responseText;
 	    }
 	  };
 	  xhttp.open("POST", "http://localhost:3000/SimpleAPI", true);
@@ -180,7 +215,12 @@ Frontend For Testing
 	  
 	  var reqbody={
 	    type:"setAccount",
-	    setAccount: ["416640656@qq.com","password","data"]
+	    setAccount: {
+	      type: "buyer",
+	      email: "416640656@qq.com",
+	      password: "qwerty",
+	    }
 	  };
 	  xhttp.send(JSON.stringify(reqbody));
+
 	</script>
