@@ -4,5 +4,176 @@ Nodejs RESTful API Production
 
 :Date: 5 Oct 2019
 
+Backend Module
+------------------
 
+- **my_modules/SimpleAPI.js**
+- **To Be Completed: sqlite**
+- **Dependencies**
+	- **./SimpleGmail.js**
+	- **crypto**
+	- **ejs**
 
+.. code-block:: javascript
+
+	module.exports = class SimpleAPI{
+	    constructor(hostIP, port, app, appName, myAddress, myPassword){
+	        var self = this
+	        self.appName = appName
+	        self.hostIP = hostIP
+	        self.port = port
+	        // express server
+	        const jsonParser = require('body-parser').json()
+
+	        app.get('/SimpleAPI/setAccountVerify',(req, res)=>{
+	            //self.verifyEmail(req)
+	            console.log(req.query)
+	            res.send("Account has been set!")
+	        })
+	        app.post('/SimpleAPI',jsonParser,(req,res)=>{
+	            if(req.body.type == "setAccount"){
+	                self.setAccount(req)
+	            }
+	            else{
+	                error = self.verifyUser(req)
+	                if(error) res.send(JSON.stringify(error))
+	                else self.serve(req,res)
+	            }
+	        })
+	        app.listen(port, hostIP, () => console.log("http://"+hostIP+":"+port))        
+	        
+	        // mysql database 
+	        /*
+	        self.mysql = require('mysql').createConnection({
+	            host: "localhost", user: "SimpleAPI",
+	            password: "SimpleAPIpassword", database: "simpleAPI" 
+	        })
+	        self.mysql.connect((err)=>{
+	            if(err) throw err;
+	            self.mysql.query(
+	                "CREATE TABLE IF NOT EXISTS accounts "
+	                +"(email VARCHAR(255), password VARCHAR(255), data TEXT, state VARCHAR(255))"
+	            )
+	        })  
+	        */
+
+	        // SimpleGmail
+	        const SimpleGmail = require("./SimpleGmail.js")
+	        self.simpleGmail = new SimpleGmail(myAddress, myPassword)
+	    }
+
+	    setAccount(req,res){
+	        var self = this
+	        var secretCode = require('crypto').randomBytes(48)
+	        
+	        // register secretCode in database
+	        var state = "ToBeVerified"+secretCode
+	        var value = req.body.setAccount.push(state)
+	        /*
+	        self.mysql.connect((err)=>{
+	            if(err) throw err;
+	            var query = "INSERT INTO accounts (email,password,data,state) VALUES ?"
+	            self.mysql.query(query,[value],(err,result)=>{
+	                if(err) res.send(err)
+	                else res.send("success")
+	            })
+	        })    
+	        */
+
+	        // send user email for verification
+	        var receiverAddress = req.body.setAccount[0]
+	        var password = req.body.setAccount[1]
+	        var subject = self.appName+": Set Account Verification"
+	                
+	        var htmlPromise = require('ejs').renderFile(__dirname+'/SetAccountVerification.ejs',{
+	            subject: subject, receiverAddress: receiverAddress, 
+	            password: password, host: self.hostIP+":"+self.port, state: state
+	        });
+
+	        htmlPromise.then(html =>{
+	            console.log(html)
+	            self.simpleGmail.send(receiverAddress, subject, html)
+	        })         
+	    }
+
+	    verifyEmail(req){
+	        // check if secretCode in req matches with one in database
+	    }    
+
+	    verifyUser(req){
+	        // use passport.js for security
+	    }
+
+	    serve(req,res){
+
+	    }
+	}
+
+Backend Main
+------------------
+
+- **index.js**
+
+.. code-block:: javascript
+
+	const app = require('express')()
+	app.get('/',(req, res)=>{
+	    res.sendFile(__dirname+'/index.html')
+	})
+
+	const SimpleAPI = require("./my_modules/SimpleAPI.js")
+	const simpleAPI = new SimpleAPI(
+	    hostIP = 'localhost',
+	    port = 3000,
+	    app,
+	    appName = "SimpleAPI",
+	    myAddress = "dingruiqi97m@gmail.com", 
+	    myPassword = "ThisIsRealPassword"
+	)
+
+Backend Email Verification Template
+--------------------------------------
+
+- **my_modules/SetAccountVerification.ejs**
+
+.. code-block:: html
+
+	  <h><%= subject %></h>
+
+	  <p>receiverAddress: <%= receiverAddress %></p>
+	  <p>password: <%= password %></p>
+	  <p>state: <%= state %></p>
+
+	  <button><a href="
+	    <%= 'http://'+host+'/SimpleAPI/setAccountVerify?'
+	                  +'receiverAddress='+receiverAddress
+	                  +'&password='+password
+	                  +'&state='+state
+	    %>" class="button">Confirm
+	  </a></button>
+
+Frontend For Testing
+--------------------------------------
+
+- **index.html**
+
+.. code-block:: html
+
+	Hello!
+	<div id="demo"></div>
+	<script>
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	      document.getElementById("demo").innerHTML = this.responseText;
+	    }
+	  };
+	  xhttp.open("POST", "http://localhost:3000/SimpleAPI", true);
+	  xhttp.setRequestHeader("Content-type", "application/json");
+	  
+	  var reqbody={
+	    type:"setAccount",
+	    setAccount: ["416640656@qq.com","password","data"]
+	  };
+	  xhttp.send(JSON.stringify(reqbody));
+	</script>
