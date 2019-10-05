@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nodejs RESTful API &mdash; Simple Physics  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Verilog DataSender" href="Verilog-DataSender.html" />
+    <link rel="prev" title="Nodejs Talking To C Executable 2" href="Nodejs-Talking-To-C-Executable-2.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Simple Physics
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Math/index.html">Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Relativity/index.html">Relativity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quantum-Mechanics-Feynman-Path-Integral/index.html">Quantum Mechanics: Feynman Path Integral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quantum-Computation/index.html">Quantum Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quantum-Optics/index.html">Quantum Optics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Density-Functional-Theory/index.html">Density Functional Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Thermodynamics-And-Statistical-Mechanics/index.html">Thermodynamics And Statistical Mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Biomolecular-Physics/index.html">Biomolecular Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Papers-Quantum-Computers/index.html">Papers: Quantum Computers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Experimental Physics: SoC FPGA Design</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Design-Plan.html">Design Plan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Linux-Tips.html">Linux Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-FPGA-Part.html">Processor-FPGA Communication: FPGA Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Processor-Part.html">Processor-FPGA Communication: Processor Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FAILED-Processor-FPGA-Communication-Using-FIFO-FPGA-Part.html">FAILED Processor-FPGA Communication: Using FIFO FPGA Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FAILED-Processor-FPGA-Communication-Using-FIFO-Processor-Part.html">FAILED Processor-FPGA Communication: Using FIFO Processor Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Using-FIFO-FPGA-Part.html">Processor-FPGA Communication: Using FIFO FPGA Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Using-FIFO-Processor-Part.html">Processor-FPGA Communication: Using FIFO Processor Part</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Nodejs-Talking-To-C-Executable-1.html">Nodejs Talking To C Executable 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Nodejs-Talking-To-C-Executable-2.html">Nodejs Talking To C Executable 2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Nodejs RESTful API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-the-idea">What is the idea?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#backend-server">Backend Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frontend-client">Frontend Client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Verilog-DataSender.html">Verilog DataSender</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Django/index.html">Django</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Simple Physics</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Experimental Physics: SoC FPGA Design</a> &raquo;</li>
+        
+      <li>Nodejs RESTful API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/Nodejs-RESTful-API.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nodejs-restful-api">
+<h1>Nodejs RESTful API<a class="headerlink" href="#nodejs-restful-api" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">5 Oct 2019</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="what-is-the-idea">
+<h2>What is the idea?<a class="headerlink" href="#what-is-the-idea" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>In the previous parts we use <strong>Socket.io + WebSocket</strong> to handle communication between nodejs server and client</li>
+<li>In this part we make an alternative: <strong>RESTful API</strong></li>
+</ul>
+</div>
+<div class="section" id="backend-server">
+<h2>Backend Server<a class="headerlink" href="#backend-server" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>index.js</strong></li>
+</ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)()</span>
+<span class="kd">var</span> <span class="nx">jsonParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;body-parser&#39;</span><span class="p">).</span><span class="nx">json</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="nx">__dirname</span><span class="o">+</span><span class="s1">&#39;/index.html&#39;</span><span class="p">);</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">jsonParser</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&quot;You sent: &quot;</span><span class="o">+</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">));</span>
+<span class="p">})</span>
+
+<span class="kd">var</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`http://localhost:</span><span class="si">${</span><span class="nx">port</span><span class="si">}</span><span class="sb">`</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="frontend-client">
+<h2>Frontend Client<a class="headerlink" href="#frontend-client" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>index.html</strong></li>
+</ul>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;demo&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kd">var</span> <span class="nx">xhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+        <span class="nx">xhttp</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;demo&quot;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+
+        <span class="nx">xhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;http://localhost:3000&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+        <span class="nx">xhttp</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">);</span>
+
+        <span class="kd">var</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span><span class="nx">key</span><span class="o">:</span><span class="s2">&quot;value&quot;</span><span class="p">};</span>
+        <span class="nx">xhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">object</span><span class="p">));</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Verilog-DataSender.html" class="btn btn-neutral float-right" title="Verilog DataSender" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Nodejs-Talking-To-C-Executable-2.html" class="btn btn-neutral float-left" title="Nodejs Talking To C Executable 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tesla Cat
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
