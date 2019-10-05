@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Design Plan &mdash; Simple Physics  documentation</title>
+  <title>Nodejs RESTful API Production &mdash; Simple Physics  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Linux Tips" href="Linux-Tips.html" />
-    <link rel="prev" title="Experimental Physics: SoC FPGA Design" href="index.html" /> 
+    <link rel="next" title="Verilog DataSender" href="Verilog-DataSender.html" />
+    <link rel="prev" title="Nodejs RESTful API Email Verification" href="Nodejs-RESTful-API-Email-Verification.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,15 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Biomolecular-Physics/index.html">Biomolecular Physics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Papers-Quantum-Computers/index.html">Papers: Quantum Computers</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Experimental Physics: SoC FPGA Design</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Design Plan</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#note">Note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#what-are-we-gonna-do">What are we gonna do?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#front-end">Front End</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#back-end">Back End</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#quartus-project">Quartus Project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tutorials">Tutorials</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="Design-Plan.html">Design Plan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Linux-Tips.html">Linux Tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-FPGA-Part.html">Processor-FPGA Communication: FPGA Part</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Processor-Part.html">Processor-FPGA Communication: Processor Part</a></li>
@@ -112,7 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Nodejs-Talking-To-C-Executable-2.html">Nodejs Talking To C Executable 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Nodejs-RESTful-API-Basic.html">Nodejs RESTful API Basic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Nodejs-RESTful-API-Email-Verification.html">Nodejs RESTful API Email Verification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Nodejs-RESTful-API-Production.html">Nodejs RESTful API Production</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Nodejs RESTful API Production</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-DataSender.html">Verilog DataSender</a></li>
 </ul>
 </li>
@@ -164,13 +156,13 @@
         
           <li><a href="index.html">Experimental Physics: SoC FPGA Design</a> &raquo;</li>
         
-      <li>Design Plan</li>
+      <li>Nodejs RESTful API Production</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/Design-Plan.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/Nodejs-RESTful-API-Production.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -183,68 +175,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="design-plan">
-<h1>Design Plan<a class="headerlink" href="#design-plan" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="note">
-<h2>Note<a class="headerlink" href="#note" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>This is originally a project documentation, some files mentioned in this series can be found at <a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System">this GitHub repo of mine</a></li>
-</ul>
-</div>
-<div class="section" id="what-are-we-gonna-do">
-<h2>What are we gonna do?<a class="headerlink" href="#what-are-we-gonna-do" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>The Cyclone V SoC FPGA can be used as <strong>sequencer, counter</strong> etc. for the lab</li>
-<li>The FPGA passes the data it collected to the HPS processor via FIFO, the processor has a server running on it, so any client can get the data via XML http request etc.</li>
-<li>The client can also send data, through processor server, to control the FPGA</li>
-<li>We will use DE10-NANO Dev Board to do the above:</li>
-</ul>
-<div class="figure">
-<img alt="../_images/DE10_NANO_Dev_Board.jpg" src="../_images/DE10_NANO_Dev_Board.jpg" />
-</div>
-</div>
-<div class="section" id="front-end">
-<h2>Front End<a class="headerlink" href="#front-end" title="Permalink to this headline">¶</a></h2>
-<p>Technologies Used:</p>
-<ul class="simple">
-<li>Bootstrap 4</li>
-<li>Plotly.js</li>
-</ul>
-<p>Notes:</p>
-<ul class="simple">
-<li>If the project scales, I will use <strong>React.js</strong> or <strong>Vue.js</strong>, but currently there is no such need</li>
-</ul>
-</div>
-<div class="section" id="back-end">
-<h2>Back End<a class="headerlink" href="#back-end" title="Permalink to this headline">¶</a></h2>
-<p>Technologies Used:</p>
-<ul class="simple">
-<li>Node.js / Python as server</li>
-</ul>
-</div>
-<div class="section" id="quartus-project">
-<h2>Quartus Project<a class="headerlink" href="#quartus-project" title="Permalink to this headline">¶</a></h2>
-<p>Uses Cyclone V SoC: HPS (processor) + FPGA</p>
-<p>What I’m already familiar with:</p>
-<ul class="simple">
-<li>C</li>
-<li>Verilog</li>
-<li>Quartus</li>
-</ul>
-<p>What I need to learn:</p>
-<ul class="simple">
-<li>Communication between HPS and FPGA</li>
-</ul>
-</div>
-<div class="section" id="tutorials">
-<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/blob/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project/DE10-Nano_User_manual_a_b.pdf">DE10 Nano User Manual Chapter 7 Examples for using both HPS SoC and FGPA</a></li>
-<li><a class="reference external" href="https://people.ece.cornell.edu/land/courses/ece5760/DE1_SOC/HPS_peripherials/FPGA_addr_index.html">DE1 SoC ARM HPS and FPGA Addresses and Communication Cornell ece5760</a></li>
-<li><strong>Main page of the above:</strong> <a class="reference external" href="https://people.ece.cornell.edu/land/courses/ece5760/#reading">ece5760 Reading Material</a></li>
-<li><strong>YouTube series of the above:</strong> <a class="reference external" href="https://www.youtube.com/watch?v=0XRn5KbnzYA&amp;list=PLKcjQ_UFkrd7UcOVMm39A6VdMbWWq-e_c&amp;index=2">Cyclone 5 and memory mapping</a></li>
-</ul>
-</div>
+  <div class="section" id="nodejs-restful-api-production">
+<h1>Nodejs RESTful API Production<a class="headerlink" href="#nodejs-restful-api-production" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">5 Oct 2019</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -255,10 +195,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Linux-Tips.html" class="btn btn-neutral float-right" title="Linux Tips" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Verilog-DataSender.html" class="btn btn-neutral float-right" title="Verilog DataSender" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="Experimental Physics: SoC FPGA Design" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Nodejs-RESTful-API-Email-Verification.html" class="btn btn-neutral float-left" title="Nodejs RESTful API Email Verification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

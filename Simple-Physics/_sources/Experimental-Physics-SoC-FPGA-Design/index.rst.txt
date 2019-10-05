@@ -13,7 +13,9 @@ Experimental Physics: SoC FPGA Design
 	Processor-FPGA-Communication-Using-FIFO-Processor-Part
 	Nodejs-Talking-To-C-Executable-1
 	Nodejs-Talking-To-C-Executable-2
-	Nodejs-RESTful-API
+	Nodejs-RESTful-API-Basic
+	Nodejs-RESTful-API-Email-Verification
+	Nodejs-RESTful-API-Production
 	Verilog-DataSender
 	
 	

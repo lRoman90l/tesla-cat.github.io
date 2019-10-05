@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Nodejs RESTful API &mdash; Simple Physics  documentation</title>
+  <title>Nodejs RESTful API Basic &mdash; Simple Physics  documentation</title>
   
 
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Verilog DataSender" href="Verilog-DataSender.html" />
+    <link rel="next" title="Nodejs RESTful API Email Verification" href="Nodejs-RESTful-API-Email-Verification.html" />
     <link rel="prev" title="Nodejs Talking To C Executable 2" href="Nodejs-Talking-To-C-Executable-2.html" /> 
 </head>
 
@@ -102,12 +102,16 @@
 <li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Using-FIFO-Processor-Part.html">Processor-FPGA Communication: Using FIFO Processor Part</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Nodejs-Talking-To-C-Executable-1.html">Nodejs Talking To C Executable 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Nodejs-Talking-To-C-Executable-2.html">Nodejs Talking To C Executable 2</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Nodejs RESTful API</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Nodejs RESTful API Basic</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#what-is-the-idea">What is the idea?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#backend-server">Backend Server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#frontend-client">Frontend Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#username-password-authentication">Username/Password Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#facebook-authentication">Facebook authentication</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="Nodejs-RESTful-API-Email-Verification.html">Nodejs RESTful API Email Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Nodejs-RESTful-API-Production.html">Nodejs RESTful API Production</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-DataSender.html">Verilog DataSender</a></li>
 </ul>
 </li>
@@ -159,13 +163,13 @@
         
           <li><a href="index.html">Experimental Physics: SoC FPGA Design</a> &raquo;</li>
         
-      <li>Nodejs RESTful API</li>
+      <li>Nodejs RESTful API Basic</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/Nodejs-RESTful-API.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/Nodejs-RESTful-API-Basic.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -178,8 +182,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nodejs-restful-api">
-<h1>Nodejs RESTful API<a class="headerlink" href="#nodejs-restful-api" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="nodejs-restful-api-basic">
+<h1>Nodejs RESTful API Basic<a class="headerlink" href="#nodejs-restful-api-basic" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -240,6 +244,47 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="username-password-authentication">
+<h2>Username/Password Authentication<a class="headerlink" href="#username-password-authentication" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The following is from <a class="reference external" href="https://stackoverflow.com/questions/14572600/passport-js-restful-auth">here</a></li>
+</ul>
+<p>Let’s look at how plain old authentication works first.</p>
+<ul class="simple">
+<li>The user connects to <a class="reference external" href="https://example.com">https://example.com</a></li>
+<li>The server serves a rich Javascript application which renders the initial page. Somehwere in the page there is a login form.</li>
+<li>Many of the sections of this single page app haven’t been populated with data due to the user not being logged in. All these sections have an event listener on a “login” event. All this is client side stuff, the server does not know of these events.</li>
+<li>User enters his/her login and password and hits the submit button, which triggers a Javascript handler to record the username and password in client side variables. Then this handler triggers the “login” event. Again, this is all client side action, credentials were not sent to the server yet.</li>
+<li>The listeners of the “login” event are invoked. Each of these now needs to send one or more requests to the RESTful API at <a class="reference external" href="https://example.com/api">https://example.com/api</a> to obtain the user specific data to render on the page. Every single request they send to the web service will include the username and password, possibly in the form of HTTP Basic authentication, since the service being RESTful isn’t allowed to maintain client state from one request to the next. Since the web service is on secure HTTP the password is safely encrypted during transit.</li>
+<li>The web service at <a class="reference external" href="https://example.com/api">https://example.com/api</a> receives a bunch of individual requests, each with authentication information. The username and password in each request is checked against the user database and if found correct the requested function executes and data is returned to the client in JSON format. If username and password do not match an error is sent to the client in the form of a 401 HTTP error code.</li>
+<li>Instead of forcing clients to send username and password with every request you can have a “get_access_token” function in your RESTful service that takes the username and password and responds with a token, which is some sort of cryptographic hash that is unique and has some expiration date associated with it. These tokens are stored in the database with each user. Then the client sends the access token in subsequent requests. The access token will then be validated against the database instead of the username and password.</li>
+<li>Non browser client applications like phone apps do the same as above, they ask user to enter his/her credentials, then send them (or an access token generated from them) with every request to the web service.</li>
+<li>The important take away point from this example is that RESTful web services require authentication with every request.</li>
+</ul>
+</div>
+<div class="section" id="facebook-authentication">
+<h2>Facebook authentication<a class="headerlink" href="#facebook-authentication" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The following is from <a class="reference external" href="https://stackoverflow.com/questions/14572600/passport-js-restful-auth">here</a></li>
+</ul>
+<p>The workflow above does not work for Facebook connect because the login via Facebook has a third party, Facebook itself. The login procedure requires the user to be redirected to Facebook’s website where credentials are entered outside of our control.</p>
+<p>So let’s see how things change:.</p>
+<ul class="simple">
+<li>The user connects to <a class="reference external" href="https://example.com">https://example.com</a></li>
+<li>The server serves a rich Javascript application which renders the initial page. Somehwere in the page there is a login form that includes a “Login with Facebook” button.</li>
+<li>The user clicks the “Login with Facebook” button, which is just a link that redirects to (for example) <a class="reference external" href="https://example.com/auth/facebook">https://example.com/auth/facebook</a>.</li>
+<li>The <a class="reference external" href="https://example.com/auth/facebook">https://example.com/auth/facebook</a> route is handled by passport.js (see the documentation)</li>
+<li>All the user sees is that the page changes and now they are in a Facebook hosted page where they need to login and authorize our web application. This is completely outside of our control.</li>
+<li>The user logs in to Facebook and gives permission to our application, so Facebook now redirects back to the callback URL that we configured in the passport.js setup, which following the example in the documentation is <a class="reference external" href="https://example.com/auth/facebook/callback">https://example.com/auth/facebook/callback</a></li>
+<li>The passport.js handler for the <a class="reference external" href="https://example.com/auth/facebook/callback">https://example.com/auth/facebook/callback</a> route will invoke the callback function that receives the Facebook access token and some user information from Facebook, including the user’s email address.</li>
+<li>With the email we can locate the user in our database and store the Facebook access token with it.</li>
+<li>The last thing you do in the Facebook callback is to redirect back to the rich client application, but this time we need to pass the username and the access token to the client so that it can use them. This can be done in a number of ways. For example, Javascript variables can be added to the page through a server-side template engine, or else a cookie can be returned with this information. (thanks to &#64;RyanKimber for pointing out the security issues with passing this data in the URL, as I initially suggested).</li>
+<li>So now we start the single page app one more time, but the client has the username and the access token.</li>
+<li>The client application can trigger the “login” event immediately and let the different parts of the application request the information that they need from the web service.</li>
+<li>All the requests sent to <a class="reference external" href="https://example.com/api">https://example.com/api</a> will include the Facebook access token for authentication, or the application’s own access token generated from Facebook’s token via a “get_access_token” function in the REST API.</li>
+<li>The non-browser apps have it a bit more difficult here, because OAuth requires a web browser for logging in. To login from a phone or desktop app you will need to start a browser to do the redirect to Facebook, and even worse, you need a way for the browser to pass the Facebook access token back to the application via some mechanism.</li>
+</ul>
+</div>
 </div>
 
 
@@ -250,7 +295,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Verilog-DataSender.html" class="btn btn-neutral float-right" title="Verilog DataSender" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Nodejs-RESTful-API-Email-Verification.html" class="btn btn-neutral float-right" title="Nodejs RESTful API Email Verification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Nodejs-Talking-To-C-Executable-2.html" class="btn btn-neutral float-left" title="Nodejs Talking To C Executable 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
