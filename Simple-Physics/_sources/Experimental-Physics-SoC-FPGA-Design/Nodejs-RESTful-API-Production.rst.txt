@@ -10,9 +10,11 @@ Backend Module
 - **my_modules/SimpleAPI.js**
 - **To Be Completed: sqlite**
 - **Dependencies**
-	- **./SimpleGmail.js**
-	- **crypto**
-	- **ejs**
+	- **express**	// Of course
+	- **./SimpleGmail.js**  // To send verification email
+	- **crypto**   // To generate secretCode for verification
+	- **ejs**	// To use html templates
+	- **mongoose (MongoDB)**   // Database
 
 .. code-block:: javascript
 
@@ -20,8 +22,6 @@ Backend Module
 	    constructor(hostIP, port, app, appName, myAddress, myPassword){
 	        var self = this
 	        self.appName = appName
-	        self.hostIP = hostIP
-	        self.port = port
 	        // express server
 	        const jsonParser = require('body-parser').json()
 
@@ -40,22 +40,16 @@ Backend Module
 	                else self.serve(req,res)
 	            }
 	        })
-	        app.listen(port, hostIP, () => console.log("http://"+hostIP+":"+port))        
+	        self.host = "http://"+hostIP+":"+port
+	        app.listen(port, hostIP, () => console.log(self.host))        
 	        
-	        // mysql database 
-	        /*
-	        self.mysql = require('mysql').createConnection({
-	            host: "localhost", user: "SimpleAPI",
-	            password: "SimpleAPIpassword", database: "simpleAPI" 
-	        })
-	        self.mysql.connect((err)=>{
-	            if(err) throw err;
-	            self.mysql.query(
-	                "CREATE TABLE IF NOT EXISTS accounts "
-	                +"(email VARCHAR(255), password VARCHAR(255), data TEXT, state VARCHAR(255))"
-	            )
-	        })  
-	        */
+	        // mongodb mongoose
+	        self.mongoose = require('mongoose')
+	        self.mongoose.connect('mongodb://localhost/SimpleAPI',{useNewUrlParser: true})
+	        self.db = self.mongoose.connection
+	        self.db.on('error',console.error.bind(console,'db err:'))
+	        self.defineSchemasAndModels()
+	        self.db.once('open',()=>{self.test()})
 
 	        // SimpleGmail
 	        const SimpleGmail = require("./SimpleGmail.js")
@@ -68,26 +62,17 @@ Backend Module
 	        
 	        // register secretCode in database
 	        var state = "ToBeVerified"+secretCode
-	        var value = req.body.setAccount.push(state)
-	        /*
-	        self.mysql.connect((err)=>{
-	            if(err) throw err;
-	            var query = "INSERT INTO accounts (email,password,data,state) VALUES ?"
-	            self.mysql.query(query,[value],(err,result)=>{
-	                if(err) res.send(err)
-	                else res.send("success")
-	            })
-	        })    
-	        */
 
 	        // send user email for verification
-	        var receiverAddress = req.body.setAccount[0]
-	        var password = req.body.setAccount[1]
+	        var receiverAddress = req.body.setAccount.receiverAddress
 	        var subject = self.appName+": Set Account Verification"
 	                
 	        var htmlPromise = require('ejs').renderFile(__dirname+'/SetAccountVerification.ejs',{
-	            subject: subject, receiverAddress: receiverAddress, 
-	            password: password, host: self.hostIP+":"+self.port, state: state
+	            subject: subject, 
+	            host: self.host, 
+	            receiverAddress: receiverAddress, 
+	            password: req.body.setAccount.password, 
+	            state: state
 	        });
 
 	        htmlPromise.then(html =>{
@@ -101,13 +86,35 @@ Backend Module
 	    }    
 
 	    verifyUser(req){
-	        // use passport.js for security
+
 	    }
 
 	    serve(req,res){
 
 	    }
+
+	    defineSchemasAndModels(){
+	        var self = this
+	        var KittySchema = new self.mongoose.Schema({name:String})
+	        KittySchema.methods.speak=function(){
+	            console.log(this.name)
+	        }
+	        self.KittyModel = self.mongoose.model('KittyModel', KittySchema)
+	    }
+
+	    test(){
+	        var self = this
+	        var fluffy = new self.KittyModel({name:'fluffy'})
+	        fluffy.save((err, fluffy)=>{
+	            if (err) return console.error(err)
+	            fluffy.speak()
+	        })
+	        self.KittyModel.find((err,kittens)=>{
+	            console.log(kittens)
+	        })
+	    }
 	}
+
 
 Backend Main
 ------------------
@@ -145,7 +152,7 @@ Backend Email Verification Template
 	  <p>state: <%= state %></p>
 
 	  <button><a href="
-	    <%= 'http://'+host+'/SimpleAPI/setAccountVerify?'
+	    <%= host+'/SimpleAPI/setAccountVerify?'
 	                  +'receiverAddress='+receiverAddress
 	                  +'&password='+password
 	                  +'&state='+state

@@ -199,9 +199,11 @@
 <li><dl class="first docutils">
 <dt><strong>Dependencies</strong></dt>
 <dd><ul class="first last">
-<li><strong>./SimpleGmail.js</strong></li>
-<li><strong>crypto</strong></li>
-<li><strong>ejs</strong></li>
+<li><strong>express</strong>   // Of course</li>
+<li><strong>./SimpleGmail.js</strong>  // To send verification email</li>
+<li><strong>crypto</strong>   // To generate secretCode for verification</li>
+<li><strong>ejs</strong>       // To use html templates</li>
+<li><strong>mongoose (MongoDB)</strong>   // Database</li>
 </ul>
 </dd>
 </dl>
@@ -211,8 +213,6 @@
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">hostIP</span><span class="p">,</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">appName</span><span class="p">,</span> <span class="nx">myAddress</span><span class="p">,</span> <span class="nx">myPassword</span><span class="p">){</span>
         <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span>
         <span class="nx">self</span><span class="p">.</span><span class="nx">appName</span> <span class="o">=</span> <span class="nx">appName</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">hostIP</span> <span class="o">=</span> <span class="nx">hostIP</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">port</span> <span class="o">=</span> <span class="nx">port</span>
         <span class="c1">// express server</span>
         <span class="kr">const</span> <span class="nx">jsonParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;body-parser&#39;</span><span class="p">).</span><span class="nx">json</span><span class="p">()</span>
 
@@ -231,22 +231,16 @@
                 <span class="k">else</span> <span class="nx">self</span><span class="p">.</span><span class="nx">serve</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="p">})</span>
-        <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="nx">hostIP</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;http://&quot;</span><span class="o">+</span><span class="nx">hostIP</span><span class="o">+</span><span class="s2">&quot;:&quot;</span><span class="o">+</span><span class="nx">port</span><span class="p">))</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">host</span> <span class="o">=</span> <span class="s2">&quot;http://&quot;</span><span class="o">+</span><span class="nx">hostIP</span><span class="o">+</span><span class="s2">&quot;:&quot;</span><span class="o">+</span><span class="nx">port</span>
+        <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="nx">hostIP</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">host</span><span class="p">))</span>
 
-        <span class="c1">// mysql database</span>
-        <span class="cm">/*</span>
-<span class="cm">        self.mysql = require(&#39;mysql&#39;).createConnection({</span>
-<span class="cm">            host: &quot;localhost&quot;, user: &quot;SimpleAPI&quot;,</span>
-<span class="cm">            password: &quot;SimpleAPIpassword&quot;, database: &quot;simpleAPI&quot;</span>
-<span class="cm">        })</span>
-<span class="cm">        self.mysql.connect((err)=&gt;{</span>
-<span class="cm">            if(err) throw err;</span>
-<span class="cm">            self.mysql.query(</span>
-<span class="cm">                &quot;CREATE TABLE IF NOT EXISTS accounts &quot;</span>
-<span class="cm">                +&quot;(email VARCHAR(255), password VARCHAR(255), data TEXT, state VARCHAR(255))&quot;</span>
-<span class="cm">            )</span>
-<span class="cm">        })</span>
-<span class="cm">        */</span>
+        <span class="c1">// mongodb mongoose</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">)</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">&#39;mongodb://localhost/SimpleAPI&#39;</span><span class="p">,{</span><span class="nx">useNewUrlParser</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">db</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span><span class="s1">&#39;db err:&#39;</span><span class="p">))</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">defineSchemasAndModels</span><span class="p">()</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,()=&gt;{</span><span class="nx">self</span><span class="p">.</span><span class="nx">test</span><span class="p">()})</span>
 
         <span class="c1">// SimpleGmail</span>
         <span class="kr">const</span> <span class="nx">SimpleGmail</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./SimpleGmail.js&quot;</span><span class="p">)</span>
@@ -259,26 +253,17 @@
 
         <span class="c1">// register secretCode in database</span>
         <span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="s2">&quot;ToBeVerified&quot;</span><span class="o">+</span><span class="nx">secretCode</span>
-        <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">setAccount</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
-        <span class="cm">/*</span>
-<span class="cm">        self.mysql.connect((err)=&gt;{</span>
-<span class="cm">            if(err) throw err;</span>
-<span class="cm">            var query = &quot;INSERT INTO accounts (email,password,data,state) VALUES ?&quot;</span>
-<span class="cm">            self.mysql.query(query,[value],(err,result)=&gt;{</span>
-<span class="cm">                if(err) res.send(err)</span>
-<span class="cm">                else res.send(&quot;success&quot;)</span>
-<span class="cm">            })</span>
-<span class="cm">        })</span>
-<span class="cm">        */</span>
 
         <span class="c1">// send user email for verification</span>
-        <span class="kd">var</span> <span class="nx">receiverAddress</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">setAccount</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">setAccount</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="kd">var</span> <span class="nx">receiverAddress</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">setAccount</span><span class="p">.</span><span class="nx">receiverAddress</span>
         <span class="kd">var</span> <span class="nx">subject</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">appName</span><span class="o">+</span><span class="s2">&quot;: Set Account Verification&quot;</span>
 
         <span class="kd">var</span> <span class="nx">htmlPromise</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ejs&#39;</span><span class="p">).</span><span class="nx">renderFile</span><span class="p">(</span><span class="nx">__dirname</span><span class="o">+</span><span class="s1">&#39;/SetAccountVerification.ejs&#39;</span><span class="p">,{</span>
-            <span class="nx">subject</span><span class="o">:</span> <span class="nx">subject</span><span class="p">,</span> <span class="nx">receiverAddress</span><span class="o">:</span> <span class="nx">receiverAddress</span><span class="p">,</span>
-            <span class="nx">password</span><span class="o">:</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">host</span><span class="o">:</span> <span class="nx">self</span><span class="p">.</span><span class="nx">hostIP</span><span class="o">+</span><span class="s2">&quot;:&quot;</span><span class="o">+</span><span class="nx">self</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span> <span class="nx">state</span><span class="o">:</span> <span class="nx">state</span>
+            <span class="nx">subject</span><span class="o">:</span> <span class="nx">subject</span><span class="p">,</span>
+            <span class="nx">host</span><span class="o">:</span> <span class="nx">self</span><span class="p">.</span><span class="nx">host</span><span class="p">,</span>
+            <span class="nx">receiverAddress</span><span class="o">:</span> <span class="nx">receiverAddress</span><span class="p">,</span>
+            <span class="nx">password</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">setAccount</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span>
+            <span class="nx">state</span><span class="o">:</span> <span class="nx">state</span>
         <span class="p">});</span>
 
         <span class="nx">htmlPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">html</span> <span class="p">=&gt;{</span>
@@ -292,11 +277,32 @@
     <span class="p">}</span>
 
     <span class="nx">verifyUser</span><span class="p">(</span><span class="nx">req</span><span class="p">){</span>
-        <span class="c1">// use passport.js for security</span>
+
     <span class="p">}</span>
 
     <span class="nx">serve</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
 
+    <span class="p">}</span>
+
+    <span class="nx">defineSchemasAndModels</span><span class="p">(){</span>
+        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span>
+        <span class="kd">var</span> <span class="nx">KittySchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">.</span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="nb">String</span><span class="p">})</span>
+        <span class="nx">KittySchema</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">speak</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">KittyModel</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;KittyModel&#39;</span><span class="p">,</span> <span class="nx">KittySchema</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nx">test</span><span class="p">(){</span>
+        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span>
+        <span class="kd">var</span> <span class="nx">fluffy</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">.</span><span class="nx">KittyModel</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;fluffy&#39;</span><span class="p">})</span>
+        <span class="nx">fluffy</span><span class="p">.</span><span class="nx">save</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">fluffy</span><span class="p">)=&gt;{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+            <span class="nx">fluffy</span><span class="p">.</span><span class="nx">speak</span><span class="p">()</span>
+        <span class="p">})</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">KittyModel</span><span class="p">.</span><span class="nx">find</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span><span class="nx">kittens</span><span class="p">)=&gt;{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">kittens</span><span class="p">)</span>
+        <span class="p">})</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -336,7 +342,7 @@
 &lt;p&gt;state: &lt;%= state %&gt;&lt;/p&gt;
 
 &lt;button&gt;&lt;a href=&quot;
-  &lt;%= &#39;http://&#39;+host+&#39;/SimpleAPI/setAccountVerify?&#39;
+  &lt;%= host+&#39;/SimpleAPI/setAccountVerify?&#39;
                 +&#39;receiverAddress=&#39;+receiverAddress
                 +&#39;&amp;password=&#39;+password
                 +&#39;&amp;state=&#39;+state
