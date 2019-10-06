@@ -30,7 +30,7 @@ Backend Main
 	    app,
 	    appName = "SimpleAPI",
 	    myAddress = "dingruiqi97m@gmail.com", 
-	    myPassword = "bomb4065"
+	    myPassword = "........"
 	)
 
 Backend Module
