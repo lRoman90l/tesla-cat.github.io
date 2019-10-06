@@ -4,6 +4,20 @@ Nodejs RESTful API Production
 
 :Date: 5 Oct 2019
 
+Progress
+------------
+
+- User registration with email verification
+- Password reset with email verification
+- Handle request by verifying Email and Password
+
+To Do
+---------
+
+- Handle request to **find, create, update, delete** data based on permissions
+- Figure out what are **Hash and Salt** and whether I need it if every request requires Email and Password
+
+
 Backend Main
 ------------------
 
@@ -30,7 +44,7 @@ Backend Main
 	    app,
 	    appName = "SimpleAPI",
 	    myAddress = "dingruiqi97m@gmail.com", 
-	    myPassword = "........"
+	    myPassword = "."
 	)
 
 Backend Module
@@ -55,30 +69,28 @@ Backend Module
 	        const jsonParser = require('body-parser').json()
 
 	        app.get('/SimpleAPI/setAccountVerify',(req, res)=>{
-	            //self.verifyEmail(req)
-	            console.log(req.query)
-	            res.send("Account has been set!")
+	            self.verifyEmail(req, res)
 	        })
 	        app.post('/SimpleAPI',jsonParser,(req,res)=>{
 	            if(req.body.type == "setAccount"){
 	                self.setAccount(req,res)
 	            }
-	            else{
-	                error = self.verifyUser(req)
-	                if(error) res.send(JSON.stringify(error))
-	                else self.serve(req,res)
-	            }
+	            else self.verifyAccount(req,res)
 	        })
 	        self.host = "http://"+hostIP+":"+port
 	        app.listen(port, hostIP, () => console.log(self.host))        
 	        
 	        // mongodb mongoose
 	        self.mongoose = require('mongoose')
-	        self.mongoose.connect('mongodb://localhost/SimpleAPI',{useNewUrlParser: true})
+	        self.mongoose.connect('mongodb://localhost/SimpleAPI',{
+	            useNewUrlParser: true,
+	            useFindAndModify: false,
+	            useCreateIndex: true,
+	            useUnifiedTopology: true
+	        })  //Fix Deprecation Warnings: https://mongoosejs.com/docs/deprecations.html
 	        self.db = self.mongoose.connection
 	        self.db.on('error',console.error.bind(console,'db err:'))
 	        self.defineSchemasAndModels()
-	        self.db.once('open',()=>{self.test()})
 
 	        // SimpleGmail
 	        const SimpleGmail = require("./SimpleGmail.js")
@@ -87,38 +99,73 @@ Backend Module
 
 	    setAccount(req,res){
 	        var self = this
-	        var secretCode = require('crypto').randomBytes(48)
-	        
-	        // register secretCode in database
-	        req.body.setAccount.state = "ToBeVerified"+secretCode
-	        var account = new self.AccountModel(req.body.setAccount)
+	        var secretCode = require('crypto').randomBytes(16).toString('hex')
+
+	        var query = req.body.setAccount
+	        self.AccountModel.findOneAndUpdate(
+	            {type: query.type, email: query.email}, 
+	            {state: "ToBeVerified"+secretCode},
+	            {new: true},
+	            (err, modifiedAccount)=>{
+	                if(modifiedAccount==null){
+	                    var account = new self.AccountModel({
+	                        type: query.type, email: query.email,
+	                        state: "ToBeVerified"+secretCode
+	                    })
+	                    account.save()
+	                    console.log("\nNew Account:\n", account)
+	                }
+	                else console.log("\nModified Account:\n", modifiedAccount)
+	            }
+	        )
 
 	        // send user email for verification
-	        var email = req.body.setAccount.email
+	        var email = query.email
 	        var subject = self.appName+": Set Account Verification"
 	                
 	        var htmlPromise = require('ejs').renderFile(__dirname+'/SetAccountVerification.ejs',{
 	            subject: subject, 
 	            host: self.host, 
-	            setAccount: req.body.setAccount
-	        });
-
+	            setAccount: query,
+	            state: "ToBeVerified"+secretCode,
+	        })
 	        htmlPromise.then( (html)=>{
 	            self.simpleGmail.send(email, subject, html)
-	            res.send(html)
+	            res.send(html) // For Testing
 	        })         
 	    }
 
-	    verifyEmail(req){
-	        // check if secretCode in req matches with one in database
+	    verifyEmail(req, res){
+	        var self = this
+	        var query = req.query
+	        self.AccountModel.findOneAndUpdate({
+	                type: query.type, email: query.email, 
+	                state: query.state 
+	            }, 
+	            {password: query.password, state:"Verified"},
+	            (err,doc)=>{
+	                if(doc==null) res.send("Error: This is not the latest link!")
+	                else res.json(doc)
+	                self.test() 
+	            }
+	        )
 	    }    
 
-	    verifyUser(req){
-
-	    }
-
-	    serve(req,res){
-
+	    verifyAccount(req,res){
+	        var self = this
+	        var query = req.body.verifyAccount
+	        self.AccountModel.findOne(
+	            {   type: query.type, email: query.email, 
+	                password : query.password}, 
+	            (err, account)=>{
+	                if(account==null){
+	                    res.send( "public")
+	                }
+	                else{
+	                    res.send( query.email) 
+	                }
+	            }
+	        )
 	    }
 
 	    defineSchemasAndModels(){
@@ -130,39 +177,18 @@ Backend Module
 	            password: String,
 	            state: String,
 	            // for search
-	            city: String,
-	            gender: String,
-	            occupation: String,
 	            labels: [String],
 	            // for display
 	            display: String
 	        })
 	        self.AccountModel = self.mongoose.model('AccountModel', AccountSchema)
-	    
-	        var OrderSchema = new self.mongoose.Schema({
-	            // for security
-	            buyerEmail: String,
-	            sellerEmail: String,
-	            states: [String],
-	            // for search
-	            productName: String,
-	            buyFrom: String,
-	            priceRange: [Number],
-	            dateRange: [Date],
-	            mailingAddress: String,
-	            bountyRatio: Number,
-	            // for display
-	            display: String
-	        })
-	        self.OrderModel = self.mongoose.model('OrderModel', OrderSchema)
 	    }
-
+	    
+	    
 	    test(){
 	        var self = this
-	        var account = new self.AccountModel({email:'test'})
-	        account.save()
 	        self.AccountModel.find((err,accounts)=>{
-	            console.log(accounts)
+	            console.log("\nCheck Accounts:\n", accounts)
 	        })
 	    }
 	}
@@ -185,7 +211,7 @@ Backend Email Verification Template
 	            +'type='        + setAccount.type
 	            +'&email='      + setAccount.email
 	            +'&password='   + setAccount.password
-	            +'&state='      + setAccount.state
+	            +'&state='      + state
 	        %>"
 	    >Confirm</a>
 	</button>
@@ -194,6 +220,7 @@ Frontend For Testing
 --------------------------------------
 
 - **index.html**
+- **The following code is ugly since it is only for testing!**
 
 .. code-block:: html
 
@@ -202,6 +229,9 @@ Frontend For Testing
 	<h3>setAccount verification email will look like this:</h3>
 	<div id="setAccount"></div>
 
+	<button onclick="setAccount()">setAccount</button>
+	<button onclick="verifyAccount()">verifyAccount</button>
+	<button onclick="verifyAccountFail()">verifyAccountFail</button>
 	<script>
 
 	  var xhttp = new XMLHttpRequest();
@@ -210,17 +240,47 @@ Frontend For Testing
 	      document.getElementById("setAccount").innerHTML = this.responseText;
 	    }
 	  };
+
+	  function setAccount(){
+		  var reqbody={
+		    type:"setAccount",
+		    setAccount: {
+		      type: "buyer",
+		      email: "416640656@qq.com",
+		      password: "qwerty",
+		    }
+		  };
 	  xhttp.open("POST", "http://localhost:3000/SimpleAPI", true);
-	  xhttp.setRequestHeader("Content-type", "application/json");
-	  
-	  var reqbody={
-	    type:"setAccount",
-	    setAccount: {
-	      type: "buyer",
-	      email: "416640656@qq.com",
-	      password: "qwerty",
-	    }
-	  };
-	  xhttp.send(JSON.stringify(reqbody));
+	  	xhttp.setRequestHeader("Content-type", "application/json");
+		  xhttp.send(JSON.stringify(reqbody));  		
+	  }
+
+	  function verifyAccount(){
+		  var reqbody={
+		    type:"verifyAccount",
+		    verifyAccount: {
+		      type: "buyer",
+		      email: "416640656@qq.com",
+		      password: "qwerty",
+		    }
+		  };
+		xhttp.open("POST", "http://localhost:3000/SimpleAPI", true);
+	     xhttp.setRequestHeader("Content-type", "application/json");
+		  xhttp.send(JSON.stringify(reqbody));  
+	  }
+
+	  function verifyAccountFail(){
+		  var reqbody={
+		    type:"verifyAccount",
+		    verifyAccount: {
+		      type: "buyer",
+		      email: "416640656@qq.com",
+		      password: "qwertyFail",
+		    }
+		  };
+		xhttp.open("POST", "http://localhost:3000/SimpleAPI", true);
+	  	 xhttp.setRequestHeader("Content-type", "application/json");
+		  xhttp.send(JSON.stringify(reqbody));  
+	  }
 
 	</script>
