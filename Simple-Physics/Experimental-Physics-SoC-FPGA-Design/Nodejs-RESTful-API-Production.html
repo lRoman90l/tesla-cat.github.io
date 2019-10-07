@@ -106,6 +106,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Nodejs-RESTful-API-Email-Verification.html">Nodejs RESTful API Email Verification</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Nodejs RESTful API Production</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#progress">Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-model-possible-improvements">Database Model: possible improvements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#to-do">To Do</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#backend-main">Backend Main</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#backend-module">Backend Module</a></li>
@@ -248,6 +249,21 @@
         <span class="p">},</span>
         <span class="p">...</span>
     <span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="database-model-possible-improvements">
+<h2>Database Model: possible improvements<a class="headerlink" href="#database-model-possible-improvements" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">data1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">_id</span><span class="o">:</span> <span class="p">...</span> <span class="p">,</span>
+    <span class="nx">owner</span><span class="o">:</span> <span class="p">...</span> <span class="p">,</span>
+    <span class="nx">content</span><span class="o">:</span> <span class="p">...</span> <span class="p">,</span>
+    <span class="nx">children</span><span class="o">:</span> <span class="p">[</span>
+        <span class="nx">data2_id</span><span class="p">,</span>
+        <span class="nx">data3_id</span><span class="p">,</span>
+        <span class="p">...</span>
+    <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>

@@ -53,6 +53,21 @@ Progress
         ],
     }
 
+Database Model: possible improvements
+-----------------------------------------------
+.. code-block:: javascript 
+
+    data1 = {
+        _id: ... ,
+        owner: ... ,
+        content: ... ,
+        children: [ 
+            data2_id,
+            data3_id,
+            ...
+        ]
+    }
+
 To Do
 ---------
 
