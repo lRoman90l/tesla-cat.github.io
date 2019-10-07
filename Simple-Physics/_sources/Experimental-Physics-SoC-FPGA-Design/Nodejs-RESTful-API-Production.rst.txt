@@ -17,6 +17,42 @@ Progress
     - User can create data
     - User can find data by its ID and **only modify the part of content that belongs to them**
 
+- Database Model
+
+.. code-block:: javascript 
+
+    data = {
+        _id: assigned automatically by database,
+        creater: creater email (unique), 
+        contents: [
+            {
+                owner: owner 1 email (unique), 
+                content: owner 1 content,
+            },
+            {
+                owner: owner 2 email (unique), 
+                content: owner 2 content,
+            },
+            ...
+        ],
+    }
+
+    数据 = {
+        _id: 由 database 自动分配,  
+        创建者: 创建者邮箱(唯一),
+        所有内容: [
+            {   
+                所有者: 所有者 1 邮箱(唯一), 
+                内容: 所有者 1 内容,
+            },
+            {   
+                所有者: 所有者 2 邮箱(唯一),
+                内容: 所有者 2 内容,
+            },
+            ...
+        ],
+    }
+
 To Do
 ---------
 

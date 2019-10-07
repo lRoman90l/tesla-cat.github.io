@@ -216,7 +216,41 @@
 </dd>
 </dl>
 </li>
+<li>Database Model</li>
 </ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">_id</span><span class="o">:</span> <span class="nx">assigned</span> <span class="nx">automatically</span> <span class="nx">by</span> <span class="nx">database</span><span class="p">,</span>
+    <span class="nx">creater</span><span class="o">:</span> <span class="nx">creater</span> <span class="nx">email</span> <span class="p">(</span><span class="nx">unique</span><span class="p">),</span>
+    <span class="nx">contents</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">owner</span><span class="o">:</span> <span class="nx">owner</span> <span class="mi">1</span> <span class="nx">email</span> <span class="p">(</span><span class="nx">unique</span><span class="p">),</span>
+            <span class="nx">content</span><span class="o">:</span> <span class="nx">owner</span> <span class="mi">1</span> <span class="nx">content</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nx">owner</span><span class="o">:</span> <span class="nx">owner</span> <span class="mi">2</span> <span class="nx">email</span> <span class="p">(</span><span class="nx">unique</span><span class="p">),</span>
+            <span class="nx">content</span><span class="o">:</span> <span class="nx">owner</span> <span class="mi">2</span> <span class="nx">content</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">...</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="nx">数据</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">_id</span><span class="o">:</span> <span class="nx">由</span> <span class="nx">database</span> <span class="nx">自动分配</span><span class="p">,</span>
+    <span class="nx">创建者</span><span class="o">:</span> <span class="nx">创建者邮箱</span><span class="p">(</span><span class="nx">唯一</span><span class="p">),</span>
+    <span class="nx">所有内容</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">所有者</span><span class="o">:</span> <span class="nx">所有者</span> <span class="mi">1</span> <span class="nx">邮箱</span><span class="p">(</span><span class="nx">唯一</span><span class="p">),</span>
+            <span class="nx">内容</span><span class="o">:</span> <span class="nx">所有者</span> <span class="mi">1</span> <span class="nx">内容</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nx">所有者</span><span class="o">:</span> <span class="nx">所有者</span> <span class="mi">2</span> <span class="nx">邮箱</span><span class="p">(</span><span class="nx">唯一</span><span class="p">),</span>
+            <span class="nx">内容</span><span class="o">:</span> <span class="nx">所有者</span> <span class="mi">2</span> <span class="nx">内容</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">...</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="to-do">
 <h2>To Do<a class="headerlink" href="#to-do" title="Permalink to this headline">¶</a></h2>
