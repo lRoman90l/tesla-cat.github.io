@@ -83,7 +83,7 @@ Second order differentiation
 
 
 
-.. image:: output_3_2.png
+.. image:: imgs/1D-DFT-In-Python/output_3_2.png
 
 
 Free particle Hamiltonian
@@ -114,7 +114,7 @@ Free particle Hamiltonian
 
 
 
-.. image:: output_5_1.png
+.. image:: imgs/1D-DFT-In-Python/output_5_1.png
 
 
 Harmonic oscillator
@@ -143,7 +143,7 @@ Harmonic oscillator
 
 
 
-.. image:: output_7_1.png
+.. image:: imgs/1D-DFT-In-Python/output_7_1.png
 
 
 Potential well
@@ -172,7 +172,7 @@ Potential well
 
 
 
-.. image:: output_9_1.png
+.. image:: imgs/1D-DFT-In-Python/output_9_1.png
 
 
 Density
@@ -225,7 +225,7 @@ Thus if :math:`N_\text{total}=5` for example,
 
 
 
-.. image:: output_11_1.png
+.. image:: imgs/1D-DFT-In-Python/output_11_1.png
 
 
 Functional Derivative
@@ -373,7 +373,7 @@ Solve the Kohn–Sham Equations: Self-Consistency Loop
 
 
 
-.. image:: output_19_2.png
+.. image:: imgs/1D-DFT-In-Python/output_19_2.png
 
 
 Wrap up
@@ -485,38 +485,38 @@ Wrap up
 
 
 
-.. image:: output_21_0.png
+.. image:: imgs/1D-DFT-In-Python/output_21_0.png
 
 
 
-.. image:: output_21_1.png
+.. image:: imgs/1D-DFT-In-Python/output_21_1.png
 
 
 
-.. image:: output_21_2.png
+.. image:: imgs/1D-DFT-In-Python/output_21_2.png
 
 
 
-.. image:: output_21_3.png
+.. image:: imgs/1D-DFT-In-Python/output_21_3.png
 
 
 
-.. image:: output_21_4.png
+.. image:: imgs/1D-DFT-In-Python/output_21_4.png
 
 
 
-.. image:: output_21_5.png
+.. image:: imgs/1D-DFT-In-Python/output_21_5.png
 
 
 
-.. image:: output_21_6.png
+.. image:: imgs/1D-DFT-In-Python/output_21_6.png
 
 
 
-.. image:: output_21_7.png
+.. image:: imgs/1D-DFT-In-Python/output_21_7.png
 
 
 
-.. image:: output_21_8.png
+.. image:: imgs/1D-DFT-In-Python/output_21_8.png
 
 
