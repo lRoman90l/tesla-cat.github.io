@@ -57,16 +57,48 @@ Database Model: possible improvements
 -----------------------------------------------
 .. code-block:: javascript 
 
-    data1 = {
-        _id: ... ,
-        owner: ... ,
-        content: ... ,
-        children: [ 
-            data2_id,
-            data3_id,
-            ...
-        ]
+    createData(account,req,res){
+        var self = this
+        var query = req.body.createData
+        var data = new self.DataModel()
+        data.creater = account
+        data.content = query.content
+        data.save()
+        console.log("\nNew Data:\n", data)
+        query.parents.forEach((parentId)=>{
+            self.DataModel.findById(parentId,(err,parent)=>{
+                if(parent==null){
+                    console.log("\nparentId not found\n")
+                }
+                else{
+                    parent.content.children.push(data._id)
+                }
+            })
+        })
     }
+
+    updateData(account,req,res){
+        var self = this
+        var query = req.body.updateData
+        self.DataModel.findById(query.id,(err,data)=>{
+            if(data == null){
+                console.log("\nupdateDataId not found\n")
+            }
+            else{
+                if(data.creater==account) data.content = query.content
+            }
+        })
+    }
+
+    //============ Model ============
+        var DataSchema = new self.mongoose.Schema({
+            creater: String,
+            content: self.mongoose.Schema.Types.Mixed,
+        })
+        DataSchema.index({
+            content: 'text',
+        })
+        self.DataModel = self.mongoose.model('DataModel', DataSchema)
 
 To Do
 ---------

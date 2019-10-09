@@ -255,16 +255,48 @@
 </div>
 <div class="section" id="database-model-possible-improvements">
 <h2>Database Model: possible improvements<a class="headerlink" href="#database-model-possible-improvements" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">data1</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">_id</span><span class="o">:</span> <span class="p">...</span> <span class="p">,</span>
-    <span class="nx">owner</span><span class="o">:</span> <span class="p">...</span> <span class="p">,</span>
-    <span class="nx">content</span><span class="o">:</span> <span class="p">...</span> <span class="p">,</span>
-    <span class="nx">children</span><span class="o">:</span> <span class="p">[</span>
-        <span class="nx">data2_id</span><span class="p">,</span>
-        <span class="nx">data3_id</span><span class="p">,</span>
-        <span class="p">...</span>
-    <span class="p">]</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">createData</span><span class="p">(</span><span class="nx">account</span><span class="p">,</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span>
+    <span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">createData</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">.</span><span class="nx">DataModel</span><span class="p">()</span>
+    <span class="nx">data</span><span class="p">.</span><span class="nx">creater</span> <span class="o">=</span> <span class="nx">account</span>
+    <span class="nx">data</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">content</span>
+    <span class="nx">data</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;\nNew Data:\n&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="nx">query</span><span class="p">.</span><span class="nx">parents</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">parentId</span><span class="p">)=&gt;{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">DataModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">parentId</span><span class="p">,(</span><span class="nx">err</span><span class="p">,</span><span class="nx">parent</span><span class="p">)=&gt;{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">parent</span><span class="o">==</span><span class="kc">null</span><span class="p">){</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;\nparentId not found\n&quot;</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="nx">parent</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
 <span class="p">}</span>
+
+<span class="nx">updateData</span><span class="p">(</span><span class="nx">account</span><span class="p">,</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span>
+    <span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">updateData</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">DataModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">id</span><span class="p">,(</span><span class="nx">err</span><span class="p">,</span><span class="nx">data</span><span class="p">)=&gt;{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">data</span> <span class="o">==</span> <span class="kc">null</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;\nupdateDataId not found\n&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">creater</span><span class="o">==</span><span class="nx">account</span><span class="p">)</span> <span class="nx">data</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">content</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">//============ Model ============</span>
+    <span class="kd">var</span> <span class="nx">DataSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">.</span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+        <span class="nx">creater</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+        <span class="nx">content</span><span class="o">:</span> <span class="nx">self</span><span class="p">.</span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">.</span><span class="nx">Types</span><span class="p">.</span><span class="nx">Mixed</span><span class="p">,</span>
+    <span class="p">})</span>
+    <span class="nx">DataSchema</span><span class="p">.</span><span class="nx">index</span><span class="p">({</span>
+        <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+    <span class="p">})</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">DataModel</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;DataModel&#39;</span><span class="p">,</span> <span class="nx">DataSchema</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
