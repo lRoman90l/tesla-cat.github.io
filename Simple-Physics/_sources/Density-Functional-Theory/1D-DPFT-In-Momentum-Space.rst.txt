@@ -83,6 +83,12 @@ Why is :math:`r<{Z\over T-\mu}` wrong?
    potentials** :math:`T` and :math:`V` are the same **physical
    quantity**, so :math:`\mu > T` MUST HOLD!
 
+- Yet another argument. If we adopt :math:`r > -{Z\over \mu-T}` , then if :math:`Z>0` (positive nucleus), :math:`r\in (0,\infty)`. If :math:`Z<0` (negative nucleus), :math:`r` must be larger than some threshold. These two physically makes sense!  
+
+- Yet another argument, :math:`\mu > T` simply works! As shown in code below
+
+- If you accept my arguments, than we must conclude that there is something missing with DPFT, :math:`\mu` cannot simply be treated as **lagrange multiplier**, there must be some relation that lead to :math:`\mu > T`
+
 Simple DPFT in Momentum space (Hamonic Oscillator 1D)
 -----------------------------------------------------
 
