@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1D DPFT In Python &mdash; Simple Physics  documentation</title>
+  <title>1D DPFT In Momentum Space &mdash; Simple Physics  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DFT In Momentum Space" href="DFT-In-Momentum-Space.html" />
-    <link rel="prev" title="1D DFT In Python" href="1D-DFT-In-Python.html" /> 
+    <link rel="next" title="Thermodynamics And Statistical Mechanics" href="../Thermodynamics-And-Statistical-Mechanics/index.html" />
+    <link rel="prev" title="DFT In Momentum Space" href="DFT-In-Momentum-Space.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,17 +91,18 @@
 <li class="toctree-l2"><a class="reference internal" href="Hohenberg-Kohn-Variational-Principle.html">Hohenberg Kohn Variational Principle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Kohn-Sham-Equations.html">Kohn Sham Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="1D-DFT-In-Python.html">1D DFT In Python</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">1D DPFT In Python</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#note">Note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#thomas-fermi-kinetic-energy">Thomas Fermi Kinetic Energy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#without-interaction">Without Interaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1D-DPFT-In-Python.html">1D DPFT In Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DFT-In-Momentum-Space.html">DFT In Momentum Space</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1D DPFT In Momentum Space</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#thomas-fermi-approximation">Thomas Fermi Approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#effective-kinetic-envergy-t">Effective Kinetic Envergy <span class="math notranslate nohighlight">\(T\)</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-interaction">The Interaction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#self-consistent-loop">Self Consistent Loop</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#simple-implementation-in-python">Simple implementation in Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-momentum-space">Why momentum space ?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fermi-radius-for-coulomb-potential-1d">Fermi Radius for Coulomb Potential (1D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-is-r-z-over-t-mu-wrong">Why is <span class="math notranslate nohighlight">\(r&lt;{Z\over T-\mu}\)</span> wrong?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-dpft-in-momentum-space-hamonic-oscillator-1d">Simple DPFT in Momentum space (Hamonic Oscillator 1D)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="DFT-In-Momentum-Space.html">DFT In Momentum Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="1D-DPFT-In-Momentum-Space.html">1D DPFT In Momentum Space</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Thermodynamics-And-Statistical-Mechanics/index.html">Thermodynamics And Statistical Mechanics</a></li>
@@ -156,13 +157,13 @@
         
           <li><a href="index.html">Density Functional Theory</a> &raquo;</li>
         
-      <li>1D DPFT In Python</li>
+      <li>1D DPFT In Momentum Space</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Density-Functional-Theory/1D-DPFT-In-Python.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Density-Functional-Theory/1D-DPFT-In-Momentum-Space.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -175,96 +176,95 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="d-dpft-in-python">
-<h1>1D DPFT In Python<a class="headerlink" href="#d-dpft-in-python" title="Permalink to this headline">¶</a></h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">8 Oct 2019</td>
-</tr>
-</tbody>
-</table>
-<div class="section" id="note">
-<h2>Note<a class="headerlink" href="#note" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="code docutils literal notranslate"><span class="pre">.rst</span></code> file for this page is generated using Jupyter Notebook, from the <code class="code docutils literal notranslate"><span class="pre">.ipynb</span></code> file: <a class="reference external" href="https://github.com/tesla-cat/Physics/blob/master/ipynb/1D_DPFT_In_Python.ipynb">1D DPFT In Python</a></p>
-</div>
-<div class="section" id="thomas-fermi-kinetic-energy">
-<h2>Thomas Fermi Kinetic Energy<a class="headerlink" href="#thomas-fermi-kinetic-energy" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="d-dpft-in-momentum-space">
+<h1>1D DPFT In Momentum Space<a class="headerlink" href="#d-dpft-in-momentum-space" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="thomas-fermi-approximation">
+<h2>Thomas Fermi Approximation<a class="headerlink" href="#thomas-fermi-approximation" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
-\[\begin{split}E_{\text{kin}}=\int dx\; {1\over 3}\alpha \bar{n}^3 \\
-\Rightarrow {\delta E_{\text{kin}} \over \delta n}=\alpha n^2\end{split}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\alpha \equiv {\pi^2\hbar^2\over 2mg^2}\)</span></p>
-<p>And <span class="math notranslate nohighlight">\(g\)</span> is spin multiplicity. For spin-polarized fermi gas (For
-example electron gas with all the electrons spin-up), <span class="math notranslate nohighlight">\(g=1\)</span> from
-Pauli principle</p>
-</div>
-<div class="section" id="without-interaction">
-<h2>Without Interaction<a class="headerlink" href="#without-interaction" title="Permalink to this headline">¶</a></h2>
+\[\begin{split}E_1^{TF}[T-\mu]=g\int {drdp\over (2\pi)^3}[ T(p)+V_{\text{ext}}(r)-\mu ]\eta(\mu -T-V_{\text{ext}}) \\
+\Rightarrow \rho={\delta E_1^{TF} \over \delta T}= g\int {dr \over (2\pi)^3} 1\cdot \eta(\mu -T-V_{\text{ext}})\\
+= g{1 \over (2\pi)^3} {4\over 3}\pi R^3={g \over 6\pi^3}R^3 \\
+\text{Where }R \text{ is the radius of the sphere such that } \mu -T-V_{\text{ext}}&gt;0\end{split}\]</div>
+<ul class="simple">
+<li>For harmonic oscillator in 1D, we have</li>
+</ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{cases}
- \delta\left(E_{\text{kin}}+E_{\text{ext}}\right)=0 \\
-{\delta E_{\text{ext}} \over \delta n}= V_{\text{ext}} - \mu
- \end{cases}
-\\ \Rightarrow n_{\text{nonInt}}[\mu-V_{\text{ext}}]=\sqrt{\alpha^{-1}[\mu-V_{\text{ext}}]_+}\end{split}\]</div>
-<p>is a <strong>Functional</strong> of <span class="math notranslate nohighlight">\(\mu-V_{\text{ext}}\)</span></p>
-<p>Where <span class="math notranslate nohighlight">\(\mu\)</span> is the <strong>chemical potential</strong></p>
+\[\begin{split}V=x^2\Rightarrow \mu -T- x^2&gt;0 \Rightarrow x &lt; \sqrt{\mu-T}\equiv R\\
+\Rightarrow \rho= g{1 \over 2\pi} 2R ={g \over \pi} \sqrt{\mu-T}\end{split}\]</div>
+</div>
+<div class="section" id="effective-kinetic-envergy-t">
+<h2>Effective Kinetic Envergy <span class="math notranslate nohighlight">\(T\)</span><a class="headerlink" href="#effective-kinetic-envergy-t" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}T(p)={\delta \over \delta \rho}E_{\text{int}} +T_{\text{kin}}\\
+\text{where } T_{\text{kin}} = {1\over 2}p^2\end{split}\]</div>
 </div>
 <div class="section" id="the-interaction">
 <h2>The Interaction<a class="headerlink" href="#the-interaction" title="Permalink to this headline">¶</a></h2>
-<div class="math notranslate nohighlight">
-\[\begin{split}E_{\text{int}} = w{1\over 2}\int{dr\; n^2(r)} \\
-\Rightarrow V_{\text{int}}={\delta E_{\text{int}} \over \delta n}=wn\end{split}\]</div>
 <ul class="simple">
-<li>Where <span class="math notranslate nohighlight">\(w\)</span> is strength of interaction</li>
-<li>Then we have</li>
+<li>I don’t know what <span class="math notranslate nohighlight">\(E_{\text{int}}\)</span> should look like at the
+moment, let us just assume the same form as in [1D DPFT In Python] so
+that</li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\delta\left(E_{\text{kin}}+E_{\text{ext}}+E_{\text{int}} \right)=0
-\\ \Rightarrow n_{\text{int}}(x,\mu)=\left(-{w\over 2\alpha}+\sqrt{ ( {w\over 2\alpha})^2 +{\mu-V_{\text{ext}} \over \alpha}  }\right) \eta(\mu-V_{\text{ext}})\end{split}\]</div>
+\[T_{\text{int}} = { \delta E_{\text{int}} \over \delta \rho}= w  \rho\]</div>
 </div>
-<div class="section" id="self-consistent-loop">
-<h2>Self Consistent Loop<a class="headerlink" href="#self-consistent-loop" title="Permalink to this headline">¶</a></h2>
-<p><strong>What is the idea?</strong></p>
+<div class="section" id="why-momentum-space">
+<h2>Why momentum space ?<a class="headerlink" href="#why-momentum-space" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>We will find <span class="math notranslate nohighlight">\(n\)</span> <strong>with interaction</strong></li>
-<li>However, <strong>we will NOT use the expression</strong> <span class="math notranslate nohighlight">\(n_{\text{int}}\)</span>
-above</li>
-<li>Instead, <strong>we use the expression</strong> <span class="math notranslate nohighlight">\(n_{\text{nonInt}}\)</span>:<ol class="arabic">
-<li>Specifically we will use <span class="math notranslate nohighlight">\(n=\sqrt{\alpha^{-1}[\mu-V]_+}\)</span></li>
-<li>We initialize <span class="math notranslate nohighlight">\(V\)</span> with <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span></li>
-<li>Then we find the chemical potential <span class="math notranslate nohighlight">\(\mu\)</span> using <strong>gradient
-descent</strong>, the loss function would be <span class="math notranslate nohighlight">\(N-\int n(x) \;dx\)</span>, we
-do this to make sure the total particle number is constant</li>
-<li>Then we calculate <span class="math notranslate nohighlight">\(n_{\text{modified}}\)</span> based on <span class="math notranslate nohighlight">\(\mu\)</span>
-and <span class="math notranslate nohighlight">\(V\)</span> using above formula</li>
-<li>Then we update <span class="math notranslate nohighlight">\(n\)</span> by mixing the <strong>old</strong> <span class="math notranslate nohighlight">\(n\)</span> with
-<span class="math notranslate nohighlight">\(n_{\text{modified}}\)</span>, that is
-<span class="math notranslate nohighlight">\(n=(1-p)n+p\; n_{\text{modified}}\)</span>, the idea is similar to
-<strong>gradient descent</strong>, the <span class="math notranslate nohighlight">\(p\)</span> here can be understood as
-<strong>learning rate</strong></li>
-<li>Using the <strong>new</strong> <span class="math notranslate nohighlight">\(n\)</span> we can calculate
-<span class="math notranslate nohighlight">\(V_{\text{int}}=wn\)</span>, then we <strong>add the interaction energy
-to</strong> <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span> as our modified <span class="math notranslate nohighlight">\(V\)</span>, that is
-<span class="math notranslate nohighlight">\(V=V_{\text{ext}}+V_{\text{int}}\)</span></li>
-<li>Then we can go back to <span class="math notranslate nohighlight">\(3\)</span> until <span class="math notranslate nohighlight">\(n\)</span> converges</li>
-</ol>
-</li>
+<li>As can be seen above, in position space, we have fixed expression for
+density <span class="math notranslate nohighlight">\(n=\sqrt{\alpha^{-1}[\mu - V_{\text{ext}}]}\)</span>, this
+expression does not change, only <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span> varies</li>
+<li>In momentum space</li>
+<li>We start with <span class="math notranslate nohighlight">\(\mu -T- V_{\text{ext}}(r)&gt;0\)</span>, then
+<span class="math notranslate nohighlight">\(R=V_{\text{ext}}^{\text{Inv}}(\mu-T)\)</span> and <span class="math notranslate nohighlight">\(\rho = {g\over 6\pi^3}R^3\)</span></li>
+<li>The position space and momentum space are only equivalent, at least
+computationally, for harmonic oscillators! And this is a result of
+the fundamental relation <span class="math notranslate nohighlight">\(T={1\over 2}p^2\)</span></li>
+<li>Therefore, depends on <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span>, some problem may be
+easier to solve in momentum space!</li>
 </ul>
 </div>
-<div class="section" id="simple-implementation-in-python">
-<h2>Simple implementation in Python<a class="headerlink" href="#simple-implementation-in-python" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fermi-radius-for-coulomb-potential-1d">
+<h2>Fermi Radius for Coulomb Potential (1D)<a class="headerlink" href="#fermi-radius-for-coulomb-potential-1d" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+    \mu -T- V_{\text{ext}}(r)&gt;0 \\
+    V_{\text{ext}}(r) = -{Z\over r}
+ \end{cases}  \Rightarrow r &gt; -{Z\over \mu-T}\end{split}\]</div>
+<ul class="simple">
+<li>I just realized that the above discussion does not apply to Coulomb
+potential! In this case the particle can only live <strong>outside</strong> Fermi
+Sphere, whereas for harmonic oscillator, the particle can only live
+<strong>inside</strong> !</li>
+</ul>
+</div>
+<div class="section" id="why-is-r-z-over-t-mu-wrong">
+<h2>Why is <span class="math notranslate nohighlight">\(r&lt;{Z\over T-\mu}\)</span> wrong?<a class="headerlink" href="#why-is-r-z-over-t-mu-wrong" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}{Z\over r}&gt;T-\mu\\
+\Rightarrow {Z\over T-\mu}&gt;r \;\;\text{This step is wrong since }T-\mu&lt;0\end{split}\]</div>
+<ul class="simple">
+<li>Still don’t agree? In <strong>Equation (45)</strong> in the paper, we demand
+<span class="math notranslate nohighlight">\(-2[V-\mu]&gt;0\)</span>, this means <span class="math notranslate nohighlight">\(\mu &gt; V\)</span>, and <strong>Both effective
+potentials</strong> <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are the same <strong>physical
+quantity</strong>, so <span class="math notranslate nohighlight">\(\mu &gt; T\)</span> MUST HOLD!</li>
+</ul>
+</div>
+<div class="section" id="simple-dpft-in-momentum-space-hamonic-oscillator-1d">
+<h2>Simple DPFT in Momentum space (Hamonic Oscillator 1D)<a class="headerlink" href="#simple-dpft-in-momentum-space-hamonic-oscillator-1d" title="Permalink to this headline">¶</a></h2>
+<p><strong>The following code is successful and the result agrees with one in
+position space, note that it uses the fact</strong> <span class="math notranslate nohighlight">\(\mu&gt;T\)</span></p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="k">class</span> <span class="nc">SimpleDPFT</span><span class="p">:</span>
   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">args</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">Vext</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;Vext&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">Tkin</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;Tkin&quot;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">maxIteration</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;maxIteration&quot;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;N&quot;</span><span class="p">]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;dx&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dp</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;dp&quot;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">learningRate</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;learningRate&quot;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">gradientMax</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;gradientMax&quot;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span>
@@ -272,11 +272,11 @@ to</strong> <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">nChangeMax</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;nChangeMax&quot;</span><span class="p">]</span>
 
   <span class="k">def</span> <span class="nf">selfConsistentLoop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Vext</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tkin</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enforceN</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDensity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxIteration</span><span class="p">):</span>
-      <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Vext</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tkin</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
       <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enforceN</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span>
       <span class="n">nOld</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
       <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">getDensity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span>
@@ -293,25 +293,25 @@ to</strong> <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span>
         <span class="k">break</span>
     <span class="k">return</span> <span class="n">mu</span>
   <span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getDensity</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getDensity</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="p">)</span> <span class="p">)</span>
 
   <span class="k">def</span> <span class="nf">getDensity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="p">):</span>
-    <span class="n">muMinusV</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span>
-    <span class="n">muMinusV</span><span class="p">[</span> <span class="n">muMinusV</span><span class="o">&lt;</span><span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">muMinusV</span><span class="p">)</span>
+    <span class="n">muMinusT</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">muMinusT</span><span class="p">[</span> <span class="n">muMinusT</span><span class="o">&lt;</span><span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">muMinusT</span><span class="p">)</span>
 
 <span class="c1"># =================================================</span>
 <span class="c1"># ================= Usage =========================</span>
 <span class="c1"># =================================================</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">dx</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">dp</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">args</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Vext&quot;</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;Tkin&quot;</span><span class="p">:</span> <span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
     <span class="s2">&quot;maxIteration&quot;</span><span class="p">:</span> <span class="mi">4000</span><span class="p">,</span>
     <span class="s2">&quot;mu&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="n">dx</span><span class="p">,</span>
+    <span class="s2">&quot;dp&quot;</span><span class="p">:</span> <span class="n">dp</span><span class="p">,</span>
     <span class="s2">&quot;learningRate&quot;</span><span class="p">:</span> <span class="mf">1e-1</span><span class="p">,</span>
     <span class="s2">&quot;gradientMax&quot;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">,</span>
     <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
@@ -323,18 +323,18 @@ to</strong> <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span>
   <span class="n">args</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="mi">5</span>
   <span class="n">simpleDPFT</span> <span class="o">=</span> <span class="n">SimpleDPFT</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
   <span class="n">n</span> <span class="o">=</span> <span class="n">simpleDPFT</span><span class="o">.</span><span class="n">selfConsistentLoop</span><span class="p">()</span>
-  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Particle Number Check:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">dx</span><span class="p">,</span><span class="s2">&quot;/ 20&quot;</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;w=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Particle Number Check:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">dp</span><span class="p">,</span><span class="s2">&quot;/ 20&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;w=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">19.651993996020014</span> <span class="o">/</span> <span class="mi">20</span>
-<span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">19.524746349214976</span> <span class="o">/</span> <span class="mi">20</span>
-<span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">19.440909250694254</span> <span class="o">/</span> <span class="mi">20</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">19.65459900651429</span> <span class="o">/</span> <span class="mi">20</span>
+<span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">19.560823172965314</span> <span class="o">/</span> <span class="mi">20</span>
+<span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">19.494538379097083</span> <span class="o">/</span> <span class="mi">20</span>
 </pre></div>
 </div>
-<img alt="../_images/output_5_11.png" src="../_images/output_5_11.png" />
+<img alt="../_images/output_8_1.png" src="../_images/output_8_1.png" />
 </div>
 </div>
 
@@ -346,10 +346,10 @@ to</strong> <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="DFT-In-Momentum-Space.html" class="btn btn-neutral float-right" title="DFT In Momentum Space" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Thermodynamics-And-Statistical-Mechanics/index.html" class="btn btn-neutral float-right" title="Thermodynamics And Statistical Mechanics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="1D-DFT-In-Python.html" class="btn btn-neutral float-left" title="1D DFT In Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="DFT-In-Momentum-Space.html" class="btn btn-neutral float-left" title="DFT In Momentum Space" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
