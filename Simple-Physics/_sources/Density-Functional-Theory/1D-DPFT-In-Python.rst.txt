@@ -16,7 +16,7 @@ Thomas Fermi Kinetic Energy
 .. math::
 
    E_{\text{kin}}=\int dx\; {1\over 3}\alpha \bar{n}^3 \\
-   \Rightarrow {\delta E_{\text{int}} \over \delta n}=\alpha n^2 
+   \Rightarrow {\delta E_{\text{kin}} \over \delta n}=\alpha n^2 
 
 Where :math:`\alpha \equiv {\pi^2\hbar^2\over 2mg^2}`
 
@@ -31,7 +31,7 @@ Without Interaction
 
    \begin{cases}
     \delta\left(E_{\text{kin}}+E_{\text{ext}}\right)=0 \\
-   {\delta E_{\text{ext}} \over \delta n}= \mu-V_{\text{ext}}
+   {\delta E_{\text{ext}} \over \delta n}= V_{\text{ext}} - \mu
     \end{cases}
    \\ \Rightarrow n_{\text{nonInt}}[\mu-V_{\text{ext}}]=\sqrt{\alpha^{-1}[\mu-V_{\text{ext}}]_+}
 
