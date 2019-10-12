@@ -7,7 +7,7 @@ React Native Redux 2
 What is the idea?
 -----------------------
 
-- Last time we used **expo**, but some libraries are not functioning well with it. Specifically `Swipeable by React Native Gesture Handler <https://kmagiera.github.io/react-native-gesture-handler/docs/component-swipeable.html>`_ and `react native video controls <https://github.com/itsnubix/react-native-video-controls>`_
+- Last time we used **expo**, but some libraries are not functioning well with it. Specifically `react native video controls <https://github.com/itsnubix/react-native-video-controls>`_
 
 - Therefore we will turn to **React Native CLI**
 - You can just follow the guide on the official website, and notice several Issues I encountered
@@ -32,7 +32,7 @@ Issues
 
 .. code-block:: console
 
-	npm install react-native-gesture-handler react-redux redux react-navigation-stack react-navigation
+    npm install react-native-gesture-handler react-redux redux react-navigation-stack react-navigation
 
 - Work flow
     - :code:`sudo react-native run-android` : This installs the App via USB to your phone. A message will show up in your phone and you need to allow the installation
@@ -40,35 +40,64 @@ Issues
     - Now open the app on your phone, it then will fetch data from the server running on your computer
     - Unlike Expo, once you make changes to your **code**, you need to restart the App. And you need to reinstall it if you add a **new package** 
 
-app.js
-------------
-
-.. code-block:: javascript
-
-
-
-components/Navigator.js
-----------------------------
-
-.. code-block:: javascript
-
  
-components/Home.js
-------------------------
+components/Home.js: Gesture Responder
+--------------------------------------
+
+- Added `PanResponder <https://facebook.github.io/react-native/docs/panresponder>`_ to handle Swipe Gesture
 
 .. code-block:: javascript
 
- 
-components/Search.js
------------------------
+    import React,{Component} from 'react'
+    import {View,Text,Button,PanResponder} from 'react-native'
+    import {bindActionCreators} from 'redux'
+    import {connect} from 'react-redux'
 
-.. code-block:: javascript
+    class Home extends Component{
+        constructor(props) {
+            super(props);
+            this._panResponder = PanResponder.create({
+                onStartShouldSetPanResponder: (evt, gestureState) => true,
+                onPanResponderRelease: (evt, gestureState) => {
+                    this.props.changeMovie()
+                },
+            })
+        }
 
-  
+        render(){
+            return(
+                <View style={{flex:1}}>
+                        <View style={{flex:9}} {...this._panResponder.panHandlers}>
+                            <Text style={{flex:1,backgroundColor: 'skyblue'}}>
+                                {this.props.Home.currentMovie}
+                            </Text>
+                        </View>
+                        <View style={{flex:1}}>
+                            <Button title="Search"
+                                onPress={()=>this.props.navigation.navigate('Search')}
+                            />
+                        </View>
+                </View>
+            )
+        }
+    }
 
-reducers/Home.js
-------------------
+    //===============================
+    // Begin Actions
+    //===============================
+    const changeMovie = payload=>({
+        type: "changeMovie",
+        payload: payload
+    })
+    // End Actions
 
-.. code-block:: javascript
+    const mapStateToProps=(state)=>{
+        const {Home}=state
+        return {Home}
+    }
+    const mapActionToProps=action=>(
+        bindActionCreators({changeMovie},action)
+    )
+    export default connect(mapStateToProps,mapActionToProps)(Home)
 
- 
+

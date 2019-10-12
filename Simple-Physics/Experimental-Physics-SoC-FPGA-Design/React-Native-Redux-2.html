@@ -109,11 +109,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">React Native Redux 2</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#what-is-the-idea">What is the idea?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#issues">Issues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#app-js">app.js</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#components-navigator-js">components/Navigator.js</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#components-home-js">components/Home.js</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#components-search-js">components/Search.js</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reducers-home-js">reducers/Home.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#components-home-js-gesture-responder">components/Home.js: Gesture Responder</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-DataSender.html">Verilog DataSender</a></li>
@@ -201,7 +197,7 @@
 <div class="section" id="what-is-the-idea">
 <h2>What is the idea?<a class="headerlink" href="#what-is-the-idea" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Last time we used <strong>expo</strong>, but some libraries are not functioning well with it. Specifically <a class="reference external" href="https://kmagiera.github.io/react-native-gesture-handler/docs/component-swipeable.html">Swipeable by React Native Gesture Handler</a> and <a class="reference external" href="https://github.com/itsnubix/react-native-video-controls">react native video controls</a></li>
+<li>Last time we used <strong>expo</strong>, but some libraries are not functioning well with it. Specifically <a class="reference external" href="https://github.com/itsnubix/react-native-video-controls">react native video controls</a></li>
 <li>Therefore we will turn to <strong>React Native CLI</strong></li>
 <li>You can just follow the guide on the official website, and notice several Issues I encountered</li>
 </ul>
@@ -251,33 +247,62 @@
 </li>
 </ul>
 </div>
-<div class="section" id="app-js">
-<h2>app.js<a class="headerlink" href="#app-js" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="components-navigator-js">
-<h2>components/Navigator.js<a class="headerlink" href="#components-navigator-js" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="components-home-js">
-<h2>components/Home.js<a class="headerlink" href="#components-home-js" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="components-search-js">
-<h2>components/Search.js<a class="headerlink" href="#components-search-js" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="reducers-home-js">
-<h2>reducers/Home.js<a class="headerlink" href="#reducers-home-js" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
+<div class="section" id="components-home-js-gesture-responder">
+<h2>components/Home.js: Gesture Responder<a class="headerlink" href="#components-home-js-gesture-responder" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added <a class="reference external" href="https://facebook.github.io/react-native/docs/panresponder">PanResponder</a> to handle Swipe Gesture</li>
+</ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>import React,{Component} from &#39;react&#39;
+import {View,Text,Button,PanResponder} from &#39;react-native&#39;
+import {bindActionCreators} from &#39;redux&#39;
+import {connect} from &#39;react-redux&#39;
+
+class Home extends Component{
+    constructor(props) {
+        super(props);
+        this._panResponder = PanResponder.create({
+            onStartShouldSetPanResponder: (evt, gestureState) =&gt; true,
+            onPanResponderRelease: (evt, gestureState) =&gt; {
+                this.props.changeMovie()
+            },
+        })
+    }
+
+    render(){
+        return(
+            &lt;View style={{flex:1}}&gt;
+                    &lt;View style={{flex:9}} {...this._panResponder.panHandlers}&gt;
+                        &lt;Text style={{flex:1,backgroundColor: &#39;skyblue&#39;}}&gt;
+                            {this.props.Home.currentMovie}
+                        &lt;/Text&gt;
+                    &lt;/View&gt;
+                    &lt;View style={{flex:1}}&gt;
+                        &lt;Button title=&quot;Search&quot;
+                            onPress={()=&gt;this.props.navigation.navigate(&#39;Search&#39;)}
+                        /&gt;
+                    &lt;/View&gt;
+            &lt;/View&gt;
+        )
+    }
+}
+
+//===============================
+// Begin Actions
+//===============================
+const changeMovie = payload=&gt;({
+    type: &quot;changeMovie&quot;,
+    payload: payload
+})
+// End Actions
+
+const mapStateToProps=(state)=&gt;{
+    const {Home}=state
+    return {Home}
+}
+const mapActionToProps=action=&gt;(
+    bindActionCreators({changeMovie},action)
+)
+export default connect(mapStateToProps,mapActionToProps)(Home)
 </pre></div>
 </div>
 </div>
