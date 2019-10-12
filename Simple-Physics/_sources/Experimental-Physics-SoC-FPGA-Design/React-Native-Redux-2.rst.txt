@@ -42,16 +42,26 @@ Issues
 
  
 components/Home.js: Gesture Responder
---------------------------------------
+----------------------------------------
 
-- Added `PanResponder <https://facebook.github.io/react-native/docs/panresponder>`_ to handle Swipe Gesture
+- Added :code:`PanResponder` to handle Swipe 
+
+- Added :code:`react-native-video`
+
+- Added :code:`react-native-orientation` to make default orientation Landscape
+
+- Added my own :code:`ModalExample`
 
 .. code-block:: javascript
 
     import React,{Component} from 'react'
-    import {View,Text,Button,PanResponder} from 'react-native'
+    import {StyleSheet,View,Text,Button,PanResponder} from 'react-native'
     import {bindActionCreators} from 'redux'
     import {connect} from 'react-redux'
+    import Video from 'react-native-video'
+    import Orientation from 'react-native-orientation'
+
+    import ModalExample from './ModalExample'
 
     class Home extends Component{
         constructor(props) {
@@ -62,21 +72,33 @@ components/Home.js: Gesture Responder
                     this.props.changeMovie()
                 },
             })
+            Orientation.lockToLandscape()
         }
 
         render(){
             return(
-                <View style={{flex:1}}>
-                        <View style={{flex:9}} {...this._panResponder.panHandlers}>
-                            <Text style={{flex:1,backgroundColor: 'skyblue'}}>
-                                {this.props.Home.currentMovie}
-                            </Text>
+                <View style={{flex:1,flexDirection:'row'}}>
+                    <View style={{flex:8,flexDirection:'row',backgroundColor:'black'}}
+                        {...this._panResponder.panHandlers}>
+                            <Video source={{uri:"https://youku.com-ok-pptv.com/20190927/7452_75e64cba/index.m3u8"}}
+                                style={{height:"100%", width:"100%"}}
+                                controls={true} resizeMode={"contain"} />
+                    </View>
+                    <View style={{flex:1,flexDirection:'row',backgroundColor:'black',padding:3}}>
+                        <View style={{flexDirection:'column'}}>
+                            <Text style={{color:"white"}}>划动即可随机切换！</Text>
+                            <Text style={{color:"white"}}>正在播放:</Text>
+                            <Text style={{color:"white"}}>{this.props.Home.currentMovie}</Text>
+                            <ModalExample prop={{label:"播单", data:"111"}}>
+                            </ModalExample>
+                            <ModalExample prop={{label:"选集", data:"222"}}>
+                            </ModalExample>
+                            <ModalExample prop={{label:"评论", data:"333"}}>
+                            </ModalExample>
+                            <ModalExample prop={{label:"设置", data:"444"}}>
+                            </ModalExample>
                         </View>
-                        <View style={{flex:1}}>
-                            <Button title="Search"
-                                onPress={()=>this.props.navigation.navigate('Search')}
-                            />
-                        </View>
+                    </View>
                 </View>
             )
         }
@@ -99,5 +121,57 @@ components/Home.js: Gesture Responder
         bindActionCreators({changeMovie},action)
     )
     export default connect(mapStateToProps,mapActionToProps)(Home)
+
+
+components/ModalExample.js
+----------------------------------------
+
+.. code-block:: javascript
+
+    import React,{Component} from 'react'
+    import {StyleSheet,View,Modal,Text,Button,TouchableOpacity} from 'react-native'
+
+    class ModalExample extends Component{
+      state={modalVisible:false}
+      flipModal=()=>{
+        this.setState({modalVisible:!this.state.modalVisible})
+      }
+
+      render(){
+        return(
+          <View>
+            <Modal animationType="slide" transparent={true}
+              visible={this.state.modalVisible}>
+              <View style={{alignItems:'flex-end',paddingRight:"15%"}}>
+                <TouchableOpacity style={styles.button}
+                  onPress={()=>this.flipModal()}><Text>收起</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}
+                  onPress={()=>this.flipModal()}>
+                  <Text>{this.props.prop.data}</Text>
+                </TouchableOpacity>
+              </View>
+            </Modal>
+            <TouchableOpacity style={styles.button}
+              onPress={()=>this.flipModal()}>
+              <Text>{this.props.prop.label}</Text>
+            </TouchableOpacity>
+          </View>
+        )
+      }
+    }
+
+    const styles = StyleSheet.create({
+      button:{
+        backgroundColor:"lightblue",
+        alignItems:'center',
+        padding:10,
+        margin:2,
+        width:90,
+        borderRadius: 15,
+      }
+    })
+
+    export default ModalExample
 
 

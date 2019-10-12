@@ -110,6 +110,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#what-is-the-idea">What is the idea?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#issues">Issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#components-home-js-gesture-responder">components/Home.js: Gesture Responder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#components-modalexample-js">components/ModalExample.js</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-DataSender.html">Verilog DataSender</a></li>
@@ -250,12 +251,19 @@
 <div class="section" id="components-home-js-gesture-responder">
 <h2>components/Home.js: Gesture Responder<a class="headerlink" href="#components-home-js-gesture-responder" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Added <a class="reference external" href="https://facebook.github.io/react-native/docs/panresponder">PanResponder</a> to handle Swipe Gesture</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">PanResponder</span></code> to handle Swipe</li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">react-native-video</span></code></li>
+<li>Added <code class="code docutils literal notranslate"><span class="pre">react-native-orientation</span></code> to make default orientation Landscape</li>
+<li>Added my own <code class="code docutils literal notranslate"><span class="pre">ModalExample</span></code></li>
 </ul>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>import React,{Component} from &#39;react&#39;
-import {View,Text,Button,PanResponder} from &#39;react-native&#39;
+import {StyleSheet,View,Text,Button,PanResponder} from &#39;react-native&#39;
 import {bindActionCreators} from &#39;redux&#39;
 import {connect} from &#39;react-redux&#39;
+import Video from &#39;react-native-video&#39;
+import Orientation from &#39;react-native-orientation&#39;
+
+import ModalExample from &#39;./ModalExample&#39;
 
 class Home extends Component{
     constructor(props) {
@@ -266,21 +274,33 @@ class Home extends Component{
                 this.props.changeMovie()
             },
         })
+        Orientation.lockToLandscape()
     }
 
     render(){
         return(
-            &lt;View style={{flex:1}}&gt;
-                    &lt;View style={{flex:9}} {...this._panResponder.panHandlers}&gt;
-                        &lt;Text style={{flex:1,backgroundColor: &#39;skyblue&#39;}}&gt;
-                            {this.props.Home.currentMovie}
-                        &lt;/Text&gt;
+            &lt;View style={{flex:1,flexDirection:&#39;row&#39;}}&gt;
+                &lt;View style={{flex:8,flexDirection:&#39;row&#39;,backgroundColor:&#39;black&#39;}}
+                    {...this._panResponder.panHandlers}&gt;
+                        &lt;Video source={{uri:&quot;https://youku.com-ok-pptv.com/20190927/7452_75e64cba/index.m3u8&quot;}}
+                            style={{height:&quot;100%&quot;, width:&quot;100%&quot;}}
+                            controls={true} resizeMode={&quot;contain&quot;} /&gt;
+                &lt;/View&gt;
+                &lt;View style={{flex:1,flexDirection:&#39;row&#39;,backgroundColor:&#39;black&#39;,padding:3}}&gt;
+                    &lt;View style={{flexDirection:&#39;column&#39;}}&gt;
+                        &lt;Text style={{color:&quot;white&quot;}}&gt;划动即可随机切换！&lt;/Text&gt;
+                        &lt;Text style={{color:&quot;white&quot;}}&gt;正在播放:&lt;/Text&gt;
+                        &lt;Text style={{color:&quot;white&quot;}}&gt;{this.props.Home.currentMovie}&lt;/Text&gt;
+                        &lt;ModalExample prop={{label:&quot;播单&quot;, data:&quot;111&quot;}}&gt;
+                        &lt;/ModalExample&gt;
+                        &lt;ModalExample prop={{label:&quot;选集&quot;, data:&quot;222&quot;}}&gt;
+                        &lt;/ModalExample&gt;
+                        &lt;ModalExample prop={{label:&quot;评论&quot;, data:&quot;333&quot;}}&gt;
+                        &lt;/ModalExample&gt;
+                        &lt;ModalExample prop={{label:&quot;设置&quot;, data:&quot;444&quot;}}&gt;
+                        &lt;/ModalExample&gt;
                     &lt;/View&gt;
-                    &lt;View style={{flex:1}}&gt;
-                        &lt;Button title=&quot;Search&quot;
-                            onPress={()=&gt;this.props.navigation.navigate(&#39;Search&#39;)}
-                        /&gt;
-                    &lt;/View&gt;
+                &lt;/View&gt;
             &lt;/View&gt;
         )
     }
@@ -303,6 +323,56 @@ const mapActionToProps=action=&gt;(
     bindActionCreators({changeMovie},action)
 )
 export default connect(mapStateToProps,mapActionToProps)(Home)
+</pre></div>
+</div>
+</div>
+<div class="section" id="components-modalexample-js">
+<h2>components/ModalExample.js<a class="headerlink" href="#components-modalexample-js" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>import React,{Component} from &#39;react&#39;
+import {StyleSheet,View,Modal,Text,Button,TouchableOpacity} from &#39;react-native&#39;
+
+class ModalExample extends Component{
+  state={modalVisible:false}
+  flipModal=()=&gt;{
+    this.setState({modalVisible:!this.state.modalVisible})
+  }
+
+  render(){
+    return(
+      &lt;View&gt;
+        &lt;Modal animationType=&quot;slide&quot; transparent={true}
+          visible={this.state.modalVisible}&gt;
+          &lt;View style={{alignItems:&#39;flex-end&#39;,paddingRight:&quot;15%&quot;}}&gt;
+            &lt;TouchableOpacity style={styles.button}
+              onPress={()=&gt;this.flipModal()}&gt;&lt;Text&gt;收起&lt;/Text&gt;
+            &lt;/TouchableOpacity&gt;
+            &lt;TouchableOpacity style={styles.button}
+              onPress={()=&gt;this.flipModal()}&gt;
+              &lt;Text&gt;{this.props.prop.data}&lt;/Text&gt;
+            &lt;/TouchableOpacity&gt;
+          &lt;/View&gt;
+        &lt;/Modal&gt;
+        &lt;TouchableOpacity style={styles.button}
+          onPress={()=&gt;this.flipModal()}&gt;
+          &lt;Text&gt;{this.props.prop.label}&lt;/Text&gt;
+        &lt;/TouchableOpacity&gt;
+      &lt;/View&gt;
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  button:{
+    backgroundColor:&quot;lightblue&quot;,
+    alignItems:&#39;center&#39;,
+    padding:10,
+    margin:2,
+    width:90,
+    borderRadius: 15,
+  }
+})
+
+export default ModalExample
 </pre></div>
 </div>
 </div>
