@@ -1,0 +1,74 @@
+
+React Native Redux 2
+=============================================================
+
+:Date: 12 Oct 2019
+
+What is the idea?
+-----------------------
+
+- Last time we used **expo**, but some libraries are not functioning well with it. Specifically `Swipeable by React Native Gesture Handler <https://kmagiera.github.io/react-native-gesture-handler/docs/component-swipeable.html>`_ and `react native video controls <https://github.com/itsnubix/react-native-video-controls>`_
+
+- Therefore we will turn to **React Native CLI**
+- You can just follow the guide on the official website, and notice several Issues I encountered
+
+Issues
+----------------
+
+- :code:`SDK location not found`
+    - Go to the :code:`android/` directory of your react-native project
+    - Create a file called :code:`local.properties` with this line:
+    - :code:`sdk.dir = .../Android/Sdk`
+    - For me: :code:`sdk.dir = /home/teslacat/Android/Sdk`
+
+- The developer mode for XiaoMi is stupid!
+    - Version :code:`MIUI 10.3.4`
+    - Go to :code:`Settings/My device/All specs/`
+    - Tap :code:`MIUI version` for 10000 times
+    - Go to :code:`Settings/Additional settings/Developer options/`
+    - Make sure :code:`USB debugging` and :code:`Install via USB` are on. For latter you need to sign in to MI Account
+
+- Of course you can use exactly the same code as last time. But don't forget to install dependencies! 
+
+.. code-block:: console
+
+	npm install react-native-gesture-handler react-redux redux react-navigation-stack react-navigation
+
+- Work flow
+    - :code:`sudo react-native run-android` : This installs the App via USB to your phone. A message will show up in your phone and you need to allow the installation
+    - :code:`sudo react-native start` : This starts a server on your laptop. Note you need to execute :code:`adb reverse tcp:8081 tcp:8081` as stated in the official guide
+    - Now open the app on your phone, it then will fetch data from the server running on your computer
+    - Unlike Expo, once you make changes to your **code**, you need to restart the App. And you need to reinstall it if you add a **new package** 
+
+app.js
+------------
+
+.. code-block:: javascript
+
+
+
+components/Navigator.js
+----------------------------
+
+.. code-block:: javascript
+
+ 
+components/Home.js
+------------------------
+
+.. code-block:: javascript
+
+ 
+components/Search.js
+-----------------------
+
+.. code-block:: javascript
+
+  
+
+reducers/Home.js
+------------------
+
+.. code-block:: javascript
+
+ 

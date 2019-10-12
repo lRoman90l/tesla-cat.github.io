@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Processor-FPGA Communication: Processor Part &mdash; Simple Physics  documentation</title>
+  <title>React Native Redux 2 &mdash; Simple Physics  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="FAILED Processor-FPGA Communication: Using FIFO FPGA Part" href="FAILED-Processor-FPGA-Communication-Using-FIFO-FPGA-Part.html" />
-    <link rel="prev" title="Processor-FPGA Communication: FPGA Part" href="Processor-FPGA-Communication-FPGA-Part.html" /> 
+    <link rel="next" title="Verilog DataSender" href="Verilog-DataSender.html" />
+    <link rel="prev" title="React Native Redux 1" href="React-Native-Redux-1.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,12 +95,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Design-Plan.html">Design Plan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Linux-Tips.html">Linux Tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-FPGA-Part.html">Processor-FPGA Communication: FPGA Part</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Processor-FPGA Communication: Processor Part</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#corresponding-project-folder">Corresponding Project Folder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dependency">Dependency</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#processor-part">Processor Part</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Processor-Part.html">Processor-FPGA Communication: Processor Part</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FAILED-Processor-FPGA-Communication-Using-FIFO-FPGA-Part.html">FAILED Processor-FPGA Communication: Using FIFO FPGA Part</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FAILED-Processor-FPGA-Communication-Using-FIFO-Processor-Part.html">FAILED Processor-FPGA Communication: Using FIFO Processor Part</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Processor-FPGA-Communication-Using-FIFO-FPGA-Part.html">Processor-FPGA Communication: Using FIFO FPGA Part</a></li>
@@ -111,7 +106,16 @@
 <li class="toctree-l2"><a class="reference internal" href="Nodejs-RESTful-API-Email-Verification.html">Nodejs RESTful API Email Verification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Nodejs-RESTful-API-Production.html">Nodejs RESTful API Production</a></li>
 <li class="toctree-l2"><a class="reference internal" href="React-Native-Redux-1.html">React Native Redux 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="React-Native-Redux-2.html">React Native Redux 2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">React Native Redux 2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-the-idea">What is the idea?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#issues">Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app-js">app.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#components-navigator-js">components/Navigator.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#components-home-js">components/Home.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#components-search-js">components/Search.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reducers-home-js">reducers/Home.js</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-DataSender.html">Verilog DataSender</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-My16ChannelCounter.html">Verilog My16ChannelCounter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-MemoryMapper.html">Verilog MemoryMapper</a></li>
@@ -165,13 +169,13 @@
         
           <li><a href="index.html">Experimental Physics: SoC FPGA Design</a> &raquo;</li>
         
-      <li>Processor-FPGA Communication: Processor Part</li>
+      <li>React Native Redux 2</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/Processor-FPGA-Communication-Processor-Part.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Experimental-Physics-SoC-FPGA-Design/React-Native-Redux-2.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -184,49 +188,98 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="processor-fpga-communication-processor-part">
-<h1>Processor-FPGA Communication: Processor Part<a class="headerlink" href="#processor-fpga-communication-processor-part" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="react-native-redux-2">
+<h1>React Native Redux 2<a class="headerlink" href="#react-native-redux-2" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">14 Aug 2019</td>
+<tr class="field-odd field"><th class="field-name">Date:</th><td class="field-body">12 Oct 2019</td>
 </tr>
 </tbody>
 </table>
-<div class="section" id="corresponding-project-folder">
-<h2><a class="reference external" href="https://github.com/tesla-cat/Works-Done-In-Dzmitry-s-Lab-At-CQT/tree/master/Cyclone%20V%20SoC%20Control%20System/Quartus%20Project/HPS_FPGA_LED">Corresponding Project Folder</a><a class="headerlink" href="#corresponding-project-folder" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="dependency">
-<h2>Dependency<a class="headerlink" href="#dependency" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-is-the-idea">
+<h2>What is the idea?<a class="headerlink" href="#what-is-the-idea" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Edit the system environment variables</li>
+<li>Last time we used <strong>expo</strong>, but some libraries are not functioning well with it. Specifically <a class="reference external" href="https://kmagiera.github.io/react-native-gesture-handler/docs/component-swipeable.html">Swipeable by React Native Gesture Handler</a> and <a class="reference external" href="https://github.com/itsnubix/react-native-video-controls">react native video controls</a></li>
+<li>Therefore we will turn to <strong>React Native CLI</strong></li>
+<li>You can just follow the guide on the official website, and notice several Issues I encountered</li>
 </ul>
 </div>
-<div class="section" id="processor-part">
-<h2>Processor Part<a class="headerlink" href="#processor-part" title="Permalink to this headline">¶</a></h2>
-<p><strong>Step 1</strong> Add <code class="code docutils literal notranslate"><span class="pre">quartus\sopc_builder\bin</span></code> to <strong>PATH</strong> environment variable, in my case <code class="code docutils literal notranslate"><span class="pre">D:\QUARTUS\quartus\sopc_builder\bin</span></code></p>
-<p><strong>Step 2</strong> Install <a class="reference external" href="http://fpgasoftware.intel.com/soceds/18.1/?edition=standard&amp;platform=windows&amp;download_manager=direct">Intel SoC FPGA Embedded Development Suite</a></p>
+<div class="section" id="issues">
+<h2>Issues<a class="headerlink" href="#issues" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Search program <strong>SoC EDS command shell</strong> in your computer and run it</li>
+<li><dl class="first docutils">
+<dt><code class="code docutils literal notranslate"><span class="pre">SDK</span> <span class="pre">location</span> <span class="pre">not</span> <span class="pre">found</span></code></dt>
+<dd><ul class="first last">
+<li>Go to the <code class="code docutils literal notranslate"><span class="pre">android/</span></code> directory of your react-native project</li>
+<li>Create a file called <code class="code docutils literal notranslate"><span class="pre">local.properties</span></code> with this line:</li>
+<li><code class="code docutils literal notranslate"><span class="pre">sdk.dir</span> <span class="pre">=</span> <span class="pre">.../Android/Sdk</span></code></li>
+<li>For me: <code class="code docutils literal notranslate"><span class="pre">sdk.dir</span> <span class="pre">=</span> <span class="pre">/home/teslacat/Android/Sdk</span></code></li>
 </ul>
-<p><strong>Step 3</strong> Generate necessary C header file</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>The developer mode for XiaoMi is stupid!</dt>
+<dd><ul class="first last">
+<li>Version <code class="code docutils literal notranslate"><span class="pre">MIUI</span> <span class="pre">10.3.4</span></code></li>
+<li>Go to <code class="code docutils literal notranslate"><span class="pre">Settings/My</span> <span class="pre">device/All</span> <span class="pre">specs/</span></code></li>
+<li>Tap <code class="code docutils literal notranslate"><span class="pre">MIUI</span> <span class="pre">version</span></code> for 10000 times</li>
+<li>Go to <code class="code docutils literal notranslate"><span class="pre">Settings/Additional</span> <span class="pre">settings/Developer</span> <span class="pre">options/</span></code></li>
+<li>Make sure <code class="code docutils literal notranslate"><span class="pre">USB</span> <span class="pre">debugging</span></code> and <code class="code docutils literal notranslate"><span class="pre">Install</span> <span class="pre">via</span> <span class="pre">USB</span></code> are on. For latter you need to sign in to MI Account</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Of course you can use exactly the same code as last time. But don’t forget to install dependencies!</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">npm install react-native-gesture-handler react-redux redux react-navigation-stack react-navigation</span>
+</pre></div>
+</div>
 <ul class="simple">
-<li>In <strong>SoC EDS command shell</strong> go to your Quartus project folder and execute <code class="code docutils literal notranslate"><span class="pre">./generate_hps_qsys_header.sh</span></code>. This <strong>automatically</strong> generates <code class="code docutils literal notranslate"><span class="pre">hps_0.h</span></code> C header file based on <code class="code docutils literal notranslate"><span class="pre">soc_system.sopcinfo</span></code> file. <code class="code docutils literal notranslate"><span class="pre">hps_0.h</span></code> contains <strong>address infomation</strong> we set earlier in FPGA part: e.g. <code class="code docutils literal notranslate"><span class="pre">#define</span> <span class="pre">LED_PIO_BASE</span> <span class="pre">0x3000</span></code> is in it</li>
-<li>We can then use the macro <code class="code docutils literal notranslate"><span class="pre">LED_PIO_BASE</span></code> later in our main C program conveniently</li>
+<li><dl class="first docutils">
+<dt>Work flow</dt>
+<dd><ul class="first last">
+<li><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">react-native</span> <span class="pre">run-android</span></code> : This installs the App via USB to your phone. A message will show up in your phone and you need to allow the installation</li>
+<li><code class="code docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">react-native</span> <span class="pre">start</span></code> : This starts a server on your laptop. Note you need to execute <code class="code docutils literal notranslate"><span class="pre">adb</span> <span class="pre">reverse</span> <span class="pre">tcp:8081</span> <span class="pre">tcp:8081</span></code> as stated in the official guide</li>
+<li>Now open the app on your phone, it then will fetch data from the server running on your computer</li>
+<li>Unlike Expo, once you make changes to your <strong>code</strong>, you need to restart the App. And you need to reinstall it if you add a <strong>new package</strong></li>
 </ul>
-<p><strong>Step 4</strong> Write the main C program, refer to <code class="code docutils literal notranslate"><span class="pre">main.c</span></code> and read the comments there</p>
-<p><strong>Step 5</strong> Compile the C program</p>
-<ul class="simple">
-<li>In <strong>SoC EDS command shell</strong> go to the project folder and execute <code class="code docutils literal notranslate"><span class="pre">make</span></code></li>
+</dd>
+</dl>
+</li>
 </ul>
-<p><strong>Step 6</strong> Copy the file to DE10-Nano Board and execute it</p>
-<ul class="simple">
-<li>Connect your computer with DE10-Nano board using <a class="reference external" href="https://software.intel.com/en-us/node/712683">Ethernet over USB</a> , this corresponds to <code class="code docutils literal notranslate"><span class="pre">IP</span> <span class="pre">Address:</span> <span class="pre">192.168.7.1</span></code></li>
-<li>In <strong>SoC EDS command shell</strong> go to the project folder and execute <code class="code docutils literal notranslate"><span class="pre">scp</span> <span class="pre">HPS_FPGA_LED</span> <span class="pre">root&#64;192.168.7.1:/home/root</span></code>, then type “yes” and press “Enter”</li>
-</ul>
-<p><strong>Step 7</strong> Enter the Linux System of your DE10-Nano board. I use <a class="reference external" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer</a> introduced in <a class="reference external" href="https://software.intel.com/en-us/node/712683">Ethernet over USB</a>. Then open Linux console (Applications &gt;&gt; Terminal Emulator in VNC Viewer). Go to <code class="code docutils literal notranslate"><span class="pre">/home/root</span></code> and execute <code class="code docutils literal notranslate"><span class="pre">./HPS_FPGA_LED</span></code></p>
-<p><strong>We are done!</strong></p>
+</div>
+<div class="section" id="app-js">
+<h2>app.js<a class="headerlink" href="#app-js" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="components-navigator-js">
+<h2>components/Navigator.js<a class="headerlink" href="#components-navigator-js" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="components-home-js">
+<h2>components/Home.js<a class="headerlink" href="#components-home-js" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="components-search-js">
+<h2>components/Search.js<a class="headerlink" href="#components-search-js" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reducers-home-js">
+<h2>reducers/Home.js<a class="headerlink" href="#reducers-home-js" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -238,10 +291,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="FAILED-Processor-FPGA-Communication-Using-FIFO-FPGA-Part.html" class="btn btn-neutral float-right" title="FAILED Processor-FPGA Communication: Using FIFO FPGA Part" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Verilog-DataSender.html" class="btn btn-neutral float-right" title="Verilog DataSender" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Processor-FPGA-Communication-FPGA-Part.html" class="btn btn-neutral float-left" title="Processor-FPGA Communication: FPGA Part" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="React-Native-Redux-1.html" class="btn btn-neutral float-left" title="React Native Redux 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Verilog DataSender" href="Verilog-DataSender.html" />
+    <link rel="next" title="React Native Redux 2" href="React-Native-Redux-2.html" />
     <link rel="prev" title="Nodejs RESTful API Production" href="Nodejs-RESTful-API-Production.html" /> 
 </head>
 
@@ -116,6 +116,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#reducers-home-js">reducers/Home.js</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="React-Native-Redux-2.html">React Native Redux 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-DataSender.html">Verilog DataSender</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-My16ChannelCounter.html">Verilog My16ChannelCounter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Verilog-MemoryMapper.html">Verilog MemoryMapper</a></li>
@@ -278,9 +279,9 @@ import {Provider} from &#39;react-redux&#39;
 
 import HomeReducer from &#39;./redux/reducers/Home&#39;
 const store = createStore(combineReducers({
-        Home: HomeReducer,
-        // you can add other reducers here
-        // eg: Search: SearchReducer
+    Home: HomeReducer,
+    // you can add other reducers here
+    // eg: Search: SearchReducer
 }))
 
 import Navigitor from &#39;./redux/components/Navigator&#39;
@@ -306,8 +307,8 @@ export default class AwesomeMovies extends Component{
 <span class="kr">import</span> <span class="nx">Search</span> <span class="nx">from</span> <span class="s1">&#39;./Search&#39;</span>
 
 <span class="kr">const</span> <span class="nx">Navigator</span> <span class="o">=</span> <span class="nx">createStackNavigator</span><span class="p">({</span>
-        <span class="nx">Home</span><span class="o">:</span><span class="p">{</span><span class="nx">screen</span><span class="o">:</span> <span class="nx">Home</span><span class="p">},</span>
-        <span class="nx">Search</span><span class="o">:</span><span class="p">{</span><span class="nx">screen</span><span class="o">:</span> <span class="nx">Search</span><span class="p">}</span>
+    <span class="nx">Home</span><span class="o">:</span><span class="p">{</span><span class="nx">screen</span><span class="o">:</span> <span class="nx">Home</span><span class="p">},</span>
+    <span class="nx">Search</span><span class="o">:</span><span class="p">{</span><span class="nx">screen</span><span class="o">:</span> <span class="nx">Search</span><span class="p">}</span>
 <span class="p">})</span>
 
 <span class="kr">export</span> <span class="k">default</span> <span class="nx">createAppContainer</span><span class="p">(</span><span class="nx">Navigator</span><span class="p">)</span>
@@ -322,39 +323,39 @@ import {bindActionCreators} from &#39;redux&#39;
 import {connect} from &#39;react-redux&#39;
 
 class Home extends Component{
-        render(){
-                return(
-                        &lt;View&gt;
-                                &lt;Text&gt;{this.props.Home.currentMovie}&lt;/Text&gt;
-                                &lt;Button
-                                        title=&quot;changeMovie&quot;
-                                        onPress={()=&gt;this.props.changeMovie()}
-                                /&gt;
-                                &lt;Text&gt;This is Home&lt;/Text&gt;
-                                &lt;Button
-                                        title=&quot;Search&quot;
-                                        onPress={()=&gt;this.props.navigation.navigate(&#39;Search&#39;)}
-                                /&gt;
-                        &lt;/View&gt;
-                )
-        }
+    render(){
+        return(
+            &lt;View&gt;
+                &lt;Text&gt;{this.props.Home.currentMovie}&lt;/Text&gt;
+                &lt;Button
+                    title=&quot;changeMovie&quot;
+                    onPress={()=&gt;this.props.changeMovie()}
+                /&gt;
+                &lt;Text&gt;This is Home&lt;/Text&gt;
+                &lt;Button
+                    title=&quot;Search&quot;
+                    onPress={()=&gt;this.props.navigation.navigate(&#39;Search&#39;)}
+                /&gt;
+            &lt;/View&gt;
+        )
+    }
 }
 
 //===============================
 // Begin Actions
 //===============================
 const changeMovie = payload=&gt;({
-        type: &quot;changeMovie&quot;,
-        payload: payload
+    type: &quot;changeMovie&quot;,
+    payload: payload
 })
 // End Actions
 
 const mapStateToProps=(state)=&gt;{
-        const {Home}=state
-        return {Home}
+    const {Home}=state
+    return {Home}
 }
 const mapActionToProps=action=&gt;(
-        bindActionCreators({changeMovie},action)
+    bindActionCreators({changeMovie},action)
 )
 export default connect(mapStateToProps,mapActionToProps)(Home)
 </pre></div>
@@ -366,17 +367,17 @@ export default connect(mapStateToProps,mapActionToProps)(Home)
 import {View,Text,Button} from &#39;react-native&#39;
 
 class Search extends Component{
-        render(){
-                return(
-                        &lt;View&gt;
-                                &lt;Text&gt;This is Search&lt;/Text&gt;
-                                &lt;Button
-                                        title=&quot;Home&quot;
-                                        onPress={()=&gt;this.props.navigation.navigate(&#39;Home&#39;)}
-                                /&gt;
-                        &lt;/View&gt;
-                )
-        }
+    render(){
+        return(
+            &lt;View&gt;
+                &lt;Text&gt;This is Search&lt;/Text&gt;
+                &lt;Button
+                    title=&quot;Home&quot;
+                    onPress={()=&gt;this.props.navigation.navigate(&#39;Home&#39;)}
+                /&gt;
+            &lt;/View&gt;
+        )
+    }
 }
 
 export default Search
@@ -386,20 +387,20 @@ export default Search
 <div class="section" id="reducers-home-js">
 <h2>reducers/Home.js<a class="headerlink" href="#reducers-home-js" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">initialState</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">currentMovie</span><span class="o">:</span><span class="s2">&quot;Yui Hatano&quot;</span><span class="p">,</span>
-        <span class="nx">movies</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;Tsubasa Amami&quot;</span><span class="p">,</span> <span class="s2">&quot;Yui Hatano&quot;</span><span class="p">]</span>
+    <span class="nx">currentMovie</span><span class="o">:</span><span class="s2">&quot;Yui Hatano&quot;</span><span class="p">,</span>
+    <span class="nx">movies</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;Tsubasa Amami&quot;</span><span class="p">,</span> <span class="s2">&quot;Yui Hatano&quot;</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="kr">const</span> <span class="nx">HomeReducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="o">=</span><span class="nx">initialState</span><span class="p">,</span> <span class="nx">action</span><span class="p">)=&gt;{</span>
-        <span class="k">switch</span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">){</span>
-                <span class="k">case</span> <span class="s2">&quot;changeMovie&quot;</span><span class="o">:</span>
-                        <span class="kd">var</span> <span class="nx">randomIndex</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="nx">state</span><span class="p">.</span><span class="nx">movies</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
-                        <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">state</span><span class="p">,</span> <span class="p">{</span>
-                        <span class="nx">currentMovie</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">movies</span><span class="p">[</span><span class="nx">randomIndex</span><span class="p">]</span>
-                <span class="p">})</span>
-                <span class="k">default</span><span class="o">:</span>
-                        <span class="k">return</span> <span class="nx">state</span>
-        <span class="p">}</span>
+    <span class="k">switch</span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">){</span>
+        <span class="k">case</span> <span class="s2">&quot;changeMovie&quot;</span><span class="o">:</span>
+            <span class="kd">var</span> <span class="nx">randomIndex</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="nx">state</span><span class="p">.</span><span class="nx">movies</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">state</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">currentMovie</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">movies</span><span class="p">[</span><span class="nx">randomIndex</span><span class="p">]</span>
+              <span class="p">})</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="k">return</span> <span class="nx">state</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kr">export</span> <span class="k">default</span> <span class="nx">HomeReducer</span>
@@ -416,7 +417,7 @@ export default Search
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Verilog-DataSender.html" class="btn btn-neutral float-right" title="Verilog DataSender" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="React-Native-Redux-2.html" class="btn btn-neutral float-right" title="React Native Redux 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Nodejs-RESTful-API-Production.html" class="btn btn-neutral float-left" title="Nodejs RESTful API Production" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
