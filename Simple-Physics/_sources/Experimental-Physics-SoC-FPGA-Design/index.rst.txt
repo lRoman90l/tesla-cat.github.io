@@ -18,6 +18,7 @@ Experimental Physics: SoC FPGA Design
 	Nodejs-RESTful-API-Production
 	React-Native-Redux-1
 	React-Native-Redux-2
+	React-Native-Redux-3
 	Verilog-DataSender
 	Verilog-My16ChannelCounter
 	Verilog-MemoryMapper

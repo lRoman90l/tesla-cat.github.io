@@ -1,0 +1,179 @@
+
+React Native Redux 3
+=====================================
+
+:Date: 13 Oct 2019
+
+What is the idea?
+-----------------------
+
+- Added movieFinder, a function to get movies by parsing XML
+- Moved all styles to a single file
+- Added FlatList and MovieDetail Components
+ 
+functions/movieFinder.js
+----------------------------------------
+
+.. code-block:: javascript
+
+    const parseString = require('react-native-xml2js').parseString
+
+    export default function movieFinder(uriPrefix,keyword,callback){
+      var results=[]
+      fetchVideos(uriPrefix+"&wd="+keyword,(vids)=>{
+        vids.forEach((vid)=>{
+          fetchVideos(uriPrefix+"ac=videolist&ids="+vid.id[0],(vids)=>{
+            vids[0].dl[0].dd.forEach((dd)=>{
+              if(dd.$.flag=="ckm3u8"){
+                var eps=dd._.split("#")
+                var episodes={}
+                eps.forEach((ep)=>{
+                  var episode=ep.split("$")
+                  episodes[episode[0]] = episode[1]
+                })
+                var result={
+                  name: vids[0].name[0],
+                  pic: vids[0].pic[0],
+                  episodes:episodes,
+                }
+                callback(result)
+              }
+            })
+          })
+        })
+      })
+    }
+
+    // ===================================
+    const fetchVideos=(uri,callback)=>{
+      console.log(uri)
+      fetch(uri).then(response=>response.text())
+        .then((response)=>{
+          parseString(response,(err,result)=>{
+            var videos = result.rss.list[0].video
+            callback(videos)
+          })
+        })
+    }
+
+- To use:
+
+.. code-block:: javascript
+
+    const uriPrefix = "https://cj.okzy.tv/inc/api1s.php?"
+    const keyword = "硅谷"
+    movieFinder(uriPrefix,keyword,(result)=>{
+        console.log(result)
+    })
+
+components/MovieList.js
+----------------------------------------
+
+.. code-block:: javascript
+
+    import React,{Component} from 'react'
+    import {FlatList,View,Modal,TouchableOpacity,Text} from 'react-native'
+    import {connect} from 'react-redux'
+
+    import styles from './styles'
+    import MovieDetail from './MovieDetail'
+
+    class MovieList extends Component{
+      state={modalVisible:false}
+      flipModal=()=>{
+        this.setState({modalVisible:!this.state.modalVisible})
+      }
+
+      render(){
+        return(
+          <View>
+            <Modal animationType="slide" transparent={true}
+              visible={this.state.modalVisible}>
+              <View style={styles.Modal}>
+                <TouchableOpacity style={styles.ModalCloseButton}
+                  onPress={()=>this.flipModal()}>
+                  <Text style={styles.TextWhite}>收起</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.ModalItems}
+                  onPress={()=>this.flipModal()}>
+
+                  <FlatList data={this.props.Home.movies}
+                    style={{backgroundColor:'transparent'}}
+                    renderItem={({item})=>(
+                      <TouchableOpacity style={styles.ModalCloseButton}
+                        onPress={()=>this.flipModal()}>
+                        <MovieDetail movie={item}/>
+                      </TouchableOpacity>
+                    )}
+                    keyExtractor={item=>item.name}
+                  />
+     
+                </TouchableOpacity>
+              </View>
+            </Modal>
+            <TouchableOpacity style={styles.ModalOpenButton}
+              onPress={()=>this.flipModal()}>
+              <Text style={styles.TextWhite}>影视列表</Text>
+            </TouchableOpacity>
+          </View>
+        )
+      }
+    }
+
+    const mapStateToProps=(state)=>{
+      const {Home}=state
+      return {Home}
+    }
+    export default connect(mapStateToProps)(MovieList)
+
+components/MovieDetail.js
+----------------------------------------
+
+.. code-block:: javascript
+
+    import React,{Component} from 'react'
+    import {View,Text,Image} from 'react-native'
+
+    import styles from './styles'
+
+    export default class MovieDetail extends Component{
+      render(){
+        return(
+          <View style={styles.MovieDetailBody}>
+            <Text style={styles.MovieDetailName}>
+              {this.props.movie.name}</Text>
+            <Image style={styles.MovieDetailImage}
+              source={{uri: this.props.movie.pic}}/>
+          </View>
+        )
+      }
+    }
+
+components/styles.js
+----------------------------------------
+.. code-block:: javascript
+
+    import {StyleSheet} from 'react-native'
+
+    const ButtonCommon={
+      alignItems:'center',
+      borderWidth:2,borderRadius:10,borderColor:'white',
+      //backgroundColor:'black',
+      margin:2,
+      padding:2,
+    }
+
+    const TextCommon={
+      fontSize:18,fontWeight:'bold',
+    }
+
+    export default styles = StyleSheet.create({
+      Modal:{alignItems:'flex-end',paddingRight:120},
+      ModalOpenButton:Object.assign({}, ButtonCommon),
+      ModalCloseButton:Object.assign({}, ButtonCommon),
+      ModalItems:{backgroundColor:'black'},
+      MovieDetailBody:{flexDirection:'row-reverse'},
+      MovieDetailImage:{width:60,height:90},
+      MovieDetailName:Object.assign({color:'white'}, TextCommon),
+      TextWhite:Object.assign({color:'white'}, TextCommon),
+    })
