@@ -7,9 +7,14 @@ React Native Redux 3
 What is the idea?
 -----------------------
 
-- Added movieFinder, a function to get movies by parsing XML
-- Moved all styles to a single file
-- Added FlatList and MovieDetail Components
+- Add 
+    - Added movieFinder, a function to get movies by parsing XML
+    - Added MovieList, MovieDetail, Episodes Components
+- Moved
+    - Moved all styles to a single file
+    - Moved all actions to a single file
+- Modified
+	- Modified reducers for Home
  
 functions/movieFinder.js
 ----------------------------------------
@@ -26,10 +31,10 @@ functions/movieFinder.js
             vids[0].dl[0].dd.forEach((dd)=>{
               if(dd.$.flag=="ckm3u8"){
                 var eps=dd._.split("#")
-                var episodes={}
+                var episodes=[]
                 eps.forEach((ep)=>{
                   var episode=ep.split("$")
-                  episodes[episode[0]] = episode[1]
+                  episodes.push({label:episode[0],uri:episode[1]})
                 })
                 var result={
                   name: vids[0].name[0],
@@ -73,10 +78,12 @@ components/MovieList.js
 
     import React,{Component} from 'react'
     import {FlatList,View,Modal,TouchableOpacity,Text} from 'react-native'
+    import {bindActionCreators} from 'redux'
     import {connect} from 'react-redux'
 
     import styles from './styles'
     import MovieDetail from './MovieDetail'
+    import {changeMovie} from '../actions/Home'
 
     class MovieList extends Component{
       state={modalVisible:false}
@@ -101,13 +108,16 @@ components/MovieList.js
                     style={{backgroundColor:'transparent'}}
                     renderItem={({item})=>(
                       <TouchableOpacity style={styles.ModalCloseButton}
-                        onPress={()=>this.flipModal()}>
+                        onPress={()=>{
+                          this.flipModal()
+                          this.props.changeMovie(item)
+                        }}>
                         <MovieDetail movie={item}/>
                       </TouchableOpacity>
                     )}
                     keyExtractor={item=>item.name}
                   />
-     
+
                 </TouchableOpacity>
               </View>
             </Modal>
@@ -124,7 +134,10 @@ components/MovieList.js
       const {Home}=state
       return {Home}
     }
-    export default connect(mapStateToProps)(MovieList)
+    const mapActionToProps=action=>(
+      bindActionCreators({changeMovie},action)
+    )
+    export default connect(mapStateToProps,mapActionToProps)(MovieList)
 
 components/MovieDetail.js
 ----------------------------------------
@@ -148,6 +161,75 @@ components/MovieDetail.js
         )
       }
     }
+
+components/Episodes.js
+----------------------------------------
+.. code-block:: javascript
+
+    import React,{Component} from 'react'
+    import {FlatList,View,Modal,TouchableOpacity,Text} from 'react-native'
+    import {bindActionCreators} from 'redux'
+    import {connect} from 'react-redux'
+
+    import styles from './styles'
+    import {changeMovie} from '../actions/Home'
+
+    class Episodes extends Component{
+      state={modalVisible:false}
+      flipModal=()=>{
+        this.setState({modalVisible:!this.state.modalVisible})
+      }
+
+      render(){
+        return(
+          <View>
+            <Modal animationType="slide" transparent={true}
+              visible={this.state.modalVisible}>
+              <View style={styles.Modal}>
+                <TouchableOpacity style={styles.ModalCloseButton}
+                  onPress={()=>this.flipModal()}>
+                  <Text style={styles.TextWhite}>收起</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.ModalItems}
+                  onPress={()=>this.flipModal()}>
+
+                  <FlatList data={this.props.Home.currentMovie.episodes}
+                    style={{backgroundColor:'transparent'}}
+                    renderItem={({item})=>(
+                      <TouchableOpacity style={styles.ModalCloseButton}
+                        onPress={()=>{
+                          this.flipModal()
+                          var currentMovie = this.props.Home.currentMovie
+                          currentMovie.currentEpisode = item
+                          this.props.changeMovie(currentMovie)
+                        }}>
+                        <Text style={styles.TextWhite}>{item.label}</Text>
+                      </TouchableOpacity>
+                    )}
+                    keyExtractor={item=>item.label}
+                  />
+
+                </TouchableOpacity>
+              </View>
+            </Modal>
+            <TouchableOpacity style={styles.ModalOpenButton}
+              onPress={()=>this.flipModal()}>
+              <Text style={styles.TextWhite}>选集</Text>
+            </TouchableOpacity>
+          </View>
+        )
+      }
+    }
+
+    const mapStateToProps=(state)=>{
+      const {Home}=state
+      return {Home}
+    }
+    const mapActionToProps=action=>(
+      bindActionCreators({changeMovie},action)
+    )
+    export default connect(mapStateToProps,mapActionToProps)(Episodes)
+
 
 components/styles.js
 ----------------------------------------
@@ -177,3 +259,64 @@ components/styles.js
       MovieDetailName:Object.assign({color:'white'}, TextCommon),
       TextWhite:Object.assign({color:'white'}, TextCommon),
     })
+
+actions/Home.js
+---------------------
+.. code-block:: javascript
+
+    export const changeMovie = payload=>({
+        type: "changeMovie",
+        payload: payload
+    })
+
+reducers/Home.js
+-----------------------
+.. code-block:: javascript
+
+    const movie1 = {
+        id:214, name: "硅谷第四季", area: "美国", year: 2017,
+        pic: "https://facebook.github.io/react-native/img/tiny_logo.png",
+        currentEpisode: {label:"第01集",uri:"https://youku.com-youku.net/20180604/9320_35c569aa/index.m3u8"},
+        episodes: [
+            {label:"第01集",uri:"https://youku.com-youku.net/20180604/9320_35c569aa/index.m3u8"},
+            {label:"第02集",uri:"https://youku.com-youku.net/20180604/9321_75f7c37c/index.m3u8"},
+        ],
+    }
+
+    const movie2 = {
+        id:214, name: "硅谷第4季", area: "美国", year: 2017,
+        pic: "https://facebook.github.io/react-native/img/tiny_logo.png",
+        currentEpisode: {label:"第02集",uri:"https://youku.com-youku.net/20180604/9321_75f7c37c/index.m3u8"},
+        episodes: [
+            {label:"第01集",uri:"https://youku.com-youku.net/20180604/9320_35c569aa/index.m3u8"},
+            {label:"第02集",uri:"https://youku.com-youku.net/20180604/9321_75f7c37c/index.m3u8"},
+        ],
+    }
+
+    const initialState = {
+        currentMovie: movie1,
+        movies:[movie1, movie2]
+    }
+
+    const HomeReducer = (state=initialState, action)=>{
+        switch(action.type){
+            case "changeMovie":
+                if(action.payload==null){
+                    var randomIndex = Math.floor(Math.random()*state.movies.length)
+                    console.log("changeMovie",randomIndex)
+                    return Object.assign({}, state, {
+                        currentMovie: state.movies[randomIndex]
+                      })
+                }else{
+                    console.log(action.payload.name)
+                    return Object.assign({}, state, {
+                        currentMovie: action.payload
+                      })
+                }
+
+            default:
+                return state
+        }
+    }
+
+    export default HomeReducer
