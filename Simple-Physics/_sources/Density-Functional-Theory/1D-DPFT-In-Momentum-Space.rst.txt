@@ -1,5 +1,5 @@
 
-1D DPFT In Momentum Space
+1D DPFT In Python (Momentum Space)
 ==================================
 
 Thomas Fermi Approximation
@@ -12,7 +12,8 @@ Thomas Fermi Approximation
    = g{1 \over (2\pi)^3} {4\over 3}\pi R^3={g \over 6\pi^3}R^3 \\
    \text{Where }R \text{ is the radius of the sphere such that } \mu -T-V_{\text{ext}}>0 
 
--  For harmonic oscillator in 1D, we have
+-  For harmonic oscillator in 1D, and ignore the various constants, we
+   have
 
 .. math::
 
@@ -31,7 +32,7 @@ The Interaction
 ---------------
 
 -  I don’t know what :math:`E_{\text{int}}` should look like at the
-   moment, let us just assume the same form as in [1D DPFT In Python] so
+   moment, let just assume the same form as in [1D DPFT In Python] so
    that
 
 .. math:: T_{\text{int}} = { \delta E_{\text{int}} \over \delta \rho}= w  \rho
@@ -41,12 +42,13 @@ Why momentum space ?
 
 -  As can be seen above, in position space, we have fixed expression for
    density :math:`n=\sqrt{\alpha^{-1}[\mu - V_{\text{ext}}]}`, this
-   expression does not change, only :math:`V_{\text{ext}}` varies
+   expression does not change, only :math:`V_{\text{ext}}` changes
 
 -  In momentum space
 
--  We start with :math:`\mu -T- V_{\text{ext}}(r)>0`, then
-   :math:`R=V_{\text{ext}}^{\text{Inv}}(\mu-T)` and :math:`\rho = {g\over 6\pi^3}R^3`
+-  We start with :math:`\mu -T- V_{\text{ext}}(r)>0` , then 
+	:math:`R=V_{\text{ext}}^{\text{Inv}}(\mu-T)` 
+	and :math:`\rho = {g\over 6\pi^3}R^3`
 
 -  The position space and momentum space are only equivalent, at least
    computationally, for harmonic oscillators! And this is a result of
@@ -55,45 +57,8 @@ Why momentum space ?
 -  Therefore, depends on :math:`V_{\text{ext}}`, some problem may be
    easier to solve in momentum space!
 
-Fermi Radius for Coulomb Potential (1D)
----------------------------------------
-
-.. math::
-
-   \begin{cases} 
-       \mu -T- V_{\text{ext}}(r)>0 \\
-       V_{\text{ext}}(r) = -{Z\over r} 
-    \end{cases}  \Rightarrow r > -{Z\over \mu-T} 
-
--  I just realized that the above discussion does not apply to Coulomb
-   potential! In this case the particle can only live **outside** Fermi
-   Sphere, whereas for harmonic oscillator, the particle can only live
-   **inside** !
-
-Why is :math:`r<{Z\over T-\mu}` wrong?
---------------------------------------
-
-.. math::
-
-   {Z\over r}>T-\mu\\
-   \Rightarrow {Z\over T-\mu}>r \;\;\text{This step is wrong since }T-\mu<0 
-
--  Still don’t agree? In **Equation (45)** in the paper, we demand
-   :math:`-2[V-\mu]>0`, this means :math:`\mu > V`, and **Both effective
-   potentials** :math:`T` and :math:`V` are the same **physical
-   quantity**, so :math:`\mu > T` MUST HOLD!
-
-- Yet another argument. If we adopt :math:`r > -{Z\over \mu-T}` , then if :math:`Z>0` (positive nucleus), :math:`r\in (0,\infty)`. If :math:`Z<0` (negative nucleus), :math:`r` must be larger than some threshold. These two physically makes sense!  
-
-- Yet another argument, :math:`\mu > T` simply works! As shown in code below
-
-- If you accept my arguments, than we must conclude that there is something missing with DPFT, :math:`\mu` cannot simply be treated as **lagrange multiplier**, there must be some relation that lead to :math:`\mu > T`
-
 Simple DPFT in Momentum space (Hamonic Oscillator 1D)
 -----------------------------------------------------
-
-**The following code is successful and the result agrees with one in
-position space, note that it uses the fact** :math:`\mu>T`
 
 .. code:: python
 
@@ -143,6 +108,26 @@ position space, note that it uses the fact** :math:`\mu>T`
         muMinusT[ muMinusT<0 ] = 0
         return self.g/np.pi * np.sqrt(muMinusT)
     
+      # == Bisection ================
+      def enforceN(self):
+        muNmin = muNmax = 1
+        while(self.getN(muNmin)>self.N):
+          muNmin = muNmin/2
+        while(self.getN(muNmax)<self.N):
+          muNmax = muNmax*2
+        for i in range(self.maxIteration):
+          middlePoint = (muNmin+muNmax)/2
+          if(self.getN(middlePoint)>self.N):
+            muNmax = middlePoint
+          else:
+            muNmin = middlePoint
+          if(self.getN(muNmin)/self.getN(muNmax)>(1-1e-3)):
+            break
+        return muNmin
+    
+      def getN(self,mu):
+        return np.sum(self.getDensity(mu)*self.dp)
+    
     # =================================================
     # ================= Usage =========================
     # =================================================
@@ -178,6 +163,112 @@ position space, note that it uses the fact** :math:`\mu>T`
     Particle Number Check: 19.65459900651429 / 20
     Particle Number Check: 19.560823172965314 / 20
     Particle Number Check: 19.494538379097083 / 20
+
+
+
+.. image:: imgs/1D-DPFT-In-Momentum-Space/output_6_1.png
+
+
+Simple DPFT in Momentum space (Coulomb potential 1D)
+------------------------------------------------------
+
+:math:`{Z\over T-\mu}>r, \text{ Then }\rho = {g\over \pi}{Z\over T-\mu}`
+
+**Gradient descent doesn’t work for Coulomb potential, so we use
+Bisection**
+
+.. code:: python
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    class SimpleDPFT:
+      def __init__(self,args):
+        self.p = args["p"]
+        self.g = args["g"]
+        self.N = args["N"]
+        self.w = args["w"]
+        self.mixRatio = args["mixRatio"]
+        self.maxIteration=args["maxIteration"]
+    
+        self.Tkin = self.p**2/2
+        self.dp = self.p[1] - self.p[0]
+    
+      def selfConsistentLoop(self):
+        self.T = self.Tkin
+        self.mu = self.enforceN()
+        self.n = self.getDensity(self.mu)
+        for i in range(self.maxIteration):
+          self.T = self.T + self.w * self.n
+          self.mu = self.enforceN()
+          nOld = self.n
+          self.n = (1-self.mixRatio)*self.n \
+                  + self.mixRatio   *self.getDensity(self.mu)
+          ratio = self.n/nOld
+          if(np.sum(ratio)/ratio.shape[0] < (1+1e-3) \
+             and np.sum(ratio)/ratio.shape[0] > (1-1e-3)):
+            break
+        return self.n
+    
+      def enforceN(self):
+        # mu must be negative 
+        # if abs(mu)*2, TminusMu increase, N decrease
+        muNmin = muNmax = -1
+        while(self.getN(muNmin) > self.N):
+          muNmin = muNmin*2
+        while(self.getN(muNmax) < self.N):
+          muNmax = muNmax/2
+          if(muNmax==0):
+            print("Max N you can get with such w:", self.getN(muNmax))
+            assert False, "Your N is not achievable since w is too large!"
+        for i in range(self.maxIteration):
+          middlePoint = (muNmin+muNmax)/2
+          if(self.getN(middlePoint)>self.N):
+            muNmax = middlePoint
+          else:
+            muNmin = middlePoint
+          if(self.getN(muNmin)/self.getN(muNmax)>(1-1e-3)):
+            break
+        return muNmin
+      
+      def getN(self,mu):
+        return np.sum(self.getDensity(mu)*self.dp)
+      
+      def getDensity(self,mu):
+        return self.g/np.pi/(self.T-mu)
+    
+    # =================================================
+    # ================= Usage =========================
+    # =================================================
+    p = np.linspace(-1,1,num=100)
+    N = 0.1
+    args = {
+        "p":p,
+        "g":1,
+        "N":N,
+        "mixRatio":0.5,
+        "maxIteration":1000,
+    }
+    
+    wList = [0,20,40,80]
+    for w in wList:
+      args["w"] = w
+      simpleDPFT = SimpleDPFT(args)
+      n = simpleDPFT.selfConsistentLoop()
+      print("Particle Number Check:",np.sum(n)*(p[1]-p[0]),"/",N)
+      plt.plot(p,n,label="w="+str(w))
+    plt.legend()
+    plt.show()
+    
+
+
+
+.. parsed-literal::
+
+    Particle Number Check: 0.09995211570740857 / 0.1
+    Particle Number Check: 0.0999575484394774 / 0.1
+    Particle Number Check: 0.09996421750569122 / 0.1
+    Particle Number Check: 0.09994714485865916 / 0.1
 
 
 

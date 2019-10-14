@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1D DPFT In Momentum Space &mdash; Simple Physics  documentation</title>
+  <title>1D DPFT In Python (Momentum Space) &mdash; Simple Physics  documentation</title>
   
 
   
@@ -93,14 +93,13 @@
 <li class="toctree-l2"><a class="reference internal" href="1D-DFT-In-Python.html">1D DFT In Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="1D-DPFT-In-Python.html">1D DPFT In Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="DFT-In-Momentum-Space.html">DFT In Momentum Space</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">1D DPFT In Momentum Space</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1D DPFT In Python (Momentum Space)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#thomas-fermi-approximation">Thomas Fermi Approximation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#effective-kinetic-envergy-t">Effective Kinetic Envergy <span class="math notranslate nohighlight">\(T\)</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-interaction">The Interaction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#why-momentum-space">Why momentum space ?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fermi-radius-for-coulomb-potential-1d">Fermi Radius for Coulomb Potential (1D)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#why-is-r-z-over-t-mu-wrong">Why is <span class="math notranslate nohighlight">\(r&lt;{Z\over T-\mu}\)</span> wrong?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#simple-dpft-in-momentum-space-hamonic-oscillator-1d">Simple DPFT in Momentum space (Hamonic Oscillator 1D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-dpft-in-momentum-space-coulomb-potential-1d">Simple DPFT in Momentum space (Coulomb potential 1D)</a></li>
 </ul>
 </li>
 </ul>
@@ -157,7 +156,7 @@
         
           <li><a href="index.html">Density Functional Theory</a> &raquo;</li>
         
-      <li>1D DPFT In Momentum Space</li>
+      <li>1D DPFT In Python (Momentum Space)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,8 +175,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="d-dpft-in-momentum-space">
-<h1>1D DPFT In Momentum Space<a class="headerlink" href="#d-dpft-in-momentum-space" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="d-dpft-in-python-momentum-space">
+<h1>1D DPFT In Python (Momentum Space)<a class="headerlink" href="#d-dpft-in-python-momentum-space" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="thomas-fermi-approximation">
 <h2>Thomas Fermi Approximation<a class="headerlink" href="#thomas-fermi-approximation" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
@@ -186,7 +185,8 @@
 = g{1 \over (2\pi)^3} {4\over 3}\pi R^3={g \over 6\pi^3}R^3 \\
 \text{Where }R \text{ is the radius of the sphere such that } \mu -T-V_{\text{ext}}&gt;0\end{split}\]</div>
 <ul class="simple">
-<li>For harmonic oscillator in 1D, we have</li>
+<li>For harmonic oscillator in 1D, and ignore the various constants, we
+have</li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}V=x^2\Rightarrow \mu -T- x^2&gt;0 \Rightarrow x &lt; \sqrt{\mu-T}\equiv R\\
@@ -202,7 +202,7 @@
 <h2>The Interaction<a class="headerlink" href="#the-interaction" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>I don’t know what <span class="math notranslate nohighlight">\(E_{\text{int}}\)</span> should look like at the
-moment, let us just assume the same form as in [1D DPFT In Python] so
+moment, let just assume the same form as in [1D DPFT In Python] so
 that</li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -213,10 +213,14 @@ that</li>
 <ul class="simple">
 <li>As can be seen above, in position space, we have fixed expression for
 density <span class="math notranslate nohighlight">\(n=\sqrt{\alpha^{-1}[\mu - V_{\text{ext}}]}\)</span>, this
-expression does not change, only <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span> varies</li>
+expression does not change, only <span class="math notranslate nohighlight">\(V_{\text{ext}}\)</span> changes</li>
 <li>In momentum space</li>
-<li>We start with <span class="math notranslate nohighlight">\(\mu -T- V_{\text{ext}}(r)&gt;0\)</span>, then
-<span class="math notranslate nohighlight">\(R=V_{\text{ext}}^{\text{Inv}}(\mu-T)\)</span> and <span class="math notranslate nohighlight">\(\rho = {g\over 6\pi^3}R^3\)</span></li>
+<li><dl class="first docutils">
+<dt>We start with <span class="math notranslate nohighlight">\(\mu -T- V_{\text{ext}}(r)&gt;0\)</span> , then</dt>
+<dd><span class="math notranslate nohighlight">\(R=V_{\text{ext}}^{\text{Inv}}(\mu-T)\)</span>
+and <span class="math notranslate nohighlight">\(\rho = {g\over 6\pi^3}R^3\)</span></dd>
+</dl>
+</li>
 <li>The position space and momentum space are only equivalent, at least
 computationally, for harmonic oscillators! And this is a result of
 the fundamental relation <span class="math notranslate nohighlight">\(T={1\over 2}p^2\)</span></li>
@@ -224,39 +228,8 @@ the fundamental relation <span class="math notranslate nohighlight">\(T={1\over 
 easier to solve in momentum space!</li>
 </ul>
 </div>
-<div class="section" id="fermi-radius-for-coulomb-potential-1d">
-<h2>Fermi Radius for Coulomb Potential (1D)<a class="headerlink" href="#fermi-radius-for-coulomb-potential-1d" title="Permalink to this headline">¶</a></h2>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{cases}
-    \mu -T- V_{\text{ext}}(r)&gt;0 \\
-    V_{\text{ext}}(r) = -{Z\over r}
- \end{cases}  \Rightarrow r &gt; -{Z\over \mu-T}\end{split}\]</div>
-<ul class="simple">
-<li>I just realized that the above discussion does not apply to Coulomb
-potential! In this case the particle can only live <strong>outside</strong> Fermi
-Sphere, whereas for harmonic oscillator, the particle can only live
-<strong>inside</strong> !</li>
-</ul>
-</div>
-<div class="section" id="why-is-r-z-over-t-mu-wrong">
-<h2>Why is <span class="math notranslate nohighlight">\(r&lt;{Z\over T-\mu}\)</span> wrong?<a class="headerlink" href="#why-is-r-z-over-t-mu-wrong" title="Permalink to this headline">¶</a></h2>
-<div class="math notranslate nohighlight">
-\[\begin{split}{Z\over r}&gt;T-\mu\\
-\Rightarrow {Z\over T-\mu}&gt;r \;\;\text{This step is wrong since }T-\mu&lt;0\end{split}\]</div>
-<ul class="simple">
-<li>Still don’t agree? In <strong>Equation (45)</strong> in the paper, we demand
-<span class="math notranslate nohighlight">\(-2[V-\mu]&gt;0\)</span>, this means <span class="math notranslate nohighlight">\(\mu &gt; V\)</span>, and <strong>Both effective
-potentials</strong> <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are the same <strong>physical
-quantity</strong>, so <span class="math notranslate nohighlight">\(\mu &gt; T\)</span> MUST HOLD!</li>
-<li>Yet another argument. If we adopt <span class="math notranslate nohighlight">\(r &gt; -{Z\over \mu-T}\)</span> , then if <span class="math notranslate nohighlight">\(Z&gt;0\)</span> (positive nucleus), <span class="math notranslate nohighlight">\(r\in (0,\infty)\)</span>. If <span class="math notranslate nohighlight">\(Z&lt;0\)</span> (negative nucleus), <span class="math notranslate nohighlight">\(r\)</span> must be larger than some threshold. These two physically makes sense!</li>
-<li>Yet another argument, <span class="math notranslate nohighlight">\(\mu &gt; T\)</span> simply works! As shown in code below</li>
-<li>If you accept my arguments, than we must conclude that there is something missing with DPFT, <span class="math notranslate nohighlight">\(\mu\)</span> cannot simply be treated as <strong>lagrange multiplier</strong>, there must be some relation that lead to <span class="math notranslate nohighlight">\(\mu &gt; T\)</span></li>
-</ul>
-</div>
 <div class="section" id="simple-dpft-in-momentum-space-hamonic-oscillator-1d">
 <h2>Simple DPFT in Momentum space (Hamonic Oscillator 1D)<a class="headerlink" href="#simple-dpft-in-momentum-space-hamonic-oscillator-1d" title="Permalink to this headline">¶</a></h2>
-<p><strong>The following code is successful and the result agrees with one in
-position space, note that it uses the fact</strong> <span class="math notranslate nohighlight">\(\mu&gt;T\)</span></p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
@@ -303,6 +276,26 @@ position space, note that it uses the fact</strong> <span class="math notranslat
     <span class="n">muMinusT</span><span class="p">[</span> <span class="n">muMinusT</span><span class="o">&lt;</span><span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">muMinusT</span><span class="p">)</span>
 
+  <span class="c1"># == Bisection ================</span>
+  <span class="k">def</span> <span class="nf">enforceN</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">muNmin</span> <span class="o">=</span> <span class="n">muNmax</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">muNmin</span><span class="p">)</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+      <span class="n">muNmin</span> <span class="o">=</span> <span class="n">muNmin</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">muNmax</span><span class="p">)</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+      <span class="n">muNmax</span> <span class="o">=</span> <span class="n">muNmax</span><span class="o">*</span><span class="mi">2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxIteration</span><span class="p">):</span>
+      <span class="n">middlePoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">muNmin</span><span class="o">+</span><span class="n">muNmax</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+      <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">middlePoint</span><span class="p">)</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">muNmax</span> <span class="o">=</span> <span class="n">middlePoint</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">muNmin</span> <span class="o">=</span> <span class="n">middlePoint</span>
+      <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">muNmin</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">muNmax</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">1e-3</span><span class="p">)):</span>
+        <span class="k">break</span>
+    <span class="k">return</span> <span class="n">muNmin</span>
+
+  <span class="k">def</span> <span class="nf">getN</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getDensity</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="p">)</span>
+
 <span class="c1"># =================================================</span>
 <span class="c1"># ================= Usage =========================</span>
 <span class="c1"># =================================================</span>
@@ -335,6 +328,101 @@ position space, note that it uses the fact</strong> <span class="math notranslat
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">19.65459900651429</span> <span class="o">/</span> <span class="mi">20</span>
 <span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">19.560823172965314</span> <span class="o">/</span> <span class="mi">20</span>
 <span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">19.494538379097083</span> <span class="o">/</span> <span class="mi">20</span>
+</pre></div>
+</div>
+<img alt="../_images/output_6_1.png" src="../_images/output_6_1.png" />
+</div>
+<div class="section" id="simple-dpft-in-momentum-space-coulomb-potential-1d">
+<h2>Simple DPFT in Momentum space (Coulomb potential 1D)<a class="headerlink" href="#simple-dpft-in-momentum-space-coulomb-potential-1d" title="Permalink to this headline">¶</a></h2>
+<p><span class="math notranslate nohighlight">\({Z\over T-\mu}&gt;r, \text{ Then }\rho = {g\over \pi}{Z\over T-\mu}\)</span></p>
+<p><strong>Gradient descent doesn’t work for Coulomb potential, so we use
+Bisection</strong></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">class</span> <span class="nc">SimpleDPFT</span><span class="p">:</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">args</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;N&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">mixRatio</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;mixRatio&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">maxIteration</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;maxIteration&quot;</span><span class="p">]</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">Tkin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">selfConsistentLoop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tkin</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enforceN</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDensity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxIteration</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enforceN</span><span class="p">()</span>
+      <span class="n">nOld</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mixRatio</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> \
+              <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mixRatio</span>   <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">getDensity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">)</span>
+      <span class="n">ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">/</span><span class="n">nOld</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span><span class="o">/</span><span class="n">ratio</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mf">1e-3</span><span class="p">)</span> \
+         <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ratio</span><span class="p">)</span><span class="o">/</span><span class="n">ratio</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">1e-3</span><span class="p">)):</span>
+        <span class="k">break</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+
+  <span class="k">def</span> <span class="nf">enforceN</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># mu must be negative</span>
+    <span class="c1"># if abs(mu)*2, TminusMu increase, N decrease</span>
+    <span class="n">muNmin</span> <span class="o">=</span> <span class="n">muNmax</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">muNmin</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+      <span class="n">muNmin</span> <span class="o">=</span> <span class="n">muNmin</span><span class="o">*</span><span class="mi">2</span>
+    <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">muNmax</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+      <span class="n">muNmax</span> <span class="o">=</span> <span class="n">muNmax</span><span class="o">/</span><span class="mi">2</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">muNmax</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max N you can get with such w:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">muNmax</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Your N is not achievable since w is too large!&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxIteration</span><span class="p">):</span>
+      <span class="n">middlePoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">muNmin</span><span class="o">+</span><span class="n">muNmax</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+      <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">middlePoint</span><span class="p">)</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">muNmax</span> <span class="o">=</span> <span class="n">middlePoint</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">muNmin</span> <span class="o">=</span> <span class="n">middlePoint</span>
+      <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">muNmin</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">getN</span><span class="p">(</span><span class="n">muNmax</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">1e-3</span><span class="p">)):</span>
+        <span class="k">break</span>
+    <span class="k">return</span> <span class="n">muNmin</span>
+
+  <span class="k">def</span> <span class="nf">getN</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getDensity</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">getDensity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mu</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span>
+
+<span class="c1"># =================================================</span>
+<span class="c1"># ================= Usage =========================</span>
+<span class="c1"># =================================================</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;p&quot;</span><span class="p">:</span><span class="n">p</span><span class="p">,</span>
+    <span class="s2">&quot;g&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;N&quot;</span><span class="p">:</span><span class="n">N</span><span class="p">,</span>
+    <span class="s2">&quot;mixRatio&quot;</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="s2">&quot;maxIteration&quot;</span><span class="p">:</span><span class="mi">1000</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">wList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">80</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">wList</span><span class="p">:</span>
+  <span class="n">args</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
+  <span class="n">simpleDPFT</span> <span class="o">=</span> <span class="n">SimpleDPFT</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="n">simpleDPFT</span><span class="o">.</span><span class="n">selfConsistentLoop</span><span class="p">()</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Particle Number Check:&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;w=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">0.09995211570740857</span> <span class="o">/</span> <span class="mf">0.1</span>
+<span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">0.0999575484394774</span> <span class="o">/</span> <span class="mf">0.1</span>
+<span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">0.09996421750569122</span> <span class="o">/</span> <span class="mf">0.1</span>
+<span class="n">Particle</span> <span class="n">Number</span> <span class="n">Check</span><span class="p">:</span> <span class="mf">0.09994714485865916</span> <span class="o">/</span> <span class="mf">0.1</span>
 </pre></div>
 </div>
 <img alt="../_images/output_8_1.png" src="../_images/output_8_1.png" />
