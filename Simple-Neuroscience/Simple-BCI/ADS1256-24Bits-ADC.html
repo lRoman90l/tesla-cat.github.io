@@ -83,10 +83,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../Cognitive-Neuroscience-Michael/index.html">Cognitive Neuroscience Michael</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Simple BCI</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ADS1256 24Bits ADC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#warning-change-of-plan">Warning: Change of plan!</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#general-recommendations">General Recommendations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#digital-interface-connections">Digital Interface Connections</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#what-about-esp32">What about ESP32?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-plan">The plan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plan">Plan</a></li>
 </ul>
 </li>
 </ul>
@@ -167,6 +168,14 @@
 </tr>
 </tbody>
 </table>
+<div class="section" id="warning-change-of-plan">
+<h2>Warning: Change of plan!<a class="headerlink" href="#warning-change-of-plan" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Why use 24 bits ADC? Becuase A typical adult human EEG signal is about <code class="code docutils literal notranslate"><span class="pre">10</span> <span class="pre">µV</span> <span class="pre">to</span> <span class="pre">100</span> <span class="pre">µV</span></code>  in amplitude when measured from the scalp and is about 10~20 mV when measured from subdural electrodes.</li>
+<li>ESP32 has 12 bits resolution and can measure 0~1.1V ( <a class="reference external" href="https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/adc.html#application-examples">see here</a> ), this means the resolution is <code class="code docutils literal notranslate"><span class="pre">268</span> <span class="pre">µV</span></code> . larger than the brain signal itself ! <strong>The problem is not resolution but scale!</strong></li>
+<li>Thus instead of using an expensive 24 bits ADC, we can just use an <code class="code docutils literal notranslate"><span class="pre">An</span> <span class="pre">amplifier</span> <span class="pre">+</span> <span class="pre">ESP32</span></code> !</li>
+</ul>
+</div>
 <div class="section" id="general-recommendations">
 <h2>General Recommendations<a class="headerlink" href="#general-recommendations" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://www.ti.com/lit/ds/symlink/ads1256.pdf">http://www.ti.com/lit/ds/symlink/ads1256.pdf</a></p>
@@ -263,8 +272,8 @@
 <h2>What about ESP32?<a class="headerlink" href="#what-about-esp32" title="Permalink to this headline">¶</a></h2>
 <p>ESP32 integrates two 12-bit SAR (Successive Approximation Register) ADCs</p>
 </div>
-<div class="section" id="the-plan">
-<h2>The plan<a class="headerlink" href="#the-plan" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plan">
+<h2>Plan<a class="headerlink" href="#plan" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Make PCB using <a class="reference external" href="https://upverter.com/">Upverter</a> , not gonna use Altium since I am using Linux now.</li>
 <li>To improve my skills dont just buy a board?</li>

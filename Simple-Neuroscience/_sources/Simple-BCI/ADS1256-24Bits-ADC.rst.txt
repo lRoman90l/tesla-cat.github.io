@@ -3,6 +3,17 @@ ADS1256 24Bits ADC
 
 :Date: 14 Oct 2019
 
+Warning: Change of plan!
+--------------------------
+
+- Why use 24 bits ADC? Becuase A typical adult human EEG signal is about :code:`10 µV to 100 µV`  in amplitude when measured from the scalp and is about 10~20 mV when measured from subdural electrodes.
+
+- ESP32 has 12 bits resolution and can measure 0~1.1V ( `see here <https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/adc.html#application-examples>`_ ), this means the resolution is :code:`268 µV` . larger than the brain signal itself ! **The problem is not resolution but scale!** 
+
+- Thus instead of using an expensive 24 bits ADC, we can just use an :code:`An amplifier + ESP32` !
+
+
+
 General Recommendations
 ---------------------------
 
@@ -60,7 +71,7 @@ What about ESP32?
 
 ESP32 integrates two 12-bit SAR (Successive Approximation Register) ADCs
 
-The plan
+Plan
 ----------------
 
 - Make PCB using `Upverter <https://upverter.com/>`_ , not gonna use Altium since I am using Linux now.
